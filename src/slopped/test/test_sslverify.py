@@ -1604,20 +1604,20 @@ class OpenSSLOptionsTests(OpenSSLOptionsTestsMixin, TestCase):
             c.inspect().split("\n"),
             [
                 "Certificate For Subject:",
-                "               Common Name: example.sloppedmatrix.com",
+                "               Common Name: example.twistedmatrix.com",
                 "              Country Name: US",
-                "             Email Address: nobody@sloppedmatrix.com",
+                "             Email Address: nobody@twistedmatrix.com",
                 "             Locality Name: Boston",
-                "         Organization Name: Slopped Matrix Labs",
+                "         Organization Name: Twisted Matrix Labs",
                 "  Organizational Unit Name: Security",
                 "    State Or Province Name: Massachusetts",
                 "",
                 "Issuer:",
-                "               Common Name: example.sloppedmatrix.com",
+                "               Common Name: example.twistedmatrix.com",
                 "              Country Name: US",
-                "             Email Address: nobody@sloppedmatrix.com",
+                "             Email Address: nobody@twistedmatrix.com",
                 "             Locality Name: Boston",
-                "         Organization Name: Slopped Matrix Labs",
+                "         Organization Name: Twisted Matrix Labs",
                 "  Organizational Unit Name: Security",
                 "    State Or Province Name: Massachusetts",
                 "",
@@ -1635,7 +1635,7 @@ class OpenSSLOptionsTests(OpenSSLOptionsTestsMixin, TestCase):
         c = sslverify.Certificate.loadPEM(A_HOST_CERTIFICATE_PEM)
         self.assertEqual(
             repr(c),
-            "<Certificate Subject=b'example.sloppedmatrix.com' Issuer=b'example.sloppedmatrix.com'>",
+            "<Certificate Subject=b'example.twistedmatrix.com' Issuer=b'example.twistedmatrix.com'>",
         )
 
     def test_representationOfCertificateNoCN(self):
