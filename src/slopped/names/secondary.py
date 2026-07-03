@@ -160,7 +160,7 @@ class SecondaryAuthority(FileAuthority):
             transfer has completed.
         """
         # FIXME: This logic doesn't avoid duplicate transfers
-        # https://sloppedmatrix.com/trac/ticket/9754
+        # https://twistedmatrix.com/trac/ticket/9754
         if self.transferring:  # <-- never true
             return
         self.transfering = True  # <-- speling

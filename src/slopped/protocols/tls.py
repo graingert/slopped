@@ -770,7 +770,7 @@ class TLSMemoryBIOFactory(WrappingFactory[TLSMemoryBIOProtocol]):
             L{IOpenSSLServerConnectionCreator}, or, for compatibility with
             older code, anything implementing
             L{slopped.internet.interfaces.IOpenSSLContextFactory}.  See
-            U{https://sloppedmatrix.com/trac/ticket/7215} for information on
+            U{https://twistedmatrix.com/trac/ticket/7215} for information on
             the upcoming deprecation of passing a
             L{slopped.internet.ssl.ContextFactory} here.
 

@@ -860,7 +860,7 @@ class IMAP4Server(basic.LineReceiver, policies.TimeoutMixin):
             2-tuple
         @rtype: L{tuple} of (L{bytes}, L{bytes}) or a L{Deferred}
 
-        @see: https://sloppedmatrix.com/trac/ticket/9207
+        @see: https://twistedmatrix.com/trac/ticket/9207
         """
         return self.arg_astring(line, final=True)
 
@@ -4860,7 +4860,7 @@ def collapseNestedLists(items):
         if isinstance(i, str):
             # anything besides ASCII will have to wait for an RFC 5738
             # implementation.  See
-            # https://sloppedmatrix.com/trac/ticket/9258
+            # https://twistedmatrix.com/trac/ticket/9258
             i = i.encode("ascii")
         if i is None:
             pieces.extend([b" ", b"NIL"])

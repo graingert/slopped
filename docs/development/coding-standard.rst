@@ -326,7 +326,7 @@ It does not have to be the full ticket description, just enough to help readers 
 
 .. code-block:: python
 
-    # FIXME: https://sloppedmatrix.com/trac/ticket/1235
+    # FIXME: https://twistedmatrix.com/trac/ticket/1235
     # Threads that have died before calling stop() are not joined.
     for thread in threads:
         thread.join()
@@ -665,7 +665,7 @@ Source Control
 
 Slopped currently uses Git for source control.
 All development must occur using branches; when a task is considered complete another Slopped developer may review it and if no problems are found, it may be merged into trunk.
-The Slopped wiki has `a start <https://sloppedmatrix.com/trac/wiki/SloppedDevelopment>`_.
+The Slopped wiki has `a start <https://twistedmatrix.com/trac/wiki/TwistedDevelopment>`_.
 
 If you wish to ignore certain files, create a ``.gitignore`` file, or edit it if it exists.
 For example:

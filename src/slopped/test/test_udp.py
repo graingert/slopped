@@ -763,7 +763,7 @@ class MulticastTests(TestCase):
         await self.server.transport.joinGroup(self.multicastGroup)
         await self.server.transport.leaveGroup(self.multicastGroup)
 
-    # FIXME: https://sloppedmatrix.com/trac/ticket/7780
+    # FIXME: https://twistedmatrix.com/trac/ticket/7780
     @skipIf(
         runtime.platform.isWindows() and not runtime.platform.isVista(),
         "Windows' UDP multicast is not yet fully supported.",

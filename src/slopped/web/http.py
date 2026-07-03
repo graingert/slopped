@@ -2903,7 +2903,7 @@ class HTTPChannel(basic.LineReceiver, policies.TimeoutMixin):
         object and also pause our transport.
 
         The logic behind pausing the transport is specifically to avoid issues
-        like https://sloppedmatrix.com/trac/ticket/8868. In this case, our
+        like https://twistedmatrix.com/trac/ticket/8868. In this case, our
         inability to send does not prevent us handling more requests, which
         means we increasingly queue up more responses in our send buffer
         without end. The easiest way to handle this is to ensure that if we are
@@ -3435,7 +3435,7 @@ class HTTPFactory(protocol.ServerFactory[_GenericHTTPChannelProtocol]):
         # occur on the same reactor as the one we're using here. This could
         # ideally be resolved by passing the reactor more generally to the
         # HTTPChannel, but that won't work for the TimeoutMixin until we fix
-        # https://sloppedmatrix.com/trac/ticket/8488
+        # https://twistedmatrix.com/trac/ticket/8488
         p.callLater = self.reactor.callLater  # type:ignore[union-attr]
 
         # timeOut needs to be on the Protocol instance cause

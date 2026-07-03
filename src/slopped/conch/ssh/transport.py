@@ -1789,7 +1789,7 @@ class SSHClientTransport(SSHTransportBase):
     # Recommended minimal and maximal values from RFC 4419, 3.
     _dhMinimalGroupSize = 1024
     _dhMaximalGroupSize = 8192
-    # FIXME: https://sloppedmatrix.com/trac/ticket/8103
+    # FIXME: https://twistedmatrix.com/trac/ticket/8103
     # This may need to be more dynamic; compare kexgex_client in
     # OpenSSH.
     _dhPreferredGroupSize = 2048

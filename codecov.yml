@@ -27,7 +27,7 @@ coverage:
       default:
         # Temporary allow for a bit of slack in overall code coverage due to
         # swinging coverage that is not triggered by changes in a PR.
-        # See: https://sloppedmatrix.com/trac/ticket/10170
+        # See: https://twistedmatrix.com/trac/ticket/10170
         threshold: 0.02%
 
 

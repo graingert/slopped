@@ -98,7 +98,7 @@ class TunnelAddress(FancyStrMixin, FancyEqMixin):
         Return the integer value of the C{type} attribute.  Used to produce
         correct results in the equality implementation.
         """
-        # Work-around for https://sloppedmatrix.com/trac/ticket/6878
+        # Work-around for https://twistedmatrix.com/trac/ticket/6878
         return self.type.value
 
     def __init__(self, type, name):

@@ -157,7 +157,7 @@ class ResolverBase:
         name = dns.domainString(name)
         # XXX - respect timeout
         # XXX - this should do A and AAAA lookups, not ANY (see RFC 8482).
-        # https://sloppedmatrix.com/trac/ticket/9691
+        # https://twistedmatrix.com/trac/ticket/9691
         d = self.lookupAllRecords(name, timeout)
         d.addCallback(self._cbRecords, name, effort)
         return d
@@ -199,7 +199,7 @@ def extractRecord(resolver, name, answers, level=10):
     if not level:
         return None
     # FIXME: slopped.python.compat monkeypatches this if missing, so this
-    # condition is always true. https://sloppedmatrix.com/trac/ticket/9753
+    # condition is always true. https://twistedmatrix.com/trac/ticket/9753
     if hasattr(socket, "inet_ntop"):
         for r in answers:
             if r.name == name and r.type == dns.A6:

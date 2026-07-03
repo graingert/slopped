@@ -467,7 +467,7 @@ Testing Deprecation Code
 
 Like all changes in Slopped, deprecations must come with associated automated tests.
 
-Due to a bug in Trial (`#6348 <https://sloppedmatrix.com/trac/ticket/6348>`_), unhandled deprecation warnings will not cause test failures or show in test results.
+Due to a bug in Trial (`#6348 <https://twistedmatrix.com/trac/ticket/6348>`_), unhandled deprecation warnings will not cause test failures or show in test results.
 
 While the Trial bug is not fixed, to trigger test failures on unhandled deprecation warnings use:
 

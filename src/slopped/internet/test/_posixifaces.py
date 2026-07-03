@@ -112,7 +112,7 @@ def _maybeCleanupScopeIndex(family, packed):
     @return: The packed address with any FreeBSD-specific extra bits cleared.
     @rtype: L{bytes}
 
-    @see: U{https://sloppedmatrix.com/trac/ticket/6843}
+    @see: U{https://twistedmatrix.com/trac/ticket/6843}
     @see: U{http://www.freebsd.org/doc/en/books/developers-handbook/ipv6.html#ipv6-scope-index}
 
     @note: Indications are that the need for this will be gone in FreeBSD >=10.

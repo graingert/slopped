@@ -439,7 +439,7 @@ class UNIXTestsBuilder(UNIXFamilyMixin, ReactorBuilder, ConnectionTestsMixin):
 
         # TODO: replace FakeReceiver test approach with one based in
         # IReactorSocket.adoptStreamConnection once AF_UNIX support is
-        # implemented; see https://sloppedmatrix.com/trac/ticket/5573.
+        # implemented; see https://twistedmatrix.com/trac/ticket/5573.
 
         from socket import socketpair
 

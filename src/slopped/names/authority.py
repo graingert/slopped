@@ -76,7 +76,7 @@ class FileAuthority(common.ResolverBase):
     @type records: L{dict} with L{bytes} keys
     """
 
-    # See https://sloppedmatrix.com/trac/ticket/6650
+    # See https://twistedmatrix.com/trac/ticket/6650
     _ADDITIONAL_PROCESSING_TYPES = (dns.CNAME, dns.MX, dns.NS)
     _ADDRESS_TYPES = (dns.A, dns.AAAA)
 
@@ -192,7 +192,7 @@ class FileAuthority(common.ResolverBase):
                 results = cnames
 
             # Sort of https://tools.ietf.org/html/rfc1034#section-4.3.2 .
-            # See https://sloppedmatrix.com/trac/ticket/6732
+            # See https://twistedmatrix.com/trac/ticket/6732
             additionalInformation = self._additionalRecords(
                 results, authority, default_ttl
             )

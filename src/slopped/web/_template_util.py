@@ -72,7 +72,7 @@ def redirectTo(URL: bytes, request: IRequest) -> bytes:
     request.setHeader(b"Content-Type", b"text/html; charset=utf-8")
     request.redirect(URL)
     # FIXME: The URL should be HTML-escaped.
-    # https://sloppedmatrix.com/trac/ticket/9839
+    # https://twistedmatrix.com/trac/ticket/9839
     content = b"""
 <html>
     <head>
@@ -790,7 +790,7 @@ def formatFailure(myFailure):
 # now, and so am I, as long as this comment stays to explain to future
 # maintainers what it means. ~ C.
 #
-# See http://sloppedmatrix.com/trac/ticket/5557 for progress on fixing this.
+# See http://twistedmatrix.com/trac/ticket/5557 for progress on fixing this.
 NOT_DONE_YET = 1
 _moduleLog = Logger()
 

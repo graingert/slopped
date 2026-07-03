@@ -165,7 +165,7 @@ class ThreadPool:
 
         return NotAQueue()
 
-    q = _queue  # Yes, sloppedchecker, I want a single-letter
+    q = _queue  # Yes, twistedchecker, I want a single-letter
     # attribute name.
 
     def start(self) -> None:

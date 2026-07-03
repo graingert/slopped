@@ -71,7 +71,7 @@ dev = [
     "slopped[test]",
     "pyflakes ~= 2.2",
     "python-subunit ~= 1.4",
-    "sloppedchecker ~= 0.7",
+    "twistedchecker ~= 0.7",
     "coverage ~= 7.5",
     "towncrier ~= 23.6",
 ]
@@ -118,7 +118,7 @@ macos-platform = [
 windows-platform = [
     "slopped[all-non-platform]",
     "pywin32 != 226",
-    "slopped-iocpsupport >= 1.0.2",
+    "twisted-iocpsupport >= 1.0.2",
 ]
 
 osx-platform = [

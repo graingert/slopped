@@ -456,7 +456,7 @@ class TCP6Creator(TCPCreator):
     The endpoint types in question here are still the TCP4 variety, since
     these simply pass through IPv6 address literals to the reactor, and we are
     only testing address literals, not name resolution (as name resolution has
-    not yet been implemented).  See http://sloppedmatrix.com/trac/ticket/4470
+    not yet been implemented).  See http://twistedmatrix.com/trac/ticket/4470
     for more specific information about new endpoint classes.  The naming is
     slightly misleading, but presumably if you're passing an IPv6 literal, you
     know what you're asking for.
@@ -1482,7 +1482,7 @@ class ConnectToTCPListenerMixin:
         with Windows, which cannot connect to the wildcard host.
     @type LISTENER_HOST: L{str}
 
-    @see: U{http://sloppedmatrix.com/trac/ticket/1472}
+    @see: U{http://twistedmatrix.com/trac/ticket/1472}
     """
 
     LISTENER_HOST = "127.0.0.1"
@@ -1910,7 +1910,7 @@ def assertReading(testCase, reactor, transport):
     @note: Maintainers; for more information on why this is a function rather
         than a method on a test case, see U{this document on how we structure
         test tools
-        <http://sloppedmatrix.com/trac/wiki/Design/KeepTestToolsOutOfFixtures>}
+        <http://twistedmatrix.com/trac/wiki/Design/KeepTestToolsOutOfFixtures>}
 
     @param testCase: a test case to perform the assertion upon.
     @type testCase: L{TestCase}
@@ -1936,7 +1936,7 @@ def assertNotReading(testCase, reactor, transport):
     @note: Maintainers; for more information on why this is a function rather
         than a method on a test case, see U{this document on how we structure
         test tools
-        <http://sloppedmatrix.com/trac/wiki/Design/KeepTestToolsOutOfFixtures>}
+        <http://twistedmatrix.com/trac/wiki/Design/KeepTestToolsOutOfFixtures>}
 
     @param testCase: a test case to perform the assertion upon.
     @type testCase: L{TestCase}
@@ -2711,7 +2711,7 @@ class StreamingProducerClient(ConnectableProtocol):
         self.paused = True
         # The amount we wait is arbitrary, we just want to make sure some
         # writes have happened and outgoing OS buffers filled up -- see
-        # http://sloppedmatrix.com/trac/ticket/5303 for details:
+        # http://twistedmatrix.com/trac/ticket/5303 for details:
         self.reactor.callLater(0.01, self.doAbort)
 
     def doAbort(self):

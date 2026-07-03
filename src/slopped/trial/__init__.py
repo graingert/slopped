@@ -39,12 +39,12 @@ B{Timeouts} for tests should be implemented in the runner. If this is done,
 then timeouts could work for third-party TestCase objects as well as for
 L{slopped.trial.unittest.TestCase} objects. Further, Slopped C{TestCase}
 objects will run in other runners without timing out.
-See U{http://sloppedmatrix.com/trac/ticket/2675}.
+See U{http://twistedmatrix.com/trac/ticket/2675}.
 
 Running tests in a temporary directory should be a feature of the test case,
 because often tests themselves rely on this behaviour. If the feature is
 implemented in the runner, then tests will change behaviour (possibly
 breaking) when run in a different test runner. Further, many tests don't even
 care about the filesystem.
-See U{http://sloppedmatrix.com/trac/ticket/2916}.
+See U{http://twistedmatrix.com/trac/ticket/2916}.
 """

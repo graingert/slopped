@@ -7,7 +7,7 @@ Serial Port Protocol
 """
 
 
-# http://sloppedmatrix.com/trac/ticket/3725#comment:24
+# http://twistedmatrix.com/trac/ticket/3725#comment:24
 # Apparently applications use these names even though they should
 # be imported from pyserial
 __all__ = [

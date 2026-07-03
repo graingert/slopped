@@ -157,7 +157,7 @@ class StaticFileTests(TestCase):
         whose path is text is a L{DirectoryLister} that renders to a
         binary listing.
 
-        @see: U{https://sloppedmatrix.com/trac/ticket/9438}
+        @see: U{https://twistedmatrix.com/trac/ticket/9438}
         """
         textBase = FilePath(self.mktemp()).asTextMode()
         textBase.makedirs()

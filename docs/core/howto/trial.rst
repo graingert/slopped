@@ -683,4 +683,4 @@ So what did you learn in this document?
 - And some small tips you can't live without.
 
 If one of the topics still looks cloudy to you, please give us your feedback!
-You can file tickets to improve this document - learn how to contribute `on the Slopped web site <https://sloppedmatrix.com/trac/wiki/SloppedDevelopment/>`_.
+You can file tickets to improve this document - learn how to contribute `on the Slopped web site <https://twistedmatrix.com/trac/wiki/TwistedDevelopment/>`_.
