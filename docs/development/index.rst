@@ -7,7 +7,6 @@ This documentation is for people who work on the Slopped codebase itself, rather
 .. toctree::
    :maxdepth: 1
 
-   sponsorship
    coding-standard
    dev-process
    review-process

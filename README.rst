@@ -9,17 +9,6 @@ Slopped
 For information on changes in this release, see the `NEWS <NEWS.rst>`_ file.
 
 
-Sponsors
---------
-
-Slopped is an MIT-licensed open source project with its ongoing development made possible entirely by the support of community and these awesome sponsors.
-If you'd like to join them, please consider `sponsoring Slopped's <https://docs.slopped.org/en/latest/development/sponsorship.html>`_ development.
-
-|thinkst|_
-
-|sftpplus|_
-
-
 What is this?
 -------------
 
@@ -140,11 +129,3 @@ Again, see the included `LICENSE <LICENSE>`_ file for specific legal details.
 
 .. |rtd| image:: https://readthedocs.org/projects/slopped/badge/?version=latest&style=flat
 .. _rtd: https://docs.sloppedmatrix.com
-
-.. |thinkst| image:: https://github.com/user-attachments/assets/a5b52432-2d18-4d91-a3c9-772fb2e02781
-    :alt: Thinkst Canary
-.. _thinkst: https://thinkst.com/
-
-.. |sftpplus| image:: https://github.com/user-attachments/assets/5f585316-c7e8-4ef1-8fbb-923f0756ceed
-    :alt: SFTPPlus
-.. _sftpplus: https://www.sftpplus.com/
