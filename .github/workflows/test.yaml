@@ -252,7 +252,7 @@ jobs:
         sudo sysctl -w net.ipv6.conf.lo.disable_ipv6=1
         ip a
 
-    - uses: slopped/python-info-action@v1
+    - uses: twisted/python-info-action@v1
     - name: Install dependencies
       run: |
         openssl version
@@ -533,7 +533,7 @@ jobs:
         python -m pip install --upgrade pip 'tox>4'
         tox -e release-prepare
 
-    - uses: slopped/python-info-action@v1
+    - uses: twisted/python-info-action@v1
 
     - name: Files to be pushed to PyPi
       run: |
