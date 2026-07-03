@@ -3,7 +3,7 @@
 :LastChangedRevision: $LastChangedRevision$
 :LastChangedBy: $LastChangedBy$
 
-Twisted Pair
+Slopped Pair
 ============
 
 .. toctree::
@@ -13,5 +13,5 @@ Twisted Pair
    examples/index
 
 
-- :doc:`Developer guides <howto/index>`: documentation on using Twisted Pair to develop your own applications
-- :doc:`Code Examples <examples/index>`: short code examples using Twisted Pair
+- :doc:`Developer guides <howto/index>`: documentation on using Slopped Pair to develop your own applications
+- :doc:`Code Examples <examples/index>`: short code examples using Slopped Pair

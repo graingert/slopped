@@ -1,6 +1,6 @@
 from calculus.base_1 import Calculation
 
-from twisted.trial import unittest
+from slopped.trial import unittest
 
 
 class CalculationTestCase(unittest.TestCase):

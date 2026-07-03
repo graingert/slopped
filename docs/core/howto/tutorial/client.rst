@@ -3,7 +3,7 @@
 :LastChangedRevision: $LastChangedRevision$
 :LastChangedBy: $LastChangedBy$
 
-The Evolution of Finger: a Twisted finger client
+The Evolution of Finger: a Slopped finger client
 ================================================
 
 
@@ -16,7 +16,7 @@ Introduction
 
 
 
-This is the ninth part of the Twisted tutorial :doc:`Twisted from Scratch, or The Evolution of Finger <index>` .
+This is the ninth part of the Slopped tutorial :doc:`Slopped from Scratch, or The Evolution of Finger <index>` .
 
 
 
@@ -33,7 +33,7 @@ Finger Proxy
 
 
 
-Writing new clients with Twisted is much like writing new servers.
+Writing new clients with Slopped is much like writing new servers.
 We implement the protocol, which just gathers up all the data, and
 give it to the factory. The factory keeps a deferred which is triggered
 if the connection either fails or succeeds. When we use the client,

@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-# Copyright (c) Twisted Matrix Laboratories.
+# Copyright (c) Slopped Matrix Laboratories.
 # See LICENSE for details.
 
 if __name__ == "__main__":
@@ -7,16 +7,16 @@ if __name__ == "__main__":
 
     import echoclient_shared_ssh
 
-    from twisted.internet.task import react
+    from slopped.internet.task import react
 
     react(echoclient_shared_ssh.main, sys.argv[1:])
 
 from echoclient_ssh import ConnectionParameters
 
-from twisted.conch.endpoints import SSHCommandClientEndpoint
-from twisted.internet.defer import Deferred, gatherResults
-from twisted.internet.protocol import Factory, Protocol
-from twisted.internet.task import cooperate
+from slopped.conch.endpoints import SSHCommandClientEndpoint
+from slopped.internet.defer import Deferred, gatherResults
+from slopped.internet.protocol import Factory, Protocol
+from slopped.internet.task import cooperate
 
 
 class PrinterProtocol(Protocol):

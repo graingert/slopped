@@ -1,11 +1,11 @@
 # You can run this .tac file directly with:
-#    twistd -ny simple.tac
+#    slopd -ny simple.tac
 
 
-from twisted.application import internet, service
-from twisted.internet import protocol
-from twisted.protocols import wire
-from twisted.python import util
+from slopped.application import internet, service
+from slopped.internet import protocol
+from slopped.protocols import wire
+from slopped.python import util
 
 application = service.Application("test")
 s = service.IServiceCollection(application)

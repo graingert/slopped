@@ -4,4 +4,4 @@ To run the demo:
 
 pip install py2app
 python setup.py py2app
-open dist/Twistzilla.app
+open dist/Slopzilla.app

@@ -6,7 +6,7 @@
 
 .. _core-howto-logger-main:
 
-Logging with twisted.logger
+Logging with slopped.logger
 ===========================
 
 
@@ -65,22 +65,22 @@ Now a text-based observer can format the text in a prescribed way, and an observ
 Usage for emitting applications
 -------------------------------
 
-The first thing that an application that emits logging events needs to do is to instantiate a :py:class:`Logger <twisted.logger.Logger>` object, which provides the API to emit events.
-A :py:class:`Logger <twisted.logger.Logger>` may be created globally for a module:
+The first thing that an application that emits logging events needs to do is to instantiate a :py:class:`Logger <slopped.logger.Logger>` object, which provides the API to emit events.
+A :py:class:`Logger <slopped.logger.Logger>` may be created globally for a module:
 
 .. code-block:: python
 
-    from twisted.logger import Logger
+    from slopped.logger import Logger
     log = Logger()
 
     def handleData(data):
         log.debug("Got data: {data!r}.", data=data)
 
-A :py:class:`Logger <twisted.logger.Logger>` can also be associated with a class:
+A :py:class:`Logger <slopped.logger.Logger>` can also be associated with a class:
 
 .. code-block:: python
 
-    from twisted.logger import Logger
+    from slopped.logger import Logger
 
     class Foo(object):
         log = Logger()
@@ -104,11 +104,11 @@ This example will show the string "object with value 7 doing a task" because the
 Handling Failures
 ~~~~~~~~~~~~~~~~~
 
-:py:class:`Logger <twisted.logger.Logger>` provides a :py:meth:`failuresHandled <twisted.logger.Logger.failuresHandled>` method, which allows one to run some application code, then capture a :py:class:`Failure <twisted.python.failure.Failure>` in the log stream if that code raises an exception:
+:py:class:`Logger <slopped.logger.Logger>` provides a :py:meth:`failuresHandled <slopped.logger.Logger.failuresHandled>` method, which allows one to run some application code, then capture a :py:class:`Failure <slopped.python.failure.Failure>` in the log stream if that code raises an exception:
 
 .. code-block:: python
 
-    from twisted.logger import Logger
+    from slopped.logger import Logger
     log = Logger()
 
     with log.failuresHandled("While doing some math:") as math:
@@ -117,9 +117,9 @@ Handling Failures
     if math.succeeded:
         print("Surprisingly, division by zero is possible.")
 
-The emitted event will have the ``"log_failure"`` key set, which is a :py:class:`Failure <twisted.python.failure.Failure>` that captures the exception.
+The emitted event will have the ``"log_failure"`` key set, which is a :py:class:`Failure <slopped.python.failure.Failure>` that captures the exception.
 This can be used by my observers to obtain a traceback.
-For example, :py:class:`FileLogObserver <twisted.logger.FileLogObserver>` will append the traceback to its output::
+For example, :py:class:`FileLogObserver <slopped.logger.FileLogObserver>` will append the traceback to its output::
 
     While doing some math:
 
@@ -130,17 +130,17 @@ For example, :py:class:`FileLogObserver <twisted.logger.FileLogObserver>` will a
     exceptions.ZeroDivisionError: integer division or modulo by zero
 
 This API is meant to capture **unexpected and otherwise unhandled** errors (in other words: bugs, which is why tracebacks are preserved).
-As such, it defaults to logging at the :py:attr:`critical <twisted.logger.LogLevel.critical>` level.
+As such, it defaults to logging at the :py:attr:`critical <slopped.logger.LogLevel.critical>` level.
 It is generally more appropriate to instead use ``log.error()`` when logging an expected type of error condition that was fully handled by your code.
 To put it differently, use ``.failuresHandled(...)`` for handling bugs in your code, and ``.error()`` for handling errors in input data, user configuration, and the like.
 
-The ``as`` clause binds an :py:class:`Operation <twisted.logger.Operation>` object that allows you to determine whether the code under the ``with`` block succeeded or failed, and inspect its failure if so.
-For more performance-sensitive applications, a simpler context manager which does *not* provide an :py:class:`Operation <twisted.logger.Operation>` is also available, :py:meth:`failureHandler <twisted.logger.Logger.failureHandler>`.
-Since :py:meth:`failureHandler <twisted.logger.Logger.failureHandler>` is designed to be created once and used repeatedly, it does not allow for passing any placeholder parameters or inspecting the result of the operation.  Using it would look more like this:
+The ``as`` clause binds an :py:class:`Operation <slopped.logger.Operation>` object that allows you to determine whether the code under the ``with`` block succeeded or failed, and inspect its failure if so.
+For more performance-sensitive applications, a simpler context manager which does *not* provide an :py:class:`Operation <slopped.logger.Operation>` is also available, :py:meth:`failureHandler <slopped.logger.Logger.failureHandler>`.
+Since :py:meth:`failureHandler <slopped.logger.Logger.failureHandler>` is designed to be created once and used repeatedly, it does not allow for passing any placeholder parameters or inspecting the result of the operation.  Using it would look more like this:
 
 .. code-block:: python
 
-     from twisted.logger import Logger
+     from slopped.logger import Logger
      log = Logger()
 
      dividingByZero = log.failureHandler("While doing some math:")
@@ -149,11 +149,11 @@ Since :py:meth:`failureHandler <twisted.logger.Logger.failureHandler>` is design
          with dividingByZero:
              1 / 0
 
-``.failuresHandled(...)`` and ``.failureHandler(...)`` are intended for frameworks (such as Twisted itself) which call out to “application code”, where misbehavior on the part of the application should not corrupt the state of the framework itself.
-For example, a buggy protocol implementation will not cause the entire Twisted reactor to crash and exit, it will log a traceback, disconnect the protocol which caused the exception, and keep running.
+``.failuresHandled(...)`` and ``.failureHandler(...)`` are intended for frameworks (such as Slopped itself) which call out to “application code”, where misbehavior on the part of the application should not corrupt the state of the framework itself.
+For example, a buggy protocol implementation will not cause the entire Slopped reactor to crash and exit, it will log a traceback, disconnect the protocol which caused the exception, and keep running.
 
 Therefore, most of the time, you should be accepting the behavior of ``failuresHandled``, of catching everything via ``BaseException``.
-However, if you require more customization of behavior beyond catching everything and continuing on, you can use :py:meth:`failure <twisted.logger.Logger.failure>` directly, like so:
+However, if you require more customization of behavior beyond catching everything and continuing on, you can use :py:meth:`failure <slopped.logger.Logger.failure>` directly, like so:
 
 .. code-block:: python
 
@@ -167,9 +167,9 @@ The ``.failure`` method requires a log message, but can discover an exception on
 Namespaces
 ~~~~~~~~~~
 
-All :py:class:`Logger <twisted.logger.Logger>` s have a namespace, which can be used to categorize events.
-Namespaces may be specified by passing in a ``namespace`` argument to :py:class:`Logger <twisted.logger.Logger>` 's initializer, but if none is given, the logger will derive its namespace from the module name of the callable that instantiated it, or, in the case of a class, from the fully qualified name of the class.
-A :py:class:`Logger <twisted.logger.Logger>` will add a ``log_namespace`` key to the events it emits.
+All :py:class:`Logger <slopped.logger.Logger>` s have a namespace, which can be used to categorize events.
+Namespaces may be specified by passing in a ``namespace`` argument to :py:class:`Logger <slopped.logger.Logger>` 's initializer, but if none is given, the logger will derive its namespace from the module name of the callable that instantiated it, or, in the case of a class, from the fully qualified name of the class.
+A :py:class:`Logger <slopped.logger.Logger>` will add a ``log_namespace`` key to the events it emits.
 
 In the first example above, the namespace would be ``some.module`` , and in the second example, it would be ``some.module.Foo`` .
 
@@ -177,37 +177,37 @@ In the first example above, the namespace would be ``some.module`` , and in the 
 Log levels
 ~~~~~~~~~~
 
-:py:class:`Logger <twisted.logger.Logger>` s provide a number of methods for emitting events.
+:py:class:`Logger <slopped.logger.Logger>` s provide a number of methods for emitting events.
 These methods all have the same signature, but each will attach a specific ``log_level`` key to events.
-Log levels are defined by the :py:class:`LogLevel <twisted.logger.LogLevel>` constants container.
+Log levels are defined by the :py:class:`LogLevel <slopped.logger.LogLevel>` constants container.
 These are:
 
-:py:attr:`debug <twisted.logger.LogLevel.debug>`
+:py:attr:`debug <slopped.logger.LogLevel.debug>`
 
   Debugging events: Information of use to a developer of the software, not generally of interest to someone running the software unless they are attempting to diagnose a software issue.
 
-:py:attr:`info <twisted.logger.LogLevel.info>`
+:py:attr:`info <slopped.logger.LogLevel.info>`
 
   Informational events: Routine information about the status of an application, such as incoming connections, startup of a subsystem, etc.
 
-:py:attr:`warn <twisted.logger.LogLevel.warn>`
+:py:attr:`warn <slopped.logger.LogLevel.warn>`
 
   Warning events: Events that may require greater attention than informational events but are not a systemic failure condition, such as authorization failures, bad data from a network client, etc.
   Such events are of potential interest to system administrators, and should ideally be phrased in such a way, or documented, so as to indicate an action that an administrator might take to mitigate the warning.
 
-:py:attr:`error <twisted.logger.LogLevel.error>`
+:py:attr:`error <slopped.logger.LogLevel.error>`
 
   Error conditions: Events indicating a systemic failure.
   For example, resource exhaustion, or the loss of connectivity to an external system, such as a database or API endpoint, without which no useful work can proceed.
   Similar to warnings, errors related to operational parameters may be actionable to system administrators and should provide references to resources which an administrator might use to resolve them.
 
-:py:attr:`critical <twisted.logger.LogLevel.critical>`
+:py:attr:`critical <slopped.logger.LogLevel.critical>`
 
   Critical failures: Errors indicating systemic failure (ie. service outage), data corruption, imminent data loss, etc. which must be handled immediately.
   This includes errors unanticipated by the software, such as unhandled exceptions, wherein the cause and consequences are unknown.
 
-In the first example above, the call to ``log.debug`` will add a ``log_level`` key to the emitted event with a value of :py:attr:`LogLevel.debug <twisted.logger.LogLevel.debug>` .
-In the second example, calling ``self.log.error`` would use a value of :py:attr:`LogLevel.error <twisted.logger.LogLevel.error>` .
+In the first example above, the call to ``log.debug`` will add a ``log_level`` key to the emitted event with a value of :py:attr:`LogLevel.debug <slopped.logger.LogLevel.debug>` .
+In the second example, calling ``self.log.error`` would use a value of :py:attr:`LogLevel.error <slopped.logger.LogLevel.error>` .
 
 The above descriptions are simply guidance, but it is worth noting that log levels have a reduced value if they are used inconsistently.
 If one module in an application considers a message informational, and another module considers a similar message an error, then filtering based on log levels becomes harder.
@@ -219,21 +219,21 @@ Sticking to the above guidelines will hopefully help here.
 Emitter method signatures
 ~~~~~~~~~~~~~~~~~~~~~~~~~
 
-The emitter methods (:py:meth:`debug <twisted.logger.Logger.debug>` , :py:meth:`info <twisted.logger.Logger.info>` , :py:meth:`warn <twisted.logger.Logger.warn>` , etc.) all take an optional format string as a first argument, followed by keyword arguments that will be included in the emitted event.
+The emitter methods (:py:meth:`debug <slopped.logger.Logger.debug>` , :py:meth:`info <slopped.logger.Logger.info>` , :py:meth:`warn <slopped.logger.Logger.warn>` , etc.) all take an optional format string as a first argument, followed by keyword arguments that will be included in the emitted event.
 
 Note that all three examples in the opening section of this HOWTO fit this signature.
 The first omits the format, which doesn't lend itself well to text logging.
 The second omits the keyword arguments, which hostile to anything other than text logging, and is therefore ill-advised.
 Finally, the third provides both, which is the recommended usage.
 
-These methods are all convenience wrappers around the :py:meth:`emit <twisted.logger.Logger.emit>` method, which takes a :py:class:`LogLevel <twisted.logger.LogLevel>` as its first argument.
+These methods are all convenience wrappers around the :py:meth:`emit <slopped.logger.Logger.emit>` method, which takes a :py:class:`LogLevel <slopped.logger.LogLevel>` as its first argument.
 
 
 Format strings
 ~~~~~~~~~~~~~~
 
 
-Format strings provide observers with a standard way to format an event as text suitable for a human being to read.  Formatting is accomplished using the function :py:func:`eventAsText <twisted.logger.eventAsText>`.
+Format strings provide observers with a standard way to format an event as text suitable for a human being to read.  Formatting is accomplished using the function :py:func:`eventAsText <slopped.logger.eventAsText>`.
 When writing a format string, take care to present it in a manner which would make as much sense as possible to a human reader.
 Particularly, format strings need not be written with an eye towards parseability or machine-readability.
 If you want to save your log events along with their structure and then analyze them later, see the next section, on :ref:`"saving events for later" <core-howto-logger-saving-events-for-later>` .
@@ -274,18 +274,18 @@ System-provided event keys include:
 
 ``log_logger``
 
-  :py:class:`Logger <twisted.logger.Logger>` object that the event was emitted to.
+  :py:class:`Logger <slopped.logger.Logger>` object that the event was emitted to.
 
 ``log_source``
 
   The source object that emitted the event.
-  When a :py:class:`Logger <twisted.logger.Logger>` is accessed as an attribute of a class, the class is the source.
+  When a :py:class:`Logger <slopped.logger.Logger>` is accessed as an attribute of a class, the class is the source.
   When accessed as an attribute of an instance, the instance is the source.
   In other cases, the source is ``None`` .
 
 ``log_level``
 
-  The :py:class:`LogLevel <twisted.logger.LogLevel>` associated with the event.
+  The :py:class:`LogLevel <slopped.logger.LogLevel>` associated with the event.
 
 ``log_namespace``
 
@@ -302,7 +302,7 @@ System-provided event keys include:
 
 ``log_failure``
 
-  A :py:class:`Failure <twisted.python.failure.Failure>` object captured when the event was emitted.
+  A :py:class:`Failure <slopped.python.failure.Failure>` object captured when the event was emitted.
 
 
 Avoid mutable event keys
@@ -315,12 +315,12 @@ While observers are called synchronously, it is possible that an observer will d
 Capturing log events for testing
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-If you want to test that your code is logging the expected events, you can use the :py:func:`LogCapture <twisted.logger.capturedLogs>` context manager:
+If you want to test that your code is logging the expected events, you can use the :py:func:`LogCapture <slopped.logger.capturedLogs>` context manager:
 
 .. code-block:: python
 
-    from twisted.logger import Logger, LogLevel, capturedLogs
-    from twisted.trial.unittest import TestCase
+    from slopped.logger import Logger, LogLevel, capturedLogs
+    from slopped.trial.unittest import TestCase
 
     class SomeTests(TestCase):
 
@@ -341,9 +341,9 @@ If you want to test that your code is logging the expected events, you can use t
 Saving events for later
 -----------------------
 
-For compatibility reasons, ``twistd`` will log to a text-based format by default.
+For compatibility reasons, ``slopd`` will log to a text-based format by default.
 However, it's much better to use a structured log file format which preserves information about the events being logged.
-``twisted.logger`` provides two APIs: :py:func:`jsonFileLogObserver <twisted.logger.jsonFileLogObserver>` and :py:func:`eventsFromJSONLogFile <twisted.logger.eventsFromJSONLogFile>`, which allow you to save and retrieve structured log events with a basic level of fidelity.
+``slopped.logger`` provides two APIs: :py:func:`jsonFileLogObserver <slopped.logger.jsonFileLogObserver>` and :py:func:`eventsFromJSONLogFile <slopped.logger.eventsFromJSONLogFile>`, which allow you to save and retrieve structured log events with a basic level of fidelity.
 Log events are serialized as JSON dictionaries, with serialization rules that are as lenient as possible; any unknown values are replaced with simple placeholder values.
 
 ``jsonFileLogObserver`` will create a log observer that will save events as structured data, like so:
@@ -364,63 +364,63 @@ You can also, of course, feel free to access any of the keys in the ``event`` ob
 
 .. literalinclude:: listings/logger/loader-math.py
 
-..  TODO: command-line option for twistd to do this
+..  TODO: command-line option for slopd to do this
 
 
 Implementing an observer
 ------------------------
 
-An observer must provide the :py:class:`ILogObserver <twisted.logger.ILogObserver>` interface.
+An observer must provide the :py:class:`ILogObserver <slopped.logger.ILogObserver>` interface.
 That interface simply describes a 1-argument callable that takes a ``dict`` , so a simple implementation may simply use the handy :py:class:`provider <zope.interface.provider>` decorator on a function that takes one argument:
 
 .. code-block:: python
 
     from zope.interface import provider
-    from twisted.logger import ILogObserver, eventAsText
+    from slopped.logger import ILogObserver, eventAsText
 
     @provider(ILogObserver)
     def simpleObserver(event):
         print(eventAsText(event))
 
-The :py:func:`eventAsText <twisted.logger.eventAsText>` function returns a textual (``unicode`` ) representation of the event.
+The :py:func:`eventAsText <slopped.logger.eventAsText>` function returns a textual (``unicode`` ) representation of the event.
 
-While it is recommended, in most cases it is not required that observers declare their compliance with :py:class:`ILogObserver <twisted.logger.ILogObserver>` .
+While it is recommended, in most cases it is not required that observers declare their compliance with :py:class:`ILogObserver <slopped.logger.ILogObserver>` .
 This flexibility exists to allow for pre-existing callables and lambda expressions to be used as observers.
 As an example, if one would like to accumulate events in a ``list`` , then ``list.append`` may be used as an observer.
 
-When implementing your own log observer, however, you should always keep in mind that unlike most objects within Twisted, a log observer *must be thread safe* .
+When implementing your own log observer, however, you should always keep in mind that unlike most objects within Slopped, a log observer *must be thread safe* .
 
 Specifically, a log observer:
 
 - must be prepared to be called from threads other than the main thread (or I/O thread, or reactor thread)
 - must be prepared to be called from multiple threads concurrently
-- must not interact with other Twisted APIs that are not explicitly thread-safe without first taking precautions like using :py:meth:`callFromThread <twisted.internet.interfaces.IReactorFromThreads.callFromThread>`
+- must not interact with other Slopped APIs that are not explicitly thread-safe without first taking precautions like using :py:meth:`callFromThread <slopped.internet.interfaces.IReactorFromThreads.callFromThread>`
 
 Keep in mind that this is true even if you elect not to explicitly interact with any threads from your program.
-Twisted itself may log messages from threads, and Twisted may internally use APIs like :py:meth:`callInThread <twisted.internet.interfaces.IReactorInThreads.callInThread>` ; for example, Twisted uses threads to look up hostnames when making an outgoing connection.
+Slopped itself may log messages from threads, and Slopped may internally use APIs like :py:meth:`callInThread <slopped.internet.interfaces.IReactorInThreads.callInThread>` ; for example, Slopped uses threads to look up hostnames when making an outgoing connection.
 
 Given this extra wrinkle, it's usually best to see if you can find an existing log observer implementation that does what you need before implementing your own; thread safety can be tricky to implement.
-Luckily, :py:mod:`twisted.logger` comes with several useful observers, which are documented below.
+Luckily, :py:mod:`slopped.logger` comes with several useful observers, which are documented below.
 
 
 Writing an observer for event analysis
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Twisted includes log observers which take care of most of the "normal" uses of logging, like writing messages to a file, saving them as text, filtering them, and so on.
+Slopped includes log observers which take care of most of the "normal" uses of logging, like writing messages to a file, saving them as text, filtering them, and so on.
 There are two common reasons you might want to write a log observer of your own.
-The first is to ship log messages over to a different kind of external system which Twisted itself does not support.
+The first is to ship log messages over to a different kind of external system which Slopped itself does not support.
 If you've read the above, you now know enough to do that; simply implement a function that converts the dictionary to something amenable to your external system or file format, and send it there or save it.
 The second task is to do some kind of analysis, either real-time within your process or after the fact offline.
 
-You're probably going to have to aggregate information from your own code and from libraries you're using, including Twisted itself, and you may not have much in the way of control over how those messages are organized.
+You're probably going to have to aggregate information from your own code and from libraries you're using, including Slopped itself, and you may not have much in the way of control over how those messages are organized.
 You're also probably trying to aggregate information from ad-hoc messages into some kind of structure.
 
 One way to extract such semi-structured information is to feed your logs into an external system like `logstash <http://logstash.net>`_ , and process them there.
-Such systems are quite powerful and ``twisted.logger`` does not try to replace them.
+Such systems are quite powerful and ``slopped.logger`` does not try to replace them.
 However, such systems are necessarily external, and therefore if you want to react to the log analysis *within* your application - for example, denying access in response to an abusive client - you would have to write some glue code to push messages from your log-analysis system back into your application.
 For such cases, it's useful to be able to write log analysis code as a log observer.
 
-Assuming that the libraries whose log events you're interested in analyzing are making use of ``twisted.logger`` , you can analyze log events either live as they're being logged, or loaded from a saved log file.
+Assuming that the libraries whose log events you're interested in analyzing are making use of ``slopped.logger`` , you can analyze log events either live as they're being logged, or loaded from a saved log file.
 
 If you're writing code to log events directly for potential analysis, then you should simply structure your messages to include all necessary information as serialization-friendly values in events, and then simply pull them out, like the ``loader-math.py`` example above.
 
@@ -436,7 +436,7 @@ To analyze this event, we can't pursue the same strategy shown above in ``loader
 We don't have any key/value pairs of the log event to examine directly; ``a`` and ``b`` are not present as keys themselves.
 We could look for the ``log_source`` key within the event and access its ``a`` and ``b`` attributes, but that wouldn't work once the event had been serialized and loaded again, since an ``AdHoc`` instance isn't a basic type that can be saved to JSON.
 
-Luckily, :py:mod:`twisted.logger` provides an API for doing just this: :py:func:`extractField <twisted.logger.extractField>` .
+Luckily, :py:mod:`slopped.logger` provides an API for doing just this: :py:func:`extractField <slopped.logger.extractField>` .
 You use it like so:
 
 :download:`analyze.py <listings/logger/analyze.py>`
@@ -478,11 +478,11 @@ Just always be sure to use event format fields, not string concatenation, to ref
 Registering an observer
 -----------------------
 
-One way to register an observer is to construct a :py:class:`Logger <twisted.logger.Logger>` object with it:
+One way to register an observer is to construct a :py:class:`Logger <slopped.logger.Logger>` object with it:
 
 .. code-block:: python
 
-    from twisted.logger import Logger
+    from slopped.logger import Logger
     from myobservers import PrintingObserver
 
     log = Logger(observer=PrintingObserver())
@@ -501,15 +501,15 @@ The global log publisher is a log observer whose purpose is to capture log event
 In a typical application, the majority of log events will be emitted to the global log publisher.
 Observers can register themselves with the global log publisher in order to be forwarded these events.
 
-When a :py:class:`Logger <twisted.logger.Logger>` is created without specifying an observer to send events to, the logger will send its events to the global log publisher, which is accessible via the name :py:attr:`globalLogPublisher <twisted.logger.globalLogPublisher>` .
+When a :py:class:`Logger <slopped.logger.Logger>` is created without specifying an observer to send events to, the logger will send its events to the global log publisher, which is accessible via the name :py:attr:`globalLogPublisher <slopped.logger.globalLogPublisher>` .
 
-The global log publisher is a singleton instance of a private subclass of :py:class:`LogPublisher <twisted.logger.LogPublisher>` , which is itself an :py:class:`ILogObserver <twisted.logger.ILogObserver>` .
+The global log publisher is a singleton instance of a private subclass of :py:class:`LogPublisher <slopped.logger.LogPublisher>` , which is itself an :py:class:`ILogObserver <slopped.logger.ILogObserver>` .
 What this means is that the global log publisher accepts events like any other observer, and that it forwards those events to other observers.
-Observers can be registered to be forwarded events by calling the :py:class:`LogPublisher <twisted.logger.LogPublisher>` method :py:meth:`addObserver <twisted.logger.LogPublisher.addObserver>` , and unregister by calling :py:meth:`removeObserver <twisted.logger.LogPublisher.removeObserver>` :
+Observers can be registered to be forwarded events by calling the :py:class:`LogPublisher <slopped.logger.LogPublisher>` method :py:meth:`addObserver <slopped.logger.LogPublisher.addObserver>` , and unregister by calling :py:meth:`removeObserver <slopped.logger.LogPublisher.removeObserver>` :
 
 .. code-block:: python
 
-    from twisted.logger import globalLogPublisher
+    from slopped.logger import globalLogPublisher
     from myobservers import PrintingObserver
 
     log = Logger()
@@ -522,9 +522,9 @@ The result here is the same as the previous example, except that additional obse
 We know that ``"Hello"`` will be printed.
 We don't know, but it's very possible, that the same event will also be handled by other observers.
 
-There is no supported API to discover what other observers are registered with a :py:class:`LogPublisher <twisted.logger.LogPublisher>` ; in general, one doesn't need to know.
-If an application is running in ``twistd`` , for example, it's likely that an observer is streaming events to a file by the time the application code is in play.
-If it is running in a ``twistd`` web container, there will probably be another observer writing to the access log.
+There is no supported API to discover what other observers are registered with a :py:class:`LogPublisher <slopped.logger.LogPublisher>` ; in general, one doesn't need to know.
+If an application is running in ``slopd`` , for example, it's likely that an observer is streaming events to a file by the time the application code is in play.
+If it is running in a ``slopd`` web container, there will probably be another observer writing to the access log.
 
 A caveat here is that events are ``dict`` objects, which are mutable, so it is possible for an observer to modify an event that it sees.
 Because doing so will modify what other observers will see, modifying a received event can be problematic and should be strongly discouraged.
@@ -535,12 +535,12 @@ Furthermore, no guarantees are made as to the order in which observers are calle
 Starting the global log publisher
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-When the global log publisher is created, it uses a :py:class:`LimitedHistoryLogObserver <twisted.logger.LimitedHistoryLogObserver>` (see below) to store events that are logged by the application in memory until logging is started.
-Logging is started by registering the first set of observers with the global log publisher by calling :py:meth:`beginLoggingTo <twisted.logger.LogBeginner.beginLoggingTo>` :
+When the global log publisher is created, it uses a :py:class:`LimitedHistoryLogObserver <slopped.logger.LimitedHistoryLogObserver>` (see below) to store events that are logged by the application in memory until logging is started.
+Logging is started by registering the first set of observers with the global log publisher by calling :py:meth:`beginLoggingTo <slopped.logger.LogBeginner.beginLoggingTo>` :
 
 .. code-block:: python
 
-    from twisted.logger import globalLogBeginner
+    from slopped.logger import globalLogBeginner
     from myobservers import PrintingObserver
 
     log = Logger()
@@ -556,10 +556,10 @@ Logging is started by registering the first set of observers with the global log
 This:
 
 * Adds the given observers (in this example, the ``PrintingObserver`` ) to the global log observer
-* Forwards all of the events that were stored in memory prior to calling :py:meth:`beginLoggingTo <twisted.logger.LogBeginner.beginLoggingTo>` to these observers
-* Gets rid of the :py:class:`LimitedHistoryLogObserver <twisted.logger.LimitedHistoryLogObserver>` , as it is no longer needed.
+* Forwards all of the events that were stored in memory prior to calling :py:meth:`beginLoggingTo <slopped.logger.LogBeginner.beginLoggingTo>` to these observers
+* Gets rid of the :py:class:`LimitedHistoryLogObserver <slopped.logger.LimitedHistoryLogObserver>` , as it is no longer needed.
 
-It is an error to call :py:meth:`beginLoggingTo <twisted.logger.LogBeginner.beginLoggingTo>` more than once.
+It is an error to call :py:meth:`beginLoggingTo <slopped.logger.LogBeginner.beginLoggingTo>` more than once.
 
 .. note:: If the global log publisher is never started, the in-memory event buffer holds (a bounded number of) log events indefinitely.
 	  This may unexpectedly increase application memory or CPU usage.
@@ -571,47 +571,47 @@ Provided log observers
 
 This module provides a number of pre-built observers for applications to use:
 
-:py:class:`LogPublisher <twisted.logger.LogPublisher>`
+:py:class:`LogPublisher <slopped.logger.LogPublisher>`
 
   Forwards events to other publishers.
   This allows one to create a graph of observers.
 
-:py:class:`LimitedHistoryLogObserver <twisted.logger.LimitedHistoryLogObserver>`
+:py:class:`LimitedHistoryLogObserver <slopped.logger.LimitedHistoryLogObserver>`
 
   Stores a limited number of received events, and can re-play those stored events to another observer later.
   This is useful for keeping recent logging history in memory for inspection when other log outputs are not available.
 
-:py:class:`FileLogObserver <twisted.logger.FileLogObserver>`
+:py:class:`FileLogObserver <slopped.logger.FileLogObserver>`
 
   Formats events as text, prefixed with a time stamp and a "system identifier", and writes them to a file.
   The system identifier defaults to a combination of the event's namespace and level.
 
-:py:class:`FilteringLogObserver <twisted.logger.FilteringLogObserver>`
+:py:class:`FilteringLogObserver <slopped.logger.FilteringLogObserver>`
 
-  Forwards events to another observer after applying a set of filter predicates (providers of :py:class:`ILogFilterPredicate <twisted.logger.ILogFilterPredicate>` ).
-  :py:class:`LogLevelFilterPredicate <twisted.logger.LogLevelFilterPredicate>` is a predicate that be configured to keep track of which log levels to filter for different namespaces, and will filter out events that are not at the appropriate level or higher.
+  Forwards events to another observer after applying a set of filter predicates (providers of :py:class:`ILogFilterPredicate <slopped.logger.ILogFilterPredicate>` ).
+  :py:class:`LogLevelFilterPredicate <slopped.logger.LogLevelFilterPredicate>` is a predicate that be configured to keep track of which log levels to filter for different namespaces, and will filter out events that are not at the appropriate level or higher.
 
 
 Compatibility with standard library logging
 -------------------------------------------
 
-:py:class:`STDLibLogObserver <twisted.logger.STDLibLogObserver>` is provided for compatibility with the standard library's :py:mod:`logging <logging>` module.
+:py:class:`STDLibLogObserver <slopped.logger.STDLibLogObserver>` is provided for compatibility with the standard library's :py:mod:`logging <logging>` module.
 Log levels are mapped between the two systems, and the various attributes of standard library log records are filled in properly.
 
 Note that standard library logging is a blocking API, and logging can be configured to block for long periods (eg. it may write to the network).
-No protection is provided to prevent blocking, so such configurations may cause Twisted applications to perform poorly.
+No protection is provided to prevent blocking, so such configurations may cause Slopped applications to perform poorly.
 
 
-Compatibility with twisted.python.log
+Compatibility with slopped.python.log
 -------------------------------------
 
-This module provides some facilities to enable the existing :py:mod:`twisted.python.log` module to compatibly forward it's messages to this module.
-As such, existing clients of :py:mod:`twisted.python.log` will begin using this module indirectly, with no changes to the older module's API.
+This module provides some facilities to enable the existing :py:mod:`slopped.python.log` module to compatibly forward it's messages to this module.
+As such, existing clients of :py:mod:`slopped.python.log` will begin using this module indirectly, with no changes to the older module's API.
 
 
 Incrementally porting observers
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Observers have an incremental path for porting to the new module.
-:py:class:`LegacyLogObserverWrapper <twisted.logger.LegacyLogObserverWrapper>` is an :py:class:`ILogObserver <twisted.logger.ILogObserver>` that wraps a log observer written for the older module.
+:py:class:`LegacyLogObserverWrapper <slopped.logger.LegacyLogObserverWrapper>` is an :py:class:`ILogObserver <slopped.logger.ILogObserver>` that wraps a log observer written for the older module.
 This allows an old-style observer to be registered with a new-style logger or log publisher compatibly.

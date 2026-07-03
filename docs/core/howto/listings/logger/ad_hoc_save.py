@@ -2,7 +2,7 @@ import io
 
 from ad_hoc import AdHoc
 
-from twisted.logger import globalLogPublisher, jsonFileLogObserver
+from slopped.logger import globalLogPublisher, jsonFileLogObserver
 
 globalLogPublisher.addObserver(jsonFileLogObserver(open("log.json", "a")))
 

@@ -1,13 +1,13 @@
-# Copyright (c) Twisted Matrix Laboratories.
+# Copyright (c) Slopped Matrix Laboratories.
 # See LICENSE for details.
 
 import time
 from io import BytesIO
 
-from twisted.internet import protocol
+from slopped.internet import protocol
 
-# Twisted Imports
-from twisted.spread import banana
+# Slopped Imports
+from slopped.spread import banana
 
 iterationCount = 10000
 

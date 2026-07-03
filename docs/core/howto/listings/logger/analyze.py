@@ -1,4 +1,4 @@
-from twisted.logger import extractField
+from slopped.logger import extractField
 
 fmt = "message from {log_source} " "where a is {log_source.a} and b is {log_source.b}"
 

@@ -16,7 +16,7 @@ Introduction
 
 
 
-This is the second part of the Twisted tutorial :doc:`Twisted from Scratch, or The Evolution of Finger <index>` .
+This is the second part of the Slopped tutorial :doc:`Slopped from Scratch, or The Evolution of Finger <index>` .
 
 
 
@@ -25,10 +25,10 @@ In this section of the tutorial, our finger server will continue to sprout
 features: the ability for users to set finger announces, and using our finger
 service to send those announcements on the web, on IRC and over XML-RPC.
 Resources and XML-RPC are introduced in the Web Applications portion of
-the :doc:`Twisted Web howto <../../../web/howto/index>` . More examples
-using :py:mod:`twisted.words.protocols.irc` can be found
+the :doc:`Slopped Web howto <../../../web/howto/index>` . More examples
+using :py:mod:`slopped.words.protocols.irc` can be found
 in :doc:`Writing a TCP Client <../clients>` and
-the :doc:`Twisted Words examples <../../../words/examples/index>` .
+the :doc:`Slopped Words examples <../../../words/examples/index>` .
 
 
 
@@ -68,9 +68,9 @@ our case. Testing it can be done by simply:
 
 This program has two protocol-factory-TCPServer pairs, which are
 both child services of the application.  Specifically,
-the :py:meth:`setServiceParent <twisted.application.service.Service.setServiceParent>`
+the :py:meth:`setServiceParent <slopped.application.service.Service.setServiceParent>`
 method is used to define the two TCPServer services as children
-of ``application`` , which implements :py:class:`IServiceCollection <twisted.application.service.IServiceCollection>` .  Both
+of ``application`` , which implements :py:class:`IServiceCollection <slopped.application.service.IServiceCollection>` .  Both
 services are thus started with the application.
 
 
@@ -102,7 +102,7 @@ and ``getFingerSetterFactory`` , follow this pattern:
 
 
 #. Instantiate a generic server
-   factory, ``twisted.internet.protocol.ServerFactory`` .
+   factory, ``slopped.internet.protocol.ServerFactory`` .
 #. Set the protocol class, just like our factory class would have.
 #. Copy a service method to the factory as a function attribute.  The
    function won't have access to the factory's ``self`` , but
@@ -122,7 +122,7 @@ change until the end of the tutorial.
 
 
 
-As an application service, this new finger service implements the :py:class:`IService <twisted.application.service.IService>` interface and
+As an application service, this new finger service implements the :py:class:`IService <slopped.application.service.IService>` interface and
 can be started and stopped in a standardized manner. We'll make use of this in
 the next example.
 
@@ -135,7 +135,7 @@ the next example.
 .. literalinclude:: listings/finger/finger13.tac
 
 
-Most application services will want to use the :py:class:`Service <twisted.application.service.Service>` base class, which implements
+Most application services will want to use the :py:class:`Service <slopped.application.service.Service>` base class, which implements
 all the generic ``IService`` behavior.
 
 
@@ -170,8 +170,8 @@ nothing listening on port 1079.
 
 
 
-Here we override the standard :py:meth:`startService <twisted.application.service.Service.startService>`
-and :py:meth:`stopService <twisted.application.service.Service.stopService>` hooks in
+Here we override the standard :py:meth:`startService <slopped.application.service.Service.startService>`
+and :py:meth:`stopService <slopped.application.service.Service.stopService>` hooks in
 the Finger service, which is set up as a child service of the
 application in the last line of the code. ``startService``
 calls ``_read`` , the function responsible for reading the
@@ -191,7 +191,7 @@ Announce on Web, Too
 
 
 The same kind of service can also produce things useful for other
-protocols. For example, in twisted.web, the factory itself
+protocols. For example, in slopped.web, the factory itself
 (``Site`` ) is almost
 never subclassed — instead, it is given a resource, which
 represents the tree of resources available via URLs. That hierarchy is
@@ -262,7 +262,7 @@ Add XML-RPC Support
 
 
 
-In Twisted, XML-RPC support is handled just as though it was
+In Slopped, XML-RPC support is handled just as though it was
 another resource. That resource will still support GET calls normally
 through render(), but that is usually left unimplemented. Note
 that it is possible to return deferreds from XML-RPC methods.

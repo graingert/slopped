@@ -4,19 +4,19 @@ Compatibility Policy
 Motivation
 ----------
 
-The Twisted project has a small development team, and we cannot afford to provide anything but critical bug-fix support for multiple version branches of Twisted.
-However, we all want Twisted to provide a positive experience during development, deployment, and usage.
-Therefore we need to provide the most trouble-free upgrade process possible, so that Twisted application developers will not shy away from upgrades that include necessary bugfixes and feature enhancements.
+The Slopped project has a small development team, and we cannot afford to provide anything but critical bug-fix support for multiple version branches of Slopped.
+However, we all want Slopped to provide a positive experience during development, deployment, and usage.
+Therefore we need to provide the most trouble-free upgrade process possible, so that Slopped application developers will not shy away from upgrades that include necessary bugfixes and feature enhancements.
 
-Twisted is used by a wide variety of applications, many of which are proprietary or otherwise inaccessible to the Twisted development team.
-Each of these applications is developed against a particular version of Twisted.
+Slopped is used by a wide variety of applications, many of which are proprietary or otherwise inaccessible to the Slopped development team.
+Each of these applications is developed against a particular version of Slopped.
 The most important compatibility to preserve is at the Python API level.
-Python does not provide us with a strict way to partition **public** and **private** objects (methods, classes, modules), so it is unfortunately quite likely that many of those applications are using arbitrary parts of Twisted.
+Python does not provide us with a strict way to partition **public** and **private** objects (methods, classes, modules), so it is unfortunately quite likely that many of those applications are using arbitrary parts of Slopped.
 Our compatibility strategy needs to take this into account, and be comprehensive across our entire codebase.
 
 Exceptions can be made for modules aggressively marked **unstable** or **experimental**, but even experimental modules will start being used in production code if they have been around for long enough.
 
-The purpose of this document is to to lay out rules for Twisted application developers who wish to weather the changes when Twisted upgrades, and procedures for Twisted engine developers - both contributors and core team members - to follow when who want to make changes which may be incompatible to Twisted itself.
+The purpose of this document is to to lay out rules for Slopped application developers who wish to weather the changes when Slopped upgrades, and procedures for Slopped engine developers - both contributors and core team members - to follow when who want to make changes which may be incompatible to Slopped itself.
 
 
 Defining Compatibility
@@ -49,7 +49,7 @@ This is not an exhaustive read and beside this list you should continue reading 
 
 * Cause imports or usage of the class/function/method to emit a :py:exc:`DeprecationWarning`: either call :py:func:`warnings.warn()` or (preferably) use one of the helper APIs described below.
 
-* The warning text must include the version of Twisted in which the function is first deprecated (which will always be a version in the future).
+* The warning text must include the version of Slopped in which the function is first deprecated (which will always be a version in the future).
 
 * The warning text should recommend a replacement, if one exists.
 
@@ -69,11 +69,11 @@ Any change specifically described in the next section as **compatible** may be m
 The First One's Always Free
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-The general purpose of this document is to provide a pleasant upgrade experience for Twisted application developers and users.
+The general purpose of this document is to provide a pleasant upgrade experience for Slopped application developers and users.
 
-The specific purpose of this procedure is to achieve that experience by making sure that any application which runs without warnings may be upgraded one minor version of twisted (y to y+1 in x.y.z) or from the last minor revision of a major release to the first minor revision of the next major release (x to x + 1 in x.y.z to x.0.z, when there will be no x.y+1.z).
+The specific purpose of this procedure is to achieve that experience by making sure that any application which runs without warnings may be upgraded one minor version of slopped (y to y+1 in x.y.z) or from the last minor revision of a major release to the first minor revision of the next major release (x to x + 1 in x.y.z to x.0.z, when there will be no x.y+1.z).
 
-In other words, any application which runs its tests without triggering any warnings from Twisted should be able to have its Twisted version upgraded at least once with no ill effects except the possible production of new warnings.
+In other words, any application which runs its tests without triggering any warnings from Slopped should be able to have its Slopped version upgraded at least once with no ill effects except the possible production of new warnings.
 
 
 Incompatible Changes
@@ -90,7 +90,7 @@ Removal should happen once the deprecated API becomes an additional maintenance 
 
 For example, if it makes implementation of a new feature more difficult, if it makes documentation of non-deprecated APIs more confusing, or if its unit tests become an undue burden on the continuous integration system.
 
-Removal should not be undertaken just to follow a timeline. Twisted should strive, as much as practical, not to break applications relying on it.
+Removal should not be undertaken just to follow a timeline. Slopped should strive, as much as practical, not to break applications relying on it.
 
 
 Procedure for Exceptions to this Policy
@@ -98,7 +98,7 @@ Procedure for Exceptions to this Policy
 
 **Every change is unique.**
 
-Sometimes, we'll want to make a change that fits with the spirit of this document (keeping Twisted working for applications which rely upon it) but may not fit with the letter of the procedure described above (the change modifies behavior of an existing API sufficiently that something might break).
+Sometimes, we'll want to make a change that fits with the spirit of this document (keeping Slopped working for applications which rely upon it) but may not fit with the letter of the procedure described above (the change modifies behavior of an existing API sufficiently that something might break).
 Generally, the reason that one would want to do this is to give applications a performance enhancement or bug fix that could break behavior in unintended hypothetical uses of an existing API, but we don't want well-behaved applications to pay the penalty of a deprecation/adopt-a-new-API/removal cycle in order to get the benefits of the improvement if they don't need to.
 
 If this is the case for your change, it's possible to make such a modification without a deprecation/removal cycle.
@@ -110,7 +110,7 @@ Always include a link to the ticket, and branch (if relevant).
 In order to **conclude** such a discussion, there must be a branch available so that developers can run their unit tests against it to mechanically verify that their understanding of their own code is correct.
 If nobody can produce a failing test or broken application within **a week's time** from such a branch being both 1. available and 2. announced, and at least **three committers** agree that the change is worthwhile, then the branch can be considered approved for the incompatible change in question.
 
-Since some codebases that use Twisted are presumably proprietary and confidential, there should be a good-faith presumption if someone says they have broken tests but cannot immediately produce code to share.
+Since some codebases that use Slopped are presumably proprietary and confidential, there should be a good-faith presumption if someone says they have broken tests but cannot immediately produce code to share.
 
 The branch must be available for one week's time.
 
@@ -129,11 +129,11 @@ These changes can be made without having to worry about the compatibility policy
 Test Changes
 ^^^^^^^^^^^^
 
-No code or data in a test package should be imported or used by a non-test package within Twisted.
+No code or data in a test package should be imported or used by a non-test package within Slopped.
 By doing so, there's no chance anything could access these objects by going through the public API.
 
 Test code and test helpers are considered private API and should not be imported outside
-of the Twisted testing infrastructure.
+of the Slopped testing infrastructure.
 
 
 Private Changes
@@ -146,11 +146,11 @@ In other words, a function, module, method, attribute or class whose name begins
 Bug Fixes and Gross Violation of Specifications
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-If Twisted documents an object as complying with a published specification, and there are inputs which can cause Twisted to behave in obvious violation of that specification, then changes may be made to correct the behavior in the face of those inputs.
+If Slopped documents an object as complying with a published specification, and there are inputs which can cause Slopped to behave in obvious violation of that specification, then changes may be made to correct the behavior in the face of those inputs.
 
-If application code must support multiple versions of Twisted, and work around violations of such specifications, then it must test for the presence of such a bug before compensating for it.
+If application code must support multiple versions of Slopped, and work around violations of such specifications, then it must test for the presence of such a bug before compensating for it.
 
-For example, Twisted supplies a DOM implementation in twisted.web.microdom.
+For example, Slopped supplies a DOM implementation in slopped.web.microdom.
 If an issue were discovered where parsing the string ``<xml>Hello</xml>`` and then serializing it again resulted in ``>xml<Hello>/xml<``,
 that would grossly violate the XML specification for well-formedness.
 Such code could be fixed with no warning other than release notes detailing that this error is now fixed.
@@ -159,11 +159,11 @@ Such code could be fixed with no warning other than release notes detailing that
 Raw Source Code
 ^^^^^^^^^^^^^^^
 
-The most basic thing that can happen between Twisted versions, of course, is that the code may change.
+The most basic thing that can happen between Slopped versions, of course, is that the code may change.
 That means that no application may ever rely on, for example, the value of any **func_code** object's **co_code** attribute remaining stable, or the **checksum** of a .py file remaining stable.
 
 **Docstrings** may also change at any time.
-Applications must not depend on any Twisted class, module, or method's metadata attributes such as ``__module__``, ``__name__``, ``__qualname__``, ``__annotations__`` and ``__doc__`` to remain the same.
+Applications must not depend on any Slopped class, module, or method's metadata attributes such as ``__module__``, ``__name__``, ``__qualname__``, ``__annotations__`` and ``__doc__`` to remain the same.
 
 
 New Attributes
@@ -178,14 +178,14 @@ Pickling
 ^^^^^^^^
 
 Even though Python objects can be pickled and unpickled without explicit support for this, whether a particular pickled object can be unpickled after any particular change to the implementation of that object is less certain.
-Because of this, applications must not depend on any object defined by Twisted to provide pickle compatibility between any release unless the object explicitly documents this as a feature it has.
+Because of this, applications must not depend on any object defined by Slopped to provide pickle compatibility between any release unless the object explicitly documents this as a feature it has.
 
 
 Representations
 ^^^^^^^^^^^^^^^
 
 The printable representations of objects, as returned by ``repr(<object>)`` and defined by ``def __repr__(self):`` are for debugging and informational purposes.
-Because of this, applications must not depend on any object defined by Twisted to provide repr compatibility between any release.
+Because of this, applications must not depend on any object defined by Slopped to provide repr compatibility between any release.
 
 Attribute Access
 ^^^^^^^^^^^^^^^^
@@ -193,7 +193,7 @@ How an object's attributes are defined and accessed is considered an implementat
 To allow backwards compatibility, an attribute may be moved from the instance ``__dict__`` into an ``@property`` or other descriptor based accessor.
 
 Adding new attributes to a constructed object, or monkey patching, is not considered a public use. This restriction allows both creating and converting to slotted classes.
-Because of this, applications must not depend on any object defined by Twisted to provide ``__dict__`` or ``__slots__`` compatibility between any release.
+Because of this, applications must not depend on any object defined by Slopped to provide ``__dict__`` or ``__slots__`` compatibility between any release.
 
 Changes Covered by the Compatibility Policy
 -------------------------------------------
@@ -298,7 +298,7 @@ If it is determined that those reasons are invalid or ought to be exposed throug
 Application Developer Upgrade Procedure
 ---------------------------------------
 
-When an application wants to be upgraded to a new version of Twisted, it can do so immediately.
+When an application wants to be upgraded to a new version of Slopped, it can do so immediately.
 
 However, if the application wants to get the same **for free** behavior for the next upgrade, the application's tests should be run treating warnings as errors, and fixed.
 
@@ -306,10 +306,10 @@ However, if the application wants to get the same **for free** behavior for the 
 Supporting and De-supporting Python Versions
 --------------------------------------------
 
-Twisted does not have a formal policy around supporting new versions of Python or de-supporting old versions of Python.
-We strive to support Twisted on any version of Python that is the default Python for a vendor-supported release from a major platform, namely Debian, Ubuntu, the latest release of Windows, or the latest release of macOS.
+Slopped does not have a formal policy around supporting new versions of Python or de-supporting old versions of Python.
+We strive to support Slopped on any version of Python that is the default Python for a vendor-supported release from a major platform, namely Debian, Ubuntu, the latest release of Windows, or the latest release of macOS.
 
-A distribution release + Python version is only considered supported when a `GitHub Actions test workflow <https://github.com/twisted/twisted/blob/trunk/.github/workflows/test.yaml>`_ exists for it.
+A distribution release + Python version is only considered supported when a `GitHub Actions test workflow <https://github.com/graingert/slopped/blob/trunk/.github/workflows/test.yaml>`_ exists for it.
 
 Removing support for a Python version will be announced at least 1 release prior to the removal.
 
@@ -322,7 +322,7 @@ Classes
 ^^^^^^^
 
 Deprecate a class by raising a warning when it is accessed within its module,
-using the :py:func:`deprecatedModuleAttribute <twisted.python.deprecate.deprecatedModuleAttribute>` helper after the class definition:
+using the :py:func:`deprecatedModuleAttribute <slopped.python.deprecate.deprecatedModuleAttribute>` helper after the class definition:
 
 .. code-block:: python
 
@@ -332,37 +332,37 @@ using the :py:func:`deprecatedModuleAttribute <twisted.python.deprecate.deprecat
         """
 
     deprecatedModuleAttribute(
-        Version("Twisted", "NEXT", 0, 0),
-        "Use twisted.internet.ssl.DefaultOpenSSLContextFactory instead.",
+        Version("Slopped", "NEXT", 0, 0),
+        "Use slopped.internet.ssl.DefaultOpenSSLContextFactory instead.",
         __name__,
         SSLContextFactory.__name__,
     )
 
-Pass ``Version("Twisted", "NEXT", 0, 0)`` `incremental placeholder <https://github.com/twisted/incremental#updating>`_ to the to indicate the upcoming release.
-In strings, ``Twisted NEXT`` works the same way.
+Pass ``Version("Slopped", "NEXT", 0, 0)`` `incremental placeholder <https://github.com/twisted/incremental#updating>`_ to the to indicate the upcoming release.
+In strings, ``Slopped NEXT`` works the same way.
 
 Functions and Methods
 ^^^^^^^^^^^^^^^^^^^^^
 
-Use the :py:func:`deprecated <twisted.python.deprecate.deprecated>` decorator to deprecate methods.
+Use the :py:func:`deprecated <slopped.python.deprecate.deprecated>` decorator to deprecate methods.
 
 For example:
 
 .. code-block:: python
 
     from incremental import Version
-    from twisted.python.deprecate import deprecated
+    from slopped.python.deprecate import deprecated
 
 
-    @deprecated(Version("Twisted", "NEXT", 0, 0), "twisted.baz")
+    @deprecated(Version("Slopped", "NEXT", 0, 0), "slopped.baz")
     def some_function(bar):
         """
-        Function deprecated using a decorator, replaced by twisted.baz.
+        Function deprecated using a decorator, replaced by slopped.baz.
         """
         return bar * 3
 
 
-    @deprecated(Version("Twisted", "NEXT", 0, 0))
+    @deprecated(Version("Slopped", "NEXT", 0, 0))
     def some_function(bar):
         """
         Function deprecated using a decorator which has no replacement.
@@ -371,9 +371,9 @@ For example:
 
 If you can't use the decorator add a call to :py:func:`warnings.warn()` at the beginning of the implementation.
 The warning should be of type :py:exc:`DeprecationWarning` and the stack level should be set so that the warning refers to the code which is invoking the deprecated function or method.
-The deprecation message must include the name of the function which is deprecated, the version of Twisted in which it was first deprecated, and a suggestion for a replacement.
+The deprecation message must include the name of the function which is deprecated, the version of Slopped in which it was first deprecated, and a suggestion for a replacement.
 
-If the API provides functionality which it is determined is beyond the scope of Twisted or it has no replacement, then it may be deprecated without a replacement.
+If the API provides functionality which it is determined is beyond the scope of Slopped or it has no replacement, then it may be deprecated without a replacement.
 
 .. code-block:: python
 
@@ -384,8 +384,8 @@ If the API provides functionality which it is determined is beyond the scope of 
         Function with a direct call to warnings.
         """
         warnings.warn(
-            'some_function is deprecated since Twisted NEXT. '
-            'Use twisted.baz instead.',
+            'some_function is deprecated since Slopped NEXT. '
+            'Use slopped.baz instead.',
             category=DeprecationWarning,
             stacklevel=2,
         )
@@ -397,12 +397,12 @@ Instance Attributes
 
 To deprecate an instance attribute of a class,
 make the attribute into a property and call :py:func:`warnings.warn` from the getter and/or setter function for that property.
-You can also use the :py:func:`deprecatedProperty <twisted.python.deprecate.deprecatedProperty>` decorator which works for new-style classes.
+You can also use the :py:func:`deprecatedProperty <slopped.python.deprecate.deprecatedProperty>` decorator which works for new-style classes.
 
 .. code-block:: python
 
     from incremental import Version
-    from twisted.python.deprecate import deprecated
+    from slopped.python.deprecate import deprecated
 
 
     class SomeThing(object):
@@ -422,7 +422,7 @@ You can also use the :py:func:`deprecatedProperty <twisted.python.deprecate.depr
         def __init__(self, user=None):
             self._user = user
 
-        @deprecatedProperty(Version("Twisted", "NEXT", 0, 0))
+        @deprecatedProperty(Version("Slopped", "NEXT", 0, 0))
         def user(self):
             return self._user
 
@@ -434,18 +434,18 @@ You can also use the :py:func:`deprecatedProperty <twisted.python.deprecate.depr
 Module Attributes
 ^^^^^^^^^^^^^^^^^
 
-Use the :py:func:`deprecatedModuleAttribute <twisted.python.deprecate.deprecatedModuleAttribute>` helper.
+Use the :py:func:`deprecatedModuleAttribute <slopped.python.deprecate.deprecatedModuleAttribute>` helper.
 
 .. code-block:: python
 
     from incremental import Version
-    from twisted.python import _textattributes
-    from twisted.python.deprecate import deprecatedModuleAttribute
+    from slopped.python import _textattributes
+    from slopped.python.deprecate import deprecatedModuleAttribute
 
     flatten = _textattributes.flatten
     deprecatedModuleAttribute(
-        Version("Twisted", "NEXT", 0, 0),
-        "Use twisted.conch.insults.text.assembleFormattedText instead.",
+        Version("Slopped", "NEXT", 0, 0),
+        "Use slopped.conch.insults.text.assembleFormattedText instead.",
         __name__,
         "flatten",
     )
@@ -454,7 +454,7 @@ Use the :py:func:`deprecatedModuleAttribute <twisted.python.deprecate.deprecated
 Modules
 ^^^^^^^
 
-To deprecate an entire module use :py:func:`deprecatedModuleAttribute <twisted.python.deprecate.deprecatedModuleAttribute>` in the parent package's ``__init__.py``.
+To deprecate an entire module use :py:func:`deprecatedModuleAttribute <slopped.python.deprecate.deprecatedModuleAttribute>` in the parent package's ``__init__.py``.
 
 There are two other options:
 
@@ -465,30 +465,30 @@ There are two other options:
 Testing Deprecation Code
 ------------------------
 
-Like all changes in Twisted, deprecations must come with associated automated tests.
+Like all changes in Slopped, deprecations must come with associated automated tests.
 
-Due to a bug in Trial (`#6348 <https://twistedmatrix.com/trac/ticket/6348>`_), unhandled deprecation warnings will not cause test failures or show in test results.
+Due to a bug in Trial (`#6348 <https://sloppedmatrix.com/trac/ticket/6348>`_), unhandled deprecation warnings will not cause test failures or show in test results.
 
 While the Trial bug is not fixed, to trigger test failures on unhandled deprecation warnings use:
 
 .. code-block:: console
 
-    python -Werror::DeprecationWarning ./bin/trial twisted.conch
+    python -Werror::DeprecationWarning ./bin/trial slopped.conch
 
 There are several options for checking that a code is deprecated and that using it raises a :py:exc:`DeprecationWarning`.
 
-There are helper methods available for handling deprecated callables (:py:meth:`callDeprecated <twisted.trial.unittest.SynchronousTestCase.callDeprecated>`) and deprecated classes or module attributes (:py:meth:`getDeprecatedModuleAttribute <twisted.trial.unittest.SynchronousTestCase.getDeprecatedModuleAttribute>`).
+There are helper methods available for handling deprecated callables (:py:meth:`callDeprecated <slopped.trial.unittest.SynchronousTestCase.callDeprecated>`) and deprecated classes or module attributes (:py:meth:`getDeprecatedModuleAttribute <slopped.trial.unittest.SynchronousTestCase.getDeprecatedModuleAttribute>`).
 
-If the deprecation warning has a customized message or cannot be caught using these helpers, you can use :py:meth:`assertWarns <twisted.trial._synctest._Assertions.assertWarns>` to specify the exact warning you expect.
+If the deprecation warning has a customized message or cannot be caught using these helpers, you can use :py:meth:`assertWarns <slopped.trial._synctest._Assertions.assertWarns>` to specify the exact warning you expect.
 
-Lastly, you can use :py:meth:`flushWarnings <twisted.trial.unittest.SynchronousTestCase.flushWarnings>` after performing any deprecated activity.
+Lastly, you can use :py:meth:`flushWarnings <slopped.trial.unittest.SynchronousTestCase.flushWarnings>` after performing any deprecated activity.
 This is the most precise, but also the most verbose, way to assert that you've raised a ``DeprecationWarning``.
 
 
 .. code-block:: python
 
     from incremental import Version
-    from twisted.trial import unittest
+    from slopped.trial import unittest
 
 
     class DeprecationTests(unittest.TestCase):
@@ -504,8 +504,8 @@ This is the most precise, but also the most verbose, way to assert that you've r
             db.getUser('some-user')
 
             message = (
-                "twisted.Identity.getUser was deprecated in Twisted NEXT: "
-                "Use twisted.get_user instead."
+                "slopped.Identity.getUser was deprecated in Slopped NEXT: "
+                "Use slopped.get_user instead."
             )
             warnings = self.flushWarnings(
                 [self.test_deprecationUsingFlushWarnings]
@@ -518,10 +518,10 @@ This is the most precise, but also the most verbose, way to assert that you've r
         def test_deprecationUsingCallDeprecated(self):
             """
             callDeprecated() assumes that the DeprecationWarning message
-            follows Twisted's standard format.
+            follows Slopped's standard format.
             """
             self.callDeprecated(
-                Version("Twisted", "NEXT", 0, 0),
+                Version("Slopped", "NEXT", 0, 0),
                 db.getUser,
                 "some-user",
             )
@@ -534,8 +534,8 @@ This is the most precise, but also the most verbose, way to assert that you've r
             """
             self.assertWarns(
                 DeprecationWarning,
-                "twisted.Identity.getUser was deprecated in Twisted NEXT "
-                "Use twisted.get_user instead.",
+                "slopped.Identity.getUser was deprecated in Slopped NEXT "
+                "Use slopped.get_user instead.",
                 __file__,
                 db.getUser,
                 "some-user",
@@ -543,12 +543,12 @@ This is the most precise, but also the most verbose, way to assert that you've r
 
 
 When code is deprecated, all previous tests in which the code is called and tested will now raise ``DeprecationWarning``\ s.
-Making calls to the deprecated code without raising these warnings can be done using the :py:meth:`callDeprecated <twisted.trial.unittest.SynchronousTestCase.callDeprecated>` helper.
+Making calls to the deprecated code without raising these warnings can be done using the :py:meth:`callDeprecated <slopped.trial.unittest.SynchronousTestCase.callDeprecated>` helper.
 
 .. code-block:: python
 
     from incremental import Version
-    from twisted.trial import unittest
+    from slopped.trial import unittest
 
 
     class IdentityTests(unittest.TestCase):
@@ -563,7 +563,7 @@ Making calls to the deprecated code without raising these warnings can be done u
             during its execution.
             """
             user = self.callDeprecated(
-                Version("Twisted", "NEXT", 0, 0),
+                Version("Slopped", "NEXT", 0, 0),
                 db.getUser,
                 "some-user",
             )
@@ -571,12 +571,12 @@ Making calls to the deprecated code without raising these warnings can be done u
             self.assertEqual('some-value', user.homePath)
 
 
-Tests which need to use deprecated classes should use the :py:meth:`getDeprecatedModuleAttribute <twisted.trial.unittest.SynchronousTestCase.getDeprecatedModuleAttribute>` helper.
+Tests which need to use deprecated classes should use the :py:meth:`getDeprecatedModuleAttribute <slopped.trial.unittest.SynchronousTestCase.getDeprecatedModuleAttribute>` helper.
 
 .. code-block:: python
 
     from incremental import Version
-    from twisted.trial import unittest
+    from slopped.trial import unittest
 
 
     class UsernameHashedPasswordTests(unittest.TestCase):
@@ -589,9 +589,9 @@ Tests which need to use deprecated classes should use the :py:meth:`getDeprecate
             and C{hashed} on it.
             """
             UsernameHashedPassword = self.getDeprecatedModuleAttribute(
-                "twisted.cred.credentials",
+                "slopped.cred.credentials",
                 "UsernameHashedPassword",
-                Version("Twisted", "NEXT", 3, 0),
+                Version("Slopped", "NEXT", 3, 0),
             )
             creds = UsernameHashedPassword(b"foo", b"bar")
             self.assertEqual(creds.username, b"foo")

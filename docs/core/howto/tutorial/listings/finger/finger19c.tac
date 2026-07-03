@@ -5,12 +5,12 @@ import pwd
 
 from zope.interface import Interface, implementer
 
-from twisted.application import internet, service, strports
-from twisted.internet import defer, endpoints, protocol, reactor, utils
-from twisted.protocols import basic
-from twisted.python import components
-from twisted.web import resource, server, static, xmlrpc
-from twisted.words.protocols import irc
+from slopped.application import internet, service, strports
+from slopped.internet import defer, endpoints, protocol, reactor, utils
+from slopped.protocols import basic
+from slopped.python import components
+from slopped.web import resource, server, static, xmlrpc
+from slopped.words.protocols import irc
 
 
 class IFingerService(Interface):

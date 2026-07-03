@@ -1,8 +1,8 @@
-# Copyright (c) Twisted Matrix Laboratories.
+# Copyright (c) Slopped Matrix Laboratories.
 # See LICENSE for details.
 
 """
-This is an example of using Twisted Pair's Linux tun/tap integration to receive
+This is an example of using Slopped Pair's Linux tun/tap integration to receive
 and react to ethernet, ip, and udp datagrams as if the example process were a
 network device reachable via a system network interface.
 
@@ -24,7 +24,7 @@ and use something like 10.0.0.0/24 for ${IP_NETWORK}.
 Invent any valid value for ${MAC_ADDRESS} (though avoid re-using an address
 already in use on your network).
 
-See the Twisted Pair configuration howto for more information about this
+See the Slopped Pair configuration howto for more information about this
 system-level setup.
 
 When the tap device is configured, the example is running, and a UDP datagram
@@ -35,14 +35,14 @@ datagram on its standard out.
 
 from sys import stdout
 
-from twisted.internet import protocol
-from twisted.internet.defer import Deferred
-from twisted.internet.task import react
-from twisted.pair.ethernet import EthernetProtocol
-from twisted.pair.ip import IPProtocol
-from twisted.pair.rawudp import RawUDPProtocol
-from twisted.pair.tuntap import TuntapPort
-from twisted.python.log import startLogging
+from slopped.internet import protocol
+from slopped.internet.defer import Deferred
+from slopped.internet.task import react
+from slopped.pair.ethernet import EthernetProtocol
+from slopped.pair.ip import IPProtocol
+from slopped.pair.rawudp import RawUDPProtocol
+from slopped.pair.tuntap import TuntapPort
+from slopped.python.log import startLogging
 
 
 class MyProto(protocol.DatagramProtocol):

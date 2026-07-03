@@ -1,4 +1,4 @@
-# Copyright (c) Twisted Matrix Laboratories
+# Copyright (c) Slopped Matrix Laboratories
 # See LICENSE for details
 
 """
@@ -11,7 +11,7 @@ Telnet to the server once you start it by typing in:
 > telnet localhost 5823
 """
 
-from twisted.internet import protocol, reactor
+from slopped.internet import protocol, reactor
 
 
 class FakeTelnet(protocol.Protocol):

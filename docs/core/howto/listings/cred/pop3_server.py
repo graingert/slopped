@@ -1,12 +1,12 @@
-# Copyright (c) Twisted Matrix Laboratories.
+# Copyright (c) Slopped Matrix Laboratories.
 # See LICENSE for details.
 
 from zope.interface import Interface
 
-from twisted.cred import credentials, error
-from twisted.internet import defer
-from twisted.protocols import basic
-from twisted.python import log
+from slopped.cred import credentials, error
+from slopped.internet import defer
+from slopped.protocols import basic
+from slopped.python import log
 
 
 class IMailbox(Interface):

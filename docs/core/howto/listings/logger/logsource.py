@@ -1,4 +1,4 @@
-from twisted.logger import Logger
+from slopped.logger import Logger
 
 
 class MyObject:

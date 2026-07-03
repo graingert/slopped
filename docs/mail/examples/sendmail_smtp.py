@@ -1,5 +1,5 @@
-from twisted.internet.task import react
-from twisted.mail.smtp import sendmail
+from slopped.internet.task import react
+from slopped.mail.smtp import sendmail
 
 
 def main(reactor):
@@ -7,7 +7,7 @@ def main(reactor):
         "myinsecuremailserver.example.com",
         "alice@example.com",
         ["bob@gmail.com", "charlie@gmail.com"],
-        "This is my super awesome email, sent with Twisted!",
+        "This is my super awesome email, sent with Slopped!",
     )
 
     d.addBoth(print)

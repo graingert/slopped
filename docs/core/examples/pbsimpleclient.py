@@ -1,10 +1,10 @@
-# Copyright (c) Twisted Matrix Laboratories.
+# Copyright (c) Slopped Matrix Laboratories.
 # See LICENSE for details.
 
 
-from twisted.internet import reactor
-from twisted.python import util
-from twisted.spread import pb
+from slopped.internet import reactor
+from slopped.python import util
+from slopped.spread import pb
 
 factory = pb.PBClientFactory()
 reactor.connectTCP("localhost", 8789, factory)

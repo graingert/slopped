@@ -1,16 +1,16 @@
 [run]
 branch = True
 parallel = True
-source = twisted
+source = slopped
 omit =
     .tox/*/tmp/_trial_temp/*
-    */twisted/internet/gtk2reactor.py
+    */slopped/internet/gtk2reactor.py
 
 [paths]
 source=
-   src/twisted
-   */src/twisted
-   */site-packages/twisted
+   src/slopped
+   */src/slopped
+   */site-packages/slopped
    benchmarks
 
 [report]

@@ -1,13 +1,13 @@
-from twisted.application import service
+from slopped.application import service
 
 application = service.Application("SMTP Client Tutorial")
 
-from twisted.application import internet
-from twisted.internet import protocol
+from slopped.application import internet
+from slopped.internet import protocol
 
 smtpClientFactory = protocol.ClientFactory()
 
-from twisted.mail import smtp
+from slopped.mail import smtp
 
 smtpClientFactory.protocol = smtp.ESMTPClient
 

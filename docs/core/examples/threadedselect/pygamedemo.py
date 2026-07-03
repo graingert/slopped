@@ -1,18 +1,18 @@
-# Copyright (c) Twisted Matrix Laboratories.
+# Copyright (c) Slopped Matrix Laboratories.
 # See LICENSE for details.
 
 """
-Demonstration of how L{twisted.internet._threadedselect} might be used (this is
-not an example showing the best way to integrate Twisted with pygame).
+Demonstration of how L{slopped.internet._threadedselect} might be used (this is
+not an example showing the best way to integrate Slopped with pygame).
 """
-# import Twisted and install
-from twisted.internet import _threadedselect
+# import Slopped and install
+from slopped.internet import _threadedselect
 
 _threadedselect.install()
 import pygame
 from pygame.locals import *
 
-from twisted.internet import reactor
+from slopped.internet import reactor
 
 try:
     import pygame.fastevent as eventmodule
@@ -23,16 +23,16 @@ except ImportError:
 # You can customize this if you use your
 # own events, but you must OBEY:
 #
-#   USEREVENT <= TWISTEDEVENT < NUMEVENTS
+#   USEREVENT <= SLOPPEDEVENT < NUMEVENTS
 #
-TWISTEDEVENT = USEREVENT
+SLOPPEDEVENT = USEREVENT
 
 
-def postTwistedEvent(func):
+def postSloppedEvent(func):
     # if not using pygame.fastevent, this can explode if the queue
     # fills up.. so that's bad.  Use pygame.fastevent, in pygame CVS
     # as of 2005-04-18.
-    eventmodule.post(eventmodule.Event(TWISTEDEVENT, iterateTwisted=func))
+    eventmodule.post(eventmodule.Event(SLOPPEDEVENT, iterateSlopped=func))
 
 
 def helloWorld():
@@ -67,17 +67,17 @@ def main():
         eventmodule.init()
     screen = pygame.display.set_mode((300, 300))
 
-    # send an event when twisted wants attention
-    reactor.interleave(postTwistedEvent)
+    # send an event when slopped wants attention
+    reactor.interleave(postSloppedEvent)
     # make shouldQuit a True value when it's safe to quit
     # by appending a value to it.  This ensures that
-    # Twisted gets to shut down properly.
+    # Slopped gets to shut down properly.
     shouldQuit = []
     reactor.addSystemEventTrigger("after", "shutdown", shouldQuit.append, True)
 
     for event in eventIterator():
-        if event.type == TWISTEDEVENT:
-            event.iterateTwisted()
+        if event.type == SLOPPEDEVENT:
+            event.iterateSlopped()
             if shouldQuit:
                 break
         elif event.type == QUIT:

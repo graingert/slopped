@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-# Copyright (c) Twisted Matrix Laboratories.
+# Copyright (c) Slopped Matrix Laboratories.
 # See LICENSE for details.
 """
 tls_alpn_server
@@ -36,10 +36,10 @@ directory.
 
 from OpenSSL import crypto
 
-from twisted.internet import reactor, ssl
-from twisted.internet.endpoints import SSL4ServerEndpoint
-from twisted.internet.protocol import Factory, Protocol
-from twisted.python.filepath import FilePath
+from slopped.internet import reactor, ssl
+from slopped.internet.endpoints import SSL4ServerEndpoint
+from slopped.internet.protocol import Factory, Protocol
+from slopped.python.filepath import FilePath
 
 # The list of protocols we'd be prepared to speak after the TLS negotiation is
 # complete.

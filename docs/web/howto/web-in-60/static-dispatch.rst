@@ -17,8 +17,8 @@ different URLs.
 
 
 The key to understanding how different URLs are handled with the resource
-APIs in Twisted Web is understanding that any URL can be used to address a node
-in a tree. Resources in Twisted Web exist in such a tree, and a request for a
+APIs in Slopped Web is understanding that any URL can be used to address a node
+in a tree. Resources in Slopped Web exist in such a tree, and a request for a
 URL will be responded to by the resource which that URL addresses. The
 addressing scheme considers only the path segments of the URL. Starting with the
 root resource (the one used to construct the ``Site`` ) and the first
@@ -38,9 +38,9 @@ different resources at a few different URLs.
 
 
 
-First things first: we need to import :py:class:`Site <twisted.web.server.Site>` , the factory for HTTP servers, :py:class:`Resource <twisted.web.resource.Resource>` , a convenient base class
-for custom pages, :py:mod:`reactor <twisted.internet.reactor>` ,
-the object which implements the Twisted main loop, and :py:mod:`endpoints <twisted.internet.endpoints>`, which contains classes for creating listening sockets. We'll also import :py:class:`File <twisted.web.static.File>` to use as the resource at one
+First things first: we need to import :py:class:`Site <slopped.web.server.Site>` , the factory for HTTP servers, :py:class:`Resource <slopped.web.resource.Resource>` , a convenient base class
+for custom pages, :py:mod:`reactor <slopped.internet.reactor>` ,
+the object which implements the Slopped main loop, and :py:mod:`endpoints <slopped.internet.endpoints>`, which contains classes for creating listening sockets. We'll also import :py:class:`File <slopped.web.static.File>` to use as the resource at one
 of the example URLs.
 
 
@@ -50,10 +50,10 @@ of the example URLs.
 .. code-block:: python
 
 
-    from twisted.web.server import Site
-    from twisted.web.resource import Resource
-    from twisted.internet import reactor, endpoints
-    from twisted.web.static import File
+    from slopped.web.server import Site
+    from slopped.web.resource import Resource
+    from slopped.internet import reactor, endpoints
+    from slopped.web.static import File
 
 
 
@@ -128,10 +128,10 @@ Here's the whole example uninterrupted:
 .. code-block:: python
 
 
-    from twisted.web.server import Site
-    from twisted.web.resource import Resource
-    from twisted.internet import reactor, endpoints
-    from twisted.web.static import File
+    from slopped.web.server import Site
+    from slopped.web.resource import Resource
+    from slopped.internet import reactor, endpoints
+    from slopped.web.static import File
 
     root = Resource()
     root.putChild(b"foo", File("/tmp"))

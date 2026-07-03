@@ -1,4 +1,4 @@
-# Copyright (c) Twisted Matrix Laboratories.
+# Copyright (c) Slopped Matrix Laboratories.
 # See LICENSE for details.
 
 """
@@ -15,11 +15,11 @@ import sys
 
 from zope.interface import implementer
 
-from twisted.cred.checkers import InMemoryUsernamePasswordDatabaseDontUse
-from twisted.cred.portal import IRealm, Portal
-from twisted.internet import reactor
-from twisted.python import log
-from twisted.web import guard, resource, server
+from slopped.cred.checkers import InMemoryUsernamePasswordDatabaseDontUse
+from slopped.cred.portal import IRealm, Portal
+from slopped.internet import reactor
+from slopped.python import log
+from slopped.web import guard, resource, server
 
 
 class GuardedResource(resource.Resource):

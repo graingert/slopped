@@ -1,8 +1,8 @@
-# Copyright (c) Twisted Matrix Laboratories.
+# Copyright (c) Slopped Matrix Laboratories.
 # See LICENSE for details.
 
 # You can run this .tac file directly with:
-#    twistd -ny demo.tac
+#    slopd -ny demo.tac
 
 """Nearly pointless demonstration of the manhole interactive interpreter.
 
@@ -15,11 +15,11 @@ Note, you will have to create a file named \"passwd\" and populate it
 with credentials (in the format of passwd(5)) to use this demo.
 """
 
-from twisted.application import service
+from slopped.application import service
 
 application = service.Application("TAC Demo")
 
-from twisted.conch import manhole_tap
+from slopped.conch import manhole_tap
 
 manhole_tap.makeService(
     {

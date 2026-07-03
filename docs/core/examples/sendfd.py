@@ -1,4 +1,4 @@
-# Copyright (c) Twisted Matrix Laboratories.
+# Copyright (c) Slopped Matrix Laboratories.
 # See LICENSE for details.
 
 """
@@ -25,11 +25,11 @@ if __name__ == "__main__":
 
 import sys
 
-from twisted.internet import reactor
-from twisted.internet.protocol import Factory
-from twisted.protocols.basic import LineOnlyReceiver
-from twisted.python.filepath import FilePath
-from twisted.python.log import startLogging
+from slopped.internet import reactor
+from slopped.internet.protocol import Factory
+from slopped.protocols.basic import LineOnlyReceiver
+from slopped.python.filepath import FilePath
+from slopped.python.log import startLogging
 
 
 class SendFDProtocol(LineOnlyReceiver):

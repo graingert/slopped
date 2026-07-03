@@ -1,10 +1,10 @@
 from __future__ import annotations
-from twisted.python.failure import Failure
-from twisted.web.iweb import IRequest
-from twisted.web.resource import Resource
-from twisted.web.static import File
-from twisted.web.websocket import WebSocketResource, WebSocketTransport
-from twisted.internet.task import LoopingCall
+from slopped.python.failure import Failure
+from slopped.web.iweb import IRequest
+from slopped.web.resource import Resource
+from slopped.web.static import File
+from slopped.web.websocket import WebSocketResource, WebSocketTransport
+from slopped.internet.task import LoopingCall
 
 
 class WebSocketDemo:

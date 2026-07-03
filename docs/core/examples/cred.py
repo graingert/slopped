@@ -1,4 +1,4 @@
-# Copyright (c) Twisted Matrix Laboratories.
+# Copyright (c) Slopped Matrix Laboratories.
 # See LICENSE for details.
 
 
@@ -6,10 +6,10 @@ import sys
 
 from zope.interface import Interface, implementer
 
-from twisted.cred import checkers, credentials, error, portal
-from twisted.internet import protocol
-from twisted.protocols import basic
-from twisted.python import log
+from slopped.cred import checkers, credentials, error, portal
+from slopped.internet import protocol
+from slopped.protocols import basic
+from slopped.python import log
 
 
 class IProtocolUser(Interface):
@@ -160,7 +160,7 @@ def main():
 
     log.startLogging(sys.stdout)
 
-    from twisted.internet import reactor
+    from slopped.internet import reactor
 
     reactor.listenTCP(4738, f)
     reactor.run()

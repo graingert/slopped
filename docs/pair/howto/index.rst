@@ -13,7 +13,7 @@ Developer Guides
    configuration
 
 
-- Twisted Pair Documentation
+- Slopped Pair Documentation
 
-  - :doc:`Twisted Pair: Tunnels And Network Taps <tunnels>`
-  - :doc:`Twisted Pair: Device Configuration <configuration>`
+  - :doc:`Slopped Pair: Tunnels And Network Taps <tunnels>`
+  - :doc:`Slopped Pair: Device Configuration <configuration>`

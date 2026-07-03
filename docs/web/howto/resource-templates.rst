@@ -16,11 +16,11 @@ Overview
 
 
 
-While high-level templating systems can be used with Twisted (for
+While high-level templating systems can be used with Slopped (for
 example, `DivmodNevow <https://launchpad.net/nevow>`_ , sometimes one needs a less file-heavy system which lets one
-directly write HTML. While :py:func:`ResourceScript <twisted.web.script.ResourceScript>` is
+directly write HTML. While :py:func:`ResourceScript <slopped.web.script.ResourceScript>` is
 available, it has a high coding overhead, and requires some boring string
-arithmetic. :py:func:`ResourceTemplate <twisted.web.script.ResourceTemplate>` fills the
+arithmetic. :py:func:`ResourceTemplate <slopped.web.script.ResourceTemplate>` fills the
 space between Nevow and ResourceScript using Quixote's PTL (Python Templating
 Language).
 
@@ -37,12 +37,12 @@ require other ways to install Quixote, or it can be done manually.
 
 
 
-Configuring Twisted Web
+Configuring Slopped Web
 -----------------------
 
 
 
-The easiest way to get Twisted Web to support ResourceTemplates is to
+The easiest way to get Slopped Web to support ResourceTemplates is to
 bind them to some extension using the web tap's ``--processor`` 
 flag. Here is an example:
 
@@ -53,8 +53,8 @@ flag. Here is an example:
 ::
 
     
-    % twistd web --path=/var/www \
-            --processor=.rtl=twisted.web.script.ResourceTemplate
+    % slopd web --path=/var/www \
+            --processor=.rtl=slopped.web.script.ResourceTemplate
 
 
 
@@ -76,7 +76,7 @@ ResourceTemplates are coded in an extension of Python called the"Python Templati
 is available
 at `the quixote web site <http://quixote.python.ca/quixote.dev/doc/PTL.html>`_ . The web server will expect the PTL source file
 to define a variable named ``resource`` .  This should be
-a :py:class:`twisted.web.resource.Resource` ,
+a :py:class:`slopped.web.resource.Resource` ,
 whose ``.render`` method be called. Usually, you would want
 to define ``render`` using the keyword ``template`` 
 rather than ``def`` .

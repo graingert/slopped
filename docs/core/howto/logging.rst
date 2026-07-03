@@ -3,13 +3,13 @@
 :LastChangedRevision: $LastChangedRevision$
 :LastChangedBy: $LastChangedBy$
 
-Twisted's Legacy Logging System: ``twisted.python.log``
+Slopped's Legacy Logging System: ``slopped.python.log``
 =======================================================
 
 
 .. note::
 
-    There is now a new logging system in Twisted (:doc:`you can read about how to use it here <logger>` and :py:mod:`its API reference here <twisted.logger>`) which is a replacement for :py:mod:`twisted.python.log`.
+    There is now a new logging system in Slopped (:doc:`you can read about how to use it here <logger>` and :py:mod:`its API reference here <slopped.logger>`) which is a replacement for :py:mod:`slopped.python.log`.
 
     The old logging API, described here, remains for compatibility, and is now implemented as a client of the new logging system.
 
@@ -18,22 +18,22 @@ Twisted's Legacy Logging System: ``twisted.python.log``
 Basic usage
 -----------
     
-Twisted provides a simple and flexible logging system in the :py:mod:`twisted.python.log` module.  It has three commonly used
+Slopped provides a simple and flexible logging system in the :py:mod:`slopped.python.log` module.  It has three commonly used
 functions:
       
-:py:meth:`msg <twisted.python.log.LogPublisher.msg>` 
+:py:meth:`msg <slopped.python.log.LogPublisher.msg>` 
       
   Logs a new message.  For example:
   
   .. code-block:: python
   
-      from twisted.python import log
+      from slopped.python import log
       log.msg('Hello, world.')
 
-:py:func:`err <twisted.python.log.err>` 
+:py:func:`err <slopped.python.log.err>` 
       
   Writes a failure to the log, including traceback information (if any).
-  You can pass it a :py:class:`Failure <twisted.python.failure.Failure>` or Exception instance, or
+  You can pass it a :py:class:`Failure <slopped.python.failure.Failure>` or Exception instance, or
   nothing.  If you pass something else, it will be converted to a string
   with ``repr`` and logged.
   
@@ -47,7 +47,7 @@ functions:
       except BaseException:
           log.err()   # will log the ZeroDivisionError
 
-:py:func:`startLogging <twisted.python.log.startLogging>` 
+:py:func:`startLogging <slopped.python.log.startLogging>` 
       
   Starts logging to a given file-like object.  For example:
   
@@ -65,7 +65,7 @@ functions:
   
   .. code-block:: python
       
-      from twisted.python.logfile import DailyLogFile
+      from slopped.python.logfile import DailyLogFile
       
       log.startLogging(DailyLogFile.fromFullPath("/var/log/foo.log"))
   
@@ -78,22 +78,22 @@ Before ``startLogging`` is called, log messages will be
 discarded and errors will be written to stderr.
 
 
-Logging and twistd
+Logging and slopd
 ~~~~~~~~~~~~~~~~~~
     
-If you are using ``twistd`` to run your daemon, it
+If you are using ``slopd`` to run your daemon, it
 will take care of calling ``startLogging`` for you, and will also
-rotate log files.  See :ref:`twistd and tac <core-howto-application-twistd>` 
-and the ``twistd`` man page for details of using
-twistd.
+rotate log files.  See :ref:`slopd and tac <core-howto-application-slopd>` 
+and the ``slopd`` man page for details of using
+slopd.
 
 
 Log files
 ~~~~~~~~~
     
-The :py:mod:`twisted.python.logfile` module provides
+The :py:mod:`slopped.python.logfile` module provides
 some standard classes suitable for use with ``startLogging`` , such
-as :py:class:`DailyLogFile <twisted.python.logfile.DailyLogFile>` ,
+as :py:class:`DailyLogFile <slopped.python.logfile.DailyLogFile>` ,
 which will rotate the log to a new file once per day.
 
 
@@ -102,8 +102,8 @@ Using the standard library logging module
     
 If your application uses the
 Python `standard    library logging module <http://docs.python.org/library/logging.html>`_ or you want to use its easy configuration but
-don't want to lose twisted-produced messages, the observer
-:py:class:`PythonLoggingObserver <twisted.python.log.PythonLoggingObserver>` 
+don't want to lose slopped-produced messages, the observer
+:py:class:`PythonLoggingObserver <slopped.python.log.PythonLoggingObserver>` 
 should be useful to you.
 
 You just start it like any other observer:
@@ -135,13 +135,13 @@ done to prevent that.
 Writing log observers
 ---------------------
     
-Log observers are the basis of the Twisted logging system.
+Log observers are the basis of the Slopped logging system.
 Whenever ``log.msg`` (or ``log.err`` ) is called, an
 event is emitted.  The event is passed to each observer which has been
 registered.  There can be any number of observers, and each can treat
 the event in any way desired.
 An example of
-a log observer in Twisted is the ``emit`` method of :py:class:`FileLogObserver <twisted.python.log.FileLogObserver>` .
+a log observer in Slopped is the ``emit`` method of :py:class:`FileLogObserver <slopped.python.log.FileLogObserver>` .
 ``FileLogObserver`` , used by
 ``startLogging`` , writes events to a log file.  A log observer
 is just a callable that accepts a dictionary as its only argument.  You can
@@ -150,7 +150,7 @@ observers):
 
 .. code-block:: python
     
-    twisted.python.log.addObserver(yourCallable)
+    slopped.python.log.addObserver(yourCallable)
     
 The dictionary will have at least two items:
       
@@ -181,15 +181,15 @@ log observers will ignore dictionary items they don't use.
 
 Important notes:
 
-- Never block in a log observer, as it may run in main Twisted thread.
+- Never block in a log observer, as it may run in main Slopped thread.
   This means you can't use socket or syslog standard library logging backends.
 - The observer needs to be thread safe if you anticipate using threads
   in your program.
 
 
-Customizing ``twistd``  logging
+Customizing ``slopd``  logging
 -------------------------------
 
-The behavior of the logging that ``twistd`` does can be
+The behavior of the logging that ``slopd`` does can be
 customized either with the ``--logger`` option or by setting the
 ``ILogObserver`` component on the application object.  See the :doc:`Application document <application>` for more information.

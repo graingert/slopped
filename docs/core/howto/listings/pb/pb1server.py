@@ -1,10 +1,10 @@
 #!/usr/bin/env python
 
-# Copyright (c) Twisted Matrix Laboratories.
+# Copyright (c) Slopped Matrix Laboratories.
 # See LICENSE for details.
 
 
-from twisted.spread import pb
+from slopped.spread import pb
 
 
 class Two(pb.Referenceable):
@@ -19,7 +19,7 @@ class One(pb.Root):
         return two
 
 
-from twisted.internet import reactor
+from slopped.internet import reactor
 
 reactor.listenTCP(8800, pb.PBServerFactory(One()))
 reactor.run()

@@ -1,4 +1,4 @@
-"""Non-twisted throughput client."""
+"""Non-slopped throughput client."""
 
 import socket
 import sys

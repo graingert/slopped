@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-# Copyright (c) Twisted Matrix Laboratories.
+# Copyright (c) Slopped Matrix Laboratories.
 # See LICENSE for details.
 
 if __name__ == "__main__":
@@ -7,21 +7,21 @@ if __name__ == "__main__":
 
     import echoclient_ssh
 
-    from twisted.internet.task import react
+    from slopped.internet.task import react
 
     react(echoclient_ssh.main, sys.argv[1:])
 
 import getpass
 import os
 
-from twisted.conch.client.knownhosts import KnownHostsFile
-from twisted.conch.endpoints import SSHCommandClientEndpoint
-from twisted.conch.ssh.keys import EncryptedKeyError, Key
-from twisted.internet.defer import Deferred
-from twisted.internet.endpoints import UNIXClientEndpoint
-from twisted.internet.protocol import Factory, Protocol
-from twisted.python.filepath import FilePath
-from twisted.python.usage import Options
+from slopped.conch.client.knownhosts import KnownHostsFile
+from slopped.conch.endpoints import SSHCommandClientEndpoint
+from slopped.conch.ssh.keys import EncryptedKeyError, Key
+from slopped.internet.defer import Deferred
+from slopped.internet.endpoints import UNIXClientEndpoint
+from slopped.internet.protocol import Factory, Protocol
+from slopped.python.filepath import FilePath
+from slopped.python.usage import Options
 
 
 class EchoOptions(Options):

@@ -1,4 +1,4 @@
-# Copyright (c) Twisted Matrix Laboratories.
+# Copyright (c) Slopped Matrix Laboratories.
 # See LICENSE for details.
 
 """
@@ -9,9 +9,9 @@ Call with parameters KEY1=VAL1 KEY2=VAL2 ...
 
 import sys
 
-from twisted.internet import reactor
-from twisted.protocols import postfix
-from twisted.python import log
+from slopped.internet import reactor
+from slopped.protocols import postfix
+from slopped.python import log
 
 log.startLogging(sys.stdout)
 

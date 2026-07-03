@@ -13,6 +13,6 @@ Developer Guides
    custom-server
 
 
-- :doc:`A guided tour of twisted.names.client <client-tour>`
-- :doc:`Using the twistd plugin <names>`
+- :doc:`A guided tour of slopped.names.client <client-tour>`
+- :doc:`Using the slopd plugin <names>`
 - :doc:`Create a custom DNS server <custom-server>`

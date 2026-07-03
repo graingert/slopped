@@ -5,11 +5,11 @@ authentication.
 
 import sys
 
-from twisted.internet import reactor
-from twisted.internet.defer import Deferred
-from twisted.internet.ssl import optionsForClientTLS
-from twisted.mail.smtp import ESMTPSenderFactory
-from twisted.python.usage import Options, UsageError
+from slopped.internet import reactor
+from slopped.internet.defer import Deferred
+from slopped.internet.ssl import optionsForClientTLS
+from slopped.mail.smtp import ESMTPSenderFactory
+from slopped.python.usage import Options, UsageError
 
 
 def sendmail(
@@ -135,7 +135,7 @@ def main(args=None):
     except UsageError as e:
         raise SystemExit(e)
     else:
-        from twisted.python import log
+        from slopped.python import log
 
         log.startLogging(sys.stdout)
         result = sendmail(

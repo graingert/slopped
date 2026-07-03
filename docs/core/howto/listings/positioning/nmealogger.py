@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-# Copyright (c) Twisted Matrix Laboratories.
+# Copyright (c) Slopped Matrix Laboratories.
 # See LICENSE for details.
 """
 Connects to an NMEA device, logs beacon information and position.
@@ -7,9 +7,9 @@ Connects to an NMEA device, logs beacon information and position.
 
 import sys
 
-from twisted.internet import reactor, serialport
-from twisted.positioning import base, nmea
-from twisted.python import log, usage
+from slopped.internet import reactor, serialport
+from slopped.positioning import base, nmea
+from slopped.python import log, usage
 
 
 class PositioningReceiver(base.BasePositioningReceiver):

@@ -1,11 +1,11 @@
 #!/usr/bin/env python
 
-# Copyright (c) Twisted Matrix Laboratories.
+# Copyright (c) Slopped Matrix Laboratories.
 # See LICENSE for details.
 
 
-from twisted.internet import reactor
-from twisted.spread import pb
+from slopped.internet import reactor
+from slopped.spread import pb
 
 
 def main():

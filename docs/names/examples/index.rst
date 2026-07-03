@@ -6,7 +6,7 @@
 Examples
 ========
 
-DNS (Twisted Names)
+DNS (Slopped Names)
 -------------------
 
 - :download:`testdns.py` - Prints the results of an Address record lookup, Mail-Exchanger record lookup, and Nameserver record lookup for the given domain name.

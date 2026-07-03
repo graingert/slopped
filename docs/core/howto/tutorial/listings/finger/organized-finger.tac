@@ -1,13 +1,13 @@
 # organized-finger.tac
-# eg:  twistd -ny organized-finger.tac
+# eg:  slopd -ny organized-finger.tac
 
 import finger
 
-from twisted.application import internet, service, strports
-from twisted.internet import defer, endpoints, protocol, reactor
-from twisted.python import log
-from twisted.spread import pb
-from twisted.web import resource, server
+from slopped.application import internet, service, strports
+from slopped.internet import defer, endpoints, protocol, reactor
+from slopped.python import log
+from slopped.spread import pb
+from slopped.web import resource, server
 
 application = service.Application("finger", uid=1, gid=1)
 f = finger.FingerService("/etc/users")

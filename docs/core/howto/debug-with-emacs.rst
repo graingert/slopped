@@ -3,7 +3,7 @@
 :LastChangedRevision: $LastChangedRevision$
 :LastChangedBy: $LastChangedBy$
 
-Debugging Python(Twisted) with Emacs
+Debugging Python(Slopped) with Emacs
 ====================================
 
 - Open up your project files. sometimes emacs can't find them if you
@@ -19,8 +19,8 @@ Debugging Python(Twisted) with Emacs
       exec python -m pdb $1 $2 $3 $4 $5 $6 $7 $8 $9
   
 - Run ``M-x pdb`` in emacs. If you usually run your
-  program as ``python foo.py`` , your command line should be ``pdb foo.py`` , for ``twistd`` and ``trial`` just
-  add -b to the command line, e.g.: ``twistd -b -y  my.tac`` 
+  program as ``python foo.py`` , your command line should be ``pdb foo.py`` , for ``slopd`` and ``trial`` just
+  add -b to the command line, e.g.: ``slopd -b -y  my.tac`` 
 - While pdb waits for your input, go to a place in your code and hit
   ``C-x SPC`` to insert a break-point. pdb should say something happy.
   Do this in as many points as you wish.

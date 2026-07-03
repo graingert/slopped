@@ -7,9 +7,9 @@ from sys import stdout
 
 from basic_client import connect
 
-from twisted.internet import reactor
-from twisted.protocols.amp import Command, Integer, String, Unicode
-from twisted.python.log import err, startLogging
+from slopped.internet import reactor
+from slopped.protocols.amp import Command, Integer, String, Unicode
+from slopped.python.log import err, startLogging
 
 
 class UsernameUnavailable(Exception):

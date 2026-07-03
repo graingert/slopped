@@ -1,4 +1,4 @@
-# Copyright (c) Twisted Matrix Laboratories.
+# Copyright (c) Slopped Matrix Laboratories.
 # See LICENSE for details.
 
 """
@@ -15,10 +15,10 @@ from sys import argv
 
 from zope.interface import implementer
 
-from twisted.internet.endpoints import UNIXClientEndpoint
-from twisted.internet.task import react
-from twisted.web.client import Agent, readBody
-from twisted.web.iweb import IAgentEndpointFactory
+from slopped.internet.endpoints import UNIXClientEndpoint
+from slopped.internet.task import react
+from slopped.web.client import Agent, readBody
+from slopped.web.iweb import IAgentEndpointFactory
 
 
 @implementer(IAgentEndpointFactory)

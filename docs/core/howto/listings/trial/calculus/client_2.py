@@ -1,7 +1,7 @@
 # -*- test-case-name: calculus.test.test_client_2 -*-
 
-from twisted.internet import defer, reactor
-from twisted.protocols import basic
+from slopped.internet import defer, reactor
+from slopped.protocols import basic
 
 
 class ClientTimeoutError(Exception):

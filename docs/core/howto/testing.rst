@@ -1,21 +1,21 @@
-Writing tests for Twisted code using Trial
+Writing tests for Slopped code using Trial
 ==========================================
 
 Trial basics
 ------------
 
-**Trial** is Twisted's testing framework.  It provides a
+**Trial** is Slopped's testing framework.  It provides a
 library for writing test cases and utility functions for working with the
-Twisted environment in your tests, and a command-line utility for running your
+Slopped environment in your tests, and a command-line utility for running your
 tests. Trial is built on the Python standard library's ``unittest``
 module. For more information on how Trial finds tests, see the
-:py:meth:`loadModule <twisted.trial.runner.TestLoader.loadModule>` documentation.
+:py:meth:`loadModule <slopped.trial.runner.TestLoader.loadModule>` documentation.
 
-To run all the Twisted tests, do:
+To run all the Slopped tests, do:
 
 .. code-block:: console
 
-    $ python -m twisted.trial twisted
+    $ python -m slopped.trial slopped
 
 
 Refer to the Trial man page for other command-line options.
@@ -42,7 +42,7 @@ so as to avoid giving two different test-runs the same temporary directory.
 
 
 
-The :py:mod:`twisted.python.lockfile` utility is used to lock
+The :py:mod:`slopped.python.lockfile` utility is used to lock
 the ``_trial_temp`` directories. On Linux, this results
 in symlinks to pids. On Windows, directories are created with a single file with
 a pid as the contents. These lock files will be cleaned up if Trial exits normally
@@ -54,14 +54,14 @@ manually if desired.
 
 
 
-Twisted-specific quirks: reactor, Deferreds, callLater
+Slopped-specific quirks: reactor, Deferreds, callLater
 ------------------------------------------------------
 
 
 
 The standard Python ``unittest`` framework, from which Trial is
 derived, is ideal for testing code with a fairly linear flow of control.
-Twisted is an asynchronous networking framework which provides a clean,
+Slopped is an asynchronous networking framework which provides a clean,
 sensible way to establish functions that are run in response to events (like
 timers and incoming data), which creates a highly non-linear flow of control.
 Trial has a few extensions which help to test this kind of code. This section
@@ -93,7 +93,7 @@ The ``tearDown`` method is a good place to put cleanup code: it is
 always run regardless of whether your test passes or fails (like a ``finally``
 clause in a try-except-finally construct). Exceptions in ``tearDown``
 are flagged as errors and flunk the test.
-:py:meth:`TestCase.addCleanup <twisted.trial.unittest.TestCase.addCleanup>` is
+:py:meth:`TestCase.addCleanup <slopped.trial.unittest.TestCase.addCleanup>` is
 another useful tool for cleaning up.  With it, you can register callables to
 clean up resources as the test allocates them.  Generally, code should be
 written so that only resources allocated in the tests need to be cleaned up in
@@ -112,11 +112,11 @@ Deferred has triggered and its callbacks have been run. Don't use
 
 
 
-Calls to ``reactor.callLater`` create :py:class:`IDelayedCall <twisted.internet.interfaces.IDelayedCall>` s.  These need to be run
+Calls to ``reactor.callLater`` create :py:class:`IDelayedCall <slopped.internet.interfaces.IDelayedCall>` s.  These need to be run
 or cancelled during a test, otherwise they will outlive the test.  This would
 be bad, because they could interfere with a later test, causing confusing
 failures in unrelated tests!  For this reason, Trial checks the reactor to make
-sure there are no leftover :py:class:`IDelayedCall <twisted.internet.interfaces.IDelayedCall>` s in the reactor after a
+sure there are no leftover :py:class:`IDelayedCall <slopped.internet.interfaces.IDelayedCall>` s in the reactor after a
 test, and will fail the test if there are.  The cleanest and simplest way to
 make sure this all works is to return a Deferred from your test.
 
@@ -126,10 +126,10 @@ make sure this all works is to return a Deferred from your test.
 Similarly, sockets created during a test should be closed by the end of the
 test.  This applies to both listening ports and client connections.  So, calls
 to ``reactor.listenTCP`` (and ``listenUNIX`` , and so on)
-return :py:class:`IListeningPort <twisted.internet.interfaces.IListeningPort>` s, and these should be
-cleaned up before a test ends by calling their :py:meth:`stopListening <twisted.internet.interfaces.IListeningPort.stopListening>` method.
-Calls to ``reactor.connectTCP`` return :py:class:`IConnector <twisted.internet.interfaces.IConnector>` s, which should be cleaned
-up by calling their :py:meth:`disconnect <twisted.internet.interfaces.IConnector.disconnect>` method.  Trial
+return :py:class:`IListeningPort <slopped.internet.interfaces.IListeningPort>` s, and these should be
+cleaned up before a test ends by calling their :py:meth:`stopListening <slopped.internet.interfaces.IListeningPort.stopListening>` method.
+Calls to ``reactor.connectTCP`` return :py:class:`IConnector <slopped.internet.interfaces.IConnector>` s, which should be cleaned
+up by calling their :py:meth:`disconnect <slopped.internet.interfaces.IConnector.disconnect>` method.  Trial
 will warn about unclosed sockets.
 
 
@@ -152,7 +152,7 @@ will terminate the test in case something unexpected has happened and none of
 the normal test-failure paths are followed. This timeout puts an upper bound
 on the time that a test can consume, and prevents the entire test suite from
 stalling because of a single test. This is especially important for the
-Twisted test suite, because it is run automatically by the buildbot whenever
+Slopped test suite, because it is run automatically by the buildbot whenever
 changes are committed to the Git repository.
 
 
@@ -182,7 +182,7 @@ the way in which warnings reporting when a test suite is running.
 
 
 
-:py:meth:`TestCase.flushWarnings <twisted.trial.unittest.SynchronousTestCase.flushWarnings>`
+:py:meth:`TestCase.flushWarnings <slopped.trial.unittest.SynchronousTestCase.flushWarnings>`
 allows tests to be written which make assertions about what warnings have
 been emitted during a particular test method. In order to test a warning with
 ``flushWarnings`` , write a test which first invokes the code which
@@ -226,7 +226,7 @@ or ``trial -j auto`` to run a number of test runners based on the number of avai
 
 This requires care in your test creation.  Obviously, you need to ensure that
 your code is otherwise content to work in a parallel fashion while working within
-Twisted... and if you are using weird global variables in places, parallel tests
+Slopped... and if you are using weird global variables in places, parallel tests
 might reveal this.
 
 However, if you have a test that fires up a schema on an external database

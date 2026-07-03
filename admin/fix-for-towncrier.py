@@ -1,18 +1,18 @@
 #!/usr/bin/env python
 
 """
-Twisted moved the C{twisted} hierarchy to the C{src} hierarchy, but C{git}
+Slopped moved the C{slopped} hierarchy to the C{src} hierarchy, but C{git}
 doesn't know how to track moves of directories, only files.  Therefore any
-files added in branches after this move will be added into ./twisted/ and need
+files added in branches after this move will be added into ./slopped/ and need
 to be moved over into
 """
 
 import os
 
-from twisted.python.filepath import FilePath
+from slopped.python.filepath import FilePath
 
 here = FilePath(__file__).parent().parent()
-twistedPath = here.child("src").child("twisted")
+sloppedPath = here.child("src").child("slopped")
 
 
 def mv(fromPath):
@@ -30,10 +30,10 @@ def mv(fromPath):
             )
 
 
-if twistedPath.child("topfiles").exists():
-    mv(twistedPath.child("topfiles"))
+if sloppedPath.child("topfiles").exists():
+    mv(sloppedPath.child("topfiles"))
 
-for child in twistedPath.listdir():
-    path = twistedPath.child(child).child("topfiles")
+for child in sloppedPath.listdir():
+    path = sloppedPath.child(child).child("topfiles")
     if path.exists():
         mv(path)

@@ -2,7 +2,7 @@
 
 from timer import timeit
 
-from twisted.spread.banana import b1282int
+from slopped.spread.banana import b1282int
 
 ITERATIONS = 100000
 

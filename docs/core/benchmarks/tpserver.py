@@ -2,9 +2,9 @@
 
 import sys
 
-from twisted.internet import protocol, reactor
-from twisted.protocols.wire import Discard
-from twisted.python import log
+from slopped.internet import protocol, reactor
+from slopped.protocols.wire import Discard
+from slopped.python import log
 
 
 def main():

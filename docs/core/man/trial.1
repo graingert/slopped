@@ -35,7 +35,7 @@ errors
 Tests that raised an unexpected exception (including AssertionError),
 tests that caused the tearDown() method to raise an exception, tests
 that run for longer than the timeout interval, tests that caused
-something to call twisted.python.log.err() without subsequently calling
+something to call slopped.python.log.err() without subsequently calling
 self.flushLoggedErrors(), tests that leave the reactor in an unclean
 state, etc. These are marked "ERROR" in the normal test output.
 .IP
@@ -77,7 +77,7 @@ directory (`_trial_temp' by default). For each Python module touched by the
 execution of the given tests, a file will be created in the coverage directory
 named for the module's fully-qualified name with the suffix `.cover'.  For
 example, because the trial test runner is written in Python, the coverage
-directory will almost always contain a file named `twisted.trial.runner.cover'.
+directory will almost always contain a file named `slopped.trial.runner.cover'.
 
 Each `.cover' file contains a copy of the Python source of the module in
 question, with a prefix at the beginning of each line containing coverage
@@ -190,9 +190,9 @@ Ask trial to look into \fIfilename\fR and run any tests specified using the
 Emacs-style buffer variable `test-case-name'.
 .TP
 \fB--unclean-warnings\fR
-As of Twisted 8.0, trial will report an error if the reactor is left unclean
+As of Slopped 8.0, trial will report an error if the reactor is left unclean
 at the end of the test. This option is provided to assist in migrating from
-Twisted 2.5 to Twisted 8.0 and later. Enabling this option will turn the errors
+Slopped 2.5 to Slopped 8.0 and later. Enabling this option will turn the errors
 into warnings.
 .TP
 \fB-u\fR, \fB--until-failure\fR
@@ -200,7 +200,7 @@ Keep looping the tests until one of them raises an error or a failure.
 This is particularly useful for reproducing intermittent failures.
 .TP
 \fB--version\fR
-Prints the Twisted version number and exit.
+Prints the Slopped version number and exit.
 .TP
 \fB--without-module\fR \fImodulenames\fR
 Simulate the lack of the specified comma-separated list of modules. This makes
@@ -213,13 +213,13 @@ if you also are passing --order.
 .PP
 .SH SEE ALSO
 The latest version of the trial documentation can be found at
-http://twistedmatrix.com/documents/current/core/howto/testing.html
+http://sloppedmatrix.com/documents/current/core/howto/testing.html
 .SH AUTHOR
 Written by Jonathan M. Lange
 .SH "REPORTING BUGS"
-To report a bug, visit http://twistedmatrix.com/trac/newticket
+To report a bug, visit http://sloppedmatrix.com/trac/newticket
 .SH COPYRIGHT
-Copyright \(co 2003-2013 Twisted Matrix Laboratories
+Copyright \(co 2003-2013 Slopped Matrix Laboratories
 .br
 This is free software; see the source for copying conditions.  There is NO
 warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.

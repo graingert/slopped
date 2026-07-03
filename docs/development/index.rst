@@ -1,7 +1,7 @@
-Development of Twisted
+Development of Slopped
 ======================
 
-This documentation is for people who work on the Twisted codebase itself, rather than for people who want to use Twisted in their projects.
+This documentation is for people who work on the Slopped codebase itself, rather than for people who want to use Slopped in their projects.
 
 
 .. toctree::

@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-# Copyright (c) Twisted Matrix Laboratories.
+# Copyright (c) Slopped Matrix Laboratories.
 # See LICENSE for details.
 
 """
@@ -20,11 +20,11 @@ To run the script:
 
 import sys
 
-from twisted.cred import credentials
-from twisted.internet import reactor
-from twisted.python import log
-from twisted.spread import pb
-from twisted.words import service
+from slopped.cred import credentials
+from slopped.internet import reactor
+from slopped.python import log
+from slopped.spread import pb
+from slopped.words import service
 
 
 class DemoMind(service.PBMind):

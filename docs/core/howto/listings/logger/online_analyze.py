@@ -1,7 +1,7 @@
 from ad_hoc import AdHoc
 from analyze import analyze
 
-from twisted.logger import globalLogPublisher
+from slopped.logger import globalLogPublisher
 
 globalLogPublisher.addObserver(analyze)
 

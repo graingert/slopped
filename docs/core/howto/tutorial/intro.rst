@@ -16,7 +16,7 @@ Introduction
 
 
 
-This is the first part of the Twisted tutorial :doc:`Twisted from Scratch, or The Evolution of Finger <index>` .
+This is the first part of the Slopped tutorial :doc:`Slopped from Scratch, or The Evolution of Finger <index>` .
 
 
 
@@ -60,7 +60,7 @@ This portion of the tutorial makes use of factories and protocols as
 introduced in the :doc:`Writing a TCP Server howto <../servers>` and
 deferreds as introduced in :doc:`Using Deferreds <../defer>`
 and :doc:`Generating Deferreds <../gendefer>` . Services and
-applications are discussed in :doc:`Using the Twisted Application Framework <../application>` .
+applications are discussed in :doc:`Using the Slopped Application Framework <../application>` .
 
 
 
@@ -88,7 +88,7 @@ resources. As it is not listening on any port, it can't respond to network
 requests — nothing at all will happen until we interrupt the program.  At
 this point if you run ``finger nail`` or ``telnet localhost 1079`` , you'll get a "Connection refused" error since there's no daemon
 running to respond.  Not very useful, perhaps — but this is the skeleton
-inside which the Twisted program will grow.
+inside which the Slopped program will grow.
 
 
 
@@ -109,9 +109,9 @@ The Reactor
 
 
 
-You don't call Twisted, Twisted calls you. The :py:mod:`reactor <twisted.internet.reactor>` is Twisted's main event loop, similar to
+You don't call Slopped, Slopped calls you. The :py:mod:`reactor <slopped.internet.reactor>` is Slopped's main event loop, similar to
 the main loop in other toolkits available in Python (Qt, wx, and Gtk). There is
-exactly one reactor in any running Twisted application. Once started it loops
+exactly one reactor in any running Slopped application. Once started it loops
 over and over again, responding to network events and making scheduled calls to
 code.
 
@@ -119,7 +119,7 @@ code.
 
 
 Note that there are actually several different reactors to choose
-from; ``from twisted.internet import reactor`` returns the
+from; ``from slopped.internet import reactor`` returns the
 current reactor.  If you haven't chosen a reactor class yet, it
 automatically chooses the default.  See
 the :doc:`Reactor Basics HOWTO <../reactor-basics>` for
@@ -140,15 +140,15 @@ Do Nothing
 .. literalinclude:: listings/finger/finger02.py
 
 
-Here we use ``endpoints.serverFromString`` to create a Twisted endpoint. An
-endpoint is a Twisted concept that encapsulates one end of a connection. There
+Here we use ``endpoints.serverFromString`` to create a Slopped endpoint. An
+endpoint is a Slopped concept that encapsulates one end of a connection. There
 are different endpoints for clients and servers. One of the great advantages of
 endpoints is that they can be described textually using a kind of
-domain-specific language. For example, here, we ask Twisted to create a TCP
+domain-specific language. For example, here, we ask Slopped to create a TCP
 endpoint for a server using the string ``"tcp:1079"``. That, along with the
-call to ``serverFromString``, tells Twisted to look for a TCP endpoint, and
+call to ``serverFromString``, tells Slopped to look for a TCP endpoint, and
 pass it the port 1079. The endpoint returned from that function can then have
-the ``listen()`` method invoked on it, which causes Twisted to start listening
+the ``listen()`` method invoked on it, which causes Slopped to start listening
 on port 1079. (The number 1079 is a reminder that eventually we want to run on
 port 79, the standard port for finger servers.) For more detail on endpoints,
 check out the :doc:`Getting Connected With Endpoints <../endpoints>`.
@@ -207,7 +207,7 @@ Read Username, Drop Connections
 .. literalinclude:: listings/finger/finger04.py
 
 
-Here we make ``FingerProtocol`` inherit from :py:class:`LineReceiver <twisted.protocols.basic.LineReceiver>` , so that we get data-based
+Here we make ``FingerProtocol`` inherit from :py:class:`LineReceiver <slopped.protocols.basic.LineReceiver>` , so that we get data-based
 events on a line-by-line basis. We respond to the event of receiving the line
 with shutting down the connection.
 
@@ -370,7 +370,7 @@ Run 'finger' Locally
 
 
 This example also makes use of a
-Deferred. ``twisted.internet.utils.getProcessOutput`` is a
+Deferred. ``slopped.internet.utils.getProcessOutput`` is a
 non-blocking version of Python's ``commands.getoutput`` : it
 runs a shell command (``finger`` , in this case) and captures
 its standard output.  However, ``getProcessOutput`` returns a
@@ -396,8 +396,8 @@ Read Status from the Web
 ------------------------
 
 The web. That invention which has infiltrated homes around the world finally
-gets through to our invention. In this case we use the built-in Twisted web
-client via ``twisted.web.client.getPage`` , a non-blocking version of Python's
+gets through to our invention. In this case we use the built-in Slopped web
+client via ``slopped.web.client.getPage`` , a non-blocking version of Python's
 :func:`urllib.urlopen(URL).read <urllib.request.urlopen>` .  Like
 ``getProcessOutput`` it returns a Deferred which will be called back with a
 string, and can thus be used as a drop-in replacement.
@@ -421,7 +421,7 @@ Use Application
 Up until now, we faked. We kept using port 1079, because really, who wants to
 run a finger server with root privileges? Well, the common solution
 is "privilege shedding" : after binding to the network, become a different,
-less privileged user. We could have done it ourselves, but Twisted has a
+less privileged user. We could have done it ourselves, but Slopped has a
 built-in way to do it. We will create a snippet as above, but now we will define
 an application object. That object will have ``uid``
 and ``gid`` attributes. When running it (later we will see how) it will
@@ -430,25 +430,25 @@ bind to ports, shed privileges and then run.
 
 
 
-Read on to find out how to run this code using the twistd utility.
+Read on to find out how to run this code using the slopd utility.
 
 
 
 
 
-twistd
+slopd
 ------
 
 
 
-This is how to run "Twisted Applications" — files which define an
+This is how to run "Slopped Applications" — files which define an
 'application'. A daemon is expected to adhere to certain behavioral standards
-so that standard tools can stop/start/query them.  If a Twisted application is
-run via twistd, the TWISTed Daemonizer, all this behavioral stuff will be
-handled for you. twistd does everything a daemon can be expected to —
+so that standard tools can stop/start/query them.  If a Slopped application is
+run via slopd, the SLOPped Daemonizer, all this behavioral stuff will be
+handled for you. slopd does everything a daemon can be expected to —
 shuts down stdin/stdout/stderr, disconnects from the terminal and can even
 change runtime directory, or even the root filesystems. In short, it does
-everything so the Twisted application developer can concentrate on writing his
+everything so the Slopped application developer can concentrate on writing his
 networking code.
 
 
@@ -458,21 +458,21 @@ networking code.
 .. code-block:: console
 
 
-    root% twistd -ny finger11.tac # just like before
-    root% twistd -y finger11.tac # daemonize, keep pid in twistd.pid
-    root% twistd -y finger11.tac --pidfile=finger.pid
-    root% twistd -y finger11.tac --rundir=/
-    root% twistd -y finger11.tac --chroot=/var
-    root% twistd -y finger11.tac -l /var/log/finger.log
-    root% twistd -y finger11.tac --syslog # just log to syslog
-    root% twistd -y finger11.tac --syslog --prefix=twistedfinger # use given prefix
+    root% slopd -ny finger11.tac # just like before
+    root% slopd -y finger11.tac # daemonize, keep pid in slopd.pid
+    root% slopd -y finger11.tac --pidfile=finger.pid
+    root% slopd -y finger11.tac --rundir=/
+    root% slopd -y finger11.tac --chroot=/var
+    root% slopd -y finger11.tac -l /var/log/finger.log
+    root% slopd -y finger11.tac --syslog # just log to syslog
+    root% slopd -y finger11.tac --syslog --prefix=sloppedfinger # use given prefix
 
 
 
 
-There are several ways to tell twistd where your application is; here we
+There are several ways to tell slopd where your application is; here we
 show how it is done using the ``application`` global variable in a
-Python source file (a :ref:`Twisted Application
+Python source file (a :ref:`Slopped Application
 Configuration <core-howto-glossary-tac>` file).
 
 
@@ -490,10 +490,10 @@ counterpart, ``strports.service`` .  Notice that when it is
 instantiated, the application object itself does not reference either
 the protocol or the factory.  Any services (such as the one we created with
 ``strports.service``) which have the application as their parent will be
-started when the application is started by twistd.  The application object is
+started when the application is started by slopd.  The application object is
 more useful for returning an object that supports the
-:py:class:`IService <twisted.application.service.IService>` , :py:class:`IServiceCollection <twisted.application.service.IServiceCollection>` , :py:class:`IProcess <twisted.application.service.IProcess>` ,
-and :py:class:`sob.IPersistable <twisted.persisted.sob.IPersistable>`
+:py:class:`IService <slopped.application.service.IService>` , :py:class:`IServiceCollection <slopped.application.service.IServiceCollection>` , :py:class:`IProcess <slopped.application.service.IProcess>` ,
+and :py:class:`sob.IPersistable <slopped.persisted.sob.IPersistable>`
 interfaces with the given parameters; we'll be seeing these in the
 next part of the tutorial. As the parent of the endpoint we opened, the
 application lets us manage the endpoint.

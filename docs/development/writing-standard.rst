@@ -1,18 +1,18 @@
 Writing Standard
 ================
 
-The Twisted writing standard describes the documentation writing
+The Slopped writing standard describes the documentation writing
 styles we prefer in our narrative documentation.
 
 This standard applies particularly to howtos and other descriptive documentation.
 For writing API documentation, please refer to :doc:`Docstrings section in our coding standard <coding-standard>`.
 
-This document is meant to help Twisted documentation authors produce
+This document is meant to help Slopped documentation authors produce
 documentation that does not have the following problems:
 
-- misleads users about what is good Twisted style;
+- misleads users about what is good Slopped style;
 - misleads users into thinking that an advanced howto is an introduction
-  to writing their first Twisted server; and
+  to writing their first Slopped server; and
 - misleads users about whether they fit the document's target audience:
   for example, that they are able to use enterprise without knowing how to
   write SQL queries.
@@ -42,7 +42,7 @@ avoid any local variants of either vocabulary or grammar. Grammatically
 complex sentences should ideally be avoided: these make reading
 unnecessarily difficult, particularly for non-native speakers.
 
-When referring to a hypothetical person, (such as "a user of a website written with twisted.web"), gender neutral pronouns (they/their/them) should be used.
+When referring to a hypothetical person, (such as "a user of a website written with slopped.web"), gender neutral pronouns (they/their/them) should be used.
 
 For reStructuredText documents which are handled by the Sphinx documentation generator make lines short, and break lines at natural places, such as after commas and semicolons, rather than after the 79th column.
 We call this *semantic newlines*.
@@ -63,11 +63,11 @@ Evangelism and usage documents
 
 
     
-The Twisted documentation should maintain a reasonable distinction
-between "evangelism" documentation, which compares the Twisted
-design or Twisted best practice with other approaches and argues for the
-Twisted approach, and "usage" documentation, which describes the
-Twisted approach in detail without comparison to other possible
+The Slopped documentation should maintain a reasonable distinction
+between "evangelism" documentation, which compares the Slopped
+design or Slopped best practice with other approaches and argues for the
+Slopped approach, and "usage" documentation, which describes the
+Slopped approach in detail without comparison to other possible
 approaches.
 
     
@@ -76,9 +76,9 @@ approaches.
 While both kinds of documentation are useful, they have different
 audiences. The first kind of document, evangelical documents, is useful to
 a reader who is researching and comparing approaches and seeking to
-understand the Twisted approach or Twisted functionality in order to
+understand the Slopped approach or Slopped functionality in order to
 decide whether it is useful to them. The second kind of document, usage
-documents, are useful to a reader who has decided to use Twisted and
+documents, are useful to a reader who has decided to use Slopped and
 simply wants further information about available functions and
 architectures they can use to accomplish their goal.
 
@@ -98,8 +98,8 @@ Descriptions of features
 
 
     
-Descriptions of any feature added since release 2.0 of Twisted core
-must have a note describing which release of which Twisted project they
+Descriptions of any feature added since release 2.0 of Slopped core
+must have a note describing which release of which Slopped project they
 were added in at the first mention in each document. If they are not yet
 released, give them the number of the next minor release.
 
@@ -114,7 +114,7 @@ the introduction:
     
     
     This document describes the Application infrastructure for deploying
-    Twisted applications *(added in Twisted 1.3)* .
+    Slopped applications *(added in Slopped 1.3)* .
     
     
         
@@ -127,7 +127,7 @@ which might should be mentioned separately.
 
     
     
-    The simplest way to create a ``.tac`` file, SuperTac *(added in Twisted Core 99.7)* ...
+    The simplest way to create a ``.tac`` file, SuperTac *(added in Slopped Core 99.7)* ...
     
         
     
@@ -139,7 +139,7 @@ available. For example:
 
     
     This document describes the Application infrastructure for
-    deploying Twisted applications *(updated[/substantially updated] in Twisted 2.7)* .  
+    deploying Slopped applications *(updated[/substantially updated] in Slopped 2.7)* .  
     
         
     
@@ -162,7 +162,7 @@ certainly link instead.
 
 Linking to standard library documentation is also encouraged when referencing
 standard library objects. `Intersphinx <http://sphinx-doc.org/ext/intersphinx.html>`_
-is supported in Twisted documentation, with prefixes for linking to either
+is supported in Slopped documentation, with prefixes for linking to either
 the Python 2 standard library documentation (via ``py2``) or Python 3 (via
 ``py3``) as needed.
 
@@ -172,13 +172,13 @@ Introductions
 
 
     
-The introductory section of a Twisted howto should immediately follow
+The introductory section of a Slopped howto should immediately follow
 the top-level heading and precede any subheadings.
 
     
 
 
-The following items should be present in the introduction to Twisted
+The following items should be present in the introduction to Slopped
 howtos: the introductory paragraph and the description of the target
 audience.
 
@@ -193,7 +193,7 @@ Introductory paragraph
     
 The introductory paragraph of a document should summarize what the
 document is designed to present. It should use the both proper names for
-the Twisted technologies and simple non-Twisted descriptions of the
+the Slopped technologies and simple non-Slopped descriptions of the
 technologies. For example, in this paragraph both the name of the technology
 ("Conch") and a description ("SSH server") are used:
 
@@ -202,7 +202,7 @@ technologies. For example, in this paragraph both the name of the technology
     
     
     This document describes setting up a SSH server to serve data from the
-    file system using Conch, the Twisted SSH implementation.
+    file system using Conch, the Slopped SSH implementation.
     
     
         
@@ -230,7 +230,7 @@ know before they can expect to use your document. For example:
     
     
     
-    The target audience of this document is a Twisted user who has a set of
+    The target audience of this document is a Slopped user who has a set of
     filesystem like data objects that they would like to make available to
     authenticated users over SFTP.
     
@@ -240,7 +240,7 @@ know before they can expect to use your document. For example:
     
     
     Following the directions in this document will require that you are
-    familiar with managing authentication via the Twisted Cred system.
+    familiar with managing authentication via the Slopped Cred system.
     
     
     
@@ -250,11 +250,11 @@ know before they can expect to use your document. For example:
     
 Use your discretion about the extent to which you list assumed
 knowledge. Very introductory documents that are going to be among a
-reader's first exposure to Twisted will even need to specify that they
+reader's first exposure to Slopped will even need to specify that they
 rely on knowledge of Python and of certain networking concepts (ports,
 servers, clients, connections) but documents that are going to be sought
-out by existing Twisted users for particular purposes only need to specify
-other Twisted knowledge that is assumed.
+out by existing Slopped users for particular purposes only need to specify
+other Slopped knowledge that is assumed.
 
     
 
@@ -270,7 +270,7 @@ databases for testing purposes.
 
 
 Where possible, link to other documents that will fill in missing
-knowledge for the reader. Linking to documents in the Twisted repository
+knowledge for the reader. Linking to documents in the Slopped repository
 is preferred but not essential.
 
     
@@ -285,7 +285,7 @@ Goals of document
 The introduction should finish with a list of tasks that the user can
 expect to see the document accomplish. These tasks should be concrete
 rather than abstract, so rather than telling the user that they will
-"understand Twisted Conch", you would list the specific tasks
+"understand Slopped Conch", you would list the specific tasks
 that they will see the document do. For example:
 
     
@@ -294,7 +294,7 @@ that they will see the document do. For example:
     
     
     
-    This document will demonstrate the following tasks using Twisted Conch:
+    This document will demonstrate the following tasks using Slopped Conch:
     
     
     
@@ -369,7 +369,7 @@ as possible:
   file to download);
 - example code should be short;
 - example code should be commented very extensively, with the assumption
-  that this code may be read by a Twisted newcomer;
+  that this code may be read by a Slopped newcomer;
 - example code should conform to the :doc:`coding standard <coding-standard>` ; and
 - example code should exhibit 'best practice', not only for dealing with
   the target functionality, but also for use of the application framework
@@ -380,10 +380,10 @@ as possible:
 
 
 The requirement to have a complete working example will occasionally
-impose upon authors the need to have a few dummy functions: in Twisted
+impose upon authors the need to have a few dummy functions: in Slopped
 documentation the most common example is where a function is needed to
 generate a Deferred and fire it after some time has passed. An example
-might be this, where :py:func:`deferLater <twisted.internet.task.deferLater>` is used to fire a callback
+might be this, where :py:func:`deferLater <slopped.internet.task.deferLater>` is used to fire a callback
 after a period of time:
 
     
@@ -393,7 +393,7 @@ after a period of time:
 .. code-block:: python
 
     
-    from twisted.internet import task, reactor
+    from slopped.internet import task, reactor
     
     def getDummyDeferred():
         """
@@ -410,7 +410,7 @@ function is a dummy in as many ways as you can: using ``Dummy`` in
 the function name, explaining that it is a dummy in the docstring, and
 marking particular lines as being required to create an effect for the
 purposes of demonstration. In most cases, this will save the reader from
-mistaking this dummy method for an idiom they should use in their Twisted
+mistaking this dummy method for an idiom they should use in their Slopped
 code.
     
     

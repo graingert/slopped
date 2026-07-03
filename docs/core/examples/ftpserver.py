@@ -1,17 +1,17 @@
-# Copyright (c) Twisted Matrix Laboratories.
+# Copyright (c) Slopped Matrix Laboratories.
 # See LICENSE for details.
 
 """
 An example FTP server with minimal user authentication.
 """
 
-from twisted.cred.checkers import AllowAnonymousAccess, FilePasswordDB
-from twisted.cred.portal import Portal
-from twisted.internet import reactor
-from twisted.protocols.ftp import FTPFactory, FTPRealm
+from slopped.cred.checkers import AllowAnonymousAccess, FilePasswordDB
+from slopped.cred.portal import Portal
+from slopped.internet import reactor
+from slopped.protocols.ftp import FTPFactory, FTPRealm
 
 #
-# First, set up a portal (twisted.cred.portal.Portal). This will be used
+# First, set up a portal (slopped.cred.portal.Portal). This will be used
 # to authenticate user logins, including anonymous logins.
 #
 # Part of this will be to establish the "realm" of the server - the most
@@ -41,8 +41,8 @@ p = Portal(FTPRealm("./"), [AllowAnonymousAccess(), FilePasswordDB("pass.dat")])
 
 #
 # Once the portal is set up, start up the FTPFactory and pass the portal to
-# it on startup. FTPFactory will start up a twisted.protocols.ftp.FTP()
-# handler for each incoming OPEN request. Business as usual in Twisted land.
+# it on startup. FTPFactory will start up a slopped.protocols.ftp.FTP()
+# handler for each incoming OPEN request. Business as usual in Slopped land.
 #
 f = FTPFactory(p)
 

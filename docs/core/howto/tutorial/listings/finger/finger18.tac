@@ -1,11 +1,11 @@
 # Do everything properly
 import html
 
-from twisted.application import internet, service, strports
-from twisted.internet import defer, endpoints, protocol, reactor
-from twisted.protocols import basic
-from twisted.web import resource, server, static, xmlrpc
-from twisted.words.protocols import irc
+from slopped.application import internet, service, strports
+from slopped.internet import defer, endpoints, protocol, reactor
+from slopped.protocols import basic
+from slopped.web import resource, server, static, xmlrpc
+from slopped.words.protocols import irc
 
 
 def catchError(err):

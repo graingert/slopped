@@ -13,9 +13,9 @@ A Names server can be perform three basic operations:
 Creating a non-authoritative server
 -----------------------------------
 The first two of these are easy, and you can create a server that performs them
-with the command ``twistd -n dns --recursive --cache`` .
+with the command ``slopd -n dns --recursive --cache`` .
 You may wish to run this as root since it will try to bind to UDP port 53.  Try
-performing a lookup with it, ``dig twistedmatrix.com @127.0.0.1`` .
+performing a lookup with it, ``dig sloppedmatrix.com @127.0.0.1`` .
 
 Creating an authoritative server
 --------------------------------
@@ -33,7 +33,7 @@ this domain.
 
 .. literalinclude:: listings/names/example-domain.com
 
-Next, run the command ``twistd -n dns --pyzone example-domain.com`` .  Now try querying the domain locally (again, with
+Next, run the command ``slopd -n dns --pyzone example-domain.com`` .  Now try querying the domain locally (again, with
 dig): ``dig -t any example-domain.com @127.0.0.1`` .
 
 Names can also read a traditional, BIND-syntax zone file.  Specify these

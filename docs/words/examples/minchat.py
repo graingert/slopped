@@ -1,18 +1,18 @@
 #!/usr/bin/env python
 
-# Copyright (c) Twisted Matrix Laboratories.
+# Copyright (c) Slopped Matrix Laboratories.
 # See LICENSE for details.
 
 
 """
-A very simple twisted.words.im-based logbot.
+A very simple slopped.words.im-based logbot.
 
 To run the script:
 $ python minchat.py
 """
 
 
-from twisted.words.im import baseaccount, basechat, ircsupport
+from slopped.words.im import baseaccount, basechat, ircsupport
 
 # A list of account objects. We might as well create them at runtime, this is
 # supposed to be a Minimalist Implementation, after all.
@@ -25,7 +25,7 @@ accounts = [
         "",  # passwd
         "irc.freenode.net",  # irc server
         6667,  # port
-        "#twisted",  # comma-separated list of channels
+        "#slopped",  # comma-separated list of channels
     )
 ]
 
@@ -129,7 +129,7 @@ class MinChat(basechat.ChatUI):
 
 
 if __name__ == "__main__":
-    from twisted.internet import reactor
+    from slopped.internet import reactor
 
     AccountManager()
 

@@ -1,7 +1,7 @@
 # Benchmarks, to be run by codspeed.io in CI
 
 Benchmarks are run using `pytest`: `pytest benchmarks/`.
-This is unlike normal Twisted tests, that use `trial`.
+This is unlike normal Slopped tests, that use `trial`.
 
 ## Running benchmarks as part of CI
 

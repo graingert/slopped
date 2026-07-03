@@ -1,5 +1,5 @@
 # You can run this .tac file directly with:
-#    twistd -ny service.tac
+#    slopd -ny service.tac
 
 """
 This is an example .tac file which starts a webserver on port 8080 and
@@ -7,13 +7,13 @@ serves files from the current working directory.
 
 The important part of this, the part that makes it a .tac file, is
 the final root-level section, which sets up the object called 'application'
-which twistd will look for
+which slopd will look for
 """
 
 import os
 
-from twisted.application import internet, service
-from twisted.web import server, static
+from slopped.application import internet, service
+from slopped.web import server, static
 
 
 def getWebService():

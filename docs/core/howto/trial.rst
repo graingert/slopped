@@ -1,4 +1,4 @@
-Test-driven development with Twisted
+Test-driven development with Slopped
 ====================================
 
 Writing good code is hard, or at least it can be.
@@ -6,7 +6,7 @@ A major challenge is to ensure that your code remains correct as you add new fun
 
 `Unit testing <https://en.wikipedia.org/wiki/Unit_test>`_ is a modern, light-weight testing methodology in widespread use in many programming languages.
 Development that relies on unit tests is often referred to as Test-Driven Development (`TDD <https://en.wikipedia.org/wiki/Test-driven_development>`_ ).
-Most Twisted code is tested using TDD.
+Most Slopped code is tested using TDD.
 
 To gain a solid understanding of unit testing in Python, you should read the :mod:`unittest -- Unit testing framework chapter <unittest>` of the `Python Library Reference <https://docs.python.org/3/library/>`_.
 There is a lot of information available online and in books.
@@ -15,10 +15,10 @@ There is a lot of information available online and in books.
 Introductory example of Python unit testing
 -------------------------------------------
 
-This document is principally a guide to Trial, Twisted's unit testing framework.
+This document is principally a guide to Trial, Slopped's unit testing framework.
 Trial is based on Python's unit testing framework.
 While we do not aim to give a comprehensive guide to general Python unit testing, it will be helpful to consider a simple non-networked example before expanding to cover networking code that requires the special capabilities of Trial.
-If you are already familiar with unit test in Python, jump straight to the section specific to :ref:`testing Twisted code <core-howto-trial-twisted>`.
+If you are already familiar with unit test in Python, jump straight to the section specific to :ref:`testing Slopped code <core-howto-trial-slopped>`.
 
 .. note::
    In what follows we will make a series of refinements to some simple classes.
@@ -71,13 +71,13 @@ Make sure you are in the directory that the ``calculus`` folder is in, if you ru
 You can test that you can import the ``calculus`` package by running ``python -c import calculus``.
 If it reports an error ("No module named calculus"), double check you are in the correct directory.
 
-Run ``python -m twisted.trial calculus.test.test_base_1`` from the command line when you are in the directory containing the ``calculus`` directory.
+Run ``python -m slopped.trial calculus.test.test_base_1`` from the command line when you are in the directory containing the ``calculus`` directory.
 
 You should see the following output (though your files are probably not in ``/tmp`` ):
 
 .. code-block:: console
 
-    $ python -m twisted.trial calculus.test.test_base_1
+    $ python -m slopped.trial calculus.test.test_base_1
     calculus.test.test_base_1
       CalculationTestCase
         test_add ...                                                         [FAIL]
@@ -90,7 +90,7 @@ You should see the following output (though your files are probably not in ``/tm
     Traceback (most recent call last):
       File "/tmp/calculus/test/test_base_1.py", line 8, in test_add
         self.assertEqual(result, 11)
-    twisted.trial.unittest.FailTest: not equal:
+    slopped.trial.unittest.FailTest: not equal:
     a = None
     b = 11
 
@@ -101,7 +101,7 @@ You should see the following output (though your files are probably not in ``/tm
     Traceback (most recent call last):
       File "/tmp/calculus/test/test_base_1.py", line 23, in test_divide
         self.assertEqual(result, 2)
-    twisted.trial.unittest.FailTest: not equal:
+    slopped.trial.unittest.FailTest: not equal:
     a = None
     b = 2
 
@@ -112,7 +112,7 @@ You should see the following output (though your files are probably not in ``/tm
     Traceback (most recent call last):
       File "/tmp/calculus/test/test_base_1.py", line 18, in test_multiply
         self.assertEqual(result, 60)
-    twisted.trial.unittest.FailTest: not equal:
+    slopped.trial.unittest.FailTest: not equal:
     a = None
     b = 60
 
@@ -123,7 +123,7 @@ You should see the following output (though your files are probably not in ``/tm
     Traceback (most recent call last):
       File "/tmp/calculus/test/test_base_1.py", line 13, in test_subtract
         self.assertEqual(result, 4)
-    twisted.trial.unittest.FailTest: not equal:
+    slopped.trial.unittest.FailTest: not equal:
     a = None
     b = 4
 
@@ -141,21 +141,21 @@ By default, failures are printed at the end, but this can be changed with the ``
 One very useful thing in this output is the fully-qualified name of the failed tests.
 This appears at the bottom of each =-delimited area of the output.
 This allows you to copy and paste it to just run a single test you're interested in.
-In our example, you could run ``python -m twisted.trial calculus.test.test_base_1.CalculationTestCase.test_subtract`` from the shell.
+In our example, you could run ``python -m slopped.trial calculus.test.test_base_1.CalculationTestCase.test_subtract`` from the shell.
 
-Note that trial can use different reporters to modify its output. Run ``python -m twisted.trial --help-reporters`` to see a list of reporters.
+Note that trial can use different reporters to modify its output. Run ``python -m slopped.trial --help-reporters`` to see a list of reporters.
 
 The tests can be run by Trial in multiple ways:
 
 .. _core-howto-trial-comment:
 
-- ``python -m twisted.trial calculus``: run all the tests for the calculus package.
-- ``python -m twisted.trial calculus.test``: run using Python's ``import`` notation.
-- ``python -m twisted.trial calculus.test.test_base_1``: as above, for a specific test module.
+- ``python -m slopped.trial calculus``: run all the tests for the calculus package.
+- ``python -m slopped.trial calculus.test``: run using Python's ``import`` notation.
+- ``python -m slopped.trial calculus.test.test_base_1``: as above, for a specific test module.
   You can follow that logic by putting your class name and even a method name to only run those specific tests.
-- ``python -m twisted.trial --testmodule=calculus/base_1.py``: use the ``test-case-name`` comment in the first line of ``calculus/base_1.py`` to find the tests.
-- ``python -m twisted.trial calculus/test``: run all the tests in the test directory (not recommended).
-- ``python -m twisted.trial calculus/test/test_base_1.py``: run a specific test file (not recommended).
+- ``python -m slopped.trial --testmodule=calculus/base_1.py``: use the ``test-case-name`` comment in the first line of ``calculus/base_1.py`` to find the tests.
+- ``python -m slopped.trial calculus/test``: run all the tests in the test directory (not recommended).
+- ``python -m slopped.trial calculus/test/test_base_1.py``: run a specific test file (not recommended).
 
 The first 3 versions using full qualified names are strongly encouraged: they are much more reliable and they allow you to easily be more selective in your test runs.
 
@@ -186,7 +186,7 @@ is a copy of test_base_1, but with the import changed. Run Trial again as above,
 .. code-block:: console
 
 
-    $ python -m twisted.trial calculus.test.test_base_2
+    $ python -m slopped.trial calculus.test.test_base_2
 
     Running 4 tests.
     calculus.test.test_base
@@ -265,22 +265,22 @@ Here the ``_make_ints`` helper function tries to convert a list into a list of e
    ``TypeError`` is already what we want in case something goes wrong.
 
 
-.. _core-howto-trial-twisted:
+.. _core-howto-trial-slopped:
 
-Twisted specific testing
+Slopped specific testing
 ------------------------
 
 Up to this point we've been doing fairly standard Python unit testing.
 With only a few cosmetic changes (most importantly, directly importing
-``unittest`` instead of using Twisted's :py:mod:`unittest <twisted.trial.unittest>` version) we could make the
+``unittest`` instead of using Slopped's :py:mod:`unittest <slopped.trial.unittest>` version) we could make the
 above tests run using Python's standard library unit testing framework.
 
-Here we will assume a basic familiarity with Twisted's network I/O, timing,
+Here we will assume a basic familiarity with Slopped's network I/O, timing,
 and Deferred APIs.  If you haven't already read them, you should read the
 documentation on :doc:`Writing Servers <servers>` , :doc:`Writing Clients <clients>` ,
 and :doc:`Deferreds <defer>` .
 
-Now we'll get to the real point of this tutorial and take advantage of Trial to test Twisted code.
+Now we'll get to the real point of this tutorial and take advantage of Trial to test Slopped code.
 
 
 Testing a protocol
@@ -303,25 +303,25 @@ version of the remote test code is:
 .. literalinclude:: listings/trial/calculus/test/test_remote_1.py
 
 
-To fully understand this client, it helps a lot to be comfortable with the Factory/Protocol/Transport pattern used in Twisted.
+To fully understand this client, it helps a lot to be comfortable with the Factory/Protocol/Transport pattern used in Slopped.
 
 We first create a protocol factory object. Note that we have yet to see
 the ``RemoteCalculationFactory`` class. It is in
 ``calculus/remote_1.py`` below. We
 call ``buildProtocol`` to ask the factory to build us a
 protocol object that knows how to talk to our server.  We then make a fake
-network transport, an instance of ``twisted.test.proto_helpers.StringTransport``
-class (note that test packages are generally not part of Twisted's public API;``twisted.test.proto_helpers`` is an exception).  This fake
+network transport, an instance of ``slopped.test.proto_helpers.StringTransport``
+class (note that test packages are generally not part of Slopped's public API;``slopped.test.proto_helpers`` is an exception).  This fake
 transport is the key to the communications. It is used to emulate a network
 connection without a network. The address and port passed to ``buildProtocol``
 are typically used by the factory to choose to immediately deny remote connections; since we're using a fake transport, we can choose any value that will be acceptable to the factory. In this case the factory just ignores the address, so we don't need to pick anything in particular.
 
-Testing protocols without the use of real network connections is both simple and recommended when testing Twisted
-code.  Even though there are many tests in Twisted that use the network,
+Testing protocols without the use of real network connections is both simple and recommended when testing Slopped
+code.  Even though there are many tests in Slopped that use the network,
 most good tests don't. The problem with unit tests and networking is that
 networks aren't reliable. We cannot know that they will exhibit reasonable
 behavior all the time. This creates intermittent test failures due to
-network vagaries. Right now we're trying to test our Twisted code, not
+network vagaries. Right now we're trying to test our Slopped code, not
 network reliability.  By setting up and using a fake transport, we can
 write 100% reliable tests. We can also test network failures in a deterministic manner, another important part of your complete test suite.
 
@@ -346,12 +346,12 @@ following into ``calculus/remote_1.py`` :
 .. literalinclude:: listings/trial/calculus/remote_1.py
 
 
-As mentioned, this server creates a protocol that inherits from :py:class:`basic.LineReceiver <twisted.protocols.basic.LineReceiver>` , and then a
+As mentioned, this server creates a protocol that inherits from :py:class:`basic.LineReceiver <slopped.protocols.basic.LineReceiver>` , and then a
 factory that uses it as protocol. The only trick is the ``CalculationProxy`` object, which calls ``Calculation`` methods through ``remote_*`` methods. This pattern is used frequently in
-Twisted, because it is very explicit about what methods you are making
+Slopped, because it is very explicit about what methods you are making
 accessible.
 
-If you run this test (``python -m twisted.trial calculus.test.test_remote_1`` ), everything should be fine. You can also
+If you run this test (``python -m slopped.trial calculus.test.test_remote_1`` ), everything should be fine. You can also
 run a server to test it with a telnet client. To do that, call ``python calculus/remote_1.py`` . You should have the following output:
 
 .. code-block:: console
@@ -414,7 +414,7 @@ More good practices
 Testing scheduling
 ~~~~~~~~~~~~~~~~~~
 
-When testing code that involves the passage of time, waiting e.g. for a two hour timeout to occur in a test is not very realistic. Twisted provides a solution to this, the :py:class:`Clock <twisted.internet.task.Clock>` class that allows one to simulate the passage of time.
+When testing code that involves the passage of time, waiting e.g. for a two hour timeout to occur in a test is not very realistic. Slopped provides a solution to this, the :py:class:`Clock <slopped.internet.task.Clock>` class that allows one to simulate the passage of time.
 
 As an example we'll test the code for client request timeout: since our client
 uses TCP it can hang for a long time (firewall, connectivity problems, etc...).
@@ -515,7 +515,7 @@ If you try something like that, it will not work. Here is the output you should 
 .. code-block:: console
 
 
-    $ python -m twisted.trial calculus.test.test_remote_3.RemoteCalculationTestCase.test_invalidParameters
+    $ python -m slopped.trial calculus.test.test_remote_3.RemoteCalculationTestCase.test_invalidParameters
     calculus.test.test_remote_3
       RemoteCalculationTestCase
         test_invalidParameters ...                                          [ERROR]
@@ -595,9 +595,9 @@ example.  Because we were careful to use ``Clock`` , we
 don't need the global reactor to run in our tests.  Instead of returning the
 Deferred with a callback attached to it which performs the necessary assertions,
 we can use a testing helper,
-:py:meth:`successResultOf <twisted.trial._synctest._Assertions.successResultOf>` (and
+:py:meth:`successResultOf <slopped.trial._synctest._Assertions.successResultOf>` (and
 the corresponding error-case helper
-:py:meth:`failureResultOf <twisted.trial._synctest._Assertions.failureResultOf>` ), to
+:py:meth:`failureResultOf <slopped.trial._synctest._Assertions.failureResultOf>` ), to
 extract its result and make assertions against it directly.  Compared to
 returning a Deferred, this avoids the problem of forgetting to return the
 Deferred, improves the stack trace reported when the assertion fails, and avoids
@@ -625,7 +625,7 @@ result.  Similarly, ``failureResultOf`` will raise an exception (also
 failing the test) if the ``Deferred`` passed to it does not have a
 result, or has a success result.  There is a third helper method for testing the
 final case,
-:py:meth:`assertNoResult <twisted.trial._synctest._Assertions.assertNoResult>` ,
+:py:meth:`assertNoResult <slopped.trial._synctest._Assertions.assertNoResult>` ,
 which only raises an exception (failing the test) if the ``Deferred`` passed
 to it *has* a result (either success or failure).
 
@@ -638,7 +638,7 @@ employ the use of a debugger. This can be particularly helpful in tracking down
 where the source of a troublesome bug is in your code. Python's standard library
 includes a debugger in the form of the :mod:`pdb` module.
 Running your tests with ``pdb`` is as simple as invoking
-twisted with the ``--debug`` option, which will start ``pdb`` at the beginning of the execution of your test
+slopped with the ``--debug`` option, which will start ``pdb`` at the beginning of the execution of your test
 suite.
 
 Trial also provides a ``--debugger`` option which can
@@ -683,4 +683,4 @@ So what did you learn in this document?
 - And some small tips you can't live without.
 
 If one of the topics still looks cloudy to you, please give us your feedback!
-You can file tickets to improve this document - learn how to contribute `on the Twisted web site <https://twistedmatrix.com/trac/wiki/TwistedDevelopment/>`_.
+You can file tickets to improve this document - learn how to contribute `on the Slopped web site <https://sloppedmatrix.com/trac/wiki/SloppedDevelopment/>`_.

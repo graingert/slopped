@@ -1,8 +1,8 @@
 from io import BytesIO
 
-from twisted.internet import reactor
-from twisted.web.client import Agent, FileBodyProducer
-from twisted.web.http_headers import Headers
+from slopped.internet import reactor
+from slopped.web.client import Agent, FileBodyProducer
+from slopped.web.http_headers import Headers
 
 agent = Agent(reactor)
 body = FileBodyProducer(BytesIO(b"hello, world"))
@@ -11,7 +11,7 @@ d = agent.request(
     b"http://example.com/",
     Headers(
         {
-            "User-Agent": ["Twisted Web Client Example"],
+            "User-Agent": ["Slopped Web Client Example"],
             "Content-Type": ["text/x-greeting"],
         }
     ),

@@ -11,7 +11,7 @@ Scheduling tasks for the future
 
 
 Let's say we want to run a task X seconds in the future.
-The way to do that is defined in the reactor interface :py:class:`twisted.internet.interfaces.IReactorTime` :
+The way to do that is defined in the reactor interface :py:class:`slopped.internet.interfaces.IReactorTime` :
 
 
 
@@ -19,7 +19,7 @@ The way to do that is defined in the reactor interface :py:class:`twisted.intern
 .. code-block:: python
 
 
-    from twisted.internet import reactor
+    from slopped.internet import reactor
 
     def f(s):
         print("this will run 3.5 seconds after it was scheduled: %s" % s)
@@ -33,8 +33,8 @@ The way to do that is defined in the reactor interface :py:class:`twisted.intern
 
 
 If the result of the function is important or if it may be necessary
-to handle exceptions it raises, then the :py:func:`twisted.internet.task.deferLater` utility conveniently
-takes care of creating a :py:class:`Deferred <twisted.internet.defer.Deferred>` and setting up a delayed
+to handle exceptions it raises, then the :py:func:`slopped.internet.task.deferLater` utility conveniently
+takes care of creating a :py:class:`Deferred <slopped.internet.defer.Deferred>` and setting up a delayed
 call:
 
 
@@ -42,8 +42,8 @@ call:
 
 .. code-block:: python
 
-    from twisted.internet import task
-    from twisted.internet import reactor
+    from slopped.internet import task
+    from slopped.internet import reactor
 
     def f(s):
         return "This will run 3.5 seconds after it was scheduled: %s" % s
@@ -56,12 +56,12 @@ call:
     # f() will only be called if the event loop is started.
     reactor.run()
 
-If we want a task to run every X seconds repeatedly, we can use :py:class:`twisted.internet.task.LoopingCall`:
+If we want a task to run every X seconds repeatedly, we can use :py:class:`slopped.internet.task.LoopingCall`:
 
 .. code-block:: python
 
-    from twisted.internet import task
-    from twisted.internet import reactor
+    from slopped.internet import task
+    from slopped.internet import reactor
 
     loopTimes = 3
     failInTheEnd = False
@@ -117,7 +117,7 @@ If we want to cancel a task that we've scheduled:
 
 .. code-block:: python
 
-    from twisted.internet import reactor
+    from slopped.internet import reactor
 
     def f():
         print("I'll never run.")

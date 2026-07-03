@@ -1,3 +1,3 @@
-from twisted.internet import reactor
+from slopped.internet import reactor
 
 reactor.run()

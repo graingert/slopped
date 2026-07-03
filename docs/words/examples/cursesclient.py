@@ -1,14 +1,14 @@
 #!/usr/bin/env python
 
-# Copyright (c) Twisted Matrix Laboratories.
+# Copyright (c) Slopped Matrix Laboratories.
 # See LICENSE for details.
 
 """
-This is an example of integrating curses with the twisted underlying
+This is an example of integrating curses with the slopped underlying
 select loop. Most of what is in this is insignificant -- the main piece
 of interest is the 'CursesStdIO' class.
 
-This class acts as file-descriptor 0, and is scheduled with the twisted
+This class acts as file-descriptor 0, and is scheduled with the slopped
 select loop via reactor.addReader (once the curses class extends it
 of course). When there is input waiting doRead is called, and any
 input-oriented curses calls (ie. getch()) should be executed within this
@@ -26,10 +26,10 @@ To run the script::
 import curses
 import curses.wrapper
 
-# Twisted imports
-from twisted.internet import reactor
-from twisted.internet.protocol import ClientFactory
-from twisted.words.protocols.irc import IRCClient
+# Slopped imports
+from slopped.internet import reactor
+from slopped.internet.protocol import ClientFactory
+from slopped.words.protocols.irc import IRCClient
 
 
 class TextTooLongError(Exception):
@@ -37,7 +37,7 @@ class TextTooLongError(Exception):
 
 
 class CursesStdIO:
-    """fake fd to be registered as a reader with the twisted reactor.
+    """fake fd to be registered as a reader with the slopped reactor.
     Curses classes needing input should extend this"""
 
     def fileno(self):

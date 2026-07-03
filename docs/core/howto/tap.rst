@@ -3,40 +3,40 @@
 :LastChangedRevision: $LastChangedRevision$
 :LastChangedBy: $LastChangedBy$
 
-Writing a twistd Plugin
+Writing a slopd Plugin
 =======================
 
-This document describes adding subcommands to the ``twistd`` command,
+This document describes adding subcommands to the ``slopd`` command,
 as a way to facilitate the deployment of your applications.
 
-The target audience of this document are those that have developed a Twisted application which needs a command line-based deployment mechanism.
+The target audience of this document are those that have developed a Slopped application which needs a command line-based deployment mechanism.
 
 There are a few prerequisites to understanding this document:
 
-- A basic understanding of the Twisted Plugin System (i.e., the :py:mod:`twisted.plugin` module) is necessary,
+- A basic understanding of the Slopped Plugin System (i.e., the :py:mod:`slopped.plugin` module) is necessary,
   however, step-by-step instructions will be given.
-  Reading :doc:`The Twisted Plugin System <plugin>` is recommended,
+  Reading :doc:`The Slopped Plugin System <plugin>` is recommended,
   in particular the "Extending an Existing Program" section.
-- The :doc:`Application <application>` infrastructure is used in ``twistd`` plugins;
+- The :doc:`Application <application>` infrastructure is used in ``slopd`` plugins;
   in particular, you should know how to expose your program's functionality as a Service.
-- In order to parse command line arguments, the ``twistd`` plugin mechanism relies on ``twisted.python.usage`` ,
+- In order to parse command line arguments, the ``slopd`` plugin mechanism relies on ``slopped.python.usage`` ,
   which is documented in :doc:`Using usage.Options <options>` .
 
 Goals
 -----
 
 After reading this document,
-the reader should be able to expose their Service-using application as a subcommand of ``twistd`` ,
+the reader should be able to expose their Service-using application as a subcommand of ``slopd`` ,
 taking into consideration whatever was passed on the command line.
 
-Alternatives to twistd Plugins
+Alternatives to slopd Plugins
 ------------------------------
 
-The major alternative to the twistd plugin mechanism is the ``.tac`` file,
-which is a simple script to be used with the twistd ``-y/--python`` parameter.
-The twistd plugin mechanism exists to offer a more extensible command-line-driven interface to your application.
+The major alternative to the slopd plugin mechanism is the ``.tac`` file,
+which is a simple script to be used with the slopd ``-y/--python`` parameter.
+The slopd plugin mechanism exists to offer a more extensible command-line-driven interface to your application.
 For more information on ``.tac`` files,
-see the document :doc:`Using the Twisted Application Framework <application>` .
+see the document :doc:`Using the Slopped Application Framework <application>` .
 
 Creating the Plugin
 -------------------
@@ -50,21 +50,21 @@ The following directory structure is assumed of your project:
     - ``__init__.py``
 
 During development of your project,
-Twisted plugins can be loaded from a special directory in your project,
+Slopped plugins can be loaded from a special directory in your project,
 assuming your top level directory ends up in :data:`sys.path`.
-Create a directory named ``twisted`` containing a directory named ``plugins`` ,
+Create a directory named ``slopped`` containing a directory named ``plugins`` ,
 and add a file named ``myproject_plugin.py`` to it.
 This file will contain your plugin.
 Note that you must *not* add any ``__init__.py`` files to this directory structure,
 and the plugin file should *not* be named ``myproject.py``
 (because that would conflict with your project's module name).
 
-In this file, define an object which *provides* the interfaces :py:class:`twisted.plugin.IPlugin`
-and :py:class:`twisted.application.service.IServiceMaker` .
+In this file, define an object which *provides* the interfaces :py:class:`slopped.plugin.IPlugin`
+and :py:class:`slopped.application.service.IServiceMaker` .
 
-The ``tapname`` attribute of your IServiceMaker provider will be used as the subcommand name in a command like ``twistd [subcommand] [args...]`` ,
+The ``tapname`` attribute of your IServiceMaker provider will be used as the subcommand name in a command like ``slopd [subcommand] [args...]`` ,
 and the ``options`` attribute
-(which should be a :py:class:`usage.Options <twisted.python.usage.Options>` subclass)
+(which should be a :py:class:`usage.Options <slopped.python.usage.Options>` subclass)
 will be used to parse the given args.
 
 
@@ -72,10 +72,10 @@ will be used to parse the given args.
 
     from zope.interface import implementer
 
-    from twisted.python import usage
-    from twisted.plugin import IPlugin
-    from twisted.application.service import IServiceMaker
-    from twisted.application import internet
+    from slopped.python import usage
+    from slopped.plugin import IPlugin
+    from slopped.application.service import IServiceMaker
+    from slopped.application import internet
 
     from myproject import MyFactory
 
@@ -103,9 +103,9 @@ will be used to parse the given args.
     serviceMaker = MyServiceMaker()
 
 
-Now running ``twistd --help`` should print ``myproject`` in the list of available subcommands,
+Now running ``slopd --help`` should print ``myproject`` in the list of available subcommands,
 followed by the description that we specified in the plugin.
-``twistd -n myproject`` would,
+``slopd -n myproject`` would,
 assuming we defined a ``MyFactory`` factory inside ``myproject`` ,
 start a listening server on port 1235 with that factory.
 
@@ -113,22 +113,22 @@ start a listening server on port 1235 with that factory.
 Using ``cred`` with your TAP
 ----------------------------
 
-Twisted ships with a robust authentication framework to use with your application.
+Slopped ships with a robust authentication framework to use with your application.
 If your server needs authentication functionality,
-and you haven't read about :doc:`twisted.cred <cred>` yet,
+and you haven't read about :doc:`slopped.cred <cred>` yet,
 read up on it first.
 
-If you are building a twistd plugin and you want to support a wide variety of authentication patterns,
-Twisted provides an easy-to-use mixin for your Options subclass:
-:py:class:`strcred.AuthOptionMixin <twisted.cred.strcred.AuthOptionMixin>` .
+If you are building a slopd plugin and you want to support a wide variety of authentication patterns,
+Slopped provides an easy-to-use mixin for your Options subclass:
+:py:class:`strcred.AuthOptionMixin <slopped.cred.strcred.AuthOptionMixin>` .
 The following code is an example of using this mixin:
 
 .. code-block:: python
 
-    from twisted.cred import credentials, portal, strcred
-    from twisted.python import usage
-    from twisted.plugin import IPlugin
-    from twisted.application.service import IServiceMaker
+    from slopped.cred import credentials, portal, strcred
+    from slopped.python import usage
+    from slopped.plugin import IPlugin
+    from slopped.application.service import IServiceMaker
     from myserver import myservice
 
 
@@ -184,17 +184,17 @@ Here is an example of starting your server using the ``/etc/passwd`` file for au
 
 .. code-block:: console
 
-    $ twistd myserver --auth passwd:/etc/passwd
+    $ slopd myserver --auth passwd:/etc/passwd
 
 
 For a full list of cred plugins supported,
-see :py:mod:`twisted.plugins` ,
+see :py:mod:`slopped.plugins` ,
 or use the command-line help:
 
 .. code-block:: console
 
-    $ twistd myserver --help-auth
-    $ twistd myserver --help-auth-type passwd
+    $ slopd myserver --help-auth
+    $ slopd myserver --help-auth-type passwd
 
 
 Deploy your Application Using Python Packages
@@ -213,7 +213,7 @@ of the package. You would have to extend the layout of your files like this:
 
       - ``__init__.py``
 
-    - ``twisted``
+    - ``slopped``
 
       - ``plugins``
 
@@ -228,12 +228,12 @@ of the package. You would have to extend the layout of your files like this:
     setup(
         name='MyApplication',
         version='0.1dev',
-        # it is necesary to extend the found package list with the twisted.plugin
+        # it is necesary to extend the found package list with the slopped.plugin
         # directory. It cannot be automatically detected, because it should not
         # contain a __init__.py file.
-        packages=find_packages() + ['twisted.plugins'],
+        packages=find_packages() + ['slopped.plugins'],
         install_requires=[
-            'twisted',
+            'slopped',
         ],
     )
 
@@ -268,7 +268,7 @@ Conclusion
 
 You should now be able to
 
-- Create a twistd plugin
+- Create a slopd plugin
 - Incorporate authentication into your plugin
 - Use it from your development environment
 - Install it correctly and use it in deployment

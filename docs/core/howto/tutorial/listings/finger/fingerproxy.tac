@@ -1,10 +1,10 @@
 # finger proxy
 from zope.interface import Interface, implementer
 
-from twisted.application import internet, service, strports
-from twisted.internet import defer, endpoints, protocol, reactor
-from twisted.protocols import basic
-from twisted.python import components
+from slopped.application import internet, service, strports
+from slopped.internet import defer, endpoints, protocol, reactor
+from slopped.protocols import basic
+from slopped.python import components
 
 
 def catchError(err):

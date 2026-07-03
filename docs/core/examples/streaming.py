@@ -1,10 +1,10 @@
 #!/usr/bin/env python
 
-# Copyright (c) Twisted Matrix Laboratories.
+# Copyright (c) Slopped Matrix Laboratories.
 # See LICENSE for details.
 
 """
-This is a sample implementation of a Twisted push producer/consumer system. It
+This is a sample implementation of a Slopped push producer/consumer system. It
 consists of a TCP server which asks the user how many random integers they
 want, and it sends the result set back to the user, one result per line,
 and finally closes the connection.
@@ -16,10 +16,10 @@ from sys import stdout
 
 from zope.interface import implementer
 
-from twisted.internet import interfaces, reactor
-from twisted.internet.protocol import Factory
-from twisted.protocols.basic import LineReceiver
-from twisted.python.log import startLogging
+from slopped.internet import interfaces, reactor
+from slopped.internet.protocol import Factory
+from slopped.protocols.basic import LineReceiver
+from slopped.python.log import startLogging
 
 
 @implementer(interfaces.IPushProducer)

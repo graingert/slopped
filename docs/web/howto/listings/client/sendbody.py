@@ -1,8 +1,8 @@
 from bytesprod import BytesProducer
 
-from twisted.internet import reactor
-from twisted.web.client import Agent
-from twisted.web.http_headers import Headers
+from slopped.internet import reactor
+from slopped.web.client import Agent
+from slopped.web.http_headers import Headers
 
 agent = Agent(reactor)
 body = BytesProducer(b"hello, world")
@@ -11,7 +11,7 @@ d = agent.request(
     b"http://httpbin.org/post",
     Headers(
         {
-            "User-Agent": ["Twisted Web Client Example"],
+            "User-Agent": ["Slopped Web Client Example"],
             "Content-Type": ["text/x-greeting"],
         }
     ),

@@ -1,9 +1,9 @@
 #!/usr/bin/python
-# Copyright (c) Twisted Matrix Laboratories.
+# Copyright (c) Slopped Matrix Laboratories.
 # See LICENSE for details.
 
 """
-A very simple twisted xmpp-client (Jabber ID)
+A very simple slopped xmpp-client (Jabber ID)
 
 To run the script:
 $ python xmpp_client.py <jid> <secret>
@@ -12,12 +12,12 @@ $ python xmpp_client.py <jid> <secret>
 
 import sys
 
-from twisted.internet.defer import Deferred
-from twisted.internet.task import react
-from twisted.names.srvconnect import SRVConnector
-from twisted.words.protocols.jabber import client, xmlstream
-from twisted.words.protocols.jabber.jid import JID
-from twisted.words.xish import domish
+from slopped.internet.defer import Deferred
+from slopped.internet.task import react
+from slopped.names.srvconnect import SRVConnector
+from slopped.words.protocols.jabber import client, xmlstream
+from slopped.words.protocols.jabber.jid import JID
+from slopped.words.xish import domish
 
 
 class Client:

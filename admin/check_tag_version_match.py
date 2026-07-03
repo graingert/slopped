@@ -1,17 +1,17 @@
 #
 # Used during the release process to make sure that we release based on a
-# tag that has the same version as the current twisted.__version.
+# tag that has the same version as the current slopped.__version.
 #
 # Designed to be conditionally called inside GitHub Actions release job.
 # Tags should use PEP440 version scheme.
 #
-# To be called as: admin/check_tag_version_match.py refs/tags/twisted-20.3.0
+# To be called as: admin/check_tag_version_match.py refs/tags/slopped-20.3.0
 #
 import sys
 
 import pep517.meta
 
-TAG_PREFIX = "refs/tags/twisted-"
+TAG_PREFIX = "refs/tags/slopped-"
 
 if len(sys.argv) < 2:
     print("No tag check requested.")
@@ -21,7 +21,7 @@ branch_version = pep517.meta.load(".").version
 run_version = sys.argv[1]
 
 if not run_version.startswith(TAG_PREFIX):
-    print(f"Not a twisted release tag name '{run_version}.")
+    print(f"Not a slopped release tag name '{run_version}.")
     sys.exit(1)
 
 run_version = run_version[len(TAG_PREFIX) :]

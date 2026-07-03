@@ -3,7 +3,7 @@
 :LastChangedRevision: $LastChangedRevision$
 :LastChangedBy: $LastChangedBy$
 
-Twisted Mail Tutorial: Building an SMTP Client from Scratch
+Slopped Mail Tutorial: Building an SMTP Client from Scratch
 ===========================================================
 
 
@@ -25,10 +25,10 @@ and transmit a message for delivery.
 
 
 
-For the majority of this tutorial, ``twistd`` will be used
+For the majority of this tutorial, ``slopd`` will be used
 to launch the application.  Near the end we will explore other
-possibilities for starting a Twisted application.  Until then, make
-sure that you have ``twistd`` installed and conveniently
+possibilities for starting a Slopped application.  Until then, make
+sure that you have ``slopd`` installed and conveniently
 accessible for use in running each of the example ``.tac``
 files.
 
@@ -41,7 +41,7 @@ SMTP Client 1
 
 
 
-The first step is to create :download:`smtpclient-1.tac` possible for use by ``twistd`` .
+The first step is to create :download:`smtpclient-1.tac` possible for use by ``slopd`` .
 
 
 
@@ -50,15 +50,15 @@ The first step is to create :download:`smtpclient-1.tac` possible for use by ``t
 .. code-block:: python
 
 
-    from twisted.application import service
+    from slopped.application import service
 
 
 
 
 The first line of the ``.tac`` file
-imports ``twisted.application.service`` , a module which
+imports ``slopped.application.service`` , a module which
 contains many of the basic *service* classes and helper
-functions available in Twisted.  In particular, we will be using
+functions available in Slopped.  In particular, we will be using
 the ``Application`` function to create a new *application service* .  An *application service* simply acts as a
 central object on which to store certain kinds of deployment
 configuration.
@@ -77,7 +77,7 @@ configuration.
 
 The second line of the ``.tac`` file creates a
 new *application service* and binds it to the local
-name ``application`` .  ``twistd`` requires this
+name ``application`` .  ``slopd`` requires this
 local name in each ``.tac`` file it runs.  It uses various
 pieces of configuration on the object to determine its behavior.  For
 example, ``"SMTP Client Tutorial"`` will be used as the name
@@ -88,9 +88,9 @@ state, should it be necessary to do so.
 
 
 That does it for the first example.  We now have enough of
-a ``.tac`` file to pass to ``twistd`` .  If we
+a ``.tac`` file to pass to ``slopd`` .  If we
 run :download:`smtpclient-1.tac` using
-the ``twistd`` command line:
+the ``slopd`` command line:
 
 
 
@@ -99,7 +99,7 @@ the ``twistd`` command line:
 .. code-block:: python
 
 
-    twistd -ny smtpclient-1.tac
+    slopd -ny smtpclient-1.tac
 
 
 
@@ -113,10 +113,10 @@ we are rewarded with the following output:
 .. code-block:: console
 
 
-    exarkun@boson:~/mail/tutorial/smtpclient$ twistd -ny smtpclient-1.tac
+    exarkun@boson:~/mail/tutorial/smtpclient$ slopd -ny smtpclient-1.tac
     18:31 EST [-] Log opened.
-    18:31 EST [-] twistd 2.0.0 (/usr/bin/python2.4 2.4.1) starting up
-    18:31 EST [-] reactor class: twisted.internet.selectreactor.SelectReactor
+    18:31 EST [-] slopd 2.0.0 (/usr/bin/python2.4 2.4.1) starting up
+    18:31 EST [-] reactor class: slopped.internet.selectreactor.SelectReactor
     18:31 EST [-] Loading smtpclient-1.tac...
     18:31 EST [-] Loaded.
 
@@ -159,18 +159,18 @@ more things:
 .. code-block:: python
 
 
-    from twisted.application import internet
-    from twisted.internet import protocol
+    from slopped.application import internet
+    from slopped.internet import protocol
 
 
 
 
-``twisted.application.internet`` is
+``slopped.application.internet`` is
 another *application service* module.  It provides services for
 establishing outgoing connections (as well as creating network
 servers, though we are not interested in those parts for the
-moment). ``twisted.internet.protocol`` provides base
-implementations of many of the core Twisted concepts, such
+moment). ``slopped.internet.protocol`` provides base
+implementations of many of the core Slopped concepts, such
 as *factories* and *protocols* .
 
 
@@ -238,29 +238,29 @@ disappointing:
 .. code-block:: console
 
 
-    exarkun@boson:~/mail/tutorial/smtpclient$ twistd -ny smtpclient-2.tac
+    exarkun@boson:~/mail/tutorial/smtpclient$ slopd -ny smtpclient-2.tac
     18:55 EST [-] Log opened.
-    18:55 EST [-] twistd SVN-Trunk (/usr/bin/python2.4 2.4.1) starting up
-    18:55 EST [-] reactor class: twisted.internet.selectreactor.SelectReactor
+    18:55 EST [-] slopd SVN-Trunk (/usr/bin/python2.4 2.4.1) starting up
+    18:55 EST [-] reactor class: slopped.internet.selectreactor.SelectReactor
     18:55 EST [-] Loading smtpclient-2.tac...
     18:55 EST [-] Loaded.
-    18:55 EST [-] Starting factory <twisted.internet.protocol.ClientFactory
+    18:55 EST [-] Starting factory <slopped.internet.protocol.ClientFactory
                   instance at 0xb791e46c>
     18:55 EST [-] Traceback (most recent call last):
-              File "twisted/scripts/twistd.py", line 187, in runApp
+              File "slopped/scripts/slopd.py", line 187, in runApp
                 app.runReactorWithLogging(config, oldstdout, oldstderr)
-              File "twisted/application/app.py", line 128, in runReactorWithLogging
+              File "slopped/application/app.py", line 128, in runReactorWithLogging
                 reactor.run()
-              File "twisted/internet/posixbase.py", line 200, in run
+              File "slopped/internet/posixbase.py", line 200, in run
                 self.mainLoop()
-              File "twisted/internet/posixbase.py", line 208, in mainLoop
+              File "slopped/internet/posixbase.py", line 208, in mainLoop
                 self.runUntilCurrent()
             --- <exception caught here> ---
-              File "twisted/internet/base.py", line 533, in runUntilCurrent
+              File "slopped/internet/base.py", line 533, in runUntilCurrent
                 call.func(*call.args, **call.kw)
-              File "twisted/internet/tcp.py", line 489, in resolveAddress
+              File "slopped/internet/tcp.py", line 489, in resolveAddress
                 if abstract.isIPAddress(self.addr[0]):
-              File "twisted/internet/abstract.py", line 315, in isIPAddress
+              File "slopped/internet/abstract.py", line 315, in isIPAddress
                 parts = string.split(addr, '.')
               File "/usr/lib/python2.4/string.py", line 292, in split
                 return s.split(sep, maxsplit)
@@ -330,39 +330,39 @@ change gets us:
 .. code-block:: console
 
 
-    exarkun@boson:~/mail/tutorial/smtpclient$ twistd -ny smtpclient-3.tac
+    exarkun@boson:~/mail/tutorial/smtpclient$ slopd -ny smtpclient-3.tac
     19:10 EST [-] Log opened.
-    19:10 EST [-] twistd SVN-Trunk (/usr/bin/python2.4 2.4.1) starting up
-    19:10 EST [-] reactor class: twisted.internet.selectreactor.SelectReactor
+    19:10 EST [-] slopd SVN-Trunk (/usr/bin/python2.4 2.4.1) starting up
+    19:10 EST [-] reactor class: slopped.internet.selectreactor.SelectReactor
     19:10 EST [-] Loading smtpclient-3.tac...
     19:10 EST [-] Loaded.
-    19:10 EST [-] Starting factory <twisted.internet.protocol.ClientFactory
+    19:10 EST [-] Starting factory <slopped.internet.protocol.ClientFactory
                   instance at 0xb791e48c>
     19:10 EST [-] Enabling Multithreading.
     19:10 EST [Uninitialized] Traceback (most recent call last):
-              File "twisted/python/log.py", line 56, in callWithLogger
+              File "slopped/python/log.py", line 56, in callWithLogger
                 return callWithContext({"system": lp}, func, *args, **kw)
-              File "twisted/python/log.py", line 41, in callWithContext
+              File "slopped/python/log.py", line 41, in callWithContext
                 return context.call({ILogContext: newCtx}, func, *args, **kw)
-              File "twisted/python/context.py", line 52, in callWithContext
+              File "slopped/python/context.py", line 52, in callWithContext
                 return self.currentContext().callWithContext(ctx, func, *args, **kw)
-              File "twisted/python/context.py", line 31, in callWithContext
+              File "slopped/python/context.py", line 31, in callWithContext
                 return func(*args,**kw)
             --- <exception caught here> ---
-              File "twisted/internet/selectreactor.py", line 139, in _doReadOrWrite
+              File "slopped/internet/selectreactor.py", line 139, in _doReadOrWrite
                 why = getattr(selectable, method)()
-              File "twisted/internet/tcp.py", line 543, in doConnect
+              File "slopped/internet/tcp.py", line 543, in doConnect
                 self._connectDone()
-              File "twisted/internet/tcp.py", line 546, in _connectDone
+              File "slopped/internet/tcp.py", line 546, in _connectDone
                 self.protocol = self.connector.buildProtocol(self.getPeer())
-              File "twisted/internet/base.py", line 641, in buildProtocol
+              File "slopped/internet/base.py", line 641, in buildProtocol
                 return self.factory.buildProtocol(addr)
-              File "twisted/internet/protocol.py", line 99, in buildProtocol
+              File "slopped/internet/protocol.py", line 99, in buildProtocol
                 p = self.protocol()
             exceptions.TypeError: 'NoneType' object is not callable
 
     19:10 EST [Uninitialized] Stopping factory
-              <twisted.internet.protocol.ClientFactory instance at
+              <slopped.internet.protocol.ClientFactory instance at
               0xb791e48c>
     19:10 EST [-] Received SIGINT, shutting down.
     19:10 EST [-] Main loop terminated.
@@ -417,18 +417,18 @@ again traceback free:
 .. code-block:: console
 
 
-    exarkun@boson:~/doc/mail/tutorial/smtpclient$ twistd -ny smtpclient-4.tac
+    exarkun@boson:~/doc/mail/tutorial/smtpclient$ slopd -ny smtpclient-4.tac
     19:29 EST [-] Log opened.
-    19:29 EST [-] twistd SVN-Trunk (/usr/bin/python2.4 2.4.1) starting up
-    19:29 EST [-] reactor class: twisted.internet.selectreactor.SelectReactor
+    19:29 EST [-] slopd SVN-Trunk (/usr/bin/python2.4 2.4.1) starting up
+    19:29 EST [-] reactor class: slopped.internet.selectreactor.SelectReactor
     19:29 EST [-] Loading smtpclient-4.tac...
     19:29 EST [-] Loaded.
-    19:29 EST [-] Starting factory <twisted.internet.protocol.ClientFactory
+    19:29 EST [-] Starting factory <slopped.internet.protocol.ClientFactory
                   instance at 0xb791e4ac>
     19:29 EST [-] Enabling Multithreading.
     19:29 EST [-] Received SIGINT, shutting down.
     19:29 EST [Protocol,client] Stopping factory
-              <twisted.internet.protocol.ClientFactory instance at
+              <slopped.internet.protocol.ClientFactory instance at
               0xb791e4ac>
     19:29 EST [-] Main loop terminated.
     19:29 EST [-] Server Shut Down.
@@ -438,7 +438,7 @@ again traceback free:
 
 
 But what does this
-mean? ``twisted.internet.protocol.Protocol`` is the
+mean? ``slopped.internet.protocol.Protocol`` is the
 base *protocol* implementation.  For those familiar with the
 classic UNIX network services, it is equivalent to
 the *discard* service.  It never produces any output and it
@@ -456,13 +456,13 @@ SMTP Client 5
 
 
 In :download:`smtpclient-5.tac` , we will begin
-to use Twisted's SMTP protocol implementation for the first time.
+to use Slopped's SMTP protocol implementation for the first time.
 We'll make the obvious change, simply swapping
-out ``twisted.internet.protocol.Protocol`` in favor
-of ``twisted.mail.smtp.ESMTPClient`` .  Don't worry about
+out ``slopped.internet.protocol.Protocol`` in favor
+of ``slopped.mail.smtp.ESMTPClient`` .  Don't worry about
 the *E* in *ESMTP* .  It indicates we're actually using a
 newer version of the SMTP protocol.  There is
-an ``SMTPClient`` in Twisted, but there's essentially no
+an ``SMTPClient`` in Slopped, but there's essentially no
 reason to ever use it.
 
 
@@ -477,15 +477,15 @@ smtpclient-5.tac adds a new import:
 .. code-block:: python
 
 
-    from twisted.mail import smtp
+    from slopped.mail import smtp
 
 
 
 
-All of the mail related code in Twisted exists beneath
-the ``twisted.mail`` package.  More specifically, everything
+All of the mail related code in Slopped exists beneath
+the ``slopped.mail`` package.  More specifically, everything
 having to do with the SMTP protocol implementation is defined in
-the ``twisted.mail.smtp`` module.
+the ``slopped.mail.smtp`` module.
 
 
 
@@ -529,39 +529,39 @@ version?
 .. code-block:: console
 
 
-    exarkun@boson:~/doc/mail/tutorial/smtpclient$ twistd -ny smtpclient-5.tac
+    exarkun@boson:~/doc/mail/tutorial/smtpclient$ slopd -ny smtpclient-5.tac
     19:42 EST [-] Log opened.
-    19:42 EST [-] twistd SVN-Trunk (/usr/bin/python2.4 2.4.1) starting up
-    19:42 EST [-] reactor class: twisted.internet.selectreactor.SelectReactor
+    19:42 EST [-] slopd SVN-Trunk (/usr/bin/python2.4 2.4.1) starting up
+    19:42 EST [-] reactor class: slopped.internet.selectreactor.SelectReactor
     19:42 EST [-] Loading smtpclient-5.tac...
     19:42 EST [-] Loaded.
-    19:42 EST [-] Starting factory <twisted.internet.protocol.ClientFactory
+    19:42 EST [-] Starting factory <slopped.internet.protocol.ClientFactory
                   instance at 0xb791e54c>
     19:42 EST [-] Enabling Multithreading.
     19:42 EST [Uninitialized] Traceback (most recent call last):
-              File "twisted/python/log.py", line 56, in callWithLogger
+              File "slopped/python/log.py", line 56, in callWithLogger
                 return callWithContext({"system": lp}, func, *args, **kw)
-              File "twisted/python/log.py", line 41, in callWithContext
+              File "slopped/python/log.py", line 41, in callWithContext
                 return context.call({ILogContext: newCtx}, func, *args, **kw)
-              File "twisted/python/context.py", line 52, in callWithContext
+              File "slopped/python/context.py", line 52, in callWithContext
                 return self.currentContext().callWithContext(ctx, func, *args, **kw)
-              File "twisted/python/context.py", line 31, in callWithContext
+              File "slopped/python/context.py", line 31, in callWithContext
                 return func(*args,**kw)
             --- <exception caught here> ---
-              File "twisted/internet/selectreactor.py", line 139, in _doReadOrWrite
+              File "slopped/internet/selectreactor.py", line 139, in _doReadOrWrite
                 why = getattr(selectable, method)()
-              File "twisted/internet/tcp.py", line 543, in doConnect
+              File "slopped/internet/tcp.py", line 543, in doConnect
                 self._connectDone()
-              File "twisted/internet/tcp.py", line 546, in _connectDone
+              File "slopped/internet/tcp.py", line 546, in _connectDone
                 self.protocol = self.connector.buildProtocol(self.getPeer())
-              File "twisted/internet/base.py", line 641, in buildProtocol
+              File "slopped/internet/base.py", line 641, in buildProtocol
                 return self.factory.buildProtocol(addr)
-              File "twisted/internet/protocol.py", line 99, in buildProtocol
+              File "slopped/internet/protocol.py", line 99, in buildProtocol
                 p = self.protocol()
             exceptions.TypeError: __init__() takes at least 2 arguments (1 given)
 
     19:42 EST [Uninitialized] Stopping factory
-              <twisted.internet.protocol.ClientFactory instance at
+              <slopped.internet.protocol.ClientFactory instance at
               0xb791e54c>
     19:43 EST [-] Received SIGINT, shutting down.
     19:43 EST [-] Main loop terminated.
@@ -589,7 +589,7 @@ SMTP Client 6
 
 
 :download:`smtpclient-6.tac` introduces
-a ``twisted.internet.protocol.ClientFactory`` subclass with
+a ``slopped.internet.protocol.ClientFactory`` subclass with
 an overridden ``buildProtocol`` method to overcome the
 problem encountered in the previous example.
 
@@ -611,7 +611,7 @@ problem encountered in the previous example.
 
 The overridden method does almost the same thing as the base
 implementation: the only change is that it passes values for two
-arguments to ``twisted.mail.smtp.ESMTPClient`` 's initializer.
+arguments to ``slopped.mail.smtp.ESMTPClient`` 's initializer.
 The ``secret`` argument is used for SMTP authentication
 (which we will not attempt yet).  The ``identity`` argument
 is used as a to identify ourselves Another minor change to note is
@@ -627,7 +627,7 @@ own factories.
 
 
 One other change is required: instead of
-instantiating ``twisted.internet.protocol.ClientFactory`` , we
+instantiating ``slopped.internet.protocol.ClientFactory`` , we
 will now instantiate ``SMTPClientFactory`` :
 
 
@@ -652,42 +652,42 @@ code **still** isn't quite traceback-free.
 .. code-block:: console
 
 
-    exarkun@boson:~/doc/mail/tutorial/smtpclient$ twistd -ny smtpclient-6.tac
+    exarkun@boson:~/doc/mail/tutorial/smtpclient$ slopd -ny smtpclient-6.tac
     21:17 EST [-] Log opened.
-    21:17 EST [-] twistd SVN-Trunk (/usr/bin/python2.4 2.4.1) starting up
-    21:17 EST [-] reactor class: twisted.internet.selectreactor.SelectReactor
+    21:17 EST [-] slopd SVN-Trunk (/usr/bin/python2.4 2.4.1) starting up
+    21:17 EST [-] reactor class: slopped.internet.selectreactor.SelectReactor
     21:17 EST [-] Loading smtpclient-6.tac...
     21:17 EST [-] Loaded.
     21:17 EST [-] Starting factory <__builtin__.SMTPClientFactory instance
                   at 0xb77fd68c>
     21:17 EST [-] Enabling Multithreading.
     21:17 EST [ESMTPClient,client] Traceback (most recent call last):
-              File "twisted/python/log.py", line 56, in callWithLogger
+              File "slopped/python/log.py", line 56, in callWithLogger
                 return callWithContext({"system": lp}, func, *args, **kw)
-              File "twisted/python/log.py", line 41, in callWithContext
+              File "slopped/python/log.py", line 41, in callWithContext
                 return context.call({ILogContext: newCtx}, func, *args, **kw)
-              File "twisted/python/context.py", line 52, in callWithContext
+              File "slopped/python/context.py", line 52, in callWithContext
                 return self.currentContext().callWithContext(ctx, func, *args, **kw)
-              File "twisted/python/context.py", line 31, in callWithContext
+              File "slopped/python/context.py", line 31, in callWithContext
                 return func(*args,**kw)
             --- <exception caught here> ---
-              File "twisted/internet/selectreactor.py", line 139, in _doReadOrWrite
+              File "slopped/internet/selectreactor.py", line 139, in _doReadOrWrite
                 why = getattr(selectable, method)()
-              File "twisted/internet/tcp.py", line 351, in doRead
+              File "slopped/internet/tcp.py", line 351, in doRead
                 return self.protocol.dataReceived(data)
-              File "twisted/protocols/basic.py", line 221, in dataReceived
+              File "slopped/protocols/basic.py", line 221, in dataReceived
                 why = self.lineReceived(line)
-              File "twisted/mail/smtp.py", line 1039, in lineReceived
+              File "slopped/mail/smtp.py", line 1039, in lineReceived
                 why = self._okresponse(self.code,'\n'.join(self.resp))
-              File "twisted/mail/smtp.py", line 1281, in esmtpState_serverConfig
+              File "slopped/mail/smtp.py", line 1281, in esmtpState_serverConfig
                 self.tryTLS(code, resp, items)
-              File "twisted/mail/smtp.py", line 1294, in tryTLS
+              File "slopped/mail/smtp.py", line 1294, in tryTLS
                 self.authenticate(code, resp, items)
-              File "twisted/mail/smtp.py", line 1343, in authenticate
+              File "slopped/mail/smtp.py", line 1343, in authenticate
                 self.smtpState_from(code, resp)
-              File "twisted/mail/smtp.py", line 1062, in smtpState_from
+              File "slopped/mail/smtp.py", line 1062, in smtpState_from
                 self._from = self.getMailFrom()
-              File "twisted/mail/smtp.py", line 1137, in getMailFrom
+              File "slopped/mail/smtp.py", line 1137, in getMailFrom
                 raise NotImplementedError
             exceptions.NotImplementedError:
 
@@ -702,7 +702,7 @@ code **still** isn't quite traceback-free.
 
 
 What we have accomplished with this iteration of the example is to
-navigate far enough into an SMTP transaction that Twisted is now
+navigate far enough into an SMTP transaction that Slopped is now
 interested in calling back to application-level code to determine what
 its next step should be.  In the next example, we'll see how to
 provide that information to it.
@@ -750,7 +750,7 @@ and ``mailData`` ):
 
 This statically defined data is accessed later in the class
 definition by three of the methods which are part of the
-*SMTPClient callback API* .  Twisted expects each of the three
+*SMTPClient callback API* .  Slopped expects each of the three
 methods below to be defined and to return an object with a particular
 meaning.  First, ``getMailFrom`` :
 
@@ -808,7 +808,7 @@ there is exactly one recipient, it must still be in a list.
 
 
 The final callback we will define to provide information to
-Twisted is ``getMailData`` :
+Slopped is ``getMailData`` :
 
 
 
@@ -838,7 +838,7 @@ by ``SMTPClient`` automatically.
 
 There is one more new callback method defined in smtpclient-7.tac.
 This one isn't for providing information about the messages to
-Twisted, but for Twisted to provide information about the success or
+Slopped, but for Slopped to provide information about the success or
 failure of the message transmission to the application:
 
 
@@ -872,7 +872,7 @@ SMTP Client 8
 
 
 
-Thus far we have succeeded in creating a Twisted client application
+Thus far we have succeeded in creating a Slopped client application
 which starts up, connects to a (possibly) remote host, transmits some
 data, and disconnects.  Notably missing, however, is application
 shutdown.  Hitting ^C is fine during development, but it's not exactly
@@ -887,14 +887,14 @@ extends ``sentMail`` with these two lines:
 .. code-block:: python
 
 
-    from twisted.internet import reactor
+    from slopped.internet import reactor
     reactor.stop()
 
 
 
 
 The ``stop`` method of the reactor causes the main event
-loop to exit, allowing a Twisted server to shut down.  With this
+loop to exit, allowing a Slopped server to shut down.  With this
 version of the example, we see that the program actually terminates
 after sending the message, without user-intervention:
 
@@ -905,10 +905,10 @@ after sending the message, without user-intervention:
 .. code-block:: console
 
 
-    exarkun@boson:~/doc/mail/tutorial/smtpclient$ twistd -ny smtpclient-8.tac
+    exarkun@boson:~/doc/mail/tutorial/smtpclient$ slopd -ny smtpclient-8.tac
     19:52 EST [-] Log opened.
-    19:52 EST [-] twistd SVN-Trunk (/usr/bin/python2.4 2.4.1) starting up
-    19:52 EST [-] reactor class: twisted.internet.selectreactor.SelectReactor
+    19:52 EST [-] slopd SVN-Trunk (/usr/bin/python2.4 2.4.1) starting up
+    19:52 EST [-] reactor class: slopped.internet.selectreactor.SelectReactor
     19:52 EST [-] Loading smtpclient-8.tac...
     19:52 EST [-] Loaded.
     19:52 EST [-] Starting factory <__builtin__.SMTPClientFactory instance
@@ -1054,7 +1054,7 @@ SMTP Client 11
 
 At last we're ready to perform the mail exchange lookup.  We do
 this by calling on an object provided specifically for this
-task, ``twisted.mail.relaymanager.MXCalculator`` :
+task, ``slopped.mail.relaymanager.MXCalculator`` :
 
 
 

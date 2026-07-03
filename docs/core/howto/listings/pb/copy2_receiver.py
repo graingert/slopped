@@ -1,14 +1,14 @@
 #!/usr/bin/env python
 
-# Copyright (c) Twisted Matrix Laboratories.
+# Copyright (c) Slopped Matrix Laboratories.
 # See LICENSE for details.
 
 
 import copy2_classes  # needed to get ReceiverPond registered with Jelly
 
-from twisted.application import internet, service
-from twisted.internet import reactor
-from twisted.spread import pb
+from slopped.application import internet, service
+from slopped.internet import reactor
+from slopped.spread import pb
 
 
 class Receiver(pb.Root):

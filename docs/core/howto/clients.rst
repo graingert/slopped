@@ -8,7 +8,7 @@ Writing Clients
 
 Overview
 --------
-Twisted is a framework designed to be very flexible, and let you write
+Slopped is a framework designed to be very flexible, and let you write
 powerful clients. The cost of this flexibility is a few layers in the way
 to writing your client. This document covers creating clients that can be
 used for TCP, SSL and Unix sockets. UDP is covered :doc:`in a different document <udp>` .
@@ -16,7 +16,7 @@ used for TCP, SSL and Unix sockets. UDP is covered :doc:`in a different document
 At the base, the place where you actually implement the protocol parsing
 and handling, is the ``Protocol`` class. This class will usually be
 descended
-from :py:class:`twisted.internet.protocol.Protocol` . Most
+from :py:class:`slopped.internet.protocol.Protocol` . Most
 protocol handlers inherit either from this class or from one of its
 convenience children. An instance of the protocol class will be instantiated
 when you connect to the server and will go away when the connection is
@@ -24,15 +24,15 @@ finished.  This means that persistent configuration is not saved in the
 ``Protocol`` .
 
 The persistent configuration is kept in a ``Factory`` class,
-which usually inherits from :py:class:`twisted.internet.protocol.Factory`
-(or :py:class:`twisted.internet.protocol.ClientFactory` : see below).
+which usually inherits from :py:class:`slopped.internet.protocol.Factory`
+(or :py:class:`slopped.internet.protocol.ClientFactory` : see below).
 The default factory class just instantiates the ``Protocol`` and then sets the protocol's ``factory`` attribute to point to itself (the factory).
 This lets the ``Protocol`` access, and possibly modify, the persistent configuration.
 
 Protocol
 --------
 As mentioned above, this and auxiliary classes and functions are where
-most of the code is. A Twisted protocol handles data in an asynchronous
+most of the code is. A Slopped protocol handles data in an asynchronous
 manner. This means that the protocol never waits for an event, but rather
 responds to events as they arrive from the network.
 
@@ -40,7 +40,7 @@ Here is a simple example:
 
 .. code-block:: python
 
-    from twisted.internet.protocol import Protocol
+    from slopped.internet.protocol import Protocol
     from sys import stdout
 
     class Echo(Protocol):
@@ -54,7 +54,7 @@ another event:
 
 .. code-block:: python
 
-    from twisted.internet.protocol import Protocol
+    from slopped.internet.protocol import Protocol
 
     class WelcomeMessage(Protocol):
         def connectionMade(self):
@@ -64,25 +64,25 @@ another event:
 This protocol connects to the server, sends it a welcome message, and
 then terminates the connection.
 
-The :py:meth:`connectionMade <twisted.internet.protocol.BaseProtocol.connectionMade>` event is
+The :py:meth:`connectionMade <slopped.internet.protocol.BaseProtocol.connectionMade>` event is
 usually where set up of the ``Protocol`` object happens, as well as
 any initial greetings (as in the
 ``WelcomeMessage`` protocol above). Any tearing down of
-``Protocol`` -specific objects is done in :py:meth:`connectionLost <twisted.internet.protocol.Protocol.connectionLost>` .
+``Protocol`` -specific objects is done in :py:meth:`connectionLost <slopped.internet.protocol.Protocol.connectionLost>` .
 
 Simple, single-use clients
 --------------------------
 In many cases, the protocol only needs to connect to the server once,
 and the code just wants to get a connected instance of the protocol. In
-those cases :py:mod:`twisted.internet.endpoints` provides
-the appropriate API, and in particular :py:func:`connectProtocol <twisted.internet.endpoints.connectProtocol>` which takes a
+those cases :py:mod:`slopped.internet.endpoints` provides
+the appropriate API, and in particular :py:func:`connectProtocol <slopped.internet.endpoints.connectProtocol>` which takes a
 protocol instance rather than a factory.
 
 .. code-block:: python
 
-    from twisted.internet import reactor
-    from twisted.internet.protocol import Protocol
-    from twisted.internet.endpoints import TCP4ClientEndpoint, connectProtocol
+    from slopped.internet import reactor
+    from slopped.internet.protocol import Protocol
+    from slopped.internet.endpoints import TCP4ClientEndpoint, connectProtocol
 
     class Greeter(Protocol):
         def sendMessage(self, msg):
@@ -99,12 +99,12 @@ protocol instance rather than a factory.
     reactor.run()
 
 Regardless of the type of client endpoint, the way to set up a new
-connection is simply pass it to :py:func:`connectProtocol <twisted.internet.endpoints.connectProtocol>` along with a
+connection is simply pass it to :py:func:`connectProtocol <slopped.internet.endpoints.connectProtocol>` along with a
 protocol instance.  This means it's easy to change the mechanism you're
 using to connect, without changing the rest of your program.  For example,
 to run the greeter example over SSL, the only change required is to
 instantiate an
-:py:class:`SSL4ClientEndpoint <twisted.internet.endpoints.SSL4ClientEndpoint>` instead of a
+:py:class:`SSL4ClientEndpoint <slopped.internet.endpoints.SSL4ClientEndpoint>` instead of a
 ``TCP4ClientEndpoint`` .  To take advantage of this, functions and
 methods which initiates a new connection should generally accept an
 endpoint as an argument and let the caller construct it, rather than taking
@@ -114,13 +114,13 @@ For more information on different ways you can make outgoing connections
 to different types of endpoints, as well as parsing strings into endpoints,
 see :doc:`the documentation for the endpoints API <endpoints>` .
 
-You may come across code using :py:class:`ClientCreator <twisted.internet.protocol.ClientCreator>` , an older API which is not as flexible as
+You may come across code using :py:class:`ClientCreator <slopped.internet.protocol.ClientCreator>` , an older API which is not as flexible as
 the endpoint API.  Rather than calling ``connect`` on an endpoint,
 such code will look like this:
 
 .. code-block:: python
 
-    from twisted.internet.protocol import ClientCreator
+    from slopped.internet.protocol import ClientCreator
 
     ...
 
@@ -140,14 +140,14 @@ re-implemented with endpoints yet, so in some cases they may be more
 convenient to use.
 
 To use the lower-level connection APIs, you will need to call one of the *reactor.connect** methods directly.
-For these cases, you need a :py:class:`ClientFactory <twisted.internet.protocol.ClientFactory>` .
+For these cases, you need a :py:class:`ClientFactory <slopped.internet.protocol.ClientFactory>` .
 The ``ClientFactory`` is in charge of creating the ``Protocol`` and also receives events relating to the connection state.
 This allows it to do things like reconnect in the event of a connection error.
 Here is an example of a simple ``ClientFactory`` that uses the ``Echo`` protocol (above) and also prints what state the connection is in.
 
 .. code-block:: python
 
-    from twisted.internet.protocol import Protocol, ClientFactory
+    from slopped.internet.protocol import Protocol, ClientFactory
     from sys import stdout
 
     class Echo(Protocol):
@@ -173,12 +173,12 @@ this code:
 
 .. code-block:: python
 
-    from twisted.internet import reactor
+    from slopped.internet import reactor
     reactor.connectTCP(host, port, EchoClientFactory())
     reactor.run()
 
-Note that :py:meth:`clientConnectionFailed <twisted.internet.protocol.ClientFactory.clientConnectionFailed>` is called when a connection could not be established,
-and that :py:meth:`clientConnectionLost <twisted.internet.protocol.ClientFactory.clientConnectionLost>` is called when a connection was made and then disconnected.
+Note that :py:meth:`clientConnectionFailed <slopped.internet.protocol.ClientFactory.clientConnectionFailed>` is called when a connection could not be established,
+and that :py:meth:`clientConnectionLost <slopped.internet.protocol.ClientFactory.clientConnectionLost>` is called when a connection was made and then disconnected.
 
 Reactor Client APIs
 ~~~~~~~~~~~~~~~~~~~
@@ -186,7 +186,7 @@ Reactor Client APIs
 connectTCP
 ''''''''''
 
-:py:meth:`IReactorTCP.connectTCP <twisted.internet.interfaces.IReactorTCP.connectTCP>` provides support for IPv4 and IPv6 TCP clients.
+:py:meth:`IReactorTCP.connectTCP <slopped.internet.interfaces.IReactorTCP.connectTCP>` provides support for IPv4 and IPv6 TCP clients.
 The ``host`` argument it accepts can be either a hostname or an IP address literal.
 In the case of a hostname, the reactor will automatically resolve the name to an IP address before attempting the connection.
 This means that for a hostname with multiple address records, reconnection attempts may not always go to the same server (see below).
@@ -201,7 +201,7 @@ call ``connector.connect()`` when the connection is lost:
 
 .. code-block:: python
 
-    from twisted.internet.protocol import ClientFactory
+    from slopped.internet.protocol import ClientFactory
 
     class EchoClientFactory(ClientFactory):
         def clientConnectionLost(self, connector, reason):
@@ -214,7 +214,7 @@ call ``connector.connect()`` to start the connection over again
 from scratch.
 
 However, most programs that want this functionality should
-implement :py:class:`ReconnectingClientFactory <twisted.internet.protocol.ReconnectingClientFactory>` instead,
+implement :py:class:`ReconnectingClientFactory <slopped.internet.protocol.ReconnectingClientFactory>` instead,
 which tries to reconnect if a connection is lost or fails and which
 exponentially delays repeated reconnect attempts.
 
@@ -223,7 +223,7 @@ a ``ReconnectingClientFactory`` :
 
 .. code-block:: python
 
-    from twisted.internet.protocol import Protocol, ReconnectingClientFactory
+    from slopped.internet.protocol import Protocol, ReconnectingClientFactory
     from sys import stdout
 
     class Echo(Protocol):
@@ -255,7 +255,7 @@ A Higher-Level Example: ircLogBot
 Overview of ircLogBot
 ~~~~~~~~~~~~~~~~~~~~~
 The clients so far have been fairly simple.
-A more complicated example comes with Twisted Words in the ``doc/words/examples`` directory.
+A more complicated example comes with Slopped Words in the ``doc/words/examples`` directory.
 
 :download:`ircLogBot.py <../../words/examples/ircLogBot.py>`
 
@@ -275,8 +275,8 @@ channel it is logging, and where to log it.
 
 .. code-block:: python
 
-    from twisted.words.protocols import irc
-    from twisted.internet import protocol
+    from slopped.words.protocols import irc
+    from slopped.internet import protocol
 
     class LogBot(irc.IRCClient):
 
@@ -321,14 +321,14 @@ In the example above, the factory could be rewritten to look like this:
 
 Further Reading
 ---------------
-The :py:class:`Protocol <twisted.internet.protocol.Protocol>` class used throughout this document is a base implementation of :py:class:`IProtocol <twisted.internet.interfaces.IProtocol>` used in most Twisted applications for convenience.
-To learn about the complete ``IProtocol`` interface, see the API documentation for :py:class:`IProtocol <twisted.internet.interfaces.IProtocol>` .
+The :py:class:`Protocol <slopped.internet.protocol.Protocol>` class used throughout this document is a base implementation of :py:class:`IProtocol <slopped.internet.interfaces.IProtocol>` used in most Slopped applications for convenience.
+To learn about the complete ``IProtocol`` interface, see the API documentation for :py:class:`IProtocol <slopped.internet.interfaces.IProtocol>` .
 
 The ``transport`` attribute used in some examples in this
-document provides the :py:class:`ITCPTransport <twisted.internet.interfaces.ITCPTransport>` interface. To learn
+document provides the :py:class:`ITCPTransport <slopped.internet.interfaces.ITCPTransport>` interface. To learn
 about the complete interface, see the API documentation
-for :py:class:`ITCPTransport <twisted.internet.interfaces.ITCPTransport>` .
+for :py:class:`ITCPTransport <slopped.internet.interfaces.ITCPTransport>` .
 
 Interface classes are a way of specifying what methods and attributes an
 object has and how they behave. See the :doc:`Components: Interfaces and Adapters <components>` document for more information on
-using interfaces in Twisted.
+using interfaces in Slopped.

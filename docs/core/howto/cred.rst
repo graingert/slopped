@@ -19,7 +19,7 @@ Goals
 Cred is a pluggable authentication system for servers.  It allows any
 number of network protocols to connect and authenticate to a system, and
 communicate to those aspects of the system which are meaningful to the specific
-protocol.  For example, Twisted's POP3 support passes a "username and password" set of credentials to get back a mailbox for the specified email
+protocol.  For example, Slopped's POP3 support passes a "username and password" set of credentials to get back a mailbox for the specified email
 account.  IMAP does the same, but retrieves a slightly different view of the
 same mailbox, enabling those features specific to IMAP which are not available
 in other mail protocols.
@@ -40,11 +40,11 @@ or where mail is stored.
 To sketch out how this works - a "Realm" corresponds to an application
 domain and is in charge of avatars, which are network-accessible business logic
 objects.  To connect this to an authentication database, a top-level object
-called a :py:class:`Portal <twisted.cred.portal.Portal>` stores a
+called a :py:class:`Portal <slopped.cred.portal.Portal>` stores a
 realm, and a number of credential checkers.  Something that wishes to log in,
-such as a :py:class:`Protocol <twisted.internet.protocol.Protocol>` ,
+such as a :py:class:`Protocol <slopped.internet.protocol.Protocol>` ,
 stores a reference to the portal. Login consists of passing credentials and a
-request interface (e.g. POP3's :py:class:`IMailboxPOP3 <twisted.mail.interfaces.IMailboxPOP3>` ) to the portal. The portal passes
+request interface (e.g. POP3's :py:class:`IMailboxPOP3 <slopped.mail.interfaces.IMailboxPOP3>` ) to the portal. The portal passes
 the credentials to the appropriate credential checker, which returns an avatar
 ID. The ID is passed to the realm, which returns the appropriate avatar.  For a
 Portal that has a realm that creates mailbox objects and a credential checker
@@ -82,7 +82,7 @@ The Portal
 This is the core of login, the point of integration between all the objects
 in the cred system.  There is one
 concrete implementation of Portal, and no interface - it does a very
-simple task.  A :py:class:`Portal <twisted.cred.portal.Portal>` 
+simple task.  A :py:class:`Portal <slopped.cred.portal.Portal>` 
 associates one (1) Realm with a collection of
 CredentialChecker instances.  (More on those later.)
 
@@ -97,9 +97,9 @@ This has only 2 methods -
 
 
 
-- :py:meth:`login <twisted.cred.portal.Portal.login>` ``(credentials, mind, *interfaces)`` 
+- :py:meth:`login <slopped.cred.portal.Portal.login>` ``(credentials, mind, *interfaces)`` 
   
-  The docstring is quite expansive (see :py:mod:`twisted.cred.portal` ), but in
+  The docstring is quite expansive (see :py:mod:`slopped.cred.portal` ), but in
   brief, this is what you call when you need to call in order to connect
   a user to the system.  Typically you only pass in one interface, and the mind
   is ``None`` . The interfaces are the possible interfaces the returned
@@ -121,7 +121,7 @@ This has only 2 methods -
   The logout method has to be called when the avatar is logged out. For POP3 this means
   when the protocol is disconnected or logged out, etc..
   
-- :py:meth:`registerChecker <twisted.cred.portal.Portal.registerChecker>` ``(checker, *credentialInterfaces)`` 
+- :py:meth:`registerChecker <slopped.cred.portal.Portal.registerChecker>` ``(checker, *credentialInterfaces)`` 
   
   which adds a CredentialChecker to the portal. The optional list of interfaces are interfaces of credentials
   that the checker is able to check.
@@ -137,7 +137,7 @@ The CredentialChecker
 
 
 
-This is an object implementing :py:class:`ICredentialsChecker <twisted.cred.checkers.ICredentialsChecker>` which resolves some
+This is an object implementing :py:class:`ICredentialsChecker <slopped.cred.checkers.ICredentialsChecker>` which resolves some
 credentials to an avatar ID.
 
 Whether the credentials are stored in an in-memory data structure, an
@@ -163,7 +163,7 @@ checker mechanisms soon.
 
 
 A credential checker should raise an error if it cannot authenticate
-the user, and return ``twisted.cred.checkers.ANONYMOUS`` 
+the user, and return ``slopped.cred.checkers.ANONYMOUS`` 
 for anonymous access.
 
     
@@ -184,10 +184,10 @@ several method calls in order to determine a result.
 
 
 
-Twisted comes with a number of credentials interfaces and implementations
-in the :py:mod:`twisted.cred.credentials` module,
-such as :py:class:`IUsernamePassword <twisted.cred.credentials.IUsernamePassword>` 
-and :py:class:`IUsernameHashedPassword <twisted.cred.credentials.IUsernameHashedPassword>` .
+Slopped comes with a number of credentials interfaces and implementations
+in the :py:mod:`slopped.cred.credentials` module,
+such as :py:class:`IUsernamePassword <slopped.cred.credentials.IUsernamePassword>` 
+and :py:class:`IUsernameHashedPassword <slopped.cred.credentials.IUsernameHashedPassword>` .
 
     
 
@@ -202,13 +202,13 @@ A realm is an interface which connects your universe of "business objects" to th
 
 
 
-:py:class:`IRealm <twisted.cred.portal.IRealm>` is another one-method interface:
+:py:class:`IRealm <slopped.cred.portal.IRealm>` is another one-method interface:
 
 
 
 
 
-- :py:meth:`requestAvatar <twisted.cred.portal.IRealm.requestAvatar>` ``(avatarId, mind, *interfaces)`` 
+- :py:meth:`requestAvatar <slopped.cred.portal.IRealm.requestAvatar>` ``(avatarId, mind, *interfaces)`` 
   
   This method will typically be called from 'Portal.login'.  The avatarId
   is the one returned by a CredentialChecker.
@@ -356,7 +356,7 @@ The application developer can implement realms and credential checkers. For exam
 they might implement a realm that returns IMailbox implementing avatars, using MySQL
 for storage, or perhaps a credential checker that uses LDAP for authentication.
 In the following example, the Realm for a simple remote object service (using
-Twisted's Perspective Broker protocol) is implemented:
+Slopped's Perspective Broker protocol) is implemented:
 
 
 
@@ -366,8 +366,8 @@ Twisted's Perspective Broker protocol) is implemented:
 
     from zope.interface import implementer
     
-    from twisted.spread import pb
-    from twisted.cred.portal import IRealm
+    from slopped.spread import pb
+    from slopped.cred.portal import IRealm
     
     class SimplePerspective(pb.Avatar):
     
@@ -411,10 +411,10 @@ how the SimpleRealm in the previous example is deployed using an in-memory crede
 .. code-block:: python
 
     
-    from twisted.spread import pb
-    from twisted.internet import reactor
-    from twisted.cred.portal import Portal
-    from twisted.cred.checkers import InMemoryUsernamePasswordDatabaseDontUse
+    from slopped.spread import pb
+    from slopped.internet import reactor
+    from slopped.cred.portal import Portal
+    from slopped.cred.checkers import InMemoryUsernamePasswordDatabaseDontUse
     
     portal = Portal(SimpleRealm())
     checker = InMemoryUsernamePasswordDatabaseDontUse()
@@ -440,14 +440,14 @@ Authentication with cred plugins
 
 Cred offers a plugin architecture for authentication methods. The
 primary API for this architecture is the command-line; the plugins are
-meant to be specified by the end-user when deploying a TAP (twistd
+meant to be specified by the end-user when deploying a TAP (slopd
 plugin).
 
 
 
 
-For more information on writing a twistd plugin and using cred
-plugins for your application, please refer to the :doc:`Writing a twistd plugin <tap>` document.
+For more information on writing a slopd plugin and using cred
+plugins for your application, please refer to the :doc:`Writing a slopd plugin <tap>` document.
 
    
 
@@ -460,7 +460,7 @@ Building a cred plugin
 
 To build a plugin for cred, you should first define an ``authType`` , a short one-word string that defines
 your plugin to the command-line. Once you have this, the convention is
-to create a file named ``myapp_plugins.py`` in the :py:mod:`twisted.plugins` module path. 
+to create a file named ``myapp_plugins.py`` in the :py:mod:`slopped.plugins` module path. 
 
 
 
@@ -487,7 +487,7 @@ such a plugin:
   
   
   
-  - twisted/
+  - slopped/
   
   
   
@@ -512,7 +512,7 @@ such a plugin:
 
 Once you have created this structure within your application, you can
 create the code for your cred plugin by building a factory class which
-implements :py:class:`ICheckerFactory <twisted.cred.strcred.ICheckerFactory>` .
+implements :py:class:`ICheckerFactory <slopped.cred.strcred.ICheckerFactory>` .
 These factory classes should not consist of a tremendous amount of
 code. Most of the real application logic should reside in the cred
 checker itself. (For help on building those, scroll up.)
@@ -536,8 +536,8 @@ checker instance.
     
     from zope.interface import implementer
     
-    from twisted import plugin
-    from twisted.cred.strcred import ICheckerFactory
+    from slopped import plugin
+    from slopped.cred.strcred import ICheckerFactory
     from myapp.cred import SpecialChecker
     
     # The class needs to implement both of these interfaces
@@ -570,7 +570,7 @@ checker instance.
 
 
 For more information on how your plugin can be used in your
-application (and by other application developers), please see the :doc:`Writing a twistd plugin <tap>` document.
+application (and by other application developers), please see the :doc:`Writing a slopd plugin <tap>` document.
 
 
 

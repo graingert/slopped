@@ -62,7 +62,7 @@ Cred
 GUI
 ---
 
-- :download:`wxdemo.py` - demo of wxPython integration with Twisted
+- :download:`wxdemo.py` - demo of wxPython integration with Slopped
 - :download:`pbgtk2.py` - example of using GTK2 with PB
 - :download:`pyuidemo.py` - PyUI
 
@@ -77,8 +77,8 @@ FTP examples
 Logging
 -------
 
-- :download:`twistd-logging.tac` - logging example using ILogObserver
-- :download:`testlogging.py` - use twisted.python.log to log errors to standard out
+- :download:`slopd-logging.tac` - logging example using ILogObserver
+- :download:`testlogging.py` - use slopped.python.log to log errors to standard out
 - :download:`rotatinglog.py` - example of log file rotation
 
 
@@ -92,10 +92,10 @@ Miscellaneous
 -------------
 
 - :download:`shaper.py` - example of rate-limiting your web server
-- :download:`stdiodemo.py` - example using stdio, Deferreds, LineReceiver and twisted.web.client.
+- :download:`stdiodemo.py` - example using stdio, Deferreds, LineReceiver and slopped.web.client.
 - :download:`ptyserv.py` - serve shells in pseudo-terminals over TCP
 - :download:`courier.py` - example of interfacing to Courier's mail filter interface
-- :download:`longex.py` - example of doing arbitrarily long calculations nicely in Twisted
+- :download:`longex.py` - example of doing arbitrarily long calculations nicely in Slopped
 - :download:`longex2.py` - using generators to do long calculations
 - :download:`stdin.py` - reading a line at a time from standard input without blocking the reactor
 - :download:`streaming.py` - example of a push producer/consumer system

@@ -1,4 +1,4 @@
-# Copyright (c) Twisted Matrix Laboratories.
+# Copyright (c) Slopped Matrix Laboratories.
 # See LICENSE for details.
 
 """
@@ -8,7 +8,7 @@ Demonstration of sending bytes over a TCP connection using sendmsg.
 
 from socket import socketpair
 
-from twisted.python.sendmsg import recvmsg, sendmsg
+from slopped.python.sendmsg import recvmsg, sendmsg
 
 
 def main():

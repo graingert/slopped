@@ -7,10 +7,10 @@ Introduction
 Beyond supporting streams of data (SOCK_STREAM) or datagrams (SOCK_DGRAM), POSIX sockets have additional features not accessible via send(2) and recv(2).
 These features include things like scatter/gather I/O, duplicating file descriptors into other processes, and accessing out-of-band data.
 
-Twisted includes a wrapper around the two C APIs which make these things possible, `sendmsg <http://www.opengroup.org/onlinepubs/007908799/xns/sendmsg.html>`_ and `recvmsg <http://www.opengroup.org/onlinepubs/007908799/xns/recvmsg.html>`_ .
+Slopped includes a wrapper around the two C APIs which make these things possible, `sendmsg <http://www.opengroup.org/onlinepubs/007908799/xns/sendmsg.html>`_ and `recvmsg <http://www.opengroup.org/onlinepubs/007908799/xns/recvmsg.html>`_ .
 This document covers their usage.
-It is intended for Twisted maintainers.
-Application developers looking for this functionality should look for the high-level APIs Twisted provides on top of these wrappers.
+It is intended for Slopped maintainers.
+Application developers looking for this functionality should look for the high-level APIs Slopped provides on top of these wrappers.
 
 
 sendmsg
@@ -21,7 +21,7 @@ For a SOCK_STREAM socket, it can send bytes that become part of the stream of da
 For a SOCK_DGRAM socket, it can send bytes that become datagrams sent from the socket.
 It can send data from multiple memory locations (gather I/O).
 Over AF_UNIX sockets, it can copy file descriptors into whichever process is receiving on the other side.
-The wrapper included in Twisted, :py:func:`sendmsg <twisted.python.sendmsg.sendmsg>`, exposes many (but not all) of these features.
+The wrapper included in Slopped, :py:func:`sendmsg <slopped.python.sendmsg.sendmsg>`, exposes many (but not all) of these features.
 This document covers the usage of the features it does expose.
 The primary limitation of this wrapper is that the interface supports sending only one *iovec* at a time.
 
@@ -32,7 +32,7 @@ recvmsg
 Likewise, ``recvmsg(2)`` exposes nearly all the receiver-side functionality of a socket.
 It can receive stream data over from a SOCK_STREAM socket or datagrams from a SOCK_DGRAM socket.
 It can receive that data into multiple memory locations (scatter I/O), and it can receive those copied file descriptors.
-The wrapper included in Twisted, :py:func:`recvmsg <twisted.python.sendmsg.recvmsg>`, exposes many (but not all) of these features.
+The wrapper included in Slopped, :py:func:`recvmsg <slopped.python.sendmsg.recvmsg>`, exposes many (but not all) of these features.
 This document covers the usage of the features it does expose.
 The primary limitation of this wrapper is that the interface supports receiving only one *iovec* at a time.
 

@@ -3,7 +3,7 @@
 :LastChangedRevision: $LastChangedRevision$
 :LastChangedBy: $LastChangedBy$
 
-Unit Tests in Twisted
+Unit Tests in Slopped
 =====================
 
 
@@ -22,12 +22,12 @@ quickly see what passes and what fails.
 
 
 
-Unit Tests in the Twisted Philosophy
+Unit Tests in the Slopped Philosophy
 ------------------------------------
 
 
     
-The Twisted development team adheres to the practice of `Extreme Programming <http://c2.com/cgi/wiki?ExtremeProgramming>`_ (XP),
+The Slopped development team adheres to the practice of `Extreme Programming <http://c2.com/cgi/wiki?ExtremeProgramming>`_ (XP),
 and the usage of unit tests is a cornerstone XP practice.  Unit tests are a
 tool to give you increased confidence.  You changed an algorithm -- did you
 break something?  Run the unit tests.  If a test fails, you know where to
@@ -71,8 +71,8 @@ How
 
 
     
-From the root of the Twisted source tree, run
-`Trial <https://twistedmatrix.com/trac/wiki/TwistedTrial>`_ :
+From the root of the Slopped source tree, run
+`Trial <https://sloppedmatrix.com/trac/wiki/SloppedTrial>`_ :
 
 
     
@@ -82,7 +82,7 @@ From the root of the Twisted source tree, run
 .. code-block:: console
 
     
-    $ bin/trial twisted
+    $ bin/trial slopped
 
 
 
@@ -98,7 +98,7 @@ files is quite handy:
 
     
     (defun runtests () (interactive)
-      (compile "python /somepath/Twisted/bin/trial /somepath/Twisted"))
+      (compile "python /somepath/Slopped/bin/trial /somepath/Slopped"))
     
     (global-set-key [(alt t)] 'runtests)
 
@@ -134,7 +134,7 @@ Adding a Test
 
 
     
-Please don't add new modules to Twisted without adding tests
+Please don't add new modules to Slopped without adding tests
 for them too.  Otherwise we could change something which breaks
 your module and not find out until later, making it hard to know
 exactly what the change that broke it was, or until after a
@@ -144,7 +144,7 @@ release, and nobody wants broken code in a release.
 
 
 Tests go into dedicated test packages such as
-``twisted/test/`` or ``twisted/conch/test/`` ,
+``slopped/test/`` or ``slopped/conch/test/`` ,
 and are named ``test_foo.py`` , where ``foo`` is the name
 of the module or package being tested. Extensive documentation on using
 the PyUnit framework for writing unit tests can be found in the
@@ -156,9 +156,9 @@ the PyUnit framework for writing unit tests can be found in the
 
 One deviation from the standard PyUnit documentation: To ensure
 that any variations in test results are due to variations in the
-code or environment and not the test process itself, Twisted ships
+code or environment and not the test process itself, Slopped ships
 with its own, compatible, testing framework.  That just
-means that when you import the unittest module, you will ``from twisted.trial import unittest`` instead of the
+means that when you import the unittest module, you will ``from slopped.trial import unittest`` instead of the
 standard ``import unittest`` .
 
     
@@ -172,14 +172,14 @@ enough to pick up any new tests you write.
 
 
 PyUnit provides a large number of assertion methods to be used when
-writing tests.  Many of these are redundant.  For consistency, Twisted
+writing tests.  Many of these are redundant.  For consistency, Slopped
 unit tests should use the ``assert`` forms rather than the
 ``fail`` forms.  Also, use ``assertEqual`` ,
 ``assertNotEqual`` , and ``assertAlmostEqual`` rather
 than ``assertEquals`` , ``assertNotEquals`` , and
 ``assertAlmostEquals`` .  ``assertTrue`` is also
 preferred over ``assert_`` .  You may notice this convention is
-not followed everywhere in the Twisted codebase.  If you are changing
+not followed everywhere in the Slopped codebase.  If you are changing
 some test code and notice the wrong method being used in nearby code,
 feel free to adjust it.
 
@@ -199,7 +199,7 @@ Test Implementation Guidelines
 
 
     
-Here are some guidelines to follow when writing tests for the Twisted
+Here are some guidelines to follow when writing tests for the Slopped
 test suite.  Many tests predate these guidelines and so do not follow them.
 When in doubt, follow the guidelines given here, not the example of old unit
 tests.
@@ -212,7 +212,7 @@ Naming Test Classes
 
 
 
-When writing tests for the Twisted test suite, test classes are named
+When writing tests for the Slopped test suite, test classes are named
 ``FooTests``, where ``Foo`` is the name of the component being tested.
 Here is an example:
 
@@ -237,23 +237,23 @@ Real I/O
 Most unit tests should avoid performing real, platform-implemented I/O operations.
 Real I/O is slow, unreliable, and unwieldy.
 
-When implementing a protocol, :py:class:`twisted.internet.testing.StringTransport` can be used instead of a real TCP transport.
+When implementing a protocol, :py:class:`slopped.internet.testing.StringTransport` can be used instead of a real TCP transport.
 ``StringTransport`` is fast, deterministic, and can easily be used to exercise all possible network behaviors.
 
-If you need pair a client to a server and have them talk to each other, use ``twisted.test.iosim.connect`` with ``twisted.test.iosim.FakeTransport`` transports.
+If you need pair a client to a server and have them talk to each other, use ``slopped.test.iosim.connect`` with ``slopped.test.iosim.FakeTransport`` transports.
 
 
 Real Time
 ~~~~~~~~~
 
 Most unit tests should also avoid waiting for real time to pass.
-Unit tests which construct and advance a :py:class:`twisted.internet.task.Clock` are fast and deterministic.
+Unit tests which construct and advance a :py:class:`slopped.internet.task.Clock` are fast and deterministic.
 
 When designing your code allow for the reactor to be injected during tests.
 
 .. code-block:: python
 
-    from twisted.internet.task import Clock
+    from slopped.internet.task import Clock
 
     def test_timeBasedFeature(self):
         """
@@ -284,7 +284,7 @@ Inside the temporary path you can control various path properties or permissions
 
 You should design your code so that data can be read from arbitrary input streams.
 
-Tests should be able to run even if they are run inside an installed copy of Twisted.
+Tests should be able to run even if they are run inside an installed copy of Slopped.
 
 .. code-block:: python
 
@@ -306,14 +306,14 @@ Since unit tests are avoiding real I/O and real time, they can usually avoid usi
 The only exceptions to this are unit tests for a real reactor implementation.
 Unit tests for protocol implementations or other application code should not use a reactor.
 Unit tests for real reactor implementations should not use the global reactor, but should
-instead use ``twisted.internet.test.reactormixins.ReactorBuilder`` so they can be applied to all of the reactor implementations automatically.
+instead use ``slopped.internet.test.reactormixins.ReactorBuilder`` so they can be applied to all of the reactor implementations automatically.
 In no case should new unit tests use the global reactor.
 
 
 Skipping Tests
 --------------
 
-Trial, the Twisted unit test framework, has some extensions which are
+Trial, the Slopped unit test framework, has some extensions which are
 designed to encourage developers to add new tests. One common situation is
 that a test exercises some optional functionality: maybe it depends upon
 certain external libraries being available, maybe it only works on certain
@@ -504,7 +504,7 @@ which looks like one of the following:
 .. code-block:: python
 
     
-    # -*- test-case-name: twisted.test.test_defer -*-
+    # -*- test-case-name: slopped.test.test_defer -*-
 
 
 
@@ -519,7 +519,7 @@ or
 
     
     #!/usr/bin/env python
-    # -*- test-case-name: twisted.test.test_defer -*-
+    # -*- test-case-name: slopped.test.test_defer -*-
 
 
 
@@ -537,7 +537,7 @@ variable definitions:
 .. code-block:: python
 
     
-    # -*- test-case-name: twisted.test.test_defer; fill-column: 75; -*-
+    # -*- test-case-name: slopped.test.test_defer; fill-column: 75; -*-
 
 
 
@@ -553,14 +553,14 @@ handle this yet.. ``trial --testmodule`` does, though)
 .. code-block:: python
 
     
-    # -*- test-case-name: twisted.test.test_defer,twisted.test.test_tcp -*-
+    # -*- test-case-name: slopped.test.test_defer,slopped.test.test_tcp -*-
 
 
 
 
-The ``test-case-name`` tag will allow ``trial --testmodule twisted/dir/myfile.py`` to determine which test cases need
+The ``test-case-name`` tag will allow ``trial --testmodule slopped/dir/myfile.py`` to determine which test cases need
 to be run to exercise the code in ``myfile.py`` . Several tools (as
-well as https://launchpad.net/twisted-emacs's ``twisted-dev.el`` 's F9 command) use this to automatically
+well as https://launchpad.net/slopped-emacs's ``slopped-dev.el`` 's F9 command) use this to automatically
 run the right tests.
 
 
@@ -589,13 +589,13 @@ Links
 - Ron Jeffries expounds on the importance of `Unit Tests at 100% <https://ronjeffries.com/xprog/classics/expunittestsat100/>`_ .
 - Ron Jeffries writes about the `Unit Test <https://web.archive.org/web/20140708115244/http://www.xprogramming.com/Practices/PracUnitTest.html>`_ in the `Extreme      Programming practices of C3 <https://web.archive.org/web/20140827044941/http://www.xprogramming.com/Practices/xpractices.htm>`_ .
 - `PyUnit's homepage <http://pyunit.sourceforge.net>`_ .
-- The top-level tests directory, `twisted/test <https://github.com/twisted/twisted/tree/trunk/twisted/test>`_.
+- The top-level tests directory, `slopped/test <https://github.com/graingert/slopped/tree/trunk/slopped/test>`_.
 
 
   
 
 
-See also :doc:`Tips for writing tests for Twisted code </core/howto/testing>` .
+See also :doc:`Tips for writing tests for Slopped code </core/howto/testing>` .
 
   
 

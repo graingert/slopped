@@ -10,14 +10,14 @@ Asynchronous Responses (via Deferred)
 
 
 
-The previous example had a :py:class:`Resource <twisted.web.resource.Resource>` that generates its response
+The previous example had a :py:class:`Resource <slopped.web.resource.Resource>` that generates its response
 asynchronously rather than immediately upon the call to its render
 method. Though it was a useful demonstration of the ``NOT_DONE_YET`` 
-feature of Twisted Web, the example didn't reflect what a realistic application
-might want to do. This example introduces :py:class:`Deferred <twisted.internet.defer.Deferred>` , the Twisted class which is used
+feature of Slopped Web, the example didn't reflect what a realistic application
+might want to do. This example introduces :py:class:`Deferred <slopped.internet.defer.Deferred>` , the Slopped class which is used
 to provide a uniform interface to many asynchronous events, and shows you an
 example of using a ``Deferred`` -returning API to generate an
-asynchronous response to a request in Twisted Web.
+asynchronous response to a request in Slopped Web.
 
 
 
@@ -31,11 +31,11 @@ object once it does exist. It also needs a way to define how to handle
 errors in the creation or acquisition of that object. These two needs
 are satisfied by the *callbacks* and *errbacks* of
 a ``Deferred`` . Callbacks are added to
-a ``Deferred`` with :py:meth:`Deferred.addCallback <twisted.internet.defer.Deferred.addCallback>` ; errbacks
-are added with :py:meth:`Deferred.addErrback <twisted.internet.defer.Deferred.addErrback>` . When the
-object finally does exist, it is passed to :py:meth:`Deferred.callback <twisted.internet.defer.Deferred.callback>` which passes it
+a ``Deferred`` with :py:meth:`Deferred.addCallback <slopped.internet.defer.Deferred.addCallback>` ; errbacks
+are added with :py:meth:`Deferred.addErrback <slopped.internet.defer.Deferred.addErrback>` . When the
+object finally does exist, it is passed to :py:meth:`Deferred.callback <slopped.internet.defer.Deferred.callback>` which passes it
 on to the callback added with ``addCallback`` . Similarly, if
-an error occurs, :py:meth:`Deferred.errback <twisted.internet.defer.Deferred.errback>` is called and
+an error occurs, :py:meth:`Deferred.errback <slopped.internet.defer.Deferred.errback>` is called and
 the error is passed along to the errback added
 with ``addErrback`` . Second, the events that make
 asynchronous code actually work often take many different,
@@ -55,7 +55,7 @@ API. It does exactly the same thing as the :doc:`previous example <asynchronous>
 
 
 
-First, the example must import that new API that was just mentioned, :py:func:`deferLater <twisted.internet.task.deferLater>` :
+First, the example must import that new API that was just mentioned, :py:func:`deferLater <slopped.internet.task.deferLater>` :
 
 
 
@@ -64,7 +64,7 @@ First, the example must import that new API that was just mentioned, :py:func:`d
 .. code-block:: python
 
     
-    from twisted.internet.task import deferLater
+    from slopped.internet.task import deferLater
 
 
 
@@ -78,9 +78,9 @@ Next, all the other imports (these are the same as last time):
 .. code-block:: python
 
     
-    from twisted.web.resource import Resource
-    from twisted.web.server import NOT_DONE_YET
-    from twisted.internet import reactor
+    from slopped.web.resource import Resource
+    from slopped.web.server import NOT_DONE_YET
+    from slopped.internet import reactor
 
 
 
@@ -105,8 +105,8 @@ the code is identical to the previous version:
 
 
 Next we need to define the render method. Here's where things
-change a bit. Instead of using :py:meth:`callLater <twisted.internet.interfaces.IReactorTime.callLater>` ,
-We're going to use :py:func:`deferLater <twisted.internet.task.deferLater>` this
+change a bit. Instead of using :py:meth:`callLater <slopped.internet.interfaces.IReactorTime.callLater>` ,
+We're going to use :py:func:`deferLater <slopped.internet.task.deferLater>` this
 time. ``deferLater`` accepts a reactor, delay (in seconds, as
 with ``callLater`` ), and a function to call after the delay
 to produce that elusive object discussed in the description
@@ -188,10 +188,10 @@ Finally, here's the complete, uninterrupted example source, as an rpy script:
 .. code-block:: python
 
     
-    from twisted.internet.task import deferLater
-    from twisted.web.resource import Resource
-    from twisted.web.server import NOT_DONE_YET
-    from twisted.internet import reactor
+    from slopped.internet.task import deferLater
+    from slopped.web.resource import Resource
+    from slopped.web.server import NOT_DONE_YET
+    from slopped.internet import reactor
     
     class DelayedResource(Resource):
         def _delayedRender(self, request):

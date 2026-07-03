@@ -3,7 +3,7 @@
 
 import random
 
-from twisted.python import failure
+from slopped.python import failure
 
 random.seed(10050)
 O = [0, 20, 40, 60, 80, 10, 30, 50, 70, 90]

@@ -1,10 +1,10 @@
 """
-Benchmarks for L{twisted.internet.task}.
+Benchmarks for L{slopped.internet.task}.
 """
 
 from timer import timeit
 
-from twisted.internet import task
+from slopped.internet import task
 
 
 def test_performance():

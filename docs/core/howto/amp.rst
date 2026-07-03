@@ -9,7 +9,7 @@ Asynchronous Messaging Protocol Overview
 ========================================
 
 
-The purpose of this guide is to describe the uses for and usage of :py:mod:`twisted.protocols.amp` beyond what is explained in the API documentation.  It will show you how to implement an AMP server which can respond to commands or interact directly with individual messages.  It will also show you how to implement an AMP client which can issue commands to a server.
+The purpose of this guide is to describe the uses for and usage of :py:mod:`slopped.protocols.amp` beyond what is explained in the API documentation.  It will show you how to implement an AMP server which can respond to commands or interact directly with individual messages.  It will also show you how to implement an AMP client which can issue commands to a server.
 
     
 
@@ -25,7 +25,7 @@ Setting Up
 
 
     
-AMP runs over a stream-oriented connection-based protocol, such as TCP or SSL.  Before you can use any features of the AMP protocol, you need a connection.  The protocol class to use to establish an AMP connection is :py:class:`AMP <twisted.protocols.amp.AMP>` .  Connection setup works as it does for almost all protocols in Twisted.  For example, you can set up a listening AMP server using a server endpoint:
+AMP runs over a stream-oriented connection-based protocol, such as TCP or SSL.  Before you can use any features of the AMP protocol, you need a connection.  The protocol class to use to establish an AMP connection is :py:class:`AMP <slopped.protocols.amp.AMP>` .  Connection setup works as it does for almost all protocols in Slopped.  For example, you can set up a listening AMP server using a server endpoint:
 
     
 
@@ -53,7 +53,7 @@ Commands
 
 
     
-Either side of an AMP connection can issue a command to the other side.  Each kind of command is represented as a subclass of :py:class:`Command <twisted.protocols.amp.Command>` .  A ``Command`` defines arguments, response values, and error conditions.
+Either side of an AMP connection can issue a command to the other side.  Each kind of command is represented as a subclass of :py:class:`Command <slopped.protocols.amp.Command>` .  A ``Command`` defines arguments, response values, and error conditions.
 
     
 
@@ -61,7 +61,7 @@ Either side of an AMP connection can issue a command to the other side.  Each ki
 
 .. code-block:: python
 
-    from twisted.protocols.amp import Integer, String, Unicode, Command
+    from slopped.protocols.amp import Integer, String, Unicode, Command
     
     class UsernameUnavailable(Exception):
         pass
@@ -108,8 +108,8 @@ The logic for handling a command can be specified as an object separate from the
 
 .. code-block:: python
 
-    from twisted.protocols.amp import CommandLocator
-    from twisted.python.filepath import FilePath
+    from slopped.protocols.amp import CommandLocator
+    from slopped.python.filepath import FilePath
     
     class UsernameUnavailable(Exception):
         pass
@@ -164,7 +164,7 @@ AMP conversations consist of an exchange of messages called *boxes* .  A *box* c
 
     from zope.interface import implementer
     
-    from twisted.protocols.amp import IBoxReceiver
+    from slopped.protocols.amp import IBoxReceiver
     
     @implementer(IBoxReceiver)
     class BoxReflector(object):

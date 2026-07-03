@@ -2,7 +2,7 @@
 # version to make it easier to check the status inside GitHub UI.
 #
 # When using external actions check that the external repos are permitted via
-# the GitHub configuration at https://github.com/twisted/twisted/settings/actions
+# the GitHub configuration at https://github.com/graingert/slopped/settings/actions
 #
 name: CI
 
@@ -12,7 +12,7 @@ on:
      - trunk
      - release-*
     tags:
-      - twisted-*
+      - slopped-*
   pull_request:
     branches: [ trunk ]
 
@@ -194,7 +194,7 @@ jobs:
           # as there are test with specific code branches for pypy.
           - python-version: 'pypy3.11-v7.3.21'
             tox-env: 'nodeps-withcov-posix'
-            trial-target: '-- twisted.test.test_compat twisted.test.test_defer twisted.internet.test.test_socket twisted.trial.test.test_tests'
+            trial-target: '-- slopped.test.test_compat slopped.test.test_defer slopped.internet.test.test_socket slopped.trial.test.test_tests'
             job-name: 'with-coverage'
 
           # We run the full test suite with the GI reactor against an X virtual
@@ -216,7 +216,7 @@ jobs:
             job-name: 'nodeps-linux'
             # The arguments can be removed once trial tests are fixed.
             # https://github.com/twisted/twisted/issues/12645
-            trial-target: '-- twisted.application twisted.conch twisted.cred twisted.enterprise twisted.internet twisted.logger twisted.mail twisted.names twisted.pair twisted.persisted twisted.protocols twisted.python twisted.runner twisted.scripts twisted.spread twisted.test twisted.web twisted.words'
+            trial-target: '-- slopped.application slopped.conch slopped.cred slopped.enterprise slopped.internet slopped.logger slopped.mail slopped.names slopped.pair slopped.persisted slopped.protocols slopped.python slopped.runner slopped.scripts slopped.spread slopped.test slopped.web slopped.words'
 
           - python-version: '3.15.0-beta.1'
             tox-env: 'nodeps-withcov-posix'
@@ -224,7 +224,7 @@ jobs:
             runs-on: 'macos-14'
             # The arguments can be removed once trial tests are fixed.
             # https://github.com/twisted/twisted/issues/12645
-            trial-target: '-- twisted.application twisted.conch twisted.cred twisted.enterprise twisted.internet twisted.logger twisted.mail twisted.names twisted.pair twisted.persisted twisted.protocols twisted.python twisted.runner twisted.scripts twisted.spread twisted.test twisted.web twisted.words'
+            trial-target: '-- slopped.application slopped.conch slopped.cred slopped.enterprise slopped.internet slopped.logger slopped.mail slopped.names slopped.pair slopped.persisted slopped.protocols slopped.python slopped.runner slopped.scripts slopped.spread slopped.test slopped.web slopped.words'
 
     steps:
     - uses: actions/checkout@v6
@@ -251,7 +251,7 @@ jobs:
         sudo sysctl -w net.ipv6.conf.lo.disable_ipv6=1
         ip a
 
-    - uses: twisted/python-info-action@v1
+    - uses: slopped/python-info-action@v1
     - name: Install dependencies
       run: |
         openssl version
@@ -426,7 +426,7 @@ jobs:
         pytest \
           --benchmark-min-rounds 1 --benchmark-max-time 0.00001 \
           --benchmark-columns=rounds \
-          --cov benchmarks --cov twisted --cov-config=.coveragerc \
+          --cov benchmarks --cov slopped --cov-config=.coveragerc \
           --cov-report=xml \
           benchmarks
 
@@ -532,7 +532,7 @@ jobs:
         python -m pip install --upgrade pip 'tox>4'
         tox -e release-prepare
 
-    - uses: twisted/python-info-action@v1
+    - uses: slopped/python-info-action@v1
 
     - name: Files to be pushed to PyPi
       run: |
@@ -544,7 +544,7 @@ jobs:
         path: dist
 
     - name: Check matched tag version and branch version - on tag
-      if: startsWith(github.ref, 'refs/tags/twisted-')
+      if: startsWith(github.ref, 'refs/tags/slopped-')
       run: |
         python -m pip install pep517==0.13.1
         python admin/check_tag_version_match.py "${{ github.ref }}"
@@ -557,13 +557,13 @@ jobs:
   release-publish:
     needs:
       release-build
-    if: startsWith(github.ref, 'refs/tags/twisted-')
+    if: startsWith(github.ref, 'refs/tags/slopped-')
     environment:
       release
     permissions:
       # IMPORTANT: this permission is mandatory for trusted publishing
       id-token: write
-    name: publish on twisted-* tag
+    name: publish on slopped-* tag
     runs-on: ubuntu-latest
     steps:
     - uses: actions/download-artifact@v8

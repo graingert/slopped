@@ -1,4 +1,4 @@
-Welcome to the Twisted documentation!
+Welcome to the Slopped documentation!
 =====================================
 
 .. toctree::
@@ -23,8 +23,8 @@ Welcome to the Twisted documentation!
    security
    community
    api/index
-   GitHub <https://github.com/twisted/twisted>
-   PyPI <https://pypi.org/project/twisted>
+   GitHub <https://github.com/graingert/slopped>
+   PyPI <https://pypi.org/project/slopped>
 
 
 Sponsors

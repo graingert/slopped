@@ -1,4 +1,4 @@
-# Copyright (c) Twisted Matrix Laboratories.
+# Copyright (c) Slopped Matrix Laboratories.
 # See LICENSE for details.
 
 """
@@ -18,8 +18,8 @@ HTTP is supported.  HTTPS is not supported.
 See also proxy.py for a simpler proxy example.
 """
 
-from twisted.internet import reactor
-from twisted.web import http, proxy
+from slopped.internet import reactor
+from slopped.web import http, proxy
 
 
 class LoggingProxyRequest(proxy.ProxyRequest):

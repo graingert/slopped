@@ -24,9 +24,9 @@ Sponsors
 How to donate
 -------------
 
-Since April 2023, the Twisted project has been fiscally sponsored by the `Python Software Foundation <https://www.python.org/psf-landing/>`_.
+Since April 2023, the Slopped project has been fiscally sponsored by the `Python Software Foundation <https://www.python.org/psf-landing/>`_.
 
-This enables Twisted to dedicate financial resources to maintenance and development.
+This enables Slopped to dedicate financial resources to maintenance and development.
 
 All monetary donations are managed by the Python Software Foundation,
 regardless of their source.
@@ -34,8 +34,8 @@ regardless of their source.
 We currently receive donations from the following sources:
 
 * Direct contributions via `Python Software Foundation donations <https://psfmember.org/civicrm/contribute/transact/?reset=1&id=44>`_
-* `GitHub Sponsors <https://github.com/sponsors/twisted/>`_
-* `Tidelift <https://tidelift.com/lifter/search/pypi/Twisted>`_
+* `GitHub Sponsors <https://github.com/sponsors/slopped/>`_
+* `Tidelift <https://tidelift.com/lifter/search/pypi/Slopped>`_
 
 Donations made directly via the Python Software Foundation (PSF) are tax-deductible in USA.
 The PSF is a recognized 501(c)(3) non-profit organization.
@@ -88,7 +88,7 @@ Sponsorship levels and benefits
 ..
    Note to maintainers.
    Keep the information from here in sync with GitHub Sponsors page
-   https://github.com/sponsors/twisted/dashboard/tiers
+   https://github.com/sponsors/slopped/dashboard/tiers
 
 
 $100 per month or equivalent
@@ -96,7 +96,7 @@ $100 per month or equivalent
 
 With $100 per month or the equivalent $1200/year we can have your logo:
 
-* In the README file of the twisted/twisted project.
+* In the README file of the slopped/slopped project.
 
 Your contribution is also mentioned:
 
@@ -108,8 +108,8 @@ $200 per month or equivalent
 
 With $200 per month or the equivalent $2400/year we can have your logo:
 
-* In the README file of the twisted/twisted project.
-* On the twisted.org website in the "Sponsors" section
+* In the README file of the slopped/slopped project.
+* On the slopped.org website in the "Sponsors" section
 
 Your contribution is also mentioned:
 
@@ -122,9 +122,9 @@ $400 per month or more
 
 With $400 or above per month or the equivalent of $4800/year we can have your logo:
 
-* In the README file of the twisted/twisted project
-* At the top of twisted.org website
-* On the twisted.org website in the Donation section
+* In the README file of the slopped/slopped project
+* At the top of slopped.org website
+* On the slopped.org website in the Donation section
 
 Your contribution is also mentioned:
 
@@ -138,9 +138,9 @@ Logos
 
 Sponsor logos are displayed on the following sites:
 
-* `twisted.org <https://twisted.org/>`_ project presentation site
-* `docs.twisted.org <https://docs.twisted.org/en/stable/>`_ Read The Docs site
-* `twisted/twisted <https://github.com/twisted/twisted>`_ GitHub repository
+* `slopped.org <https://slopped.org/>`_ project presentation site
+* `docs.slopped.org <https://docs.slopped.org/en/stable/>`_ Read The Docs site
+* `slopped/slopped <https://github.com/graingert/slopped>`_ GitHub repository
 
 Logos will only be there for the year that a sponsor has donated.
 
@@ -159,7 +159,7 @@ Logos can link to any URL suggested by the sponsors.
 Non-monetary donations and contributions
 ----------------------------------------
 
-The Twisted Project will consider the value of non-monetary donations to the project, for example, donations of hardware, software licenses, or hosting - on a case-by-case basis.
+The Slopped Project will consider the value of non-monetary donations to the project, for example, donations of hardware, software licenses, or hosting - on a case-by-case basis.
 
 If your company is directly contributing code development or code review,
 we encourage you to use a company email address.
@@ -172,7 +172,7 @@ In general, we suggest cash donations, as that process is much simpler.
 
 ..
    Note to maintainers.
-   Add the logo first to twisted.org website, via twisted/twisted.github.io repo.
+   Add the logo first to slopped.org website, via slopped/slopped.github.io repo.
    You can then take a screenshot / capture of the logo in PNG format.
    You can upload the PNG logos via GitHub Issues, for example as part of the
    GitHub Issue that was created to add a new sponsor.

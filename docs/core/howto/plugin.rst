@@ -3,7 +3,7 @@
 :LastChangedRevision: $LastChangedRevision$
 :LastChangedBy: $LastChangedBy$
 
-The Twisted Plugin System
+The Slopped Plugin System
 =========================
 
 
@@ -11,12 +11,12 @@ The Twisted Plugin System
 
 
 The purpose of this guide is to describe the preferred way to
-write extensible Twisted applications (and consequently, also to
+write extensible Slopped applications (and consequently, also to
 describe how to extend applications written in such a way).  This
 extensibility is achieved through the definition of one or more
 APIs and a mechanism for collecting code plugins which
 implement this API to provide some additional functionality.
-At the base of this system is the :py:mod:`twisted.plugin` module.
+At the base of this system is the :py:mod:`slopped.plugin` module.
 
     
 
@@ -48,7 +48,7 @@ Writing Extensible Programs
 
 
     
-Taking advantage of :py:mod:`twisted.plugin` is
+Taking advantage of :py:mod:`slopped.plugin` is
 a two step process:
 
     
@@ -77,7 +77,7 @@ a two step process:
    
    
 #. 
-   At one or more places in your program, invoke :py:func:`twisted.plugin.getPlugins` and iterate over its
+   At one or more places in your program, invoke :py:func:`slopped.plugin.getPlugins` and iterate over its
    result.
 
 
@@ -151,7 +151,7 @@ The last piece of required code is that which collects
 .. code-block:: python
 
     
-    from twisted.plugin import getPlugins
+    from slopped.plugin import getPlugins
     from matsim import imatsim
     
     def displayAllKnownMaterials():
@@ -175,7 +175,7 @@ Extending an Existing Program
 
     
 The above code demonstrates how an extensible program might be
-written using Twisted's plugin system.  How do we write plugins
+written using Slopped's plugin system.  How do we write plugins
 for it, though?  Essentially, we create objects which provide the
 required interface and then make them available at a particular
 location.  Consider the following example.
@@ -188,7 +188,7 @@ location.  Consider the following example.
 
     
     from zope.interface import implementer
-    from twisted.plugin import IPlugin
+    from slopped.plugin import IPlugin
     from matsim import imatsim
     
     @implementer(IPlugin, imatsim.IMaterial)
@@ -207,18 +207,18 @@ location.  Consider the following example.
 
     
 ``steelPlate`` and ``brassPlate`` now provide both
-:py:class:`IPlugin <twisted.plugin.IPlugin>` and ``IMaterial`` .
+:py:class:`IPlugin <slopped.plugin.IPlugin>` and ``IMaterial`` .
 All that remains is to make this module available at an appropriate
 location. For this, there are two options. The first of these is
 primarily useful during development: if a directory which
 has been added to ``sys.path`` (typically by adding it to the
 ``PYTHONPATH`` environment variable) contains a
-*directory* named ``twisted/plugins/`` ,
+*directory* named ``slopped/plugins/`` ,
 each ``.py`` file in that directory will be loaded
 as a source of plugins.  This directory *must not* be a Python
 package: including ``__init__.py`` will cause the
 directory to be skipped and no plugins loaded from it.  Second, each
-module in the installed version of Twisted's ``twisted.plugins`` package will also be loaded as a source of
+module in the installed version of Slopped's ``slopped.plugins`` package will also be loaded as a source of
 plugins.
 
     
@@ -238,15 +238,15 @@ Alternate Plugin Packages
 
 
     
-:py:func:`getPlugins <twisted.plugin.getPlugins>` takes one
+:py:func:`getPlugins <slopped.plugin.getPlugins>` takes one
 additional argument not mentioned above.  If passed in, the 2nd argument
 should be a module or package to be used instead of
-``twisted.plugins`` as the plugin meta-package.  If you
-are writing a plugin for a Twisted interface, you should never
+``slopped.plugins`` as the plugin meta-package.  If you
+are writing a plugin for a Slopped interface, you should never
 need to pass this argument.  However, if you have developed an
 interface of your own, you may want to mandate that plugins for it
 are installed in your own plugins package, rather than in
-Twisted's.
+Slopped's.
 
     
 
@@ -262,7 +262,7 @@ the following lines.
 .. code-block:: python
 
     
-    from twisted.plugin import pluginPackagePaths
+    from slopped.plugin import pluginPackagePaths
     __path__.extend(pluginPackagePaths(__name__))
     __all__ = []
 
@@ -284,14 +284,14 @@ Plugin Caching
 
 
     
-In the course of using the Twisted plugin system, you may
+In the course of using the Slopped plugin system, you may
 notice ``dropin.cache`` files appearing at
 various locations.  These files are used to cache information
 about what plugins are present in the directory which contains
 them.  At times, this cached information may become out of date.
-Twisted uses the mtimes of various files involved in the plugin
+Slopped uses the mtimes of various files involved in the plugin
 system to determine when this cache may have become invalid.
-Twisted will try to re-write the cache each time it tries to use
+Slopped will try to re-write the cache each time it tries to use
 it but finds it out of date.
 
     
@@ -304,7 +304,7 @@ correct plugin information, they may run more slowly than they
 would if the cache was up to date, and they may also report
 exceptions if certain plugins have been removed but which the
 cache still references.  For these reasons, when installing or
-removing software which provides Twisted plugins, the site
+removing software which provides Slopped plugins, the site
 administrator should be sure the cache is regenerated.
 Well-behaved package managers for such software should take this
 task upon themselves, since it is trivially automatable.  The
@@ -318,7 +318,7 @@ Python code:
 .. code-block:: python
 
     
-    from twisted.plugin import IPlugin, getPlugins
+    from slopped.plugin import IPlugin, getPlugins
     list(getPlugins(IPlugin))
 
 

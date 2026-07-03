@@ -8,16 +8,16 @@ Report a security issue
 We take security very seriously.
 Your input and feedback on our security is always appreciated.
 
-You can send urgent or sensitive reports via `GitHub Security Advisory <https://github.com/twisted/twisted/security/advisories/new>`_.
+You can send urgent or sensitive reports via `GitHub Security Advisory <https://github.com/graingert/slopped/security/advisories/new>`_.
 
-If you prefer, you can send via email to <security@twistedmatrix.com>.
+If you prefer, you can send via email to <security@sloppedmatrix.com>.
 You may use our PGP public key if you wish.
 We will create a GitHub security advisory to coordinate a fix.
 Include your GitHub username so that we add you as a collaborator on the advisory.
 See `GHSA-c2jg-hw38-jrqq <https://github.com/twisted/twisted/security/advisories/GHSA-c2jg-hw38-jrqq>`_ for an example.
 We'll get back to you as soon as we can.
 
-Twisted is an all volunteer project and there may be some delay before we can respond.
+Slopped is an all volunteer project and there may be some delay before we can respond.
 
 Feel free to follow up if you think an unreasonable amount of time has elapsed without a response!
 
@@ -28,16 +28,16 @@ Consider subscribing to receive notification about the availability of a securit
 Security Procedure for Developers
 =================================
 
-The goal of the normal Twisted development procedure is to make all steps transparent and record all information at all times in a public location - either the issue tracker or a branch.
+The goal of the normal Slopped development procedure is to make all steps transparent and record all information at all times in a public location - either the issue tracker or a branch.
 
-The goal of the security variation of the Twisted development procedure is to keep track of progress resolving security issues while minimizing the window of time where information useful to attackers is available before a fix for the issue is available to Twisted users.
+The goal of the security variation of the Slopped development procedure is to keep track of progress resolving security issues while minimizing the window of time where information useful to attackers is available before a fix for the issue is available to Slopped users.
 
 This process is intended as a helpful recommendation.
 Elements of it may be followed more or less strictly depending on the severity of the issue in question:
 
 #. Begin by filing a ticket which does not describe the issue and simply says 'security issue, description pending' and has the 'security' keyword.
 
-#. Create a security advisory in GitHub using the `GitHub UI <https://github.com/twisted/twisted/security/advisories/new>`_.
+#. Create a security advisory in GitHub using the `GitHub UI <https://github.com/graingert/slopped/security/advisories/new>`_.
    This will trigger the creation of a private repository that can be use for developing a patch.
    This automatically created private repository is also used to review the PR in private.
 
@@ -67,7 +67,7 @@ Security fixes require unit tests, code review, etc.
 PGP key for email communication
 -------------------------------
 
-Below is the PGP key for security@twistedmatrix.com::
+Below is the PGP key for security@sloppedmatrix.com::
 
     -----BEGIN PGP PUBLIC KEY BLOCK-----
     Version: GnuPG v2.0.22 (Darwin)
@@ -438,7 +438,7 @@ Below is the PGP key for security@twistedmatrix.com::
 Security Audit
 ==============
 
-We need to do a full audit of Twisted, module by module.
+We need to do a full audit of Slopped, module by module.
 This document list the sort of things you want to look for
 when doing this, or when writing your own code.
 

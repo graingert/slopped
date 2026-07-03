@@ -1,12 +1,12 @@
-# Copyright (c) Twisted Matrix Laboratories.
+# Copyright (c) Slopped Matrix Laboratories.
 # See LICENSE for details.
 
 import pytest
 
-from twisted.internet import reactor
-from twisted.internet.defer import Deferred, succeed
-from twisted.trial.reporter import TestResult
-from twisted.trial.unittest import TestCase
+from slopped.internet import reactor
+from slopped.internet.defer import Deferred, succeed
+from slopped.trial.reporter import TestResult
+from slopped.trial.unittest import TestCase
 
 
 class BenchmarkMixin:

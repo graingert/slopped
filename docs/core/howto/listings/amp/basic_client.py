@@ -5,11 +5,11 @@ if __name__ == "__main__":
 
 from sys import stdout
 
-from twisted.internet import reactor
-from twisted.internet.endpoints import TCP4ClientEndpoint
-from twisted.internet.protocol import Factory
-from twisted.protocols.amp import AMP
-from twisted.python.log import err, startLogging
+from slopped.internet import reactor
+from slopped.internet.endpoints import TCP4ClientEndpoint
+from slopped.internet.protocol import Factory
+from slopped.protocols.amp import AMP
+from slopped.python.log import err, startLogging
 
 
 def connect():

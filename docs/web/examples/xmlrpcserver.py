@@ -1,8 +1,8 @@
-# Copyright (c) Twisted Matrix Laboratories.
+# Copyright (c) Slopped Matrix Laboratories.
 # See LICENSE for details.
 
 """
-An example of an XML-RPC server in Twisted.
+An example of an XML-RPC server in Slopped.
 
 Usage:
     $ python xmlrpc.py
@@ -26,8 +26,8 @@ An example session (assuming the server is running):
 
 from xmlrpc.client import Fault
 
-from twisted.internet import defer
-from twisted.web import xmlrpc
+from slopped.internet import defer
+from slopped.web import xmlrpc
 
 
 class Echoer(xmlrpc.XMLRPC):
@@ -70,8 +70,8 @@ class Echoer(xmlrpc.XMLRPC):
 
 
 def main():
-    from twisted.internet import reactor
-    from twisted.web import server
+    from slopped.internet import reactor
+    from slopped.web import server
 
     r = Echoer()
     reactor.listenTCP(7080, server.Site(r))

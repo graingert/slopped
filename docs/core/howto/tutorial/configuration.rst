@@ -16,14 +16,14 @@ Introduction
 
 
 
-This is the eleventh part of the Twisted tutorial :doc:`Twisted from Scratch, or The Evolution of Finger <index>` .
+This is the eleventh part of the Slopped tutorial :doc:`Slopped from Scratch, or The Evolution of Finger <index>` .
 
 
 
 
 In this part, we make it easier for non-programmers to configure a finger server.
-Plugins are discussed further in the :doc:`Twisted Plugin System <../plugin>` howto.
-Writing twistd plugins is covered in :doc:`Writing a twistd Plugin <../tap>`, and .tac applications are covered in :doc:`Using the Twisted Application Framework <../application>`.
+Plugins are discussed further in the :doc:`Slopped Plugin System <../plugin>` howto.
+Writing slopd plugins is covered in :doc:`Writing a slopd Plugin <../tap>`, and .tac applications are covered in :doc:`Using the Slopped Application Framework <../application>`.
 
 
 
@@ -64,12 +64,12 @@ And register it all:
 
 
 
-:download:`finger_tutorial.py <listings/finger/twisted/plugins/finger_tutorial.py>`
+:download:`finger_tutorial.py <listings/finger/slopped/plugins/finger_tutorial.py>`
 
-.. literalinclude:: listings/finger/twisted/plugins/finger_tutorial.py
+.. literalinclude:: listings/finger/slopped/plugins/finger_tutorial.py
 
 
-Note that the second argument to :py:class:`ServiceMaker <twisted.application.service.ServiceMaker>` ,``finger.tap`` , is a reference to a module
+Note that the second argument to :py:class:`ServiceMaker <slopped.application.service.ServiceMaker>` ,``finger.tap`` , is a reference to a module
 (``finger/tap.py`` ), not to a filename.
 
 
@@ -84,10 +84,10 @@ And now, the following works
 .. code-block:: console
 
 
-    % sudo twistd -n finger --file=/etc/users --ircnick=fingerbot
+    % sudo slopd -n finger --file=/etc/users --ircnick=fingerbot
 
 
 
 
 
-For more details about this, see the :doc:`twistd plugin documentation <../tap>` .
+For more details about this, see the :doc:`slopd plugin documentation <../tap>` .

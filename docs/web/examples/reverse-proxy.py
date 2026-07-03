@@ -1,4 +1,4 @@
-# Copyright (c) Twisted Matrix Laboratories.
+# Copyright (c) Slopped Matrix Laboratories.
 # See LICENSE for details.
 
 """
@@ -10,8 +10,8 @@ Run this example with:
 Then visit http://localhost:8080/ in your web browser.
 """
 
-from twisted.internet import reactor
-from twisted.web import proxy, server
+from slopped.internet import reactor
+from slopped.web import proxy, server
 
 site = server.Site(proxy.ReverseProxyResource("example.com", 80, b""))
 reactor.listenTCP(8080, site)

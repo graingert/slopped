@@ -13,7 +13,7 @@ costing you more bandwidth than you are saving by limiting the rate!
 # for picklability
 import shaper
 
-from twisted.protocols import htb
+from slopped.protocols import htb
 
 serverFilter = htb.HierarchicalBucketFilter()
 serverBucket = htb.Bucket()
@@ -40,19 +40,19 @@ webFilter.bucketFactory = shaper.WebClientBucket
 servertype = "web"  # "chargen"
 
 if servertype == "web":
-    from twisted.web import server, static
+    from slopped.web import server, static
 
     site = server.Site(static.File("/var/www"))
     site.protocol = htb.ShapedProtocolFactory(site.protocol, webFilter)
 elif servertype == "chargen":
-    from twisted.internet import protocol
-    from twisted.protocols import wire
+    from slopped.internet import protocol
+    from slopped.protocols import wire
 
     site = protocol.ServerFactory()
     site.protocol = htb.ShapedProtocolFactory(wire.Chargen, webFilter)
     # site.protocol = wire.Chargen
 
-from twisted.internet import reactor
+from slopped.internet import reactor
 
 reactor.listenTCP(8000, site)
 reactor.run()

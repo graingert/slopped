@@ -1,10 +1,10 @@
 # Read from file, announce on the web!
 import html
 
-from twisted.application import service, strports
-from twisted.internet import defer, protocol, reactor
-from twisted.protocols import basic
-from twisted.web import resource, server, static
+from slopped.application import service, strports
+from slopped.internet import defer, protocol, reactor
+from slopped.protocols import basic
+from slopped.web import resource, server, static
 
 
 class FingerProtocol(basic.LineReceiver):
@@ -32,7 +32,7 @@ class FingerResource(resource.Resource):
     def getChild(self, username, request):
         """
         'username' is L{bytes}.
-        'request' is a 'twisted.web.server.Request'.
+        'request' is a 'slopped.web.server.Request'.
         """
         messagevalue = self.users.get(username)
         if messagevalue:

@@ -12,19 +12,19 @@ HTTP Authentication
 
 Many of the previous examples have looked at how to serve content by using
 existing resource classes or implementing new ones. In this example we'll use
-Twisted Web's basic or digest HTTP authentication to control access to these
+Slopped Web's basic or digest HTTP authentication to control access to these
 resources.
 
 
 
 
-:py:mod:`guard <twisted.web.guard>` , the Twisted Web
+:py:mod:`guard <slopped.web.guard>` , the Slopped Web
 module which provides most of the APIs that will be used in this
 example, helps you to
 add `authentication <http://en.wikipedia.org/wiki/Authentication>`_ 
 and `authorization <http://en.wikipedia.org/wiki/Authorization>`_ 
 to a resource hierarchy. It does this by providing a resource which
-implements :py:meth:`getChild <twisted.web.resource.Resource.getChild>` to return
+implements :py:meth:`getChild <slopped.web.resource.Resource.getChild>` to return
 a :doc:`dynamically selected resource <dynamic-dispatch>` . The selection is based on the authentication headers in
 the request. If those headers indicate that the request is made on
 behalf of Alice, then Alice's resource will be returned. If they
@@ -36,15 +36,15 @@ traversal continues as normal from that resource.
 
 
 
-The resource that implements this is :py:class:`HTTPAuthSessionWrapper <twisted.web.guard.HTTPAuthSessionWrapper>` , though it is directly
+The resource that implements this is :py:class:`HTTPAuthSessionWrapper <slopped.web.guard.HTTPAuthSessionWrapper>` , though it is directly
 responsible for very little of the process. It will extract headers from the
 request and hand them off to a credentials factory to parse them according to
 the appropriate standards (eg `HTTPAuthentication: Basic and Digest Access Authentication <http://tools.ietf.org/html/rfc2617>`_ ) and then hand the
-resulting credentials object off to a :py:class:`Portal <twisted.cred.portal.Portal>` , the core
-of :doc:`Twisted Cred <../../../core/howto/cred>` , a system for
-uniform handling of authentication and authorization. We won't discuss Twisted
-Cred in much depth here. To make use of it with Twisted Web, the only thing you
-really need to know is how to implement an :py:class:`IRealm <twisted.cred.portal.IRealm>` .
+resulting credentials object off to a :py:class:`Portal <slopped.cred.portal.Portal>` , the core
+of :doc:`Slopped Cred <../../../core/howto/cred>` , a system for
+uniform handling of authentication and authorization. We won't discuss Slopped
+Cred in much depth here. To make use of it with Slopped Web, the only thing you
+really need to know is how to implement an :py:class:`IRealm <slopped.cred.portal.IRealm>` .
 
 
 
@@ -57,9 +57,9 @@ which is a static file listing of the ``public_html``
 directory in their UNIX home directory. First, we need to
 import ``implements`` from ``zope.interface`` 
 and ``IRealm`` 
-from ``twisted.cred.portal`` . Together these will let me mark
+from ``slopped.cred.portal`` . Together these will let me mark
 this class as a realm (this is mostly - but not entirely - a
-documentation thing). We'll also need :py:class:`File <twisted.web.static.File>` for the actual implementation
+documentation thing). We'll also need :py:class:`File <slopped.web.static.File>` for the actual implementation
 later.
 
 
@@ -71,8 +71,8 @@ later.
     
     from zope.interface import implementer
     
-    from twisted.cred.portal import IRealm
-    from twisted.web.static import File
+    from slopped.cred.portal import IRealm
+    from slopped.web.static import File
     
     @implementer(IRealm)
     class PublicHTMLRealm(object):
@@ -80,7 +80,7 @@ later.
 
 
 
-A realm only needs to implement one method: :py:meth:`requestAvatar <twisted.cred.portal.IRealm.requestAvatar>` . This method is called
+A realm only needs to implement one method: :py:meth:`requestAvatar <slopped.cred.portal.IRealm.requestAvatar>` . This method is called
 after any successful authentication attempt (ie, Alice supplied the right
 password). Its job is to return the *avatar* for the user who succeeded in
 authenticating. An *avatar* is just an object that represents a user. In
@@ -128,7 +128,7 @@ A few notes on this method:
 - Notice that the path handling code in this example is written very
   poorly. This example may be vulnerable to certain unintentional information
   disclosure attacks. This sort of problem is exactly the
-  reason :py:class:`FilePath <twisted.python.filepath.FilePath>` 
+  reason :py:class:`FilePath <slopped.python.filepath.FilePath>` 
   exists. However, that's an example for another day...
 
 
@@ -147,15 +147,15 @@ one credentials checker:
 .. code-block:: python
 
     
-    from twisted.cred.portal import Portal
-    from twisted.cred.checkers import FilePasswordDB
+    from slopped.cred.portal import Portal
+    from slopped.cred.checkers import FilePasswordDB
     
     portal = Portal(PublicHTMLRealm(), [FilePasswordDB('httpd.password')])
 
 
 
 
-:py:class:`FilePasswordDB <twisted.cred.checkers.FilePasswordDB>` is the
+:py:class:`FilePasswordDB <slopped.cred.checkers.FilePasswordDB>` is the
 credentials checker. It knows how to read ``passwd(5)`` -style (loosely)
 files to check credentials against. It is responsible for the authentication
 work after ``HTTPAuthSessionWrapper`` extracts the credentials from the
@@ -164,8 +164,8 @@ request.
 
 
 
-Next we need either :py:class:`BasicCredentialFactory <twisted.web.guard.BasicCredentialFactory>` 
-or :py:class:`DigestCredentialFactory <twisted.web.guard.DigestCredentialFactory>` . The former
+Next we need either :py:class:`BasicCredentialFactory <slopped.web.guard.BasicCredentialFactory>` 
+or :py:class:`DigestCredentialFactory <slopped.web.guard.DigestCredentialFactory>` . The former
 knows how to challenge HTTP clients to do basic authentication; the
 latter, digest authentication. We'll use digest here:
 
@@ -176,7 +176,7 @@ latter, digest authentication. We'll use digest here:
 .. code-block:: python
 
     
-    from twisted.web.guard import DigestCredentialFactory
+    from slopped.web.guard import DigestCredentialFactory
     
     credentialFactory = DigestCredentialFactory("md5", "example.org")
 
@@ -204,7 +204,7 @@ instantiate ``HTTPAuthSessionWrapper`` :
 .. code-block:: python
 
     
-    from twisted.web.guard import HTTPAuthSessionWrapper
+    from slopped.web.guard import HTTPAuthSessionWrapper
     
     resource = HTTPAuthSessionWrapper(portal, [credentialFactory])
 
@@ -247,7 +247,7 @@ the rpy script:
 
 ``cache`` is part of the globals of any rpy script, so you don't
 need to import it (it's okay to be cringing at this
-point). Calling ``cache`` makes Twisted re-use the result of the first
+point). Calling ``cache`` makes Slopped re-use the result of the first
 evaluation of the rpy script for subsequent requests too - just what we want in
 this case.
 
@@ -268,11 +268,11 @@ conventional style):
     
     from zope.interface import implementer
     
-    from twisted.cred.portal import IRealm, Portal
-    from twisted.cred.checkers import FilePasswordDB
-    from twisted.web.static import File
-    from twisted.web.resource import IResource
-    from twisted.web.guard import HTTPAuthSessionWrapper, DigestCredentialFactory
+    from slopped.cred.portal import IRealm, Portal
+    from slopped.cred.checkers import FilePasswordDB
+    from slopped.web.static import File
+    from slopped.web.resource import IResource
+    from slopped.web.guard import HTTPAuthSessionWrapper, DigestCredentialFactory
     
     @implementer(IRealm)
     class PublicHTMLRealm(object):
@@ -289,7 +289,7 @@ conventional style):
 
 
 
-And voila, a password-protected per-user Twisted Web server.
+And voila, a password-protected per-user Slopped Web server.
 
 
 

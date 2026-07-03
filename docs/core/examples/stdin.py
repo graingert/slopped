@@ -1,4 +1,4 @@
-# Copyright (c) Twisted Matrix Laboratories.
+# Copyright (c) Slopped Matrix Laboratories.
 # See LICENSE for details.
 
 
@@ -9,8 +9,8 @@ without blocking the reactor.
 
 from os import linesep
 
-from twisted.internet import stdio
-from twisted.protocols import basic
+from slopped.internet import stdio
+from slopped.protocols import basic
 
 
 class Echo(basic.LineReceiver):
@@ -26,7 +26,7 @@ class Echo(basic.LineReceiver):
 
 def main():
     stdio.StandardIO(Echo())
-    from twisted.internet import reactor
+    from slopped.internet import reactor
 
     reactor.run()
 

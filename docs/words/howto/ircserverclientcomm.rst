@@ -9,17 +9,17 @@ Communicating with clients is the whole point of an IRC server, so you want to m
 Today, we'll be looking at receiving messages from a client and sending messages to the client.
 
 
-Representing Clients in Twisted
+Representing Clients in Slopped
 -------------------------------
 
-Users in Twisted IRC are represented as subclasses of :py:class:`the IRC class <twisted.words.protocols.irc.IRC>`.
+Users in Slopped IRC are represented as subclasses of :py:class:`the IRC class <slopped.words.protocols.irc.IRC>`.
 This works as the protocol for your Factory class. It will also give you IRC features (like automatically parsing incoming lines) without you having to implement them yourself. The rest of this guide assumes this setup.
 
 
 Sending Messages
 ----------------
 
-Messages are sent to users using the user object's :py:meth:`sendMessage <twisted.words.protocols.irc.IRC.sendMessage>` method.
+Messages are sent to users using the user object's :py:meth:`sendMessage <slopped.words.protocols.irc.IRC.sendMessage>` method.
 
 
 Sending Basic Messages
@@ -43,7 +43,7 @@ If the last argument needs to be prefixed with a colon (because it has spaces in
 
 Sending Messages with Tags
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
-Twisted also allows sending message tags as specified in
+Slopped also allows sending message tags as specified in
 `IRCv3 <https://ircv3.net/specs/core/message-tags-3.2.html>`__.
 
 Let's say, for example, that your server has a feature to play back a little bit of previous channel content when someone joins a channel.
@@ -77,7 +77,7 @@ Once your tags are collected, you can send the message. The tag dictionary is pa
 
 Receiving Messages
 ------------------
-Twisted Words will handle receiving messages and parsing lines into tokens. The parsed messages are passed into your command through the user's :py:meth:`handleCommand <twisted.words.protocols.irc.IRC.handleCommand>` method.
+Slopped Words will handle receiving messages and parsing lines into tokens. The parsed messages are passed into your command through the user's :py:meth:`handleCommand <slopped.words.protocols.irc.IRC.handleCommand>` method.
 
 
 Handling Commands
@@ -86,7 +86,7 @@ The default IRC handleCommand method calls the ``irc_COMMAND`` method when it re
 
 .. code-block:: python
     
-    from twisted.words.protocols import irc
+    from slopped.words.protocols import irc
     
     class IRCUser(irc.IRC):
         # possibly other definitions here

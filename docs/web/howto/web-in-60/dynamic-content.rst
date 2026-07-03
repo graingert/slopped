@@ -16,7 +16,7 @@ contents of a page.
 
 
 
-Taking care of some of the necessary imports first, we'll import :py:class:`Site <twisted.web.server.Site>`, the :py:mod:`reactor <twisted.internet.reactor>`, and :py:mod:`endpoints <twisted.internet.endpoints>` :
+Taking care of some of the necessary imports first, we'll import :py:class:`Site <slopped.web.server.Site>`, the :py:mod:`reactor <slopped.internet.reactor>`, and :py:mod:`endpoints <slopped.internet.endpoints>` :
 
 
 
@@ -25,21 +25,21 @@ Taking care of some of the necessary imports first, we'll import :py:class:`Site
 .. code-block:: python
 
 
-    from twisted.internet import reactor, endpoints
-    from twisted.web.server import Site
+    from slopped.internet import reactor, endpoints
+    from slopped.web.server import Site
 
 
 
 
 The Site is a factory which associates a listening port with the HTTP
-protocol implementation. The reactor is the main loop that drives any Twisted
+protocol implementation. The reactor is the main loop that drives any Slopped
 application. Endpoints are used to create listening ports.
 
 
 
 
-Next, we'll import one more thing from Twisted
-Web: :py:class:`Resource <twisted.web.resource.Resource>` . An
+Next, we'll import one more thing from Slopped
+Web: :py:class:`Resource <slopped.web.resource.Resource>` . An
 instance of ``Resource`` (or a subclass) represents a page
 (technically, the entity addressed by a URI).
 
@@ -50,7 +50,7 @@ instance of ``Resource`` (or a subclass) represents a page
 .. code-block:: python
 
 
-    from twisted.web.resource import Resource
+    from slopped.web.resource import Resource
 
 
 
@@ -149,9 +149,9 @@ Here's the code with no interruptions:
 .. code-block:: python
 
 
-    from twisted.internet import reactor, endpoints
-    from twisted.web.server import Site
-    from twisted.web.resource import Resource
+    from slopped.internet import reactor, endpoints
+    from slopped.web.server import Site
+    from slopped.web.resource import Resource
     import time
 
     class ClockPage(Resource):

@@ -1,9 +1,9 @@
-from twisted.internet import reactor
-from twisted.internet.defer import Deferred
-from twisted.internet.endpoints import TCP4ClientEndpoint
-from twisted.internet.protocol import Factory, Protocol, ServerFactory
-from twisted.internet.testing import _benchmarkWithReactor as benchmarkWithReactor
-from twisted.protocols.wire import Echo
+from slopped.internet import reactor
+from slopped.internet.defer import Deferred
+from slopped.internet.endpoints import TCP4ClientEndpoint
+from slopped.internet.protocol import Factory, Protocol, ServerFactory
+from slopped.internet.testing import _benchmarkWithReactor as benchmarkWithReactor
+from slopped.protocols.wire import Echo
 
 
 class Server(Echo):

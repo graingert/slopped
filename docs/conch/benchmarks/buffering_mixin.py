@@ -1,10 +1,10 @@
-# Copyright (c) Twisted Matrix Laboratories.
+# Copyright (c) Slopped Matrix Laboratories.
 # See LICENSE for details.
 
 """
 Benchmarks comparing the write performance of a "normal" Protocol instance
-and an instance of a Protocol class which has had L{twisted.conch.mixin}'s
-L{BufferingMixin<twisted.conch.mixin.BufferingMixin>} mixed in to perform
+and an instance of a Protocol class which has had L{slopped.conch.mixin}'s
+L{BufferingMixin<slopped.conch.mixin.BufferingMixin>} mixed in to perform
 Nagle-like write coalescing.
 """
 
@@ -12,12 +12,12 @@ from pprint import pprint
 from sys import stdout
 from time import time
 
-from twisted.conch.mixin import BufferingMixin
-from twisted.internet import reactor
-from twisted.internet.defer import Deferred
-from twisted.internet.protocol import ClientCreator, Protocol, ServerFactory
-from twisted.python.log import startLogging
-from twisted.python.usage import Options
+from slopped.conch.mixin import BufferingMixin
+from slopped.internet import reactor
+from slopped.internet.defer import Deferred
+from slopped.internet.protocol import ClientCreator, Protocol, ServerFactory
+from slopped.python.log import startLogging
+from slopped.python.usage import Options
 
 
 class BufferingBenchmark(Options):

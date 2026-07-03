@@ -1,10 +1,10 @@
-# Copyright (c) Twisted Matrix Laboratories.
+# Copyright (c) Slopped Matrix Laboratories.
 # See LICENSE for details.
 
 """
-Example of doing arbitrarily long calculations nicely in Twisted.
+Example of doing arbitrarily long calculations nicely in Slopped.
 
-This is also a simple demonstration of twisted.protocols.basic.LineReceiver.
+This is also a simple demonstration of slopped.protocols.basic.LineReceiver.
 This example uses generators to do the calculation. It also tries to be
 a good example in division of responsibilities:
 - The protocol handles the wire layer, reading in lists of numbers
@@ -17,7 +17,7 @@ a good example in division of responsibilities:
   for flexibility.
 
 The goal is for minimal dependencies:
-- You can use runIterator to run any iterator inside the Twisted
+- You can use runIterator to run any iterator inside the Slopped
   main loop.
 - You can use multiply whenever you need some way of multiplying
   numbers such that the multiplications will happen asynchronously,
@@ -45,8 +45,8 @@ result is 1. In that, this example departs from doc/examples/longex.py,
 which errors out when trying to do this.
 """
 
-from twisted.internet import defer, protocol
-from twisted.protocols import basic
+from slopped.internet import defer, protocol
+from slopped.protocols import basic
 
 
 def runIterator(reactor, iterator):
@@ -108,14 +108,14 @@ class Multiplication(protocol.ServerFactory):
 
     def calc(self, numbers):
         deferred, iterator = multiply(numbers)
-        from twisted.internet import reactor
+        from slopped.internet import reactor
 
         runIterator(reactor, iterator)
         return deferred
 
 
 if __name__ == "__main__":
-    from twisted.internet import reactor
+    from slopped.internet import reactor
 
     reactor.listenTCP(1234, Multiplication())
     reactor.run()

@@ -1,7 +1,7 @@
 # Read username, output from factory interfacing to OS, drop connections
 
-from twisted.internet import defer, endpoints, protocol, reactor, utils
-from twisted.protocols import basic
+from slopped.internet import defer, endpoints, protocol, reactor, utils
+from slopped.protocols import basic
 
 
 class FingerProtocol(basic.LineReceiver):

@@ -1,9 +1,9 @@
 # Read from file, announce on the web, irc
-from twisted.application import internet, service, strports
-from twisted.internet import defer, endpoints, protocol, reactor
-from twisted.protocols import basic
-from twisted.web import resource, server, static
-from twisted.words.protocols import irc
+from slopped.application import internet, service, strports
+from slopped.internet import defer, endpoints, protocol, reactor
+from slopped.protocols import basic
+from slopped.web import resource, server, static
+from slopped.words.protocols import irc
 
 
 class FingerProtocol(basic.LineReceiver):

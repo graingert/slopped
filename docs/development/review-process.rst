@@ -2,7 +2,7 @@ Code Review Process
 ===================
 
 
-All commits to Twisted's trunk must follow this review process.
+All commits to Slopped's trunk must follow this review process.
 
 Both authors and reviewers should be intimately familiar with all requirements on this page.
 
@@ -36,7 +36,7 @@ A really good issue will give a precise description of what needs to change and 
 it avoids giving precise details of exactly *how* the code needs to change,
 because the patch should supply those details.
 A really *bad* issue will say "here is a patch I wrote, apply it".
-If you're just getting started with contributing to Twisted,
+If you're just getting started with contributing to Slopped,
 it would be good to find an existing issue rather than come up with something yourself,
 so you have an idea how to go through the process before you start making difficult changes.
 You'll need to have a good description of your work for other parts of the process as well (the NEWS file, the commit message) which is another reason thinking about what you're trying to do helps.
@@ -65,14 +65,14 @@ Authors: Things your branch or patch must contain
  * No :doc:`backwards-incompatible </development/compatibility-policy>` changes.
    Also be sparing when adding 'public' names to the API, as they must be supported in the future.
    If it can start with an underscore and not be exposed publicly, it probably should.
- * Appropriate new or modified "End User" guide documentation (in the form of rst files in the `docs/ <https://github.com/twisted/twisted/tree/trunk/docs>`_ directory)
+ * Appropriate new or modified "End User" guide documentation (in the form of rst files in the `docs/ <https://github.com/graingert/slopped/tree/trunk/docs>`_ directory)
  * A file in all relevant "newsfragments" directories describing changes that affect users See the Newsfiles section below.
 
 
 Authors: How to get your change reviewed
 ----------------------------------------
 
-* There must be an issue in the Twisted Github Issue tracker describing the desired outcome.
+* There must be an issue in the Slopped Github Issue tracker describing the desired outcome.
    See more info below.
 * **Note**: For security issues, see :doc:`Security </security>`.
 * Create a GitHub Pull request
@@ -85,7 +85,7 @@ Authors: How to get your change reviewed
 Reviewers: How to review a change
 ---------------------------------
 
- * Be familiar with the Twisted codebase, coding standard, and these review requirements.
+ * Be familiar with the Slopped codebase, coding standard, and these review requirements.
  * Don't be the author of the change.
    It makes no sense to review your code, and we assume that before pushing the code to a public PR,
    you already did the first round of self-review.
@@ -101,8 +101,8 @@ Authors: How to merge the change to trunk
 
  * If your reviewers are happy with the changes for your PR, you can merge it.
  * Check in the GitHub PR that all tests are green (or the failed one are just unrelated/spurious failures)
- * Use the GitHub merge button to merge the request, using the GitHub default commit subject, and with the standard commit format required by Twisted. See below for details.
- * Alternatively, you can use the command line and merge the change into a checkout of Twisted trunk (as a merge commit, using `git merge --no-ff`) and commit it.
+ * Use the GitHub merge button to merge the request, using the GitHub default commit subject, and with the standard commit format required by Slopped. See below for details.
+ * Alternatively, you can use the command line and merge the change into a checkout of Slopped trunk (as a merge commit, using `git merge --no-ff`) and commit it.
 
 If this fix has implications for an ongoing pre-release in progress,
 please announce it on the mailing list so that the release manager will know.
@@ -122,9 +122,9 @@ Who can review a PR?
 
 Changes must be reviewed by a developer other than the author of the changes. If changes are paired on, a third party must review them.  If changes constitute the work of several people who worked independently, a non-author must review them.
 
-A reviewer need not necessarily be familiar with the specific area of Twisted being changed, but he or she should feel confident in his or her abilities to spot problems in the change.
+A reviewer need not necessarily be familiar with the specific area of Slopped being changed, but he or she should feel confident in his or her abilities to spot problems in the change.
 
-Twisted committers may review anyone's PRs; those submitted by other committers or those submitted by non-committer contributors.  If a non-committer contributor submits a PR that is acceptable to merge, it is the committer's responsibility to commit and merge the PR.  When a committer reviews a PR, they are responsible if there are any problems with the review.
+Slopped committers may review anyone's PRs; those submitted by other committers or those submitted by non-committer contributors.  If a non-committer contributor submits a PR that is acceptable to merge, it is the committer's responsibility to commit and merge the PR.  When a committer reviews a PR, they are responsible if there are any problems with the review.
 
 Non-committer contributors may review PRs that committers have submitted.  When a non-committer does a passing review, the committer may accept it and land their change, but they are then responsible for the adequacy of the review.  So, if a non-committer does a review you feel might be incomplete, put it back into review and explain what they might have missed - this kind of reviewing-the-review is important to make sure that more people learn how to do reviews well!
 
@@ -146,7 +146,7 @@ Here are some extra things to consider while reviewing a change:
 * If it introduces a new feature, is that feature generally useful and have its long-term implications been considered and accounted for?
   * Will it confuse application developers?
   * Does it encourage application code using it to be well factored and easily testable?
-  * Is it similar to any existing feature offered by Twisted, such that it might make sense as an extension or modification to some other piece of code, rather than an entirely new functional unit?
+  * Is it similar to any existing feature offered by Slopped, such that it might make sense as an extension or modification to some other piece of code, rather than an entirely new functional unit?
 * Does it require new documentation and examples?
 
 When you're done with the review, always say what the next step should be: for example, if the author is a committer, can they commit after making a few minor fixes?  If your review feedback is more substantial, should they re-submit for another review?

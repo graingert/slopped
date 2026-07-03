@@ -10,7 +10,7 @@ Custom Response Codes
 
 
 
-The previous example introduced :py:class:`NoResource <twisted.web.resource.NoResource>`, a Twisted Web error resource which
+The previous example introduced :py:class:`NoResource <slopped.web.resource.NoResource>`, a Slopped Web error resource which
 responds with a 404 (not found) code. This example will cover the APIs
 that ``NoResource`` uses to do this so that you can generate your own
 custom response codes as desired.
@@ -27,9 +27,9 @@ First, the now-standard import preamble:
 .. code-block:: python
 
 
-    from twisted.web.server import Site
-    from twisted.web.resource import Resource
-    from twisted.internet import reactor, endpoints
+    from slopped.web.server import Site
+    from slopped.web.resource import Resource
+    from slopped.internet import reactor, endpoints
 
 
 
@@ -43,13 +43,13 @@ the request object, though, which none of the previous examples have done.
 
 
 
-The :py:class:`Request <twisted.web.server.Request>` object has
+The :py:class:`Request <slopped.web.server.Request>` object has
 shown up in a couple of places, but so far we've ignored it. It is a parameter
-to the :py:meth:`getChild <twisted.web.resource.Resource.getChild>`
+to the :py:meth:`getChild <slopped.web.resource.Resource.getChild>`
 API as well as to render methods such as ``render_GET`` . As you might
 have suspected, it represents the request for which a response is to be
 generated. Additionally, it also represents the response being generated. In
-this example we're going to use its :py:meth:`setResponseCode <twisted.web.http.Request.setResponseCode>` method to - you guessed
+this example we're going to use its :py:meth:`setResponseCode <slopped.web.http.Request.setResponseCode>` method to - you guessed
 it - set the response's status code.
 
 
@@ -105,9 +105,9 @@ Here's the complete example:
 .. code-block:: python
 
 
-    from twisted.web.server import Site
-    from twisted.web.resource import Resource
-    from twisted.internet import reactor, endpoints
+    from slopped.web.server import Site
+    from slopped.web.resource import Resource
+    from slopped.internet import reactor, endpoints
 
     class PaymentRequired(Resource):
         def render_GET(self, request):

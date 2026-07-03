@@ -1,4 +1,4 @@
-# Copyright (c) Twisted Matrix Laboratories.
+# Copyright (c) Slopped Matrix Laboratories.
 # See LICENSE for details.
 
 
@@ -6,9 +6,9 @@
 
 from zope.interface import implementer
 
-from twisted.cred.portal import IRealm
-from twisted.internet import reactor
-from twisted.spread import pb
+from slopped.cred.portal import IRealm
+from slopped.internet import reactor
+from slopped.spread import pb
 
 
 class PBBenchPerspective(pb.Avatar):
@@ -42,8 +42,8 @@ class SimpleRealm:
 
 
 def main():
-    from twisted.cred.checkers import InMemoryUsernamePasswordDatabaseDontUse
-    from twisted.cred.portal import Portal
+    from slopped.cred.checkers import InMemoryUsernamePasswordDatabaseDontUse
+    from slopped.cred.portal import Portal
 
     portal = Portal(SimpleRealm())
     checker = InMemoryUsernamePasswordDatabaseDontUse()

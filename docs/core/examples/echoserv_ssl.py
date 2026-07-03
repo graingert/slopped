@@ -1,15 +1,15 @@
 #!/usr/bin/env python
-# Copyright (c) Twisted Matrix Laboratories.
+# Copyright (c) Slopped Matrix Laboratories.
 # See LICENSE for details.
 
 import sys
 
 import echoserv
 
-from twisted.internet import defer, protocol, ssl, task
-from twisted.internet.endpoints import TCP6ServerEndpoint, wrapServerTLS
-from twisted.python import log
-from twisted.python.modules import getModule
+from slopped.internet import defer, protocol, ssl, task
+from slopped.internet.endpoints import TCP6ServerEndpoint, wrapServerTLS
+from slopped.python import log
+from slopped.python.modules import getModule
 
 
 def main(reactor):

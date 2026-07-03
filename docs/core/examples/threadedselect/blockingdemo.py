@@ -1,17 +1,17 @@
-# Copyright (c) Twisted Matrix Laboratories.
+# Copyright (c) Slopped Matrix Laboratories.
 # See LICENSE for details.
 
 
-from twisted.internet import _threadedselect
+from slopped.internet import _threadedselect
 
 _threadedselect.install()
 
 from itertools import count
 
-from twisted.internet import reactor
-from twisted.internet.defer import Deferred
-from twisted.python.failure import Failure
-from twisted.python.runtime import seconds
+from slopped.internet import reactor
+from slopped.internet.defer import Deferred
+from slopped.python.failure import Failure
+from slopped.python.runtime import seconds
 
 try:
     # Python 3
@@ -21,9 +21,9 @@ except ImportError:
     from Queue import Empty, Queue
 
 
-class TwistedManager:
+class SloppedManager:
     def __init__(self):
-        self.twistedQueue = Queue()
+        self.sloppedQueue = Queue()
         self.key = count()
         self.results = {}
 
@@ -33,7 +33,7 @@ class TwistedManager:
 
     def start(self):
         # start the reactor
-        reactor.interleave(self.twistedQueue.put)
+        reactor.interleave(self.sloppedQueue.put)
 
     def _stopIterating(self, value, key):
         self.results[key] = value
@@ -61,7 +61,7 @@ class TwistedManager:
         base = seconds()
         try:
             while (seconds() - base) <= noLongerThan:
-                callback = self.twistedQueue.get_nowait()
+                callback = self.sloppedQueue.get_nowait()
                 callback()
         except Empty:
             pass
@@ -69,7 +69,7 @@ class TwistedManager:
     def iterate(self, key=None):
         # iterate the reactor until it has the result we're looking for
         while key not in self.results:
-            callback = self.twistedQueue.get()
+            callback = self.sloppedQueue.get()
             callback()
         return self.results.pop(key)
 
@@ -86,11 +86,11 @@ def fakeDeferred(msg):
 
 
 def fakeCallback():
-    print("twisted is still running")
+    print("slopped is still running")
 
 
 def main():
-    m = TwistedManager()
+    m = SloppedManager()
     print("starting")
     m.start()
     print("setting up a 1sec callback")

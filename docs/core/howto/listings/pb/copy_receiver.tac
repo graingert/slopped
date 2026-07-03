@@ -1,14 +1,14 @@
-# Copyright (c) Twisted Matrix Laboratories.
+# Copyright (c) Slopped Matrix Laboratories.
 # See LICENSE for details.
 
 """
 PB copy receiver example.
 
-This is a Twisted Application Configuration (tac) file.  Run with e.g.
-   twistd -ny copy_receiver.tac
+This is a Slopped Application Configuration (tac) file.  Run with e.g.
+   slopd -ny copy_receiver.tac
 
-See the twistd(1) man page or
-http://twistedmatrix.com/documents/current/howto/application for details.
+See the slopd(1) man page or
+http://sloppedmatrix.com/documents/current/howto/application for details.
 """
 
 
@@ -20,10 +20,10 @@ if __name__ == "__main__":
 
 from copy_sender import CopyPond, LilyPond
 
-from twisted.application import internet, service
-from twisted.internet import reactor
-from twisted.python import log
-from twisted.spread import pb
+from slopped.application import internet, service
+from slopped.internet import reactor
+from slopped.python import log
+from slopped.spread import pb
 
 # log.startLogging(sys.stdout)
 

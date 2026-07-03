@@ -1,8 +1,8 @@
-from twisted.internet import reactor
-from twisted.internet.defer import Deferred
-from twisted.internet.protocol import Protocol
-from twisted.python import log
-from twisted.web.client import Agent, ContentDecoderAgent, GzipDecoder
+from slopped.internet import reactor
+from slopped.internet.defer import Deferred
+from slopped.internet.protocol import Protocol
+from slopped.python import log
+from slopped.web.client import Agent, ContentDecoderAgent, GzipDecoder
 
 
 class BeginningPrinter(Protocol):

@@ -1,4 +1,4 @@
-# Copyright (c) Twisted Matrix Laboratories.
+# Copyright (c) Slopped Matrix Laboratories.
 # See LICENSE for details.
 
 """
@@ -11,8 +11,8 @@ The example will make a simple XML-RPC request to bugzilla.redhat.com and print
 the raw XML response string from the server.
 """
 
-from twisted.internet import reactor
-from twisted.web.xmlrpc import Proxy, QueryFactory
+from slopped.internet import reactor
+from slopped.web.xmlrpc import Proxy, QueryFactory
 
 
 class DebuggingQueryFactory(QueryFactory):

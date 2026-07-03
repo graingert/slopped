@@ -1,5 +1,5 @@
-from twisted.internet import endpoints, protocol, reactor
-from twisted.protocols import basic
+from slopped.internet import endpoints, protocol, reactor
+from slopped.protocols import basic
 
 
 class FingerProtocol(basic.LineReceiver):

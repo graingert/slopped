@@ -1,20 +1,20 @@
-# Copyright (c) Twisted Matrix Laboratories.
+# Copyright (c) Slopped Matrix Laboratories.
 # See LICENSE for details.
 
-"""Demo of wxPython integration with Twisted."""
+"""Demo of wxPython integration with Slopped."""
 
 
 import sys
 
 from wx import EVT_CLOSE, EVT_MENU, App, DefaultPosition, Frame, Menu, MenuBar, Size
 
-from twisted.internet import wxreactor
-from twisted.python import log
+from slopped.internet import wxreactor
+from slopped.python import log
 
 wxreactor.install()
 
 # import t.i.reactor only after installing wxreactor:
-from twisted.internet import reactor
+from slopped.internet import reactor
 
 ID_EXIT = 101
 
@@ -44,7 +44,7 @@ class MyApp(App):
         frame = MyFrame(None, -1, "Hello, world")
         frame.Show(True)
         self.SetTopWindow(frame)
-        # look, we can use twisted calls!
+        # look, we can use slopped calls!
         reactor.callLater(2, self.twoSecondsPassed)
         return True
 
@@ -52,7 +52,7 @@ class MyApp(App):
 def demo():
     log.startLogging(sys.stdout)
 
-    # register the App instance with Twisted:
+    # register the App instance with Slopped:
     app = MyApp(0)
     reactor.registerWxApp(app)
 

@@ -1,8 +1,8 @@
 from http.cookiejar import CookieJar
 
-from twisted.internet import reactor
-from twisted.python import log
-from twisted.web.client import Agent, CookieAgent
+from slopped.internet import reactor
+from slopped.python import log
+from slopped.web.client import Agent, CookieAgent
 
 
 def displayCookies(response, cookieJar):

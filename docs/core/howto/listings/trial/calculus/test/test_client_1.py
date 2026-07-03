@@ -1,7 +1,7 @@
 from calculus.client_1 import RemoteCalculationClient
 
-from twisted.test import proto_helpers
-from twisted.trial import unittest
+from slopped.test import proto_helpers
+from slopped.trial import unittest
 
 
 class ClientCalculationTestCase(unittest.TestCase):

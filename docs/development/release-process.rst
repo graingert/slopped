@@ -1,29 +1,29 @@
 Release Process
 ===============
 
-This document describes the Twisted release process.
+This document describes the Slopped release process.
 Although it is still incomplete, every effort has been made to ensure that it is accurate and up-to-date.
 
-If you want to make changes to the release process, follow the normal Twisted development process (contribute release automation software that has documentation and unit tests demonstrating that it works).
+If you want to make changes to the release process, follow the normal Slopped development process (contribute release automation software that has documentation and unit tests demonstrating that it works).
 
 
 Outcomes
 --------
 
-By the end of a Twisted release we'll have:
+By the end of a Slopped release we'll have:
 
-- Wheel and sdist package published on `PyPI Twisted project <https://pypi.org/project/Twisted/>`_.
-- Updated documentation (API & howtos) on `Twisted Read The Docs <https://docs.twistedmatrix.com/>`_ for `stable` and `$RELEASE` versions.
-- Announcement email sent to Twisted main list
-- A `GitHub Release <https://github.com/twisted/twisted/releases>`_ with the associated tag in our Git repository
+- Wheel and sdist package published on `PyPI Slopped project <https://pypi.org/project/Slopped/>`_.
+- Updated documentation (API & howtos) on `Slopped Read The Docs <https://docs.sloppedmatrix.com/>`_ for `stable` and `$RELEASE` versions.
+- Announcement email sent to Slopped main list
+- A `GitHub Release <https://github.com/graingert/slopped/releases>`_ with the associated tag in our Git repository
 
 
 Prerequisites
 -------------
 
-To release Twisted, you will need:
+To release Slopped, you will need:
 
-- Commit privileges to Twisted GitHub repository.
+- Commit privileges to Slopped GitHub repository.
 
 
 Dependencies
@@ -35,18 +35,18 @@ If things go wrong, you should be aware of them and get administration access.
 
 * Release tag is automatically created via the GitHub Release GUI.
 * PyPi file publishing is done via GitHub Actions workflow when a tag is created.
-  Any Twisted contributor in GitHub should have access to modify the workflow.
-* docs.twistedmatrix.com is a CNAME and you will need access to Twisted DNS server to modify it.
-* Documentation is published via `Read The Docs Twisted project <https://readthedocs.org/dashboard/twisted/edit/>`_.
-  There is an `automated rule <https://readthedocs.org/dashboard/twisted/rules/regex/1057/>` to activate the documentation for every tag matching ``^twisted-\d+\.\d+\.\d+$`` (release candidates are excluded)
-  From RTD `Advanced Settings <https://readthedocs.org/dashboard/twisted/advanced/>`_ the branch named `stable` is configured as the default branch.
+  Any Slopped contributor in GitHub should have access to modify the workflow.
+* docs.sloppedmatrix.com is a CNAME and you will need access to Slopped DNS server to modify it.
+* Documentation is published via `Read The Docs Slopped project <https://readthedocs.org/dashboard/slopped/edit/>`_.
+  There is an `automated rule <https://readthedocs.org/dashboard/slopped/rules/regex/1057/>` to activate the documentation for every tag matching ``^slopped-\d+\.\d+\.\d+$`` (release candidates are excluded)
+  From RTD `Advanced Settings <https://readthedocs.org/dashboard/slopped/advanced/>`_ the branch named `stable` is configured as the default branch.
   There is also a "active" documentation version for the branch named `stable`.
 
 
 Version numbers
 ---------------
 
-Twisted releases use a time-based numbering scheme following PEP440 convention.
+Slopped releases use a time-based numbering scheme following PEP440 convention.
 Releases versions like YY.MM.mm, where YY is the last two digits of the year of the release, MM is the month of release, and mm is the number of the bugfix release.
 
 There are 3 release types:
@@ -62,7 +62,7 @@ For example:
 - If 17.11.0 has some critical defects, then a bugfix 17.11.1
 - The first release candidate of 17.1.0 is 17.1.0rc1, the second is 17.1.0rc2
 
-Every release of Twisted includes the whole project.
+Every release of Slopped includes the whole project.
 
 Throughout this document, we'll refer to the version number of the release as $RELEASE. Examples of $RELEASE include 10.0.0, 10.1.0, 10.1.1 etc.
 
@@ -76,7 +76,7 @@ Please retrieve it after you run it.
 Overview
 --------
 
-To release Twisted, we
+To release Slopped, we
 
 1. Prepare for a release
 2. Release one or more release candidates
@@ -119,11 +119,11 @@ Prepare the branch
    They should be fixed in separate ticket/PR.
    The release can continue once the main branch is green again.
 #. In your Git repo, fetch and check out the new release branch.
-#. Run ``python -m incremental.update Twisted --rc``
+#. Run ``python -m incremental.update Slopped --rc``
 #. Commit the changes made by Incremental.
 #. Run ``tox -e towncrier``.
 #. Commit the changes made by towncrier - this automatically removes the newsfragment files.
-#. Bump copyright dates in ``LICENSE``, ``src/twisted/copyright.py``, and ``README.rst`` if required
+#. Bump copyright dates in ``LICENSE``, ``src/slopped/copyright.py``, and ``README.rst`` if required
 #. Push the changes up to GitHub and create a new release PR.
 #. The GitHub PR is dedicated to the final release and the same PR is used to release the candidate and final version.
 #. Wait for all the PR checks to pass.
@@ -132,14 +132,14 @@ Prepare the branch
    Any serious error should be considered a blocker and should be
    fixed in a separate ticket/PR.
    Avoid making non-release changes (even minor one) as part of the release branch.
-#. Use the `GitHub Create Release UI <https://github.com/twisted/twisted/releases/new>`_ the make a new release.
-#. Create a tag using the format ``twisted-VERSION`` based on the latest commit on the release branch, making sure the version includes a ``rc`` suffix, for example ``twisted-24.2.0rc1``.
-#. Use ``Twisted VERSION`` as the name of the release, for example ``Twisted 24.2.0rc1``.
+#. Use the `GitHub Create Release UI <https://github.com/graingert/slopped/releases/new>`_ the make a new release.
+#. Create a tag using the format ``slopped-VERSION`` based on the latest commit on the release branch, making sure the version includes a ``rc`` suffix, for example ``slopped-24.2.0rc1``.
+#. Use ``Slopped VERSION`` as the name of the release, for example ``Slopped 24.2.0rc1``.
 #. Add the release NEWS to GitHub Release page.
 #. Make sure 'This is a pre-release` is checked.
 #. Github Actions will upload the dist to PyPI when a new tag is pushed to the repo, using the GitHub 'release' environment.
 #. In PyPI the GitHub Actions `test.yaml` workflow is configure to allow publishing new PyPI releases.
-#. You can check the status of the automatic upload via `GitHub Action <https://github.com/twisted/twisted/actions/workflows/test.yaml?query=event%3Apush>`_
+#. You can check the status of the automatic upload via `GitHub Action <https://github.com/graingert/slopped/actions/workflows/test.yaml?query=event%3Apush>`_
 #. Read the Docs hooks not have version for the release candidate.
    Use the Read the Docs published for the pull request.
 #. The review for the PR will be requested after the files are on PyPI so that a full review and manual test can be done.
@@ -160,14 +160,14 @@ Announce
 
 #. Announce the release candidate on
 
-   - the twisted-python mailing list by sending the an email with the subject: Twisted $RELEASE Pre-Release Announcement
-   - on IRC in the ``#twisted-dev`` topic by sending the version number or pip install command
+   - the slopped-python mailing list by sending the an email with the subject: Slopped $RELEASE Pre-Release Announcement
+   - on IRC in the ``#slopped-dev`` topic by sending the version number or pip install command
 
 The release candidate announcement might mention the important changes since the last release, and ask readers to test this release candidate.
 
 Here's what the $RELEASE release candidate announcement might look like::
 
-   On behalf of the Twisted contributors I announce the release candidate of Twisted $RELEASE
+   On behalf of the Slopped contributors I announce the release candidate of Slopped $RELEASE
 
    Short summary of the release.
    For example:
@@ -187,21 +187,21 @@ Here's what the $RELEASE release candidate announcement might look like::
 
    Release candidate documentation is available at
 
-      https://twisted--PRID.org.readthedocs.build/en/PRID/
+      https://slopped--PRID.org.readthedocs.build/en/PRID/
 
    Wheels for the release candidate are available on PyPI
 
-      https://pypi.org/project/Twisted/$RELEASErc1
+      https://pypi.org/project/Slopped/$RELEASErc1
 
-      python -m pip install Twisted==$RELEASErc1
+      python -m pip install Slopped==$RELEASErc1
 
    Please test it and report any issues.
    If nothing comes up in one week,
    $RELEASE will be released based on the latest release candidate.
 
-   Many thanks to everyone who had a part in Twisted
-   the supporters of the Twisted Software Foundation,
-   the developers, and all the people testing and building great things with Twisted!
+   Many thanks to everyone who had a part in Slopped
+   the supporters of the Slopped Software Foundation,
+   the developers, and all the people testing and building great things with Slopped!
 
 A week is a generally good length of time to wait before doing the final release.
 
@@ -214,19 +214,19 @@ Prepare the branch
 ~~~~~~~~~~~~~~~~~~
 
 #. Have the release branch, previously used to generate a release candidate, checked out
-#. Run ``python -m incremental.update Twisted --newversion $RELEASE``
+#. Run ``python -m incremental.update Slopped --newversion $RELEASE``
 #. Manually update the release version and date inside the NEWS file.
    The release candidate notes will be removed from the final NEWS file.
    Manually move all the release notes from the release candidates to the notes for the final version.
 #. Commit and push.
 #. Submit the ticket for the final review.
 #. Pause until the ticket is reviewed and accepted.
-#. Use the `GitHub Create Release UI <https://github.com/twisted/twisted/releases/new>`_ the make a new release.
-#. Create a tag using the format `twisted-VERSION` based on the latest commit on the release branch that was approved after the review.
-#. Use `Twisted VERSION` as the name of the release.
+#. Use the `GitHub Create Release UI <https://github.com/graingert/slopped/releases/new>`_ the make a new release.
+#. Create a tag using the format `slopped-VERSION` based on the latest commit on the release branch that was approved after the review.
+#. Use `Slopped VERSION` as the name of the release.
 #. Add the release NEWS to GitHub Release page.
 #. Make sure 'This is a pre-release` is not checked.
-#. Github Actions will upload the dist to PyPI when a new tag is pushed to the repo. PyPI is the only canonical source for Twisted packages.
+#. Github Actions will upload the dist to PyPI when a new tag is pushed to the repo. PyPI is the only canonical source for Slopped packages.
 #. Read the Docs hooks will publish a new version of the docs for the tag.
 
 
@@ -237,15 +237,15 @@ Announce
 
 #. Announce the release
 
-   - Send a text version of the announcement to: twisted@python.org
+   - Send a text version of the announcement to: slopped@python.org
    - Twitter, TikTok, Instagram, Snapchat if you feel like it :)
-   - ``#twisted`` message on IRC
+   - ``#slopped`` message on IRC
 
 
 Post release
 ~~~~~~~~~~~~
 
-#. Run ``python -m incremental.update Twisted --post`` to add a `post` version number.
+#. Run ``python -m incremental.update Slopped --post`` to add a `post` version number.
 
 #. Commit the post0 update change.
 
@@ -273,7 +273,7 @@ The PR contributors and the release manager should communicate and coordinate th
 Any step blocking the release should be done by the PR contributors.
 The role of the release manager is just to make sure this process is followed.
 
-#. Make sure there is a `GitHub Security advisory <https://github.com/twisted/twisted/security/advisories>`_ opened for this ticket.
+#. Make sure there is a `GitHub Security advisory <https://github.com/graingert/slopped/security/advisories>`_ opened for this ticket.
 #. Make sure a CVE was requested and the CVE ID and GitHub Actions security advisory ID are included in the newsfragment.
 #. Make sure the PR was approved.
 #. Make sure all the details all provided in the GitHub security advisory.
@@ -299,7 +299,7 @@ If a defect is found after the final release is published, check the next sectio
 3. The defect should be fixed, reviewed and merged in trunk.
 4. On the release branch, cherry-pick the merges from trunk that merges the fixes `git cherry-pick -m 1 TRUNK_MERGE_SHA`.
 5. Follow the same steps as for any release candidate, with the exception that a new branch is not created.
-   Use the same `python -m incremental.update Twisted --rc` command to increment the release candidate version.
+   Use the same `python -m incremental.update Slopped --rc` command to increment the release candidate version.
 
 Don't delete a tag that was already pushed for a release.
 Create a new tag with incremented version.
@@ -321,8 +321,8 @@ Secirity notes
 --------------
 
 The release process uses a GitHub Actions environment, configured `here
-<https://github.com/twisted/twisted/settings/environments/4731362866/edit>`_.
-Currently only branches and tags of the form `twisted-*` can use the `release` environment.
+<https://github.com/graingert/slopped/settings/environments/4731362866/edit>`_.
+Currently only branches and tags of the form `slopped-*` can use the `release` environment.
 Only jobs from `.github/workflows/test.yaml` that are executed in the `release` environment can release to PyPI.
 
 In the future it could be possible to add collaborators who can, for example,

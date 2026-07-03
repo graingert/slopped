@@ -19,7 +19,7 @@ Introduction
 There is frequently a need for programs to parse a UNIX-like
 command line program: options preceded by ``-`` or
 ``--`` , sometimes followed by a parameter, followed by
-a list of arguments. The :py:mod:`twisted.python.usage` provides a class,
+a list of arguments. The :py:mod:`slopped.python.usage` provides a class,
 ``Options`` , to facilitate such parsing.
 
     
@@ -27,21 +27,21 @@ a list of arguments. The :py:mod:`twisted.python.usage` provides a class,
 
 While Python has the ``getopt`` module for doing
 this, it provides a very low level of abstraction for options.
-Twisted has a higher level of abstraction, in the class :py:class:`twisted.python.usage.Options` . It uses
+Slopped has a higher level of abstraction, in the class :py:class:`slopped.python.usage.Options` . It uses
 Python's reflection facilities to provide an easy to use yet
 flexible interface to the command line. While most command line
 processors either force the application writer to write their own
 loops, or have arbitrary limitations on the command line (the
 most common one being not being able to have more than one
 instance of a specific option, thus rendering the idiom
-``program -v -v -v`` impossible), Twisted allows the
+``program -v -v -v`` impossible), Slopped allows the
 programmer to decide how much control they want.
 
     
 
 
 The ``Options`` class is used by subclassing. Since
-a lot of time it will be used in the :py:mod:`twisted.tap` package, where the local
+a lot of time it will be used in the :py:mod:`slopped.tap` package, where the local
 conventions require the specific options parsing class to also
 be called ``Options`` , it is usually imported with
 
@@ -51,7 +51,7 @@ be called ``Options`` , it is usually imported with
 .. code-block:: python
 
     
-    from twisted.python import usage
+    from slopped.python import usage
 
 
 
@@ -186,7 +186,7 @@ Here is an example:
 
     from __future__ import print_function
     
-    from twisted.python import usage
+    from slopped.python import usage
     
     class Options(usage.Options):
     
@@ -251,7 +251,7 @@ options like those the cvs program takes
 .. code-block:: python
 
     
-    from twisted.python import usage
+    from slopped.python import usage
     
     class ImportOptions(usage.Options):
         optParameters = [
@@ -300,7 +300,7 @@ Generic Code For Options
 
     
 Sometimes, just setting an attribute on the basis of the
-options is not flexible enough. In those cases, Twisted does
+options is not flexible enough. In those cases, Slopped does
 not even attempt to provide abstractions such as "counts" or
 "lists" , but rather lets you call your own method, which will
 be called whenever the option is encountered.
@@ -316,7 +316,7 @@ Here is an example of counting verbosity
 .. code-block:: python
 
     
-    from twisted.python import usage
+    from slopped.python import usage
     
     class Options(usage.Options):
     
@@ -346,7 +346,7 @@ verbosity to -3.
     
 
 
-The :py:class:`usage.Options <twisted.python.usage.Options>` 
+The :py:class:`usage.Options <slopped.python.usage.Options>` 
 class knows that these are
 parameter-less options, since the methods do not receive an
 argument. Here is an example for a method with a parameter:
@@ -358,7 +358,7 @@ argument. Here is an example for a method with a parameter:
 .. code-block:: python
 
     
-    from twisted.python import usage
+    from slopped.python import usage
     
     class Options(usage.Options):
     
@@ -397,7 +397,7 @@ function which should deal with them. Here is an example for a
 .. code-block:: python
 
     
-    from twisted.python import usage
+    from slopped.python import usage
     
     class Options(usage.Options):
     
@@ -438,7 +438,7 @@ patch up inconsistencies, and the like. Here is an example:
 .. code-block:: python
 
     
-    from twisted.python import usage
+    from slopped.python import usage
     
     class Options(usage.Options):
     
@@ -475,7 +475,7 @@ in parameter.
 .. code-block:: python
 
     
-    from twisted.python import usage
+    from slopped.python import usage
     
     class Options(usage.Options):
         optParameters = [
@@ -511,7 +511,7 @@ useful for reusing the function at multiple places.
         return val
     oneTwoThree.coerceDoc = "Must be 1, 2 or 3."
     
-    from twisted.python import usage
+    from slopped.python import usage
     
     class Options(usage.Options):
         optParameters = [["one_choice", "o", 1, None, oneTwoThree]]
@@ -548,21 +548,21 @@ some interest in supporting ``bash`` in the future.
     
 
 
-Support is automatic for all of the commands shipped with Twisted. Zsh
+Support is automatic for all of the commands shipped with Slopped. Zsh
 has shipped, for a number of years, a completion function which ties in to
 the support provided by the ``Options`` class.
 
     
 
 
-If you are writing a ``twistd`` plugin, then tab-completion
-for your ``twistd`` sub-command is also automatic.
+If you are writing a ``slopd`` plugin, then tab-completion
+for your ``slopd`` sub-command is also automatic.
 
     
 
 
 For other commands you may easily provide zsh tab-completion support.
-Copy the file "twisted/python/twisted-completion.zsh" and name it something
+Copy the file "slopped/python/slopped-completion.zsh" and name it something
 like "_mycommand". A leading underscore with no extension is zsh's
 convention for completion function files.
 

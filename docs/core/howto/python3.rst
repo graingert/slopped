@@ -4,7 +4,7 @@ Porting to Python 3
 Introduction
 ------------
 
-This document covers Twisted-specific issues in porting your code to Python 3.
+This document covers Slopped-specific issues in porting your code to Python 3.
 
 API Differences
 ---------------
@@ -12,13 +12,13 @@ API Differences
 
 
 
-twisted.python.failure
+slopped.python.failure
 ~~~~~~~~~~~~~~~~~~~~~~
 
 
 
-:py:meth:`Failure.trap <twisted.python.failure.Failure.trap>`
-raises itself (i.e. a :py:class:`Failure <twisted.python.failure.Failure>` ) in Python 2. In Python 3,
+:py:meth:`Failure.trap <slopped.python.failure.Failure.trap>`
+raises itself (i.e. a :py:class:`Failure <slopped.python.failure.Failure>` ) in Python 2. In Python 3,
 the wrapped exception will be re-raised.
 
 
@@ -38,14 +38,14 @@ sometimes just called *text* or *unicode* ) on Python 3.
 
 
 
-From ``twisted.internet.address`` , the ``IPv4Address``
+From ``slopped.internet.address`` , the ``IPv4Address``
 and ``IPv6Address`` classes have had two attributes change from
 byte strings to text strings: ``type`` and ``host`` .
 
 
 
 
-``twisted.python.log`` has shifted significantly towards text
+``slopped.python.log`` has shifted significantly towards text
 strings from byte strings.  Logging events, particular those produced by a
 call like ``msg("foo")`` , must now be text strings.  Consequently,
 on Python 3, event dictionaries passed to log observes will contain text
@@ -54,14 +54,14 @@ strings where they previously contained byte strings.
 
 
 
-``twisted.python.runtime.platformType`` and the return value
-from ``twisted.python.runtime.Platform.getType`` are now both text
+``slopped.python.runtime.platformType`` and the return value
+from ``slopped.python.runtime.Platform.getType`` are now both text
 strings.
 
 
 
 
-``twisted.python.filepath.FilePath`` has *not* changed.
+``slopped.python.filepath.FilePath`` has *not* changed.
 It supports only byte strings.  This will probably require applications to
 update their usage of ``FilePath`` , at least to pass explicit byte
 string literals rather than "native" string literals (which are text on
@@ -76,7 +76,7 @@ previously byte strings are now native strings.
 
 
 
-``twisted.names.dns`` deals with strings with a wide range of
+``slopped.names.dns`` deals with strings with a wide range of
 meanings, often several for each DNS record type.  Most of these strings
 have remained as byte strings, which will probably require application
 updates (for the reason given in the ``FilePath`` section above).
@@ -89,13 +89,13 @@ now be given as text strings.
 
 
 
-``twisted.web.resource.IResource`` continues to deal with URLs
+``slopped.web.resource.IResource`` continues to deal with URLs
 and all URL-derived values as byte strings.
 
 
 
 
-``twisted.web.resource.ErrorPage`` has several string attributes
+``slopped.web.resource.ErrorPage`` has several string attributes
 (``template`` , ``brief`` , and ``detail`` ) which
 were previously byte strings.  On Python 3 only, these must now be text
 strings.

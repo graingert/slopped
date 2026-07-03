@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-# Copyright (c) Twisted Matrix Laboratories.
+# Copyright (c) Slopped Matrix Laboratories.
 # See LICENSE for details.
 
 """
@@ -11,16 +11,16 @@ It will respond to all PING messages with a PONG (including ones sent by
 itself). You can tell how many copies of this script are running on the local
 network by the number of "RECV PONG".
 
-Run using twistd:
+Run using slopd:
 
-$ twistd -ny udpbroadcast.py
+$ slopd -ny udpbroadcast.py
 """
 
 from uuid import uuid4
 
-from twisted.application import internet, service
-from twisted.internet.protocol import DatagramProtocol
-from twisted.python import log
+from slopped.application import internet, service
+from slopped.internet.protocol import DatagramProtocol
+from slopped.python import log
 
 
 class PingPongProtocol(DatagramProtocol):

@@ -1,7 +1,7 @@
 #!/usr/bin/env python
-# -*- test-case-name: twisted.names.test.test_examples -*-
+# -*- test-case-name: slopped.names.test.test_examples -*-
 
-# Copyright (c) Twisted Matrix Laboratories.
+# Copyright (c) Slopped Matrix Laboratories.
 # See LICENSE for details.
 
 """
@@ -14,9 +14,9 @@ IPADDRESS: An IPv4 or IPv6 address.
 import socket
 import sys
 
-from twisted.internet import defer, task
-from twisted.names import client
-from twisted.python import usage
+from slopped.internet import defer, task
+from slopped.names import client
+from slopped.python import usage
 
 
 class Options(usage.Options):

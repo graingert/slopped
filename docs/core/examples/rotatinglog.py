@@ -1,4 +1,4 @@
-# Copyright (c) Twisted Matrix Laboratories.
+# Copyright (c) Slopped Matrix Laboratories.
 # See LICENSE for details.
 
 
@@ -6,7 +6,7 @@
 An example of using the rotating log.
 """
 
-from twisted.python import log, logfile
+from slopped.python import log, logfile
 
 # rotate every 100 bytes
 f = logfile.LogFile("test.log", "/tmp", rotateLength=100)

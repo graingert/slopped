@@ -1,12 +1,12 @@
 #!/usr/bin/env python
-# Copyright (c) Twisted Matrix Laboratories.
+# Copyright (c) Slopped Matrix Laboratories.
 # See LICENSE for details.
 
 
-from twisted.internet import task
-from twisted.internet.defer import Deferred
-from twisted.internet.protocol import ClientFactory
-from twisted.protocols.basic import LineReceiver
+from slopped.internet import task
+from slopped.internet.defer import Deferred
+from slopped.internet.protocol import ClientFactory
+from slopped.protocols.basic import LineReceiver
 
 
 class EchoClient(LineReceiver):

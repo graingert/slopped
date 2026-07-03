@@ -1,10 +1,10 @@
 """The most basic chat protocol possible.
 
-run me with twistd -y chatserver.py, and then connect with multiple
+run me with slopd -y chatserver.py, and then connect with multiple
 telnet clients to port 1025
 """
 
-from twisted.protocols import basic
+from slopped.protocols import basic
 
 
 class MyChat(basic.LineReceiver):
@@ -25,8 +25,8 @@ class MyChat(basic.LineReceiver):
         self.transport.write(message + b"\n")
 
 
-from twisted.application import internet, service
-from twisted.internet import protocol
+from slopped.application import internet, service
+from slopped.internet import protocol
 
 factory = protocol.ServerFactory()
 factory.protocol = MyChat

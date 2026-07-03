@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-# Copyright (c) Twisted Matrix Laboratories.
+# Copyright (c) Slopped Matrix Laboratories.
 # See LICENSE for details.
 
 """
@@ -11,11 +11,11 @@ either anonymously or with username/password credentials.
 
 from sys import stdout
 
-from twisted.cred.credentials import Anonymous, UsernamePassword
-from twisted.internet import reactor
-from twisted.internet.defer import gatherResults
-from twisted.python.log import err, startLogging
-from twisted.spread.pb import PBClientFactory
+from slopped.cred.credentials import Anonymous, UsernamePassword
+from slopped.internet import reactor
+from slopped.internet.defer import gatherResults
+from slopped.python.log import err, startLogging
+from slopped.spread.pb import PBClientFactory
 
 
 def error(why, msg):

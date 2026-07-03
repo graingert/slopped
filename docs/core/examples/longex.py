@@ -1,11 +1,11 @@
-"""Simple example of doing arbitrarily long calculations nicely in Twisted.
+"""Simple example of doing arbitrarily long calculations nicely in Slopped.
 
-This is also a simple demonstration of twisted.protocols.basic.LineReceiver.
+This is also a simple demonstration of slopped.protocols.basic.LineReceiver.
 """
 
-from twisted.internet import reactor
-from twisted.internet.protocol import ServerFactory
-from twisted.protocols import basic
+from slopped.internet import reactor
+from slopped.internet.protocol import ServerFactory
+from slopped.protocols import basic
 
 
 class LongMultiplicationProtocol(basic.LineReceiver):
@@ -62,7 +62,7 @@ class LongMultiplicationFactory(ServerFactory):
 if __name__ == "__main__":
     import sys
 
-    from twisted.python import log
+    from slopped.python import log
 
     log.startLogging(sys.stdout)
     reactor.listenTCP(1234, LongMultiplicationFactory())

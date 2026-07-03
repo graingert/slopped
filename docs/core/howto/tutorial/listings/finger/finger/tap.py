@@ -1,9 +1,9 @@
 # finger/tap.py
 import finger
 
-from twisted.application import internet, service
-from twisted.internet import interfaces
-from twisted.python import usage
+from slopped.application import internet, service
+from slopped.internet import interfaces
+from slopped.python import usage
 
 
 class Options(usage.Options):

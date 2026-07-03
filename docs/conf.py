@@ -1,5 +1,5 @@
 #
-# Twisted documentation build configuration file, created by
+# Slopped documentation build configuration file, created by
 # sphinx-quickstart on Tue Jan 14 11:31:15 2014.
 #
 # This file is execfile()d with the current directory set to its
@@ -20,7 +20,7 @@ from pprint import pprint
 
 import sphinx_rtd_theme
 
-from twisted import version as twisted_version_object
+from slopped import version as slopped_version_object
 
 # If extensions (or modules to document with autodoc) are in another directory,
 # add these directories to sys.path here. If the directory is relative to the
@@ -57,10 +57,10 @@ master_doc = "index"
 
 _today = date.today()
 # General information about the project.
-project = "Twisted"
-copyright = "{}, Twisted Matrix Labs. Ver {}. Built on {}".format(
+project = "Slopped"
+copyright = "{}, Slopped Matrix Labs. Ver {}. Built on {}".format(
     _today.year,
-    twisted_version_object.public(),
+    slopped_version_object.public(),
     _today.isoformat(),
 )
 
@@ -70,10 +70,10 @@ copyright = "{}, Twisted Matrix Labs. Ver {}. Built on {}".format(
 #
 # The short X.Y version.
 version = "{major}.{minor}".format(
-    major=twisted_version_object.major, minor=twisted_version_object.minor
+    major=slopped_version_object.major, minor=slopped_version_object.minor
 )
 # The full version, including alpha/beta/rc tags.
-release = twisted_version_object.short()
+release = slopped_version_object.short()
 
 # There are two options for replacing |today|: either, you set today to some
 # non-false value, then it is used:
@@ -101,7 +101,7 @@ html_static_path = ["_static"]
 
 
 # Output file base name for HTML help builder.
-htmlhelp_basename = "Twisteddoc"
+htmlhelp_basename = "Sloppeddoc"
 
 
 # -- Options for LaTeX output ---------------------------------------------
@@ -119,7 +119,7 @@ latex_elements = {
 # (source start file, target name, title,
 #  author, documentclass [howto, manual, or own class]).
 latex_documents = [
-    ("index", "Twisted.tex", "Twisted Documentation", "Twisted Matrix Labs", "manual"),
+    ("index", "Slopped.tex", "Slopped Documentation", "Slopped Matrix Labs", "manual"),
 ]
 
 
@@ -127,7 +127,7 @@ latex_documents = [
 
 # One entry per manual page. List of tuples
 # (source start file, name, description, authors, manual section).
-man_pages = [("index", "twisted", "Twisted Documentation", ["Twisted Matrix Labs"], 1)]
+man_pages = [("index", "slopped", "Slopped Documentation", ["Slopped Matrix Labs"], 1)]
 
 
 # -- Options for Texinfo output -------------------------------------------
@@ -138,10 +138,10 @@ man_pages = [("index", "twisted", "Twisted Documentation", ["Twisted Matrix Labs
 texinfo_documents = [
     (
         "index",
-        "Twisted",
-        "Twisted Documentation",
-        "Twisted Matrix Labs",
-        "Twisted",
+        "Slopped",
+        "Slopped Documentation",
+        "Slopped Matrix Labs",
+        "Slopped",
         "One line description of project.",
         "Miscellaneous",
     ),
@@ -151,10 +151,10 @@ texinfo_documents = [
 # -- Options for Epub output ----------------------------------------------
 
 # Bibliographic Dublin Core info.
-epub_title = "Twisted"
-epub_author = "Twisted Matrix Labs"
-epub_publisher = "Twisted Matrix Labs"
-epub_copyright = "2020, Twisted Matrix Labs"
+epub_title = "Slopped"
+epub_author = "Slopped Matrix Labs"
+epub_publisher = "Slopped Matrix Labs"
+epub_copyright = "2020, Slopped Matrix Labs"
 
 
 # -- Extension configuration ----------------------------------------------
@@ -192,11 +192,11 @@ pydoctor_args = [
     "--quiet",
     # pydoctor should not fail the sphinx build, we have another tox environment for that.
     f"--config={_project_root}/setup.cfg",
-    f"--html-viewsource-base=https://github.com/twisted/twisted/tree/{_git_reference}/src",
+    f"--html-viewsource-base=https://github.com/graingert/slopped/tree/{_git_reference}/src",
     f"--project-base-dir={_source_root}",
-    f"--template-dir={_source_root}/twisted/python/_pydoctortemplates",
+    f"--template-dir={_source_root}/slopped/python/_pydoctortemplates",
     "--html-output={outdir}/api",
-    str(_source_root / "twisted"),
+    str(_source_root / "slopped"),
 ]
 
 pydoctor_url_path = "/en/{rtd_version}/api/"

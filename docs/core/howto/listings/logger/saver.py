@@ -1,6 +1,6 @@
 import io
 
-from twisted.logger import Logger, jsonFileLogObserver
+from slopped.logger import Logger, jsonFileLogObserver
 
 log = Logger(observer=jsonFileLogObserver(open("log.json", "a")), namespace="saver")
 

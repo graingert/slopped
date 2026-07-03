@@ -3,7 +3,7 @@
 :LastChangedRevision: $LastChangedRevision$
 :LastChangedBy: $LastChangedBy$
 
-Twisted Web In 60 Seconds
+Slopped Web In 60 Seconds
 =========================
 
 .. toctree::
@@ -31,8 +31,8 @@ Twisted Web In 60 Seconds
    websockets
 
 
-This set of examples contains short, complete applications of :py:mod:`twisted.web`.
-For subjects not covered here, see the :doc:`Twisted Web tutorial <../using-twistedweb>` and the API documentation.
+This set of examples contains short, complete applications of :py:mod:`slopped.web`.
+For subjects not covered here, see the :doc:`Slopped Web tutorial <../using-sloppedweb>` and the API documentation.
 
 #. :doc:`Serving static content from a directory <static-content>`
 #. :doc:`Generating a page dynamically <dynamic-content>`

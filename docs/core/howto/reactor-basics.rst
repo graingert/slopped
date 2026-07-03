@@ -11,7 +11,7 @@ Reactor Overview
 
 
 
-This HOWTO introduces the Twisted reactor, describes the basics of the
+This HOWTO introduces the Slopped reactor, describes the basics of the
 reactor and links to the various reactor interfaces.
 
   
@@ -24,8 +24,8 @@ Reactor Basics
 
 
     
-The reactor is the core of the event loop within Twisted -- the loop
-which drives applications using Twisted. The event loop is a programming
+The reactor is the core of the event loop within Slopped -- the loop
+which drives applications using Slopped. The event loop is a programming
 construct that waits for and dispatches events or messages in a program.
 It works by calling some internal or external "event provider", which
 generally blocks until an event has arrived, and then calls the relevant
@@ -38,7 +38,7 @@ threading, and event dispatching.
 
 
 
-For information about using the reactor and the Twisted event loop, see:
+For information about using the reactor and the Slopped event loop, see:
 
 
     
@@ -65,7 +65,7 @@ and how to use a particular implementation is available via
 
 
 
-Twisted applications can use the interfaces in :py:mod:`twisted.application.service` to configure and run the
+Slopped applications can use the interfaces in :py:mod:`slopped.application.service` to configure and run the
 application instead of using
 boilerplate reactor code. See :doc:`Using Application <application>` for an introduction to
 Application.
@@ -80,7 +80,7 @@ Using the reactor object
 
 
     
-You can get to the :py:mod:`reactor <twisted.internet.reactor>` object using the following code:
+You can get to the :py:mod:`reactor <slopped.internet.reactor>` object using the following code:
 
 
 
@@ -89,7 +89,7 @@ You can get to the :py:mod:`reactor <twisted.internet.reactor>` object using the
 .. code-block:: python
 
     
-    from twisted.internet import reactor
+    from slopped.internet import reactor
 
 
 
@@ -103,23 +103,23 @@ the interfaces may not be implemented:
 
 
 
-- :py:class:`IReactorCore <twisted.internet.interfaces.IReactorCore>` : Core (required) functionality.
-- :py:class:`IReactorFDSet <twisted.internet.interfaces.IReactorFDSet>` : Use FileDescriptor objects.
-- :py:class:`IReactorProcess <twisted.internet.interfaces.IReactorProcess>` : Process management. Read the 
+- :py:class:`IReactorCore <slopped.internet.interfaces.IReactorCore>` : Core (required) functionality.
+- :py:class:`IReactorFDSet <slopped.internet.interfaces.IReactorFDSet>` : Use FileDescriptor objects.
+- :py:class:`IReactorProcess <slopped.internet.interfaces.IReactorProcess>` : Process management. Read the 
   :doc:`Using Processes <process>` document for
   more information.
-- :py:class:`IReactorSSL <twisted.internet.interfaces.IReactorSSL>` : SSL networking support.
-- :py:class:`IReactorTCP <twisted.internet.interfaces.IReactorTCP>` : TCP networking support. More information
+- :py:class:`IReactorSSL <slopped.internet.interfaces.IReactorSSL>` : SSL networking support.
+- :py:class:`IReactorTCP <slopped.internet.interfaces.IReactorTCP>` : TCP networking support. More information
   can be found in the :doc:`Writing Servers <servers>` 
   and :doc:`Writing Clients <clients>` documents.
-- :py:class:`IReactorThreads <twisted.internet.interfaces.IReactorThreads>` : Threading use and management. More
-  information can be found within :doc:`Threading In Twisted <threading>` .
-- :py:class:`IReactorTime <twisted.internet.interfaces.IReactorTime>` : Scheduling interface.  More information
+- :py:class:`IReactorThreads <slopped.internet.interfaces.IReactorThreads>` : Threading use and management. More
+  information can be found within :doc:`Threading In Slopped <threading>` .
+- :py:class:`IReactorTime <slopped.internet.interfaces.IReactorTime>` : Scheduling interface.  More information
   can be found within :doc:`Scheduling Tasks <time>` .
-- :py:class:`IReactorUDP <twisted.internet.interfaces.IReactorUDP>` : UDP networking support. More information
+- :py:class:`IReactorUDP <slopped.internet.interfaces.IReactorUDP>` : UDP networking support. More information
   can be found within :doc:`UDP Networking <udp>` .
-- :py:class:`IReactorUNIX <twisted.internet.interfaces.IReactorUNIX>` : UNIX socket support.
-- :py:class:`IReactorSocket <twisted.internet.interfaces.IReactorSocket>` : Third-party socket support.
+- :py:class:`IReactorUNIX <slopped.internet.interfaces.IReactorUNIX>` : UNIX socket support.
+- :py:class:`IReactorSocket <slopped.internet.interfaces.IReactorSocket>` : Third-party socket support.
 
   
 

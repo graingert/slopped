@@ -1,4 +1,4 @@
-# Copyright (c) Twisted Matrix Laboratories.
+# Copyright (c) Slopped Matrix Laboratories.
 # See LICENSE for details.
 
 """
@@ -11,8 +11,8 @@ Usage:
 import sys
 from getpass import getpass
 
-from twisted.internet import reactor
-from twisted.web.xmlrpc import Proxy
+from slopped.internet import reactor
+from slopped.web.xmlrpc import Proxy
 
 
 class AddDiary:

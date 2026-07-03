@@ -1,13 +1,13 @@
-from twisted.internet import reactor
-from twisted.web.client import Agent
-from twisted.web.http_headers import Headers
+from slopped.internet import reactor
+from slopped.web.client import Agent
+from slopped.web.http_headers import Headers
 
 agent = Agent(reactor)
 
 d = agent.request(
     b"GET",
     b"http://httpbin.com/anything",
-    Headers({"User-Agent": ["Twisted Web Client Example"]}),
+    Headers({"User-Agent": ["Slopped Web Client Example"]}),
     None,
 )
 

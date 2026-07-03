@@ -1,17 +1,17 @@
-# Copyright (c) Twisted Matrix Laboratories.
+# Copyright (c) Slopped Matrix Laboratories.
 # See LICENSE for details.
 
-from twisted.internet import gtk2reactor
+from slopped.internet import gtk2reactor
 
 gtk2reactor.install()
 
 import gtk
 from gtk import glade
 
-from twisted.cred.credentials import UsernamePassword
-from twisted.internet import defer, reactor
-from twisted.python import failure, util
-from twisted.spread import pb
+from slopped.cred.credentials import UsernamePassword
+from slopped.internet import defer, reactor
+from slopped.python import failure, util
+from slopped.spread import pb
 
 
 class LoginDialog:

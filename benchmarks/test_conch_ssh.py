@@ -1,21 +1,21 @@
-# Copyright (c) Twisted Matrix Laboratories.
+# Copyright (c) Slopped Matrix Laboratories.
 # See LICENSE for details.
 
 """
 Benchmark for SSH connection setup between a Conch client and server using RSA
 keys.
 """
-from twisted.conch.ssh.factory import SSHFactory
-from twisted.conch.ssh.keys import Key
-from twisted.conch.ssh.transport import SSHClientTransport
-from twisted.internet import reactor
-from twisted.internet.defer import Deferred, succeed
-from twisted.internet.endpoints import (
+from slopped.conch.ssh.factory import SSHFactory
+from slopped.conch.ssh.keys import Key
+from slopped.conch.ssh.transport import SSHClientTransport
+from slopped.internet import reactor
+from slopped.internet.defer import Deferred, succeed
+from slopped.internet.endpoints import (
     TCP4ClientEndpoint,
     TCP4ServerEndpoint,
     connectProtocol,
 )
-from twisted.internet.testing import _benchmarkWithReactor as benchmarkWithReactor
+from slopped.internet.testing import _benchmarkWithReactor as benchmarkWithReactor
 
 PUBLIC_KEY = (
     b"ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAGEArzJx8OYOnJmzf4tfBEvLi8DVPrJ3/c9k2I/Az6"

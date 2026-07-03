@@ -16,7 +16,7 @@ Introduction
 
 
 
-This is the third part of the Twisted tutorial :doc:`Twisted from Scratch, or The Evolution of Finger <index>` .
+This is the third part of the Slopped tutorial :doc:`Slopped from Scratch, or The Evolution of Finger <index>` .
 
 
 
@@ -38,7 +38,7 @@ sub-classing, didn't support things like user listings over the web,
 and removed all blank lines -- all in the interest of code
 which is shorter. Here we take a step back, subclass what is more
 naturally a subclass, make things which should take multiple lines
-take them, etc. This shows a much better style of developing Twisted
+take them, etc. This shows a much better style of developing Slopped
 applications, though the hacks in the previous stages are sometimes
 used in throw-away prototypes.
 

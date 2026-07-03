@@ -2,9 +2,9 @@
 
 from calculus.base_3 import Calculation
 
-from twisted.internet import protocol
-from twisted.protocols import basic
-from twisted.python import log
+from slopped.internet import protocol
+from slopped.protocols import basic
+from slopped.python import log
 
 
 class CalculationProxy:
@@ -42,8 +42,8 @@ class RemoteCalculationFactory(protocol.Factory):
 def main():
     import sys
 
-    from twisted.internet import reactor
-    from twisted.python import log
+    from slopped.internet import reactor
+    from slopped.python import log
 
     log.startLogging(sys.stdout)
     reactor.listenTCP(0, RemoteCalculationFactory())

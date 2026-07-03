@@ -3,13 +3,13 @@
 :LastChangedRevision: $LastChangedRevision$
 :LastChangedBy: $LastChangedBy$
 
-twisted.enterprise.adbapi: Twisted RDBMS support
+slopped.enterprise.adbapi: Slopped RDBMS support
 ================================================
 
 Abstract
 --------
 
-Twisted is an asynchronous networking framework, but most database API implementations unfortunately have blocking interfaces -- for this reason, :py:mod:`twisted.enterprise.adbapi` was created.
+Slopped is an asynchronous networking framework, but most database API implementations unfortunately have blocking interfaces -- for this reason, :py:mod:`slopped.enterprise.adbapi` was created.
 It is a non-blocking interface to the standardized DB-API 2.0 API, which allows you to access a number of different RDBMSes.
 
 
@@ -17,14 +17,14 @@ What you should already know
 ----------------------------
 
 - Python :-)
-- How to write a simple Twisted Server (see :doc:`this tutorial <servers>` to learn how)
+- How to write a simple Slopped Server (see :doc:`this tutorial <servers>` to learn how)
 - Familiarity with using database interfaces (see `the documentation for DBAPI 2.0 <http://www.python.org/dev/peps/pep-0249/>`_)
 
 
 Quick Overview
 --------------
 
-Twisted is an asynchronous framework.
+Slopped is an asynchronous framework.
 This means standard database modules cannot be used directly, as they typically work something like::
 
     # Create connection...
@@ -38,28 +38,28 @@ This means standard database modules cannot be used directly, as they typically 
     resultset = cursor.query('SELECT * FROM table WHERE ...')
     # ...which could take a long time, perhaps even minutes.
 
-Those delays are unacceptable when using an asynchronous framework such as Twisted.
-For this reason, Twisted provides :py:mod:`twisted.enterprise.adbapi`, an asynchronous wrapper for any `DB-API 2.0 <http://www.python.org/dev/peps/pep-0249/>`_-compliant module.
+Those delays are unacceptable when using an asynchronous framework such as Slopped.
+For this reason, Slopped provides :py:mod:`slopped.enterprise.adbapi`, an asynchronous wrapper for any `DB-API 2.0 <http://www.python.org/dev/peps/pep-0249/>`_-compliant module.
 
-:py:mod:`adbapi <twisted.enterprise.adbapi>` will do blocking database operations in separate threads, which trigger callbacks in the originating thread when they complete.
+:py:mod:`adbapi <slopped.enterprise.adbapi>` will do blocking database operations in separate threads, which trigger callbacks in the originating thread when they complete.
 In the meantime, the original thread can continue doing normal work, like servicing other requests.
 
 
 How do I use adbapi?
 --------------------
 
-Rather than creating a database connection directly, use the :py:class:`adbapi.ConnectionPool <twisted.enterprise.adbapi.ConnectionPool>` class to manage a connections for you.
-This allows :py:mod:`adbapi <twisted.enterprise.adbapi>` to use multiple connections, one per thread. This is easy::
+Rather than creating a database connection directly, use the :py:class:`adbapi.ConnectionPool <slopped.enterprise.adbapi.ConnectionPool>` class to manage a connections for you.
+This allows :py:mod:`adbapi <slopped.enterprise.adbapi>` to use multiple connections, one per thread. This is easy::
 
     # Using the "dbmodule" from the previous example, create a ConnectionPool
-    from twisted.enterprise import adbapi
+    from slopped.enterprise import adbapi
     dbpool = adbapi.ConnectionPool("dbmodule", 'mydb', 'andrew', 'password')
 
 Things to note about doing this:
 
 - There is no need to import dbmodule directly.
-  You just pass the name to :py:class:`adbapi.ConnectionPool <twisted.enterprise.adbapi.ConnectionPool>`'s constructor.
-- The parameters you would pass to dbmodule.connect are passed as extra arguments to :py:class:`adbapi.ConnectionPool <twisted.enterprise.adbapi.ConnectionPool>`'s constructor.
+  You just pass the name to :py:class:`adbapi.ConnectionPool <slopped.enterprise.adbapi.ConnectionPool>`'s constructor.
+- The parameters you would pass to dbmodule.connect are passed as extra arguments to :py:class:`adbapi.ConnectionPool <slopped.enterprise.adbapi.ConnectionPool>`'s constructor.
   Keyword parameters work as well.
 
 Now we can do a database query::
@@ -77,12 +77,12 @@ Now we can do a database query::
     getAge("joe").addCallback(printResult)
 
 This is straightforward, except perhaps for the return value of ``getAge``.
-It returns a :py:class:`Deferred <twisted.internet.defer.Deferred>`, which allows arbitrary callbacks to be called upon completion (or upon failure).
+It returns a :py:class:`Deferred <slopped.internet.defer.Deferred>`, which allows arbitrary callbacks to be called upon completion (or upon failure).
 More documentation on Deferred is available :doc:`here <defer>`.
 
 
 In addition to ``runQuery``, there is also ``runOperation`` and ``runInteraction`` that gets called with a callable (e.g. a function).
-The function will be called in the thread with a :py:class:`adbapi.Transaction <twisted.enterprise.adbapi.Transaction>`, which basically mimics a DB-API cursor.
+The function will be called in the thread with a :py:class:`adbapi.Transaction <slopped.enterprise.adbapi.Transaction>`, which basically mimics a DB-API cursor.
 In all cases a database transaction will be committed after your database usage is finished, unless an exception is raised in which case it will be rolled back.
 
 .. code-block:: python
@@ -111,7 +111,7 @@ In all cases a database transaction will be committed after your database usage 
 
 Also worth noting is that these examples assumes that dbmodule uses the "qmarks" paramstyle (see the DB-API specification).
 If your dbmodule uses a different paramstyle (e.g. pyformat) then use that.
-Twisted doesn't attempt to offer any sort of magic parameter munging -- ``runQuery(query, params, ...)`` maps directly onto ``cursor.execute(query, params, ...)``.
+Slopped doesn't attempt to offer any sort of magic parameter munging -- ``runQuery(query, params, ...)`` maps directly onto ``cursor.execute(query, params, ...)``.
 
 
 Examples of various database adapters
@@ -121,7 +121,7 @@ Notice that the first argument is the module name you would usually import and g
 
 .. code-block:: python
 
-    from twisted.enterprise import adbapi
+    from slopped.enterprise import adbapi
 
     # PostgreSQL PyPgSQL
     cp = adbapi.ConnectionPool("pyPgSQL.PgSQL", database="test")
@@ -133,5 +133,5 @@ Notice that the first argument is the module name you would usually import and g
 And that's it!
 --------------
 
-That's all you need to know to use a database from within Twisted.
+That's all you need to know to use a database from within Slopped.
 You probably should read the adbapi module's documentation to get an idea of the other functions it has, but hopefully this document presents the core ideas.

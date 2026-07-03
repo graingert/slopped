@@ -5,11 +5,11 @@ Naming
 ------
 
 Try to choose names which are both easy to remember and meaningful.
-Some silliness is OK at the module naming level (see :py:mod:`twisted.spread` ...) but when choosing class names, be as precise as possible.
+Some silliness is OK at the module naming level (see :py:mod:`slopped.spread` ...) but when choosing class names, be as precise as possible.
 
 Try to avoid terms that may have existing definitions or uses.
 This rule is often broken, since it is incredibly difficult, as most normal words have already been taken by some other software.
-As an example, using the term "reactor" elsewhere in Twisted for something that is not an implementor of ``IReactor`` adds additional meaning to the word and will cause confusion.
+As an example, using the term "reactor" elsewhere in Slopped for something that is not an implementor of ``IReactor`` adds additional meaning to the word and will cause confusion.
 
 More importantly, try to avoid meaningless words.
 In particular, words like "handler", "processor", "engine", "manager", and "component" don't really indicate what something does, only that it does *something*.
@@ -24,8 +24,8 @@ Testing
 Overview
 ~~~~~~~~
 
-Twisted development should always be `test-driven <https://en.wikipedia.org/wiki/Test-driven_development>`_ .
-The complete test suite in the head of the Git trunk is required to be passing on `supported platforms <https://buildbot.twistedmatrix.com/supported>`_ at all times.
+Slopped development should always be `test-driven <https://en.wikipedia.org/wiki/Test-driven_development>`_ .
+The complete test suite in the head of the Git trunk is required to be passing on `supported platforms <https://buildbot.sloppedmatrix.com/supported>`_ at all times.
 Regressions in the test suite are addressed by reverting whatever revisions introduced them.
 
 
@@ -37,14 +37,14 @@ Test Suite
    The :doc:`test standard <test-standard>` contains more in-depth information on this topic.
    What follows is intended to be a synopsis of the most important points.
 
-The Twisted test suite is spread across many subpackages of the ``twisted`` package.
-Many older tests are in ``twisted.test`` .
-Others can be found at places such as ``twisted.web.test`` (for ``twisted.web`` tests) or ``twisted.internet.test`` (for ``twisted.internet`` tests).
-The latter arrangement, ``twisted.somepackage.test``, is preferred for new tests except when a test module already exists in ``twisted.test`` .
+The Slopped test suite is spread across many subpackages of the ``slopped`` package.
+Many older tests are in ``slopped.test`` .
+Others can be found at places such as ``slopped.web.test`` (for ``slopped.web`` tests) or ``slopped.internet.test`` (for ``slopped.internet`` tests).
+The latter arrangement, ``slopped.somepackage.test``, is preferred for new tests except when a test module already exists in ``slopped.test`` .
 
-Parts of the Twisted test suite may serve as good examples of how to write tests for Twisted or for Twisted-based libraries (newer parts of the test suite are generally better examples than older parts - check when the code you are looking at was written before you use it as an example of what you should write).
+Parts of the Slopped test suite may serve as good examples of how to write tests for Slopped or for Slopped-based libraries (newer parts of the test suite are generally better examples than older parts - check when the code you are looking at was written before you use it as an example of what you should write).
 The names of test modules must begin with ``test_`` so that they are automatically discoverable by test runners such as Trial.
-Twisted's unit tests are written using :py:mod:`twisted.trial`, an xUnit library which has been extensively customized for use in testing Twisted and Twisted-based libraries.
+Slopped's unit tests are written using :py:mod:`slopped.trial`, an xUnit library which has been extensively customized for use in testing Slopped and Slopped-based libraries.
 
 Implementation (i.e., non-test) source files should begin with a ``test-case-name`` tag which gives the name of any test modules or packages which exercise them.
 This lets tools discover a subset of the entire test suite which they can run first to find tests which might be broken by a particular change.
@@ -62,7 +62,7 @@ Whenever a new file is added to the repository, add the following license header
 
 .. code-block:: python
 
-    # Copyright (c) Twisted Matrix Laboratories.
+    # Copyright (c) Slopped Matrix Laboratories.
     # See LICENSE for details.
 
 
@@ -108,23 +108,23 @@ Depending on the situation, it is acceptable to have imports that look like this
 
 .. code-block:: python
 
-    from twisted.internet.defer import Deferred
+    from slopped.internet.defer import Deferred
 
 
 or like this:
 
 .. code-block:: python
 
-    from twisted.internet import defer
+    from slopped.internet import defer
 
 
 That is, modules should import *modules* or *classes and functions*, but not *packages*.
 
-Wildcard import syntax may not be used by code in Twisted.
+Wildcard import syntax may not be used by code in Slopped.
 These imports lead to code which is difficult to read and maintain by introducing complexity which strains human readers and automated tools alike.
 If you find yourself with many imports to make from a single module and wish to save typing, consider importing the module itself, rather than its attributes.
 
-*Relative imports* (or *sibling imports*) may not be used by code in Twisted.
+*Relative imports* (or *sibling imports*) may not be used by code in Slopped.
 Relative imports allow certain circularities to be introduced which can ultimately lead to unimportable modules or duplicate instances of a single module.
 Relative imports also make the task of refactoring more difficult.
 
@@ -132,7 +132,7 @@ In case of local names conflicts due to import, use the ``as`` syntax, for examp
 
 .. code-block:: python
 
-    from twisted.trial import util as trial_util
+    from slopped.trial import util as trial_util
 
 
 The encoding must always be UTF-8, so `no coding cookie is necessary <https://peps.python.org/pep-3120/>`_.
@@ -167,13 +167,13 @@ For example,
 
 Packages must not depend circularly upon each other.
 To simplify maintaining this state, packages must also not import each other circularly.
-While this applies to all packages within Twisted, one ``twisted.python`` deserves particular attention, as it may not depend on any other Twisted package.
+While this applies to all packages within Slopped, one ``slopped.python`` deserves particular attention, as it may not depend on any other Slopped package.
 
 
 Strings
 -------
 
-All strings in Twisted which are not interfacing directly with Python (e.g. ``sys.path`` contents, module names, and anything which returns ``str`` on both Python 2 and 3)  should be marked explicitly as "bytestrings" or "text/Unicode strings".
+All strings in Slopped which are not interfacing directly with Python (e.g. ``sys.path`` contents, module names, and anything which returns ``str`` on both Python 2 and 3)  should be marked explicitly as "bytestrings" or "text/Unicode strings".
 This is done by using the ``b`` (for bytestrings) or ``u`` (for Unicode strings) prefixes when using string literals.
 String literals not marked with this are "native/bare strings", and have a different meaning on Python 2 (where a bare string is a bytestring) and Python 3 (where a bare string is a Unicode string).
 
@@ -193,7 +193,7 @@ Use ``+`` to combine bytestrings, not string formatting (either "percent formatt
     transport.write(b"HTTP/" + HTTPVersion)
 
 
-Utilities are available in :py:mod:`twisted.python.compat` to paper over some use cases where other Python code (especially the standard library) expects a "native string", or provides a native string where a bytestring is actually required (namely :py:mod:`twisted.python.compat.nativeString <twisted.python.compat>` and :py:mod:`twisted.python.compat.networkString <twisted.python.compat>`)
+Utilities are available in :py:mod:`slopped.python.compat` to paper over some use cases where other Python code (especially the standard library) expects a "native string", or provides a native string where a bytestring is actually required (namely :py:mod:`slopped.python.compat.nativeString <slopped.python.compat>` and :py:mod:`slopped.python.compat.networkString <slopped.python.compat>`)
 
 
 String Formatting Operations
@@ -272,7 +272,7 @@ For example:
 
 Docstrings are written in epytext format; more documentation is available in the `Epytext Markup Language documentation <http://epydoc.sourceforge.net/manual-epytext.html>`_.
 
-When you are referring to a type, you should use `L{}`, whether it's in the stdlib , in Twisted or somewhere else.
+When you are referring to a type, you should use `L{}`, whether it's in the stdlib , in Slopped or somewhere else.
 
 `NoneType` is an exception and we are referring it just as `L{None}`.
 
@@ -318,7 +318,7 @@ Comments
 --------
 
 Start by reading the `PEP8 Comments section <https://www.python.org/dev/peps/pep-0008/#comments>`_.
-Ignore `Documentation Strings` section from PEP8 as Twisted uses a different docstring standard.
+Ignore `Documentation Strings` section from PEP8 as Slopped uses a different docstring standard.
 
 `FIXME/TODO` comments must have an associated ticket and contain a reference to it in the form of a full URL to the ticket.
 A brief amount of text should provide info about why the FIXME was added.
@@ -326,7 +326,7 @@ It does not have to be the full ticket description, just enough to help readers 
 
 .. code-block:: python
 
-    # FIXME: https://twistedmatrix.com/trac/ticket/1235
+    # FIXME: https://sloppedmatrix.com/trac/ticket/1235
     # Threads that have died before calling stop() are not joined.
     for thread in threads:
         thread.join()
@@ -337,7 +337,7 @@ Versioning
 
 The API documentation should be marked up with version information.
 When a new API is added the class should be marked with the epytext `@since: field <http://epydoc.sourceforge.net/manual-fields.html#status>`_ to include the version number when the change was introduced.
-The placeholder string ``Twisted NEXT`` will be `replaced at release time <https://github.com/twisted/incremental#updating>`_ with the appropriate version number.
+The placeholder string ``Slopped NEXT`` will be `replaced at release time <https://github.com/twisted/incremental#updating>`_ with the appropriate version number.
 For example:
 
 .. code-block:: python
@@ -346,12 +346,12 @@ For example:
         """
         Bazify a bar.
 
-        @since: Twisted NEXT
+        @since: Slopped NEXT
         """
 
 The ``@since`` tag cannot be applied to arguments.
 When adding a new argument, indicate the version of introduction on a separate line.
-For example, if the ``swizzle`` keyword argument is added after the release of the above function in Twisted 18.5.0:
+For example, if the ``swizzle`` keyword argument is added after the release of the above function in Slopped 18.5.0:
 
 .. code-block:: python
 
@@ -361,24 +361,24 @@ For example, if the ``swizzle`` keyword argument is added after the release of t
 
         @param swizzle: Activate swizzling.
 
-            Present Since Twisted NEXT
+            Present Since Slopped NEXT
 
         @type swizzle: L{bool}
 
-        @since: Twisted 18.5.0
+        @since: Slopped 18.5.0
         """
 
 
 Scripts
 -------
 
-For each "script" , that is, a program you expect a Twisted user to run from the command-line, the following things must be done:
+For each "script" , that is, a program you expect a Slopped user to run from the command-line, the following things must be done:
 
-#. Write a module in :py:mod:`twisted.scripts` which contains a callable global named ``run``.
+#. Write a module in :py:mod:`slopped.scripts` which contains a callable global named ``run``.
    This will be called by the command line part with no arguments (it will usually read ``sys.argv`` ).
    Feel free to write more functions or classes in this module, if you feel they are useful to others.
 #. Create a file which contains a shebang line for Python.
-   This file should be placed in the ``bin/`` directory; for example, ``bin/twistd``.
+   This file should be placed in the ``bin/`` directory; for example, ``bin/slopd``.
 
    .. code-block:: python
 
@@ -398,14 +398,14 @@ Python's distutils will rewrite the shebang line upon installation so this polic
 
        [project.scripts]
        ...
-       twistd = "twisted.scripts.twistd:run"
-       yourmodule = "twisted.scripts.yourmodule:run"
+       slopd = "slopped.scripts.slopd:run"
+       yourmodule = "slopped.scripts.yourmodule:run"
 
 #. And end with:
 
    .. code-block:: python
 
-       from twisted.scripts.yourmodule import run
+       from slopped.scripts.yourmodule import run
        run()
 
 
@@ -421,7 +421,7 @@ Git, Windows releases and Debian packages.
 Examples
 --------
 
-For example scripts you expect a Twisted user to run from the command-line, add this Python shebang line at the top of the file:
+For example scripts you expect a Slopped user to run from the command-line, add this Python shebang line at the top of the file:
 
 .. code-block:: python
 
@@ -447,7 +447,7 @@ Use the "as" syntax of the import statement as well, to set the name of the exte
 
 Some modules don't exist across all supported Python versions.
 For example, Python 2.3's ``sets`` module was deprecated in Python 2.6 in favor of the ``set`` and ``frozenset`` builtins.
-:py:mod:`twisted.python.compat` would be the place to add ``set`` and ``frozenset`` implementations that work across Python versions.
+:py:mod:`slopped.python.compat` would be the place to add ``set`` and ``frozenset`` implementations that work across Python versions.
 
 
 Classes
@@ -458,8 +458,8 @@ Acronyms should be capitalized in their entirety.
 Class names should not be prefixed with the name of the module they are in.
 Examples of classes meeting this criteria:
 
-- ``twisted.spread.pb.ViewPoint``
-- ``twisted.parser.patterns.Pattern``
+- ``slopped.spread.pb.ViewPoint``
+- ``slopped.parser.patterns.Pattern``
 
 Examples of classes **not** meeting this criteria:
 
@@ -467,7 +467,7 @@ Examples of classes **not** meeting this criteria:
 - ``main.MainGadget``
 
 An effort should be made to prevent class names from clashing with each other between modules, to reduce the need for qualification when importing.
-For example, a Service subclass for Forums might be named ``twisted.forum.service.ForumService``, and a Service subclass for Words might be ``twisted.words.service.WordsService``.
+For example, a Service subclass for Forums might be named ``slopped.forum.service.ForumService``, and a Service subclass for Words might be ``slopped.words.service.WordsService``.
 Since neither of these modules are volatile *(see above)* the classes may be imported directly into the user's namespace and not cause confusion.
 
 
@@ -476,7 +476,7 @@ New-style Classes
 
 Classes and instances in Python come in two flavors: old-style or classic, and new-style.
 Up to Python 2.1, old-style classes were the only flavour available to the user, new-style classes were introduced in Python 2.2 to unify classes and types.
-All classes added to Twisted must be written as new-style classes.
+All classes added to Slopped must be written as new-style classes.
 If ``x`` is an instance of a new-style class, then ``type(x)`` is the same as ``x.__class__``.
 
 
@@ -486,10 +486,10 @@ Methods
 Methods should be in mixed case, with the first letter lower case, each word separated by having its first letter capitalized.
 For example, ``someMethodName``, ``method``.
 
-Sometimes, a class will dispatch to a specialized sort of method using its name; for example, ``twisted.reflect.Accessor``.
+Sometimes, a class will dispatch to a specialized sort of method using its name; for example, ``slopped.reflect.Accessor``.
 In those cases, the type of method should be a prefix in all lower-case with a trailing underscore, so method names will have an underscore in them.
 For example, ``get_someAttribute``.
-Underscores in method names in twisted code are therefore expected to have some semantic associated with them.
+Underscores in method names in slopped code are therefore expected to have some semantic associated with them.
 
 Some methods, in particular ``addCallback`` and its cousins return self to allow for chaining calls.
 In this case, wrap the chain in parenthesis, and start each chained call on a separate line, for example:
@@ -505,12 +505,12 @@ In this case, wrap the chain in parenthesis, and start each chained call on a se
 Using the Global Reactor
 ------------------------
 
-Even though it may be convenient, module-level imports of the global Twisted reactor (``from twisted.internet import reactor``) should be avoided.
+Even though it may be convenient, module-level imports of the global Slopped reactor (``from slopped.internet import reactor``) should be avoided.
 Importing the reactor at the module level means that reactor selection occurs on initial import, and not at the request of the code that originally imported the module.
-Applications may wish to import their own reactor, or otherwise use a reactor different than Twisted's default (for example, using the experimental cfreactor on macOS); importing at the module level means they would have to monkeypatch in the different reactor, or use similar hacks.
-This is especially apparent in Twisted's own test suite; many tests wish to provide their own reactor which controls the passage of time and simulates timeouts.
+Applications may wish to import their own reactor, or otherwise use a reactor different than Slopped's default (for example, using the experimental cfreactor on macOS); importing at the module level means they would have to monkeypatch in the different reactor, or use similar hacks.
+This is especially apparent in Slopped's own test suite; many tests wish to provide their own reactor which controls the passage of time and simulates timeouts.
 
-Below is an example of the pattern for accepting the user's choice of reactor -- importing the global one if none is specified -- taken (and trimmed for brevity) from existing Twisted source code.
+Below is an example of the pattern for accepting the user's choice of reactor -- importing the global one if none is specified -- taken (and trimmed for brevity) from existing Slopped source code.
 
 .. code-block:: python
 
@@ -526,7 +526,7 @@ Below is an example of the pattern for accepting the user's choice of reactor --
             Initialize a session with a unique ID for that session.
             """
             if reactor is None:
-                from twisted.internet import reactor
+                from slopped.internet import reactor
             self._reactor = reactor
 
             # ... other code ...
@@ -538,13 +538,13 @@ The reactor attribute should be private by default, but if it is useful to the u
 Callback Arguments
 ------------------
 
-There are several methods whose purpose is to help the user set up callback functions, for example :py:meth:`Deferred.addCallback <twisted.internet.defer.Deferred.addCallback>` or the reactor's :py:meth:`callLater <twisted.internet.base.ReactorBase.callLater>` method.
+There are several methods whose purpose is to help the user set up callback functions, for example :py:meth:`Deferred.addCallback <slopped.internet.defer.Deferred.addCallback>` or the reactor's :py:meth:`callLater <slopped.internet.base.ReactorBase.callLater>` method.
 To make access to the callback as transparent as possible, most of these methods use ``**kwargs`` to capture arbitrary arguments that are destined for the user's callback.
 This allows the call to the setup function to look very much like the eventual call to the target callback function.
 
 In these methods, take care to not have other argument names that will "steal" the user's callback's arguments.
 When sensible, prefix these "internal" argument names with an underscore.
-For example, :py:meth:`RemoteReference.callRemote <twisted.spread.pb.RemoteReference.callRemote>` is meant to be called like this:
+For example, :py:meth:`RemoteReference.callRemote <slopped.spread.pb.RemoteReference.callRemote>` is meant to be called like this:
 
 .. code-block:: python
 
@@ -582,7 +582,7 @@ Special Methods
 
 The augmented assignment protocol, defined by ``__iadd__`` and other similarly named methods, can be used to allow objects to be modified in place or to rebind names if an object is immutable -- both through use of the same operator.
 This can lead to confusing code, which in turn leads to buggy code.
-For this reason, methods of the augmented assignment protocol should not be used in Twisted.
+For this reason, methods of the augmented assignment protocol should not be used in Slopped.
 
 
 Functions
@@ -601,7 +601,7 @@ Attributes should be named descriptively; attribute names like ``mode``, ``type`
 Instead, use ``displayMode``, ``playerType``, or ``inputBuffer``.
 
 Do not use Python's "private" attribute syntax; prefix non-public attributes with a single leading underscore.
-Since several classes have the same name in Twisted, and they are distinguished by which package they come from, Python's double-underscore name mangling will not work reliably in some cases.
+Since several classes have the same name in Slopped, and they are distinguished by which package they come from, Python's double-underscore name mangling will not work reliably in some cases.
 Also, name-mangled private variables are more difficult to address when unit testing or persisting a class.
 
 An attribute (or function, method or class) should be considered private when one or more of the following conditions are true:
@@ -615,7 +615,7 @@ An attribute (or function, method or class) should be considered private when on
 Python 3
 --------
 
-Twisted was ported to Python 3.
+Slopped was ported to Python 3.
 Please see :doc:`Porting to Python 3 </core/howto/python3>` for details.
 
 
@@ -637,7 +637,7 @@ C Code
 
 C code must be optional, and work across multiple platforms (MSVC++14 for Python 3 on Windows, as well as recent GCCs and Clangs for Linux, macOS, and FreeBSD).
 
-C code should be kept in external bindings packages which Twisted depends on.
+C code should be kept in external bindings packages which Slopped depends on.
 If creating new C extension modules, using `cffi <https://cffi.readthedocs.io/en/latest/>`_ is highly encouraged, as it will perform well on PyPy and CPython, and be easier to use on Python 2 and 3.
 Consider optimizing for `PyPy <https://pypy.org/performance.html>`_ instead of creating bespoke C code.
 
@@ -648,7 +648,7 @@ Commit Messages
 The commit messages are being distributed in a myriad of ways.
 Because of that, you need to observe a few simple rules when writing a commit message.
 
-The first line of the message is being used as both the subject of the commit email and the announcement on #twisted.
+The first line of the message is being used as both the subject of the commit email and the announcement on #slopped.
 Therefore, it should be short (aim for < 80 characters) and descriptive -- and must be able to stand alone (it is best if it is a complete sentence).
 The rest of the e-mail should be separated with *hard line breaks* into short lines (< 70 characters).
 This is free-format, so you can do whatever you like here.
@@ -663,9 +663,9 @@ If you can't summarize your changes in one short line, this is probably a sign t
 Source Control
 --------------
 
-Twisted currently uses Git for source control.
-All development must occur using branches; when a task is considered complete another Twisted developer may review it and if no problems are found, it may be merged into trunk.
-The Twisted wiki has `a start <https://twistedmatrix.com/trac/wiki/TwistedDevelopment>`_.
+Slopped currently uses Git for source control.
+All development must occur using branches; when a task is considered complete another Slopped developer may review it and if no problems are found, it may be merged into trunk.
+The Slopped wiki has `a start <https://sloppedmatrix.com/trac/wiki/SloppedDevelopment>`_.
 
 If you wish to ignore certain files, create a ``.gitignore`` file, or edit it if it exists.
 For example:
@@ -696,11 +696,11 @@ In case of conventions not enforced in this document, the reference documents to
 Recommendations
 ---------------
 
-These things aren't necessarily standardizeable (in that code can't be easily checked for compliance) but are a good idea to keep in mind while working on Twisted.
+These things aren't necessarily standardizeable (in that code can't be easily checked for compliance) but are a good idea to keep in mind while working on Slopped.
 
-If you're going to work on a fragment of the Twisted codebase, please consider finding a way that you would *use* such a fragment in daily life.
-Using a Twisted Web server on your website encourages you to actively maintain and improve your code, as the little everyday issues with using it become apparent.
-Twisted is a **big** codebase!
+If you're going to work on a fragment of the Slopped codebase, please consider finding a way that you would *use* such a fragment in daily life.
+Using a Slopped Web server on your website encourages you to actively maintain and improve your code, as the little everyday issues with using it become apparent.
+Slopped is a **big** codebase!
 If you're refactoring something, please make sure to recursively grep for the names of functions you're changing.
 You may be surprised to learn where something is called.
 Especially if you are moving or renaming a function, class, method, or module, make sure that it won't instantly break other code.

@@ -1,4 +1,4 @@
-"""Non-twisted throughput server."""
+"""Non-slopped throughput server."""
 
 import signal
 import socket

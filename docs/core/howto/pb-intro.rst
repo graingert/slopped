@@ -21,7 +21,7 @@ Suppose you find yourself in control of both ends of the wire: you
 have two programs that need to talk to each other, and you get to use any
 protocol you want. If you can think of your problem in terms of objects that
 need to make method calls on each other, then chances are good that you can
-use Twisted's Perspective Broker protocol rather than trying to shoehorn
+use Slopped's Perspective Broker protocol rather than trying to shoehorn
 your needs into something like HTTP, or implementing yet another RPC
 mechanism [#]_ .
 
@@ -44,7 +44,7 @@ sandwich-related puns) is based upon a few central concepts:
   the remote copy will still be useful. 
 - *remote method calls* : doing something to a local object and
   causing a method to get run on a distant one. The local object is called a
-  :py:class:`RemoteReference <twisted.spread.pb.RemoteReference>` , and you
+  :py:class:`RemoteReference <slopped.spread.pb.RemoteReference>` , and you
   "do something" by running its ``.callRemote`` method.
 
 
@@ -67,7 +67,7 @@ Object Roadmap
 
 To start with, here are the major classes, interfaces, and
 functions involved in PB, with links to the file where they are
-defined (all of which are under twisted/, of course). Don't worry
+defined (all of which are under slopped/, of course). Don't worry
 about understanding what they all do yet: it's easier to figure them
 out through their interaction than explaining them one at a time.
 
@@ -77,11 +77,11 @@ out through their interaction than explaining them one at a time.
 
 
 
-- :py:class:`Factory <twisted.internet.protocol.Factory>` 
+- :py:class:`Factory <slopped.internet.protocol.Factory>` 
   : ``internet/protocol.py`` 
-- :py:class:`PBServerFactory <twisted.spread.pb.PBServerFactory>` 
+- :py:class:`PBServerFactory <slopped.spread.pb.PBServerFactory>` 
   : ``spread/pb.py`` 
-- :py:class:`Broker <twisted.spread.pb.Broker>` 
+- :py:class:`Broker <slopped.spread.pb.Broker>` 
   : ``spread/pb.py`` 
 
 
@@ -96,15 +96,15 @@ Other classes that are involved at some point:
 
 
 
-- :py:class:`RemoteReference <twisted.spread.pb.RemoteReference>` 
+- :py:class:`RemoteReference <slopped.spread.pb.RemoteReference>` 
   : ``spread/pb.py`` 
-- :py:class:`pb.Root <twisted.spread.pb.Root>` 
+- :py:class:`pb.Root <slopped.spread.pb.Root>` 
   : ``spread/pb.py`` , actually defined as
-  ``twisted.spread.flavors.Root`` 
+  ``slopped.spread.flavors.Root`` 
   in ``spread/flavors.py`` 
-- :py:class:`pb.Referenceable <twisted.spread.pb.Referenceable>` 
+- :py:class:`pb.Referenceable <slopped.spread.pb.Referenceable>` 
   : ``spread/pb.py`` , actually defined as
-  ``twisted.spread.flavors.Referenceable`` 
+  ``slopped.spread.flavors.Referenceable`` 
   in ``spread/flavors.py`` 
 
 
@@ -119,13 +119,13 @@ about authorization and security:
 
 
 
-- :py:class:`Portal <twisted.cred.portal.Portal>` 
+- :py:class:`Portal <slopped.cred.portal.Portal>` 
   : ``cred/portal.py`` 
-- :py:class:`IRealm <twisted.cred.portal.IRealm>` 
+- :py:class:`IRealm <slopped.cred.portal.IRealm>` 
   : ``cred/portal.py`` 
-- :py:class:`IPerspective <twisted.spread.pb.IPerspective>` 
+- :py:class:`IPerspective <slopped.spread.pb.IPerspective>` 
   : ``spread/pb.py`` , which you will usually be interacting
-  with via :py:class:`pb.Avatar <twisted.spread.pb.Avatar>` (a basic implementor of the interface).
+  with via :py:class:`pb.Avatar <slopped.spread.pb.Avatar>` (a basic implementor of the interface).
 
 
 
@@ -141,7 +141,7 @@ Technically you can subclass anything you want, but technically you
 could also write a whole new framework, which would just waste a lot
 of time. Knowing which classes are useful to subclass or which
 interfaces to implement is one of the bits of knowledge that's crucial
-to using PB (and all of Twisted) successfully. Here are some hints to
+to using PB (and all of Slopped) successfully. Here are some hints to
 get started:
 
 
@@ -150,19 +150,19 @@ get started:
 
 
 
-- :py:class:`pb.Root <twisted.spread.pb.Root>` , :py:class:`pb.Referenceable <twisted.spread.pb.Referenceable>` : you'll
+- :py:class:`pb.Root <slopped.spread.pb.Root>` , :py:class:`pb.Referenceable <slopped.spread.pb.Referenceable>` : you'll
   subclass these to make remotely-referenceable objects (i.e., objects
   which you can call methods on remotely) using PB. You don't need to
   change any of the existing behavior, just inherit all of it and add
   the remotely-accessible methods that you want to export.
-- :py:class:`pb.Avatar <twisted.spread.pb.Avatar>` : You'll
+- :py:class:`pb.Avatar <slopped.spread.pb.Avatar>` : You'll
   be subclassing this when you get into PB programming with
   authorization. This is an implementor of IPerspective.
-- :py:class:`ICredentialsChecker <twisted.cred.checkers.ICredentialsChecker>` : Implement this if
+- :py:class:`ICredentialsChecker <slopped.cred.checkers.ICredentialsChecker>` : Implement this if
   you want to authenticate your users against some sort of data store:
   i.e., an LDAP database, an RDBMS, etc. There are already a few
   implementations of this for various back-ends in
-  twisted.cred.checkers.
+  slopped.cred.checkers.
 
 
 
@@ -179,7 +179,7 @@ Things you can Call Remotely
 
 
 At this writing, there are three "flavors" of objects that can
-be accessed remotely through :py:class:`RemoteReference <twisted.spread.pb.RemoteReference>` objects. Each of these
+be accessed remotely through :py:class:`RemoteReference <slopped.spread.pb.RemoteReference>` objects. Each of these
 flavors has a rule for how the ``callRemote`` 
 message is transformed into a local method call on the server.  In
 order to use one of these "flavors" , subclass them and name your
@@ -187,7 +187,7 @@ published methods with the appropriate prefix.
 
 
 
-- :py:class:`twisted.spread.pb.IPerspective` implementors
+- :py:class:`slopped.spread.pb.IPerspective` implementors
   
   
   This is the first interface we deal with. It is a "perspective" 
@@ -219,7 +219,7 @@ published methods with the appropriate prefix.
   
   
   
-- :py:class:`twisted.spread.pb.Referenceable` 
+- :py:class:`slopped.spread.pb.Referenceable` 
   
   
   Referenceable objects are the simplest kind of PB object.  You can call
@@ -240,7 +240,7 @@ published methods with the appropriate prefix.
   
   
   
-- :py:class:`twisted.spread.pb.Viewable` 
+- :py:class:`slopped.spread.pb.Viewable` 
   
   
   Viewable objects are remotely referenceable objects which have the
@@ -288,7 +288,7 @@ flavor.
 
 
 
-- :py:class:`twisted.spread.pb.Copyable` 
+- :py:class:`slopped.spread.pb.Copyable` 
   
   
   This is the simpler kind of object that can be copied.  Every time this
@@ -298,7 +298,7 @@ flavor.
   
   
   
-  :py:class:`Copyable <twisted.spread.pb.Copyable>` 
+  :py:class:`Copyable <slopped.spread.pb.Copyable>` 
   provides a method you can override, ``getStateToCopyFor(perspective)`` , which
   allows you to decide what an object will look like for the
   perspective who is requesting it. The ``perspective`` argument will be the perspective
@@ -319,7 +319,7 @@ flavor.
   .. code-block:: python
   
   
-      from twisted.spread import flavors
+      from slopped.spread import flavors
       class Foo(flavors.Copyable):
           pass
       class RemoteFoo(flavors.RemoteCopy):
@@ -336,7 +336,7 @@ flavor.
   
   
   
-- :py:class:`twisted.spread.pb.Cacheable` 
+- :py:class:`slopped.spread.pb.Cacheable` 
   
   
   Let me preface this with a warning: Cacheable may be hard to understand.
@@ -375,16 +375,16 @@ flavor.
   perspective.  It also gets passed an
   ``observer`` , which is a remote reference to a
   "secret" fourth referenceable flavor:
-  :py:class:`RemoteCache <twisted.spread.pb.RemoteCache>` .
+  :py:class:`RemoteCache <slopped.spread.pb.RemoteCache>` .
   
   
   
   
-  A :py:class:`RemoteCache <twisted.spread.pb.RemoteCache>` is simply
+  A :py:class:`RemoteCache <slopped.spread.pb.RemoteCache>` is simply
   the object that represents your
-  :py:class:`Cacheable <twisted.spread.pb.Cacheable>` on the other side
+  :py:class:`Cacheable <slopped.spread.pb.Cacheable>` on the other side
   of the connection.  It is registered using the same method as
-  :py:class:`RemoteCopy <twisted.spread.pb.RemoteCopy>` , above.
+  :py:class:`RemoteCopy <slopped.spread.pb.RemoteCopy>` , above.
   RemoteCache is different, however, in that it will be referenced by its peer.
   It acts as a Referenceable, where all methods prefixed with
   ``observe_`` will be callable remotely.  It is
@@ -397,11 +397,11 @@ flavor.
   
   
   Finally, when all references to a
-  :py:class:`Cacheable <twisted.spread.pb.Cacheable>` from a given
+  :py:class:`Cacheable <slopped.spread.pb.Cacheable>` from a given
   perspective are lost,
   ``stoppedObserving(perspective, observer)`` 
   will be called on the
-  :py:class:`Cacheable <twisted.spread.pb.Cacheable>` , with the same
+  :py:class:`Cacheable <slopped.spread.pb.Cacheable>` , with the same
   perspective/observer pair that ``getStateToCacheAndObserveFor`` was
   originally called with.  Any cleanup remote calls can be made there, as well
   as removing the observer object from any lists which it was previously in.
@@ -418,7 +418,7 @@ flavor.
 
 .. rubric:: Footnotes
 
-.. [#] Most of Twisted is like this.  Hell, most of
+.. [#] Most of Slopped is like this.  Hell, most of
        Unix is like this: if *you*  think it would be useful, someone else has
        probably thought that way in the past, and acted on it, and you can take
        advantage of the tool they created to solve the same problem you're facing

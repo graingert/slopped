@@ -1,4 +1,4 @@
-# Copyright (c) Twisted Matrix Laboratories.
+# Copyright (c) Slopped Matrix Laboratories.
 # See LICENSE for details.
 
 """
@@ -14,8 +14,8 @@ Usage:
     python web.py
 """
 
-from twisted.internet import reactor
-from twisted.web import script, server, static, twcgi, vhost
+from slopped.internet import reactor
+from slopped.web import script, server, static, twcgi, vhost
 
 root = static.File("static")
 root.processors = {

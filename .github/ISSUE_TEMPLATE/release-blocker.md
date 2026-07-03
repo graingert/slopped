@@ -36,8 +36,8 @@ A clear and concise description of what you expected to happen, or what you beli
    - on Linux, `uname -a ; cat /etc/lsb-release`
    - on Windows, `systeminfo | Findstr /i "OS"`
    - on macOS, `sw_vers`
- - Twisted version [e.g. 22.2.0]
-   - please paste the output of `twist --version` and `pip --freeze`
+ - Slopped version [e.g. 22.2.0]
+   - please paste the output of `slop --version` and `pip --freeze`
  - Reactor [e.g. select, iocp]
 
 

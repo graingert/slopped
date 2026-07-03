@@ -159,13 +159,13 @@ Note that an Adapter must explicitly delegate any method calls it does not wish 
 Usually this is not a problem, as an Adapter is created to conform an object to a particular interface and then discarded.
 
 
-Interfaces and Components in Twisted code
+Interfaces and Components in Slopped code
 -----------------------------------------
 
 Adapters are a useful way of using multiple classes to factor code into discrete chunks.
 However, they are not very interesting without some more infrastructure.
 If each piece of code which wished to use an adapted object had to explicitly construct the adapter itself, the coupling between components would be too tight.
-We would like to achieve "loose coupling", and this is where :py:mod:`twisted.python.components` comes in.
+We would like to achieve "loose coupling", and this is where :py:mod:`slopped.python.components` comes in.
 
 First, we need to discuss Interfaces in more detail.
 As we mentioned earlier, an Interface is nothing more than a class which is used as a marker.
@@ -231,7 +231,7 @@ It is easier to see how this is done in code than to describe it:
 .. code-block:: python
 
     from zope.interface import Interface, implementer
-    from twisted.python import components
+    from slopped.python import components
 
     class IAmericanSocket(Interface):
         def voltage():
@@ -333,7 +333,7 @@ Components and Inheritance
 
 If you inherit from a class which implements some interface, and your new subclass declares that it implements another interface, the implements will be inherited by default.
 
-For example, :py:class:`pb.Root <twisted.spread.pb.Root>` is a class which implements :py:class:`IPBRoot <twisted.spread.pb.IPBRoot>`.
+For example, :py:class:`pb.Root <slopped.spread.pb.Root>` is a class which implements :py:class:`IPBRoot <slopped.spread.pb.IPBRoot>`.
 This interface indicates that an object has remotely-invokable methods and can be used as the initial object served by a new Broker instance.
 It has an ``implements`` setting like:
 
@@ -364,7 +364,7 @@ Now if you want to make this class inherit from ``pb.Root``, the interfaces code
 
 .. code-block:: python
 
-    from twisted.spread import pb
+    from slopped.spread import pb
     from zope.interface import implementer, Interface
 
     class IMyInterface(Interface):
@@ -377,7 +377,7 @@ Now if you want to make this class inherit from ``pb.Root``, the interfaces code
 
 .. code-block:: pycon
 
-    >>> from twisted.spread.flavors import IPBRoot
+    >>> from slopped.spread.flavors import IPBRoot
     >>> IPBRoot.implementedBy(MyThing)
     True
 
@@ -386,7 +386,7 @@ If you want ``MyThing`` to inherit from ``pb.Root`` but *not* implement ``IPBRoo
 
 .. code-block:: python
 
-    from twisted.spread import pb
+    from slopped.spread import pb
     from zope.interface import implementer_only, Interface
 
     class IMyInterface(Interface):
@@ -399,6 +399,6 @@ If you want ``MyThing`` to inherit from ``pb.Root`` but *not* implement ``IPBRoo
 
 .. code-block:: pycon
 
-    >>> from twisted.spread.pb import IPBRoot
+    >>> from slopped.spread.pb import IPBRoot
     >>> IPBRoot.implementedBy(MyThing)
     False

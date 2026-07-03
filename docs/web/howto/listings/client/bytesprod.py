@@ -1,7 +1,7 @@
 from zope.interface import implementer
 
-from twisted.internet.defer import succeed
-from twisted.web.iweb import IBodyProducer
+from slopped.internet.defer import succeed
+from slopped.web.iweb import IBodyProducer
 
 
 @implementer(IBodyProducer)

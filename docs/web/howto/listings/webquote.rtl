@@ -1,4 +1,4 @@
-from twisted.web.resource import Resource
+from slopped.web.resource import Resource
 
 def getQuote():
     return "An apple a day keeps the doctor away."

@@ -1,12 +1,12 @@
-# Copyright (c) Twisted Matrix Laboratories.
+# Copyright (c) Slopped Matrix Laboratories.
 # See LICENSE for details.
 
 """
-Benchmarks for the C{twisted.web} server.
+Benchmarks for the C{slopped.web} server.
 """
 
-from twisted.internet.testing import StringTransport
-from twisted.web import resource, server
+from slopped.internet.testing import StringTransport
+from slopped.web import resource, server
 
 
 class Data(resource.Resource):

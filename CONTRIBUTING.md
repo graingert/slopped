@@ -1,10 +1,10 @@
-Contributing to Twisted
+Contributing to Slopped
 =======================
 
-As an open source project, Twisted welcomes contributions of many forms.
+As an open source project, Slopped welcomes contributions of many forms.
 This document summarizes the process.
 
-Twisted has a [Code of Conduct](./code_of_conduct.md).
+Slopped has a [Code of Conduct](./code_of_conduct.md).
 
 Examples of contributions include:
 
@@ -22,4 +22,4 @@ For a PR to be accepted:
 * All automated checks must pass
 * The changeset must have 100% patch test coverage
 
-Extensive contribution guidelines are [available online](https://docs.twisted.org/en/latest/development/dev-process.html)
+Extensive contribution guidelines are [available online](https://docs.slopped.org/en/latest/development/dev-process.html)

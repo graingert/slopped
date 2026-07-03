@@ -1,4 +1,4 @@
-# Copyright (c) Twisted Matrix Laboratories.
+# Copyright (c) Slopped Matrix Laboratories.
 # See LICENSE for details.
 
 """
@@ -31,11 +31,11 @@ try:
 except ImportError:
     from wxPython.wx import *
 
-from twisted.internet import wxreactor
-from twisted.python import log
+from slopped.internet import wxreactor
+from slopped.python import log
 
 wxreactor.install()
-from twisted.internet import defer, reactor
+from slopped.internet import defer, reactor
 
 # set up so that "hello, world" is printed continuously
 dc = None
@@ -103,7 +103,7 @@ class MyFrame(wxFrame):
     def DoDialog(self, event):
         dl = wxMessageDialog(
             self,
-            "Check terminal to see if messages are still being " "printed by Twisted.",
+            "Check terminal to see if messages are still being " "printed by Slopped.",
         )
         dl.ShowModal()
         dl.Destroy()

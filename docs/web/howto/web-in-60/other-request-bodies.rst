@@ -15,7 +15,7 @@ a ``POST`` carrying HTML form data.  What about ``POST``
 requests with data in some other format?  Or even ``PUT`` requests?
 Here is an example which demonstrates how to get *any* request body,
 regardless of its format - using the request's
-:py:attr:`content <twisted.web.iweb.IRequest.content>` attribute.
+:py:attr:`content <slopped.web.iweb.IRequest.content>` attribute.
 
 
 
@@ -64,9 +64,9 @@ only ``render_POST`` changed:
 .. code-block:: python
 
 
-    from twisted.web.server import Site
-    from twisted.web.resource import Resource
-    from twisted.internet import reactor, endpoints
+    from slopped.web.server import Site
+    from slopped.web.resource import Resource
+    from slopped.internet import reactor, endpoints
 
     import html
 

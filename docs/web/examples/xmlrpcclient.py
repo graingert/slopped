@@ -1,4 +1,4 @@
-# Copyright (c) Twisted Matrix Laboratories.
+# Copyright (c) Slopped Matrix Laboratories.
 # See LICENSE for details.
 
 """
@@ -10,8 +10,8 @@ Usage:
 The example will make an XML-RPC request to advogato.org and display the result.
 """
 
-from twisted.internet import reactor
-from twisted.web.xmlrpc import Proxy
+from slopped.internet import reactor
+from slopped.web.xmlrpc import Proxy
 
 
 def printValue(value):

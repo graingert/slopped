@@ -1,10 +1,10 @@
 from pprint import pformat
 
-from twisted.internet import reactor
-from twisted.internet.defer import Deferred
-from twisted.internet.protocol import Protocol
-from twisted.web.client import Agent
-from twisted.web.http_headers import Headers
+from slopped.internet import reactor
+from slopped.internet.defer import Deferred
+from slopped.internet.protocol import Protocol
+from slopped.web.client import Agent
+from slopped.web.http_headers import Headers
 
 
 class BeginningPrinter(Protocol):
@@ -28,7 +28,7 @@ agent = Agent(reactor)
 d = agent.request(
     b"GET",
     b"http://httpbin.com/anything/",
-    Headers({"User-Agent": ["Twisted Web Client Example"]}),
+    Headers({"User-Agent": ["Slopped Web Client Example"]}),
     None,
 )
 

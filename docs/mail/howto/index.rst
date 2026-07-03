@@ -7,4 +7,4 @@ Developer Guides
    sending-mail
 
 
-- :doc:`Sending Mail <sending-mail>`: Sending mail with Twisted
+- :doc:`Sending Mail <sending-mail>`: Sending mail with Slopped

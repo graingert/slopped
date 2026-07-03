@@ -1,4 +1,4 @@
-# Copyright (c) Twisted Matrix Laboratories.
+# Copyright (c) Slopped Matrix Laboratories.
 # See LICENSE for details.
 
 """
@@ -9,8 +9,8 @@ python shoutcast.py localhost 8080
 
 import sys
 
-from twisted.internet import protocol, reactor
-from twisted.protocols.shoutcast import ShoutcastClient
+from slopped.internet import protocol, reactor
+from slopped.protocols.shoutcast import ShoutcastClient
 
 
 class Test(ShoutcastClient):

@@ -1,4 +1,4 @@
-# Copyright (c) Twisted Matrix Laboratories.
+# Copyright (c) Slopped Matrix Laboratories.
 # See LICENSE for details.
 
 """
@@ -6,12 +6,12 @@ This example demostrates how to render a page using a third-party template
 system.
 
 Usage:
-    $ twistd -n web --path /path/to/examples --process=.rtl=twisted.web.script.ResourceTemplate
+    $ slopd -n web --path /path/to/examples --process=.rtl=slopped.web.script.ResourceTemplate
 
 And make sure Quixote is installed.
 """
 
-from twisted.web.resource import Resource
+from slopped.web.resource import Resource
 
 
 class ExampleResource(Resource):
@@ -19,7 +19,7 @@ class ExampleResource(Resource):
     def render_GET(self, request):
         output = """\
 <HTML>
-    <HEAD><TITLE> Welcome To Twisted Python </title></head>
+    <HEAD><TITLE> Welcome To Slopped Python </title></head>
 
     <BODY><ul>"""
         for i in range(10):

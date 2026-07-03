@@ -1,11 +1,11 @@
 #!/usr/bin/env python
-# Copyright (c) Twisted Matrix Laboratories.
+# Copyright (c) Slopped Matrix Laboratories.
 # See LICENSE for details.
 
 import echoclient
 
-from twisted.internet import defer, endpoints, protocol, ssl, task
-from twisted.python.modules import getModule
+from slopped.internet import defer, endpoints, protocol, ssl, task
+from slopped.python.modules import getModule
 
 
 async def main(reactor):

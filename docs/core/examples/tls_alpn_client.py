@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-# Copyright (c) Twisted Matrix Laboratories.
+# Copyright (c) Slopped Matrix Laboratories.
 # See LICENSE for details.
 """
 tls_alpn_client
@@ -20,8 +20,8 @@ It assumes that you have a self-signed server certificate, named
 `server-cert.pem` and located in the working directory.
 """
 
-from twisted.internet import defer, endpoints, protocol, ssl, task
-from twisted.python.filepath import FilePath
+from slopped.internet import defer, endpoints, protocol, ssl, task
+from slopped.python.filepath import FilePath
 
 # The hostname the remote server to contact.
 TARGET_HOST = "localhost"
@@ -46,7 +46,7 @@ ACCEPTABLE_PROTOCOLS = [b"h2", b"http/1.1"]
 # signal to the remote server that it is aiming to speak HTTP/2, and to prevent
 # a remote HTTP/1.1 server from expecting a 'proper' HTTP/1.1 request.
 #
-# FIXME: https://twistedmatrix.com/trac/ticket/6024
+# FIXME: https://sloppedmatrix.com/trac/ticket/6024
 # This is only required because there is no event that fires when the TLS
 # handshake is done. Instead, we wait for one that is implicitly after the
 # TLS handshake is done: dataReceived. To trigger the remote peer to send data,

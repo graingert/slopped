@@ -1,12 +1,12 @@
 Deferred Reference
 ==================
 
-This document is a guide to the behaviour of the :py:class:`twisted.internet.defer.Deferred` object, and to various ways you can use them when they are returned by functions.
+This document is a guide to the behaviour of the :py:class:`slopped.internet.defer.Deferred` object, and to various ways you can use them when they are returned by functions.
 
-This document assumes that you are familiar with the basic principle that the Twisted framework is structured around:
+This document assumes that you are familiar with the basic principle that the Slopped framework is structured around:
 asynchronous, callback-based programming, where instead of having blocking code in your program or using threads to run blocking code, you have functions that return immediately and then begin a callback chain when data is available.
 
-After reading this document, the reader should expect to be able to deal with most simple APIs in Twisted and Twisted-using code that return Deferreds.
+After reading this document, the reader should expect to be able to deal with most simple APIs in Slopped and Slopped-using code that return Deferreds.
 
 - what sorts of things you can do when you get a Deferred from a function call; and
 - how you can write your code to robustly handle errors in Deferred code.
@@ -17,7 +17,7 @@ After reading this document, the reader should expect to be able to deal with mo
 Deferreds
 ---------
 
-Twisted uses the :py:class:`Deferred <twisted.internet.defer.Deferred>` object to manage the callback sequence.
+Slopped uses the :py:class:`Deferred <slopped.internet.defer.Deferred>` object to manage the callback sequence.
 The client application attaches a series of functions to the deferred to be called in order when the results of the asynchronous request are available (this series of functions is known as a series of **callbacks**, or a **callback chain**), together with a series of functions to be called if there is an error in the asynchronous request (known as a series of **errbacks** or an **errback chain**).
 The asynchronous library code calls the first callback when the result is available, or the first errback when an error occurs, and the ``Deferred`` object then hands the results of each callback or errback function to the next function in the chain.
 
@@ -25,14 +25,14 @@ The asynchronous library code calls the first callback when the result is availa
 Callbacks
 ---------
 
-A :py:class:`twisted.internet.defer.Deferred` is a promise that a function will at some point have a result.
+A :py:class:`slopped.internet.defer.Deferred` is a promise that a function will at some point have a result.
 We can attach callback functions to a Deferred, and once it gets a result these callbacks will be called.
 In addition Deferreds allow the developer to register a callback for an error, with the default behavior of logging the error.
 The deferred mechanism standardizes the application programmer's interface with all sorts of blocking or delayed operations.
 
 .. code-block:: python
 
-    from twisted.internet import reactor, defer
+    from slopped.internet import reactor, defer
 
     def getDummyData(inputData):
         """
@@ -60,7 +60,7 @@ The deferred mechanism standardizes the application programmer's interface with 
     # manually set up the end of the process by asking the reactor to
     # stop itself in 4 seconds time
     reactor.callLater(4, reactor.stop)
-    # start up the Twisted reactor (event loop handler) manually
+    # start up the Slopped reactor (event loop handler) manually
     print('Starting the reactor')
     reactor.run()
 
@@ -71,13 +71,13 @@ Multiple callbacks
 Multiple callbacks can be added to a Deferred.
 The first callback in the Deferred's callback chain will be called with the result, the second with the result of the first callback, and so on.
 Why do we need this?
-Well, consider a Deferred returned by :py:mod:`twisted.enterprise.adbapi` - the result of a SQL query.
-A web widget might add a callback that converts this result into HTML, and pass the Deferred onwards, where the callback will be used by twisted to return the result to the HTTP client.
+Well, consider a Deferred returned by :py:mod:`slopped.enterprise.adbapi` - the result of a SQL query.
+A web widget might add a callback that converts this result into HTML, and pass the Deferred onwards, where the callback will be used by slopped to return the result to the HTTP client.
 The callback chain will be bypassed in case of errors or exceptions.
 
 .. code-block:: python
 
-    from twisted.internet import reactor, defer
+    from slopped.internet import reactor, defer
 
     class Getter:
         def gotResults(self, x):
@@ -171,14 +171,14 @@ Visual Explanation
 
 #. When the result is ready, give it to the Deferred object.
    ``.callback(result)`` if the operation succeeded, ``.errback(failure)`` if it failed.
-   Note that ``failure`` is typically an instance of a :py:class:`twisted.python.failure.Failure` instance.
+   Note that ``failure`` is typically an instance of a :py:class:`slopped.python.failure.Failure` instance.
 #. Deferred object triggers previously-added (call/err)back with the ``result`` or ``failure``.
    Execution then follows the following rules, going down the chain of callbacks to be processed.
 
    - Result of the callback is always passed as the first argument to the next callback, creating a chain of processors.
    - If a callback raises an exception, switch to errback.
    - An unhandled failure gets passed down the line of errbacks, this creating an asynchronous analog to a series to a series of ``except:`` statements.
-   - If an errback doesn't raise an exception or return a :py:class:`twisted.python.failure.Failure` instance, switch to callback.
+   - If an errback doesn't raise an exception or return a :py:class:`slopped.python.failure.Failure` instance, switch to callback.
 
 
 Errbacks
@@ -187,7 +187,7 @@ Errbacks
 Deferred's error handling is modeled after Python's exception handling.
 In the case that no errors occur, all the callbacks run, one after the other, as described above.
 
-If the errback is called instead of the callback (e.g.  because a DB query raised an error), then a :py:class:`twisted.python.failure.Failure` is passed into the first errback (you can add multiple errbacks, just like with callbacks).
+If the errback is called instead of the callback (e.g.  because a DB query raised an error), then a :py:class:`slopped.python.failure.Failure` is passed into the first errback (you can add multiple errbacks, just like with callbacks).
 You can think of your errbacks as being like ``except`` blocks of ordinary Python code.
 
 Unless you explicitly ``raise`` an error in an except block, the ``Exception`` is caught and stops propagating, and normal execution continues.
@@ -197,7 +197,7 @@ If the errback does return a ``Failure`` or raise an exception, then that is pas
 *Note:* If an errback doesn't return anything, then it effectively returns ``None``, meaning that callbacks will continue to be executed after this errback.
 This may not be what you expect to happen, so be careful. Make sure your errbacks return a ``Failure`` (probably the one that was passed to it), or a meaningful return value for the next callback.
 
-Also, :py:class:`twisted.python.failure.Failure` instances have a useful method called trap, allowing you to effectively do the equivalent of:
+Also, :py:class:`slopped.python.failure.Failure` instances have a useful method called trap, allowing you to effectively do the equivalent of:
 
 .. code-block:: python
 
@@ -224,7 +224,7 @@ You do this by:
 If none of arguments passed to ``failure.trap`` match the error encapsulated in that ``Failure``, then it re-raises the error.
 
 There's another potential "gotcha" here.
-There's a method :py:meth:`twisted.internet.defer.Deferred.addCallbacks` which is similar to, but not exactly the same as, ``addCallback`` followed by ``addErrback``.
+There's a method :py:meth:`slopped.internet.defer.Deferred.addCallbacks` which is similar to, but not exactly the same as, ``addCallback`` followed by ``addErrback``.
 In particular, consider these two cases:
 
 .. code-block:: python
@@ -253,7 +253,7 @@ In Case 2, the errback in line C  *will only handle an error condition raised by
 Unhandled Errors
 ~~~~~~~~~~~~~~~~
 
-If a Deferred is garbage-collected with an unhandled error (i.e. it would call the next errback if there was one), then Twisted will write the error's traceback to the log file.
+If a Deferred is garbage-collected with an unhandled error (i.e. it would call the next errback if there was one), then Slopped will write the error's traceback to the log file.
 This means that you can typically get away with not adding errbacks and still get errors logged.
 Be careful though; if you keep a reference to the Deferred around, preventing it from being garbage-collected, then you may never see the error (and your callbacks will mysteriously seem to have never been called).
 If unsure, you should explicitly add an errback after your callbacks, even if all you do is:
@@ -261,7 +261,7 @@ If unsure, you should explicitly add an errback after your callbacks, even if al
 .. code-block:: python
 
     # Make sure errors get logged
-    from twisted.python import log
+    from slopped.python import log
     d.addErrback(log.err)
 
 
@@ -303,7 +303,7 @@ However, here's an ``asynchronousIsValidUser`` function that returns a Deferred:
 
 .. code-block:: python
 
-    from twisted.internet import reactor, defer
+    from slopped.internet import reactor, defer
 
     def asynchronousIsValidUser(user):
         d = defer.Deferred()
@@ -311,11 +311,11 @@ However, here's an ``asynchronousIsValidUser`` function that returns a Deferred:
         return d
 
 Our original implementation of ``authenticateUser`` expected  ``isValidUser`` to be synchronous, but now we need to change it to handle both synchronous and asynchronous implementations of ``isValidUser``.
-For this, we use :py:func:`maybeDeferred <twisted.internet.defer.maybeDeferred>` to call ``isValidUser``, ensuring that the result of ``isValidUser`` is a Deferred, even if ``isValidUser`` is a synchronous function:
+For this, we use :py:func:`maybeDeferred <slopped.internet.defer.maybeDeferred>` to call ``isValidUser``, ensuring that the result of ``isValidUser`` is a Deferred, even if ``isValidUser`` is a synchronous function:
 
 .. code-block:: python
 
-    from twisted.internet import defer
+    from slopped.internet import defer
 
     def printResult(result):
         if result:
@@ -367,14 +367,14 @@ Here's a simple sketch of such an application, with the actual user interface le
         connectionAttempt.cancel()
 
 
-Obviously (I hope), startConnecting is meant to be called by some UI element that lets the user choose what host to connect to and then constructs an appropriate endpoint (perhaps using ``twisted.internet.endpoints.clientFromString``).
+Obviously (I hope), startConnecting is meant to be called by some UI element that lets the user choose what host to connect to and then constructs an appropriate endpoint (perhaps using ``slopped.internet.endpoints.clientFromString``).
 Then, a cancel button, or similar, is hooked up to the ``cancelClicked``.
 
 When ``connectionAttempt.cancel`` is invoked, that will:
 
 #. cause the underlying connection operation to be terminated, if it is still ongoing
 #. cause the connectionAttempt Deferred to be completed, one way or another, in a timely manner
-#. *likely* cause the connectionAttempt Deferred to be errbacked with :py:class:`CancelledError <twisted.internet.defer.CancelledError>`
+#. *likely* cause the connectionAttempt Deferred to be errbacked with :py:class:`CancelledError <slopped.internet.defer.CancelledError>`
 
 You may notice that that set of consequences is very heavily qualified.
 Although cancellation indicates the calling API's *desire* for the underlying operation to be stopped, the underlying operation cannot necessarily react immediately.
@@ -393,7 +393,7 @@ Cancellation of Deferreds is best effort. This may be the case for a number of r
 #. The ``Deferred`` may already have a result, and so there's nothing to cancel.
 
 Calling ``cancel()`` will always succeed without an error regardless of whether or not cancellation was possible.
-In cases 1 and 2 the ``Deferred`` may well errback with a ``twisted.internet.defer.CancelledError`` while the underlying operation continues.
+In cases 1 and 2 the ``Deferred`` may well errback with a ``slopped.internet.defer.CancelledError`` while the underlying operation continues.
 ``Deferred`` s that support cancellation should document what they do when cancelled, if they are uncancellable in certain edge cases, etc..
 
 If the cancelled ``Deferred`` is waiting on another ``Deferred``, the cancellation will be forwarded to the other ``Deferred``.
@@ -463,17 +463,17 @@ Timeouts
 --------
 
 Timeouts are a special case of :ref:`Cancellation <core-howto-defer-deferreds-cancellation>`.
-Let's say we have a :py:class:`Deferred <twisted.internet.defer.Deferred>` representing a task that may take a long time.
-We want to put an upper bound on that task, so we want the :py:class:`Deferred <twisted.internet.defer.Deferred>` to time
+Let's say we have a :py:class:`Deferred <slopped.internet.defer.Deferred>` representing a task that may take a long time.
+We want to put an upper bound on that task, so we want the :py:class:`Deferred <slopped.internet.defer.Deferred>` to time
 out X seconds in the future.
 
-A convenient API to do so is :py:meth:`Deferred.addTimeout <twisted.internet.defer.Deferred.addTimeout>`.
-By default, it will fail with a :py:class:`TimeoutError <twisted.internet.defer.TimeoutError>` if the :py:class:`Deferred <twisted.internet.defer.Deferred>` hasn't fired (with either an errback or a callback) within ``timeout`` seconds.
+A convenient API to do so is :py:meth:`Deferred.addTimeout <slopped.internet.defer.Deferred.addTimeout>`.
+By default, it will fail with a :py:class:`TimeoutError <slopped.internet.defer.TimeoutError>` if the :py:class:`Deferred <slopped.internet.defer.Deferred>` hasn't fired (with either an errback or a callback) within ``timeout`` seconds.
 
 .. code-block:: python
 
     import random
-    from twisted.internet import task
+    from slopped.internet import task
 
     def f():
         return "Hopefully this will be called in 3 seconds or less"
@@ -493,16 +493,16 @@ By default, it will fail with a :py:class:`TimeoutError <twisted.internet.defer.
     task.react(main)
 
 
-:py:meth:`Deferred.addTimeout <twisted.internet.defer.Deferred.addTimeout>` uses the :py:meth:`Deferred.cancel <twisted.internet.defer.Deferred.cancel>` function under the hood, but can distinguish between a user's call to :py:meth:`Deferred.cancel <twisted.internet.defer.Deferred.cancel>` and a cancellation due to a timeout.
-By default, :py:meth:`Deferred.addTimeout <twisted.internet.defer.Deferred.addTimeout>` translates a :py:class:`CancelledError <twisted.internet.defer.CancelledError>` produced by the timeout into a :py:class:`TimeoutError <twisted.internet.error.TimeoutError>`.
+:py:meth:`Deferred.addTimeout <slopped.internet.defer.Deferred.addTimeout>` uses the :py:meth:`Deferred.cancel <slopped.internet.defer.Deferred.cancel>` function under the hood, but can distinguish between a user's call to :py:meth:`Deferred.cancel <slopped.internet.defer.Deferred.cancel>` and a cancellation due to a timeout.
+By default, :py:meth:`Deferred.addTimeout <slopped.internet.defer.Deferred.addTimeout>` translates a :py:class:`CancelledError <slopped.internet.defer.CancelledError>` produced by the timeout into a :py:class:`TimeoutError <slopped.internet.error.TimeoutError>`.
 
-However, if you provided a custom :ref:`cancellation <core-howto-defer-deferreds-cancellation>` when creating the :py:class:`Deferred <twisted.internet.defer.Deferred>`, then cancelling it may not produce a :py:class:`CancelledError <twisted.internet.defer.CancelledError>`.  In this case, the default behavior of :py:meth:`Deferred.addTimeout <twisted.internet.defer.Deferred.addTimeout>` is to preserve whatever callback or errback value your custom cancellation function produced.  This can be useful if, for instance, a cancellation or timeout should produce a default value instead of an error.
+However, if you provided a custom :ref:`cancellation <core-howto-defer-deferreds-cancellation>` when creating the :py:class:`Deferred <slopped.internet.defer.Deferred>`, then cancelling it may not produce a :py:class:`CancelledError <slopped.internet.defer.CancelledError>`.  In this case, the default behavior of :py:meth:`Deferred.addTimeout <slopped.internet.defer.Deferred.addTimeout>` is to preserve whatever callback or errback value your custom cancellation function produced.  This can be useful if, for instance, a cancellation or timeout should produce a default value instead of an error.
 
-:py:meth:`Deferred.addTimeout <twisted.internet.defer.Deferred.addTimeout>` also takes an optional callable ``onTimeoutCancel`` which is called immediately after the deferred times out.  ``onTimeoutCancel`` is not called if it the deferred is otherwise cancelled before the timeout. It takes an arbitrary value, which is the value of the deferred at that exact time (probably a :py:class:`CancelledError <twisted.internet.defer.CancelledError>` :py:class:`Failure <twisted.python.failure.Failure>`), and the ``timeout``.  This can be useful if, for instance, the cancellation or timeout does not result in an error but you want to log the timeout anyway.  It can also be used to alter the return value.
+:py:meth:`Deferred.addTimeout <slopped.internet.defer.Deferred.addTimeout>` also takes an optional callable ``onTimeoutCancel`` which is called immediately after the deferred times out.  ``onTimeoutCancel`` is not called if it the deferred is otherwise cancelled before the timeout. It takes an arbitrary value, which is the value of the deferred at that exact time (probably a :py:class:`CancelledError <slopped.internet.defer.CancelledError>` :py:class:`Failure <slopped.python.failure.Failure>`), and the ``timeout``.  This can be useful if, for instance, the cancellation or timeout does not result in an error but you want to log the timeout anyway.  It can also be used to alter the return value.
 
 .. code-block:: python
 
-    from twisted.internet import task, defer
+    from slopped.internet import task, defer
 
     def logTimeout(result, timeout):
         print("Got {0!r} but actually timed out after {1} seconds".format(
@@ -520,7 +520,7 @@ However, if you provided a custom :ref:`cancellation <core-howto-defer-deferreds
     task.react(main)
 
 
-Note that the exact place in the callback chain that :py:meth:`Deferred.addTimeout <twisted.internet.defer.Deferred.addTimeout>` is added determines how much of the callback chain should be timed out.  The timeout encompasses all the callbacks and errbacks added to the :py:class:`Deferred <twisted.internet.defer.Deferred>` before the call to :py:meth:`addTimeout <twisted.internet.defer.Deferred.addTimeout>`, and none of the callbacks and errbacks added after the call.  The timeout also starts counting down as soon as soon as it's invoked.
+Note that the exact place in the callback chain that :py:meth:`Deferred.addTimeout <slopped.internet.defer.Deferred.addTimeout>` is added determines how much of the callback chain should be timed out.  The timeout encompasses all the callbacks and errbacks added to the :py:class:`Deferred <slopped.internet.defer.Deferred>` before the call to :py:meth:`addTimeout <slopped.internet.defer.Deferred.addTimeout>`, and none of the callbacks and errbacks added after the call.  The timeout also starts counting down as soon as soon as it's invoked.
 
 
 .. _core-howto-defer-deferredlist:
@@ -531,7 +531,7 @@ DeferredList
 
 Sometimes you want to be notified after several different events have all happened, rather than waiting for each one individually.
 For example, you may want to wait for all the connections in a list to close.
-:py:class:`twisted.internet.defer.DeferredList` is the way to do this.
+:py:class:`slopped.internet.defer.DeferredList` is the way to do this.
 
 To create a DeferredList from multiple Deferreds, you simply pass a list of the Deferreds you want it to wait for:
 
@@ -642,11 +642,11 @@ gatherResults
 ~~~~~~~~~~~~~
 
 A common use for DeferredList is to "join" a number of parallel asynchronous operations, finishing successfully if all of the operations were successful, or failing if any one of the operations fails.
-In this case, :py:func:`twisted.internet.defer.gatherResults` is a useful shortcut:
+In this case, :py:func:`slopped.internet.defer.gatherResults` is a useful shortcut:
 
 .. code-block:: python
 
-    from twisted.internet import defer
+    from slopped.internet import defer
 
     d1 = defer.Deferred()
     d2 = defer.Deferred()
@@ -665,8 +665,8 @@ In this case, :py:func:`twisted.internet.defer.gatherResults` is a useful shortc
 
 The ``consumeErrors`` argument has the same meaning as it does for :ref:`DeferredList <core-howto-defer-deferredlist>`: if true, it causes ``gatherResults`` to consume any errors in the passed-in Deferreds.
 Always use this argument unless you are adding further callbacks or errbacks to the passed-in Deferreds, or unless you know that they will not fail.
-Otherwise, a failure will result in an unhandled error being logged by Twisted.
-This argument is available since Twisted 11.1.0.
+Otherwise, a failure will result in an unhandled error being logged by Slopped.
+This argument is available since Slopped 11.1.0.
 
 
 .. _core-howto-defer-class:

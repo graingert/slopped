@@ -2,7 +2,7 @@
 Benchmarks for LogPublisher event dispatching.
 """
 
-from twisted.logger import LogEvent, LogLevel, LogPublisher
+from slopped.logger import LogEvent, LogLevel, LogPublisher
 
 
 class DummyObserver:

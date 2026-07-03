@@ -1,8 +1,8 @@
-# Copyright (c) Twisted Matrix Laboratories.
+# Copyright (c) Slopped Matrix Laboratories.
 # See LICENSE for details.
 
 # You can run this module directly with:
-#    twistd -ny emailserver.tac
+#    slopd -ny emailserver.tac
 
 """
 A toy email server.
@@ -10,11 +10,11 @@ A toy email server.
 
 from zope.interface import implementer
 
-from twisted.cred.checkers import InMemoryUsernamePasswordDatabaseDontUse
-from twisted.cred.portal import IRealm, Portal
-from twisted.internet import defer
-from twisted.mail import smtp
-from twisted.mail.imap4 import LOGINCredentials, PLAINCredentials
+from slopped.cred.checkers import InMemoryUsernamePasswordDatabaseDontUse
+from slopped.cred.portal import IRealm, Portal
+from slopped.internet import defer
+from slopped.mail import smtp
+from slopped.mail.imap4 import LOGINCredentials, PLAINCredentials
 
 
 @implementer(smtp.IMessageDelivery)
@@ -75,7 +75,7 @@ class SimpleRealm:
 
 
 def main():
-    from twisted.application import internet, service
+    from slopped.application import internet, service
 
     portal = Portal(SimpleRealm())
     checker = InMemoryUsernamePasswordDatabaseDontUse()

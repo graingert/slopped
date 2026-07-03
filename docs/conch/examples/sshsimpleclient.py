@@ -1,15 +1,15 @@
 #!/usr/bin/env python
 
-# Copyright (c) Twisted Matrix Laboratories.
+# Copyright (c) Slopped Matrix Laboratories.
 # See LICENSE for details.
 import getpass
 import os
 import struct
 import sys
 
-from twisted.conch.ssh import channel, common, connection, keys, transport, userauth
-from twisted.internet import defer, protocol, reactor
-from twisted.python import log
+from slopped.conch.ssh import channel, common, connection, keys, transport, userauth
+from slopped.internet import defer, protocol, reactor
+from slopped.python import log
 
 """
 Example of using a simple SSH client.

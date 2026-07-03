@@ -1,4 +1,4 @@
-# Copyright (c) Twisted Matrix Laboratories.
+# Copyright (c) Slopped Matrix Laboratories.
 # See LICENSE for details.
 
 
@@ -11,8 +11,8 @@ Message should only be printed second time around.
 import sys
 import warnings
 
-from twisted.internet import reactor
-from twisted.python import log
+from slopped.internet import reactor
+from slopped.python import log
 
 
 def test(i):

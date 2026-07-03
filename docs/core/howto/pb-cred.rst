@@ -29,7 +29,7 @@ set of people or programs.
 As soon as you have a program which offers services to multiple users,
 where those users should not be allowed to interfere with each other, you
 need to think about authentication. Many services use the idea of an "account" , and rely upon fact that each user has access to only one
-account. Twisted uses a system called :doc:`cred <cred>` to
+account. Slopped uses a system called :doc:`cred <cred>` to
 handle authentication issues, and Perspective Broker has code to make it
 easy to implement the most common use cases.
 
@@ -296,7 +296,7 @@ this:
         def remote_print(self, message):
             print(message)
         def join(self):
-            d = self.remoteUser.callRemote("joinGroup", "#twisted",
+            d = self.remoteUser.callRemote("joinGroup", "#slopped",
                                            allowMattress=False)
             d.addCallback(self.gotGroup)
         def gotGroup(self, group):
@@ -326,7 +326,7 @@ as the sender of the message.
    This technique also relies upon the fact that the 
    ``pb.Referenceable`` reference can *only* come from someone
    who holds a corresponding ``pb.RemoteReference`` . The design of the
-   serialization mechanism (implemented in :py:mod:`twisted.spread.jelly` : pb, jelly, spread.. get it?  Look for "banana" , too.  What other networking framework
+   serialization mechanism (implemented in :py:mod:`slopped.spread.jelly` : pb, jelly, spread.. get it?  Look for "banana" , too.  What other networking framework
    can claim API names based on sandwich ingredients?) makes it impossible for
    a client to obtain a reference that they weren't explicitly given.
    References passed over the wire are given id numbers and recorded in a
@@ -398,7 +398,7 @@ like:
     
     class ClientThing(pb.Referenceable):
         def join(self):
-            d = self.remoteUser.callRemote("joinGroup", "#twisted")
+            d = self.remoteUser.callRemote("joinGroup", "#slopped")
             d.addCallback(self.gotGroup)
         def gotGroup(self, group):
             group.callRemote("send", from_user=group, "hi everybody")
@@ -406,7 +406,7 @@ like:
 
 
 
-This would let her send a message that appeared to come from "#twisted" rather than "Alice" . If she joined a group that
+This would let her send a message that appeared to come from "#slopped" rather than "Alice" . If she joined a group that
 happened to be named "bob" (perhaps it is the "How To Be Bob" 
 channel, populated by Alice and countless others, a place where they can
 share stories about their best impersonating-Bob moments), then she would be
@@ -503,7 +503,7 @@ Avatars and Perspectives
 
 
 
-In Twisted's :doc:`cred <cred>` system, an "Avatar" is
+In Slopped's :doc:`cred <cred>` system, an "Avatar" is
 an object that lives on the "server" side (defined here as the side
 farthest from the human who is trying to get something done) which lets the
 remote user get something done. The avatar isn't really a particular class,
@@ -834,19 +834,19 @@ Anonymous Clients
 
 pbAnonServer.py implements a server based on pb6server.py, extending it to
 permit anonymous logins in addition to authenticated logins. An 
-:py:class:`AllowAnonymousAccess <twisted.cred.checkers.AllowAnonymousAccess>` 
-checker and an :py:class:`InMemoryUsernamePasswordDatabaseDontUse <twisted.cred.checkers.InMemoryUsernamePasswordDatabaseDontUse>` 
+:py:class:`AllowAnonymousAccess <slopped.cred.checkers.AllowAnonymousAccess>` 
+checker and an :py:class:`InMemoryUsernamePasswordDatabaseDontUse <slopped.cred.checkers.InMemoryUsernamePasswordDatabaseDontUse>` 
 checker are registered and the
 client's choice of credentials object determines which is used to authenticate
 the login.  In either case, the realm will be called on to create an avatar for
-the login.  ``AllowAnonymousAccess`` always produces an ``avatarId`` of ``twisted.cred.checkers.ANONYMOUS`` .
+the login.  ``AllowAnonymousAccess`` always produces an ``avatarId`` of ``slopped.cred.checkers.ANONYMOUS`` .
 
 
 
 
 On the client side, the only change is the use of an instance of 
-:py:class:`Anonymous <twisted.cred.credentials.Anonymous>` when calling 
-:py:meth:`PBClientFactory.login <twisted.spread.pb.PBClientFactory.login>` .
+:py:class:`Anonymous <slopped.cred.credentials.Anonymous>` when calling 
+:py:meth:`PBClientFactory.login <slopped.spread.pb.PBClientFactory.login>` .
 
 
 
@@ -1048,7 +1048,7 @@ Viewable
 
 
 Once you have ``IPerspective`` objects (i.e. the Avatar) to
-represent users, the :py:class:`Viewable <twisted.spread.pb.Viewable>` class can come into play. This
+represent users, the :py:class:`Viewable <slopped.spread.pb.Viewable>` class can come into play. This
 class behaves a lot like ``Referenceable`` : it turns into a 
 ``RemoteReference`` when sent over the wire, and certain methods
 can be invoked by the holder of that reference. However, the methods that
@@ -1155,7 +1155,7 @@ like this:
        "AB"  doesn't fit into the whole sandwich-themed naming scheme nearly as
        well as "PB"  does. If we changed it to AB, we'd probably have to change
        Banana to be CD (CoderDecoder), and Jelly to be EF (EncapsulatorFragmentor).
-       twisted.spread would then have to be renamed twisted.alphabetsoup, and then
+       slopped.spread would then have to be renamed slopped.alphabetsoup, and then
        the whole food-pun thing would start all over again.
 .. [#] The avatar-ish class is named 
        ``pb.Avatar``  because ``pb.Perspective``  was already

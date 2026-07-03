@@ -1,6 +1,6 @@
-from twisted.internet import reactor
-from twisted.internet.protocol import Factory
-from twisted.protocols.basic import LineReceiver
+from slopped.internet import reactor
+from slopped.internet.protocol import Factory
+from slopped.protocols.basic import LineReceiver
 
 
 class Chat(LineReceiver):

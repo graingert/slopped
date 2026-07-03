@@ -3,7 +3,7 @@
 :LastChangedRevision: $LastChangedRevision$
 :LastChangedBy: $LastChangedBy$
 
-Creating XML-RPC Servers and Clients with Twisted
+Creating XML-RPC Servers and Clients with Slopped
 =================================================
 
 
@@ -18,7 +18,7 @@ Introduction
 
 `XML-RPC <http://www.xmlrpc.com>`_ is a simple request/reply protocol
 that runs over HTTP. It is simple, easy to implement and supported by most programming
-languages. Twisted's XML-RPC support is implemented using the`xmlrpclib <http://docs.python.org/library/xmlrpclib.html>`_ library that is
+languages. Slopped's XML-RPC support is implemented using the`xmlrpclib <http://docs.python.org/library/xmlrpclib.html>`_ library that is
 included with Python 2.2 and later.
 
 
@@ -30,7 +30,7 @@ Creating a XML-RPC server
 
 
 
-Making a server is very easy - all you need to do is inherit from :py:class:`twisted.web.xmlrpc.XMLRPC` .
+Making a server is very easy - all you need to do is inherit from :py:class:`slopped.web.xmlrpc.XMLRPC` .
 You then create methods beginning with ``xmlrpc_`` . The methods'
 arguments determine what arguments it will accept from XML-RPC clients.
 The result is what will be returned to the clients.
@@ -43,7 +43,7 @@ types, such as strings, lists and so on (just return a regular python
 integer, etc).  They can also raise exceptions or return Failure instances to indicate an
 error has occurred, or ``Binary`` , ``Boolean`` or ``DateTime``
 instances (all of these are the same as the respective classes in xmlrpclib. In
-addition, XML-RPC published methods can return :py:class:`Deferred <twisted.internet.defer.Deferred>` instances whose results are one of the above. This allows
+addition, XML-RPC published methods can return :py:class:`Deferred <slopped.internet.defer.Deferred>` instances whose results are one of the above. This allows
 you to return results that can't be calculated immediately, such as database queries.
 See the :doc:`Deferred documentation <../../core/howto/defer>` for more
 details.
@@ -51,7 +51,7 @@ details.
 
 
 
-:py:class:`XMLRPC <twisted.web.xmlrpc.XMLRPC>` instances
+:py:class:`XMLRPC <slopped.web.xmlrpc.XMLRPC>` instances
 are Resource objects, and they can thus be published using a Site. The
 following example has two methods published via XML-RPC, ``add(a, b)`` and ``echo(x)`` .
 
@@ -62,7 +62,7 @@ following example has two methods published via XML-RPC, ``add(a, b)`` and ``ech
 .. code-block:: python
 
 
-    from twisted.web import xmlrpc, server
+    from slopped.web import xmlrpc, server
 
     class Example(xmlrpc.XMLRPC):
         """
@@ -88,7 +88,7 @@ following example has two methods published via XML-RPC, ``add(a, b)`` and ``ech
             raise xmlrpc.Fault(123, "The fault procedure is faulty.")
 
     if __name__ == '__main__':
-        from twisted.internet import reactor, endpoints
+        from slopped.internet import reactor, endpoints
         r = Example()
         endpoint = endpoints.TCP4ServerEndpoint(reactor, 7080)
         endpoint.listen(server.Site(r))
@@ -123,9 +123,9 @@ to the server:
 
 
 
-If the :py:class:`Request <twisted.web.server.Request>` object is
+If the :py:class:`Request <slopped.web.server.Request>` object is
 needed by an ``xmlrpc_*`` method, it can be made available using
-the :py:func:`twisted.web.xmlrpc.withRequest` decorator.  When
+the :py:func:`slopped.web.xmlrpc.withRequest` decorator.  When
 using this decorator, the method will be passed the request object as the first
 argument, before any XML-RPC parameters.  For example:
 
@@ -136,8 +136,8 @@ argument, before any XML-RPC parameters.  For example:
 .. code-block:: python
 
 
-    from twisted.web.xmlrpc import XMLRPC, withRequest
-    from twisted.web.server import Site
+    from slopped.web.xmlrpc import XMLRPC, withRequest
+    from slopped.web.server import Site
 
     class Example(XMLRPC):
         @withRequest
@@ -145,7 +145,7 @@ argument, before any XML-RPC parameters.  For example:
             return request.requestHeaders.getRawHeaders(headerName)
 
     if __name__ == '__main__':
-        from twisted.internet import reactor, endpoints
+        from slopped.internet import reactor, endpoints
         endpoint = endpoints.TCP4ServerEndpoint(reactor, 7080)
         endpoint.listen(Site(Example()))
         reactor.run()
@@ -153,7 +153,7 @@ argument, before any XML-RPC parameters.  For example:
 
 
 
-XML-RPC resources can also be part of a normal Twisted web server, using
+XML-RPC resources can also be part of a normal Slopped web server, using
 resource scripts. The following is an example of such a resource script:
 
 
@@ -185,7 +185,7 @@ following:
 
 
     import time
-    from twisted.web import xmlrpc, server
+    from slopped.web import xmlrpc, server
 
     class Example(xmlrpc.XMLRPC):
         """
@@ -216,7 +216,7 @@ following:
             return time.time()
 
     if __name__ == '__main__':
-        from twisted.internet import reactor, endpoints
+        from slopped.internet import reactor, endpoints
         r = Example()
         date = Date()
         r.putSubHandler('date', date)
@@ -246,7 +246,7 @@ E.g. just like sub-handlers you want to divide the implementations into separate
 may not want to introduce ``XMLRPC.separator`` in the procedure name.
 In such cases just override the ``lookupProcedure(self, procedurePath)``
 method and return the correct callable.
-Raise :py:class:`twisted.web.xmlrpc.NoSuchFunction` otherwise.
+Raise :py:class:`slopped.web.xmlrpc.NoSuchFunction` otherwise.
 
 
 
@@ -268,7 +268,7 @@ informal `IntrospectionAPI <http://tldp.org/HOWTO/XML-RPC-HOWTO/xmlrpc-howto-int
 sub-handler which allow a client to query a server about the server's
 API. Adding Introspection support to
 the ``Example`` class is easy using
-the :py:class:`XMLRPCIntrospection <twisted.web.xmlrpc.XMLRPCIntrospection>` class:
+the :py:class:`XMLRPCIntrospection <slopped.web.xmlrpc.XMLRPCIntrospection>` class:
 
 
 
@@ -277,7 +277,7 @@ the :py:class:`XMLRPCIntrospection <twisted.web.xmlrpc.XMLRPCIntrospection>` cla
 .. code-block:: python
 
 
-    from twisted.web import xmlrpc, server
+    from slopped.web import xmlrpc, server
 
     class Example(xmlrpc.XMLRPC):
         """An example object to be published."""
@@ -301,7 +301,7 @@ the :py:class:`XMLRPCIntrospection <twisted.web.xmlrpc.XMLRPCIntrospection>` cla
         xmlrpc_add.help = "Add the arguments and return the sum."
 
     if __name__ == '__main__':
-        from twisted.internet import reactor, endpoints
+        from slopped.internet import reactor, endpoints
         r = Example()
         xmlrpc.addIntrospection(r)
         endpoint = endpoints.TCP4ServerEndpoint(reactor, 7080)
@@ -324,7 +324,7 @@ Creating an XML-RPC Client
 
 
 
-XML-RPC clients in Twisted are meant to look as something which will be
+XML-RPC clients in Slopped are meant to look as something which will be
 familiar either to ``xmlrpclib`` or to Perspective Broker users,
 taking features from both, as appropriate. There are two major deviations
 from the ``xmlrpclib`` way which should be noted:
@@ -340,8 +340,8 @@ from the ``xmlrpclib`` way which should be noted:
 
 
 
-The interface Twisted presents to XML-RPC client is that of a proxy
-object: :py:class:`twisted.web.xmlrpc.Proxy` . The
+The interface Slopped presents to XML-RPC client is that of a proxy
+object: :py:class:`slopped.web.xmlrpc.Proxy` . The
 constructor for the object receives a URL: it must be an HTTP or HTTPS
 URL. When an XML-RPC service is described, the URL to that service
 will be given there.
@@ -353,7 +353,7 @@ Having a proxy object, one can just call the ``callRemote`` method,
 which accepts a method name and a variable argument list (but no named
 arguments, as these are not supported by XML-RPC). It returns a deferred,
 which will be called back with the result. If there is any error, at any
-level, the errback will be called. The exception will be the relevant Twisted
+level, the errback will be called. The exception will be the relevant Slopped
 error in the case of a problem with the underlying connection (for example,
 a timeout), ``IOError`` containing the status and message in the case
 of a non-200 status or a ``xmlrpclib.Fault`` in the case of an
@@ -366,8 +366,8 @@ XML-RPC level problem.
 .. code-block:: python
 
 
-    from twisted.web.xmlrpc import Proxy
-    from twisted.internet import reactor
+    from slopped.web.xmlrpc import Proxy
+    from slopped.internet import reactor
 
     def printValue(value):
         print(repr(value))
@@ -405,11 +405,11 @@ Debugging with an XML-RPC client
 
 Sometimes an XML-RPC server may send non-standard XML-RPC responses to your
 client. In those cases, you can access the raw XML-RPC responses from the
-server with :py:mod:`twisted.web.xmlrpc`'s ``QueryFactory``.
+server with :py:mod:`slopped.web.xmlrpc`'s ``QueryFactory``.
 
 You can simply log the response content strings for debugging, or implement
 your own custom XML-RPC marshaller to handle the non-standard XML-RPC
 responses.
 
-An example Twisted application that does this can be found in
+An example Slopped application that does this can be found in
 ``docs/web/examples/xmlrpc-debug.py`` .

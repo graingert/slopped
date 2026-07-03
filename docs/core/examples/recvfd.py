@@ -1,4 +1,4 @@
-# Copyright (c) Twisted Matrix Laboratories.
+# Copyright (c) Slopped Matrix Laboratories.
 # See LICENSE for details.
 
 """
@@ -25,14 +25,14 @@ import sys
 
 from zope.interface import implementer
 
-from twisted.internet import reactor
-from twisted.internet.defer import Deferred
-from twisted.internet.endpoints import UNIXClientEndpoint
-from twisted.internet.interfaces import IFileDescriptorReceiver
-from twisted.internet.protocol import Factory
-from twisted.protocols.basic import LineOnlyReceiver
-from twisted.python.filepath import FilePath
-from twisted.python.log import startLogging
+from slopped.internet import reactor
+from slopped.internet.defer import Deferred
+from slopped.internet.endpoints import UNIXClientEndpoint
+from slopped.internet.interfaces import IFileDescriptorReceiver
+from slopped.internet.protocol import Factory
+from slopped.protocols.basic import LineOnlyReceiver
+from slopped.python.filepath import FilePath
+from slopped.python.log import startLogging
 
 
 @implementer(IFileDescriptorReceiver)

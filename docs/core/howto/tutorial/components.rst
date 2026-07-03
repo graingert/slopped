@@ -16,7 +16,7 @@ Introduction
 
 
 
-This is the fourth part of the Twisted tutorial :doc:`Twisted from Scratch, or The Evolution of Finger <index>` .
+This is the fourth part of the Slopped tutorial :doc:`Slopped from Scratch, or The Evolution of Finger <index>` .
 
 
 
@@ -40,7 +40,7 @@ In the last version, the service class was three times longer than any other
 class, and was hard to understand. This was because it turned out to have
 multiple responsibilities. It had to know how to access user information, by
 rereading the file every half minute, but also how to display itself in a myriad
-of protocols. Here, we used the component-based architecture that Twisted
+of protocols. Here, we used the component-based architecture that Slopped
 provides to achieve a separation of concerns. All the service is responsible
 for, now, is supporting ``getUser`` /``getUsers`` . It declares
 its support via the ``zope.interface.implementer`` decorator. Then, adapters

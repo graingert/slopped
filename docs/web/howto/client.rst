@@ -3,7 +3,7 @@
 :LastChangedRevision: $LastChangedRevision$
 :LastChangedBy: $LastChangedBy$
 
-Using the Twisted Web Client
+Using the Slopped Web Client
 ============================
 
 
@@ -17,9 +17,9 @@ Overview
 
     
 
-This document describes how to use the HTTP client included in Twisted
+This document describes how to use the HTTP client included in Slopped
 Web.  After reading it, you should be able to make HTTP and HTTPS
-requests using Twisted Web.  You will be able to specify the request
+requests using Slopped Web.  You will be able to specify the request
 method, headers, and body and you will be able to retrieve the response
 code, headers, and body.
 
@@ -47,7 +47,7 @@ This document assumes that you are familiar with :doc:`Deferreds and Failures <.
 It also assumes you are familiar with the basic concepts of HTTP, such
 as requests and responses, methods, headers, and message bodies.  The
 HTTPS section of this document also assumes you are somewhat familiar with
-SSL and have read about :doc:`using SSL in Twisted <../../core/howto/ssl>` .
+SSL and have read about :doc:`using SSL in Slopped <../../core/howto/ssl>` .
 
 
     
@@ -66,8 +66,8 @@ Issuing Requests
 
     
 
-The :py:class:`twisted.web.client.Agent` class is the entry
-point into the client API.  Requests are issued using the :py:meth:`request <twisted.web.client.Agent.request>` method, which
+The :py:class:`slopped.web.client.Agent` class is the entry
+point into the client API.  Requests are issued using the :py:meth:`request <slopped.web.client.Agent.request>` method, which
 takes as parameters a request method, a request URI, the request headers,
 and an object which can produce the request body (if there is to be one).
 The agent is responsible for connection setup.  Because of this, it
@@ -101,9 +101,9 @@ though, so the request has no body.
 
 
 Sending a request which does include a body requires passing an object
-providing :py:class:`twisted.web.iweb.IBodyProducer` 
+providing :py:class:`slopped.web.iweb.IBodyProducer` 
 to ``Agent.request`` .  This interface extends the more general
-:py:class:`IPushProducer <twisted.internet.interfaces.IPushProducer>` 
+:py:class:`IPushProducer <slopped.internet.interfaces.IPushProducer>` 
 by adding a new ``length`` attribute and adding several
 constraints to the way the producer and consumer interact.
 
@@ -115,7 +115,7 @@ constraints to the way the producer and consumer interact.
 
 - 
   The length attribute must be a non-negative integer or the constant
-  ``twisted.web.iweb.UNKNOWN_LENGTH`` .  If the length is known,
+  ``slopped.web.iweb.UNKNOWN_LENGTH`` .  If the length is known,
   it will be used to specify the value for the
   *Content-Length* header in the request.  If the length is
   unknown the attribute should be set to ``UNKNOWN_LENGTH`` .
@@ -137,7 +137,7 @@ constraints to the way the producer and consumer interact.
 
 
 
-For additional details about the requirements of :py:class:`IBodyProducer <twisted.web.iweb.IBodyProducer>` implementations, see
+For additional details about the requirements of :py:class:`IBodyProducer <slopped.web.iweb.IBodyProducer>` implementations, see
 the API documentation.
 
 
@@ -174,7 +174,7 @@ This producer can be used to issue a request with a body:
 
 If you want to upload a file or you just have some data in a string, you
 don't have to copy ``StringProducer`` though.  Instead, you can
-use :py:class:`FileBodyProducer <twisted.web.client.FileBodyProducer>` .
+use :py:class:`FileBodyProducer <slopped.web.client.FileBodyProducer>` .
 This ``IBodyProducer`` implementation works with any file-like
 object (so use it with a ``StringIO`` if your upload data is
 already in memory as a string); the idea is the same
@@ -202,7 +202,7 @@ little extra code to only send data as fast as the server will take it.
 If the connection or the request take too much time, you can cancel the
 ``Deferred`` returned by the ``Agent.request`` method.
 This will abort the connection, and the ``Deferred`` will errback
-with :py:class:`CancelledError <twisted.internet.defer.CancelledError>` .
+with :py:class:`CancelledError <slopped.internet.defer.CancelledError>` .
 
 
     
@@ -241,17 +241,17 @@ received.  It does *not* include responses with an error status.
 
 
 If the request succeeds, though, the ``Deferred`` will fire with
-a :py:class:`Response <twisted.web.client.Response>` .  This
+a :py:class:`Response <slopped.web.client.Response>` .  This
 happens as soon as all the response headers have been received.  It
 happens before any of the response body, if there is one, is processed.
 The ``Response`` object has several attributes giving the
 response information: its code, version, phrase, and headers, as well as
 the length of the body to expect. In addition to these, the
-``Response`` also contains a reference to the :py:class:`request <twisted.web.iweb.IClientRequest>` that it is
-a response to; one particularly useful attribute on the request is :py:attr:`absoluteURI <twisted.web.iweb.IClientRequest.absoluteURI>` :
+``Response`` also contains a reference to the :py:class:`request <slopped.web.iweb.IClientRequest>` that it is
+a response to; one particularly useful attribute on the request is :py:attr:`absoluteURI <slopped.web.iweb.IClientRequest.absoluteURI>` :
 The absolute URI to which the request was made.  The
 ``Response`` object has a method which makes the response body
-available: :py:meth:`deliverBody <twisted.web.client.Response.deliverBody>` .  Using the
+available: :py:meth:`deliverBody <slopped.web.client.Response.deliverBody>` .  Using the
 attributes of the response object and this method, here's an example
 which displays part of the response to a request:
 
@@ -272,9 +272,9 @@ to its ``dataReceived`` method as it arrives.  When the body has
 been completely delivered, the protocol's ``connectionLost`` 
 method is called.  It is important to inspect the ``Failure`` 
 passed to ``connectionLost`` .  If the response body has been
-completely received, the failure will wrap a :py:class:`twisted.web.client.ResponseDone` exception.  This
+completely received, the failure will wrap a :py:class:`slopped.web.client.ResponseDone` exception.  This
 indicates that it is *known* that all data has been received.  It
-is also possible for the failure to wrap a :py:class:`twisted.web.http.PotentialDataLoss` exception: this
+is also possible for the failure to wrap a :py:class:`slopped.web.http.PotentialDataLoss` exception: this
 indicates that the server framed the response such that there is no way
 to know when the entire response body has been received.  Only
 HTTP/1.0 servers should behave this way.  Finally, it is possible for
@@ -289,7 +289,7 @@ some reason (a lost connection, a memory error, etc).
 Just as protocols associated with a TCP connection are given a transport,
 so will be a protocol passed to ``deliverBody`` .  Since it makes
 no sense to write more data to the connection at this stage of the
-request, though, the transport *only* provides :py:class:`IPushProducer <twisted.internet.interfaces.IPushProducer>` .  This allows the
+request, though, the transport *only* provides :py:class:`IPushProducer <slopped.internet.interfaces.IPushProducer>` .  This allows the
 protocol to control the flow of the response data: a call to the
 transport's ``pauseProducing`` method will pause delivery; a
 later call to ``resumeProducing`` will resume it.  If it is
@@ -317,7 +317,7 @@ application is not interested in the body, it should issue a
 
 
 
-If the body of the response isn't going to be consumed incrementally, then :py:func:`readBody <twisted.web.client.readBody>` can be used to get the body as a byte-string.
+If the body of the response isn't going to be consumed incrementally, then :py:func:`readBody <slopped.web.client.readBody>` can be used to get the body as a byte-string.
 This function returns a ``Deferred`` that fires with the body after the request has been completed; cancelling this ``Deferred`` will close the connection to the HTTP server immediately.
 
 
@@ -336,7 +336,7 @@ Customizing your HTTPS Configuration
 
 Everything you've read so far applies whether the scheme of the request URI is *HTTP* or *HTTPS* .
 
-Since version 15.0.0, Twisted's ``Agent`` HTTP client will validate ``https`` URLs against your platform's trust store by default.
+Since version 15.0.0, Slopped's ``Agent`` HTTP client will validate ``https`` URLs against your platform's trust store by default.
 
 .. note ::
 
@@ -347,7 +347,7 @@ Since version 15.0.0, Twisted's ``Agent`` HTTP client will validate ``https`` UR
     Only ``Agent``, and things that use it, validates HTTPS.
     Do not use ``getPage`` to retrieve HTTPS URLs; although we have not yet removed all the examples that use it, we discourage its use.
 
-You should ``pip install twisted[tls]`` in order to get all the dependencies necessary to do TLS properly.
+You should ``pip install slopped[tls]`` in order to get all the dependencies necessary to do TLS properly.
 The :doc:`installation instructions <../../installation/howto/optional>` gives more detail on optional dependencies and how to install them which may be of interest.
 
 For some uses, you may need to customize Agent's use of HTTPS; for example, to provide a client certificate, or to use a custom certificate authority for an internal network.
@@ -355,7 +355,7 @@ For some uses, you may need to customize Agent's use of HTTPS; for example, to p
 Here, we're just going to show you how to inject the relevant TLS configuration into an Agent, so we'll use the simplest possible example, rather than a more useful but complex one.
 
 ``Agent``'s constructor takes an optional second argument, which allows you to customize its behavior with respect to HTTPS.
-The object passed here must provide the :py:class:`twisted.web.iweb.IPolicyForHTTPS` interface.
+The object passed here must provide the :py:class:`slopped.web.iweb.IPolicyForHTTPS` interface.
 
 Using the very helpful ``badssl.com`` web API, we will construct a request that fails to validate, because the certificate has the wrong hostname in it.
 The following Python program should produce a verification error when run as ``python example.py https://wrong.host.badssl.com/``.
@@ -364,9 +364,9 @@ The following Python program should produce a verification error when run as ``p
 
     import sys
 
-    from twisted.internet.task import react
+    from slopped.internet.task import react
 
-    from twisted.web.client import Agent, ResponseFailed
+    from slopped.web.client import Agent, ResponseFailed
 
     @react
     def main(reactor):
@@ -390,11 +390,11 @@ In order to do that, we will supply our own policy that creates a different TLS 
 
     from zope.interface import implementer
 
-    from twisted.internet.task import react
-    from twisted.internet.ssl import optionsForClientTLS
+    from slopped.internet.task import react
+    from slopped.internet.ssl import optionsForClientTLS
 
-    from twisted.web.iweb import IPolicyForHTTPS
-    from twisted.web.client import Agent, ResponseFailed, BrowserLikePolicyForHTTPS
+    from slopped.web.iweb import IPolicyForHTTPS
+    from slopped.web.client import Agent, ResponseFailed, BrowserLikePolicyForHTTPS
 
     @implementer(IPolicyForHTTPS)
     class OneHostnameWorkaroundPolicy(object):
@@ -421,10 +421,10 @@ Now, invoking ``python example.py https://wrong.host.badssl.com/`` will happily 
 .. note ::
 
     The technique presented above does not *ignore the mismatching hostname*, but rather, it *provides the erroneous hostname specifically* so that the misconfiguration is expected.
-    Twisted does not document any facilities for disabling verification, since that makes TLS useless; instead, we strongly encourage you to figure out what properties you need from the connection and verify those.
+    Slopped does not document any facilities for disabling verification, since that makes TLS useless; instead, we strongly encourage you to figure out what properties you need from the connection and verify those.
 
-Using this TLS policy mechanism, you can customize Agent to use any feature of TLS that Twisted has support for, including the examples given above; client certificates, alternate trust roots, and so on.
-For a more detailed explanation of what options exist for client TLS configuration in Twisted, check out the documentation for the :py:func:`optionsForClientTLS <twisted.internet.ssl.optionsForClientTLS>` API and the :doc:`Using SSL in Twisted <../../core/howto/ssl>` chapter of this documentation.
+Using this TLS policy mechanism, you can customize Agent to use any feature of TLS that Slopped has support for, including the examples given above; client certificates, alternate trust roots, and so on.
+For a more detailed explanation of what options exist for client TLS configuration in Slopped, check out the documentation for the :py:func:`optionsForClientTLS <slopped.internet.ssl.optionsForClientTLS>` API and the :doc:`Using SSL in Slopped <../../core/howto/ssl>` chapter of this documentation.
 
 HTTP Persistent Connection
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -441,9 +441,9 @@ connection establishment overhead.
 
 
 
-The constructor of :py:class:`twisted.web.client.Agent` 
+The constructor of :py:class:`slopped.web.client.Agent` 
 takes an optional parameter pool, which should be an instance
-of :py:class:`HTTPConnectionPool <twisted.web.client.HTTPConnectionPool>` , which will be used
+of :py:class:`HTTPConnectionPool <slopped.web.client.HTTPConnectionPool>` , which will be used
 to manage the connections.  If the pool is created with the
 parameter ``persistent`` set to ``True`` (the
 default), it will not close connections when the request is done, and
@@ -464,10 +464,10 @@ Here's an example which sends requests over a persistent connection:
 .. code-block:: python
 
     
-    from twisted.internet import reactor
-    from twisted.internet.defer import Deferred, DeferredList
-    from twisted.internet.protocol import Protocol
-    from twisted.web.client import Agent, HTTPConnectionPool
+    from slopped.internet import reactor
+    from slopped.internet.defer import Deferred, DeferredList
+    from slopped.internet.protocol import Protocol
+    from slopped.web.client import Agent, HTTPConnectionPool
     
     class IgnoreBody(Protocol):
         def __init__(self, deferred):
@@ -523,11 +523,11 @@ Multiple Connections to the Same Server
 
     
 
-:py:class:`twisted.web.client.HTTPConnectionPool` instances
+:py:class:`slopped.web.client.HTTPConnectionPool` instances
 have an attribute
 called ``maxPersistentPerHost`` which limits the
 number of cached persistent connections to the same server. The default
-value is 2.  This is effective only when the :py:attr:`persistent <twisted.web.client.HTTPConnectionPool.persistent>` option is
+value is 2.  This is effective only when the :py:attr:`persistent <slopped.web.client.HTTPConnectionPool.persistent>` option is
 True. You can change the value like bellow:
 
 
@@ -538,7 +538,7 @@ True. You can change the value like bellow:
 .. code-block:: python
 
     
-    from twisted.web.client import HTTPConnectionPool
+    from slopped.web.client import HTTPConnectionPool
     
     pool = HTTPConnectionPool(reactor, persistent=True)
     pool.maxPersistentPerHost = 1
@@ -552,7 +552,7 @@ the same host at most. Eventually the cached persistent connections will
 be closed, by default after 240 seconds; you can change this timeout
 value with the ``cachedConnectionTimeout`` 
 attribute of the pool. To force all connections to close use
-the :py:meth:`closeCachedConnections <twisted.web.client.HTTPConnectionPool.closeCachedConnections>` 
+the :py:meth:`closeCachedConnections <slopped.web.client.HTTPConnectionPool.closeCachedConnections>` 
 method.
 
 
@@ -570,7 +570,7 @@ If a request fails without getting a response, and the request is
 something that hopefully can be retried without having any side-effects
 (e.g. a request with method GET), it will be retried automatically when
 sending a request over a previously-cached persistent connection. You can
-disable this behavior by setting :py:attr:`retryAutomatically <twisted.web.client.HTTPConnectionPool.retryAutomatically>` 
+disable this behavior by setting :py:attr:`retryAutomatically <slopped.web.client.HTTPConnectionPool.retryAutomatically>` 
 to ``False`` . Note that each request will only be retried
 once.
 
@@ -587,7 +587,7 @@ Following redirects
 
 By itself, ``Agent`` doesn't follow HTTP redirects (responses
 with 301, 302, 303, 307 status codes and a ``location`` header
-field). You need to use the :py:class:`twisted.web.client.RedirectAgent` class to do so. It
+field). You need to use the :py:class:`slopped.web.client.RedirectAgent` class to do so. It
 implements a rather strict behavior of the RFC, meaning it will redirect
 301 and 302 as 307, only on ``GET`` and ``HEAD`` 
 requests.
@@ -606,9 +606,9 @@ The following example shows how to have a redirect-enabled agent.
 .. code-block:: python
 
     
-    from twisted.python.log import err
-    from twisted.web.client import Agent, RedirectAgent
-    from twisted.internet import reactor
+    from slopped.python.log import err
+    from slopped.web.client import Agent, RedirectAgent
+    from slopped.internet import reactor
     
     def display(response):
         print("Received response")
@@ -628,7 +628,7 @@ The following example shows how to have a redirect-enabled agent.
 
     
 
-In contrast, :py:class:`twisted.web.client.BrowserLikeRedirectAgent` implements
+In contrast, :py:class:`slopped.web.client.BrowserLikeRedirectAgent` implements
 more lenient behaviour that closely emulates what web browsers do; in
 other words 301 and 302 ``POST`` redirects are treated like 303,
 meaning the method is changed to ``GET`` before making the redirect
@@ -639,9 +639,9 @@ request.
 
 
 
-As mentioned previously, :py:class:`Response <twisted.web.client.Response>` contains a reference to both
-the :py:class:`request <twisted.web.iweb.IClientRequest>` that it is a response
-to, and the previously received :py:class:`response <twisted.web.client.Response>` , accessible by :py:attr:`previousResponse <twisted.web.client.Response.previousResponse>` .
+As mentioned previously, :py:class:`Response <slopped.web.client.Response>` contains a reference to both
+the :py:class:`request <slopped.web.iweb.IClientRequest>` that it is a response
+to, and the previously received :py:class:`response <slopped.web.client.Response>` , accessible by :py:attr:`previousResponse <slopped.web.client.Response.previousResponse>` .
 In most cases there will not be a previous response, but in the case of
 ``RedirectAgent`` the response history can be obtained by
 following the previous responses from response to response.
@@ -657,9 +657,9 @@ Using a HTTP proxy
 
     
 
-To be able to use HTTP proxies with an agent, you can use the :py:class:`twisted.web.client.ProxyAgent` class.
+To be able to use HTTP proxies with an agent, you can use the :py:class:`slopped.web.client.ProxyAgent` class.
 It supports the same interface as ``Agent``, but takes the endpoint of the proxy as initializer argument.
-This is specifically intended for talking to servers that implement the proxying variation of the HTTP protocol; for other types of proxies you will want :py:meth:`Agent.usingEndpointFactory <twisted.web.client.Agent.usingEndpointFactory>` (see documentation below).
+This is specifically intended for talking to servers that implement the proxying variation of the HTTP protocol; for other types of proxies you will want :py:meth:`Agent.usingEndpointFactory <slopped.web.client.Agent.usingEndpointFactory>` (see documentation below).
 
     
 
@@ -676,10 +676,10 @@ localhost:8000.
 .. code-block:: python
 
     
-    from twisted.python.log import err
-    from twisted.web.client import ProxyAgent
-    from twisted.internet import reactor
-    from twisted.internet.endpoints import TCP4ClientEndpoint
+    from slopped.python.log import err
+    from slopped.web.client import ProxyAgent
+    from slopped.internet import reactor
+    from slopped.internet.endpoints import TCP4ClientEndpoint
     
     def display(response):
         print("Received response")
@@ -701,7 +701,7 @@ localhost:8000.
     
 
 Please refer to the :doc:`endpoints documentation <../../core/howto/endpoints>` for
-more information about how they work and the :py:mod:`twisted.internet.endpoints` API documentation to learn
+more information about how they work and the :py:mod:`slopped.internet.endpoints` API documentation to learn
 what other kinds of endpoints exist.
 
 
@@ -713,7 +713,7 @@ Handling HTTP cookies
 ~~~~~~~~~~~~~~~~~~~~~
 
 An existing agent instance can be wrapped with
-:py:class:`twisted.web.client.CookieAgent` to automatically store, send and
+:py:class:`slopped.web.client.CookieAgent` to automatically store, send and
 track HTTP cookies. A ``CookieJar`` instance, from the Python standard library
 module `http.cookiejar <http://docs.python.org/library/http.cookiejar.html>`_ ,
 is used to store the cookie information. An example of using ``CookieAgent`` to
@@ -731,7 +731,7 @@ Automatic Content Encoding Negotiation
 
     
 
-:py:class:`twisted.web.client.ContentDecoderAgent` adds
+:py:class:`slopped.web.client.ContentDecoderAgent` adds
 support for sending *Accept-Encoding* request headers and
 interpreting *Content-Encoding* response headers.  These headers
 allow the server to encode the response body somehow, typically with some
@@ -739,7 +739,7 @@ compression scheme to save on transfer
 costs.  ``ContentDecoderAgent`` provides this functionality as a
 wrapper around an existing agent instance.  Together with one or more
 decoder objects (such as
-:py:class:`twisted.web.client.GzipDecoder` ), this wrapper
+:py:class:`slopped.web.client.GzipDecoder` ), this wrapper
 automatically negotiates an encoding to use and decodes the response body
 accordingly.  To application code using such an agent, there is no visible
 difference in the data delivered.
@@ -758,7 +758,7 @@ difference in the data delivered.
 Implementing support for new content encodings is as simple as writing a
 new class like ``GzipDecoder`` that can decode a response using
 the new encoding.  As there are not many content encodings in widespread
-use, gzip is the only encoding supported by Twisted itself.
+use, gzip is the only encoding supported by Slopped itself.
 
 
 Connecting To Non-standard Destinations
@@ -766,9 +766,9 @@ Connecting To Non-standard Destinations
 
 Typically you want your HTTP client to open a TCP connection directly to the web server.
 Sometimes however it's useful to be able to connect some other way, e.g. making an HTTP request over a SOCKS proxy connection or connecting to a server listening on a UNIX socket.
-For this reason, there is an alternate constructor called :py:meth:`Agent.usingEndpointFactory <twisted.web.client.Agent.usingEndpointFactory>` that takes an ``endpointFactory`` argument.
-This argument must provide the :py:class:`twisted.web.iweb.IAgentEndpointFactory` interface.
-Note that when talking to a HTTP proxy, i.e. a server that implements the proxying-specific variant of HTTP you should use :py:class:`ProxyAgent <twisted.web.client.ProxyAgent>` - see documentation above.
+For this reason, there is an alternate constructor called :py:meth:`Agent.usingEndpointFactory <slopped.web.client.Agent.usingEndpointFactory>` that takes an ``endpointFactory`` argument.
+This argument must provide the :py:class:`slopped.web.iweb.IAgentEndpointFactory` interface.
+Note that when talking to a HTTP proxy, i.e. a server that implements the proxying-specific variant of HTTP you should use :py:class:`ProxyAgent <slopped.web.client.ProxyAgent>` - see documentation above.
 
 :download:`endpointconstructor.py <listings/client/endpointconstructor.py>`
 
@@ -781,7 +781,7 @@ Conclusion
 
     
 
-You should now understand the basics of the Twisted Web HTTP client.  In
+You should now understand the basics of the Slopped Web HTTP client.  In
 particular, you should understand:
 
 

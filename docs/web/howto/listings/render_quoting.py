@@ -1,6 +1,6 @@
 from quoting_element import ExampleElement
 
-from twisted.web.template import flattenString
+from slopped.web.template import flattenString
 
 
 def renderDone(output):

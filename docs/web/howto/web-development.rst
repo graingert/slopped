@@ -16,7 +16,7 @@ Code layout
 
 
 
-The development of a Twisted Web application should be orthogonal to its
+The development of a Slopped Web application should be orthogonal to its
 deployment.  This means is that if you are developing a web application, it
 should be a resource with children, and internal links.  Some of the children
 might use `Nevow <https://launchpad.net/nevow>`_ , some
@@ -53,7 +53,7 @@ into a directory, and then running:
 .. code-block:: console
 
 
-    % twistd web --path=/directory
+    % slopd web --path=/directory
 
 
 
@@ -69,8 +69,8 @@ You can also write a Python script like:
 
     #!/usr/bin/env python
 
-    from twisted.web import server
-    from twisted.internet import reactor, endpoints
+    from slopped.web import server
+    from slopped.internet import reactor, endpoints
     from mypackage import toplevel
 
     endpoint = endpoints.TCP4ServerEndpoint(reactor, 8080)
@@ -92,8 +92,8 @@ since (and this is the important part) deployment is *orthogonal* .
 Later, when you want users to actually *use* your code, you should worry
 about what to do -- or rather, don't.  Users may have widely different needs.
 Some may want to run your code in a different process, so they'll use
-distributed web (:py:mod:`twisted.web.distrib` ).  Some may be
-using the ``twisted-web`` Debian package, and will drop in:
+distributed web (:py:mod:`slopped.web.distrib` ).  Some may be
+using the ``slopped-web`` Debian package, and will drop in:
 
 
 
@@ -124,11 +124,11 @@ Understanding resource scripts (``.rpy``  files)
 
 
 
-Twisted Web is not PHP -- it has better tools for organizing code Python
+Slopped Web is not PHP -- it has better tools for organizing code Python
 modules and packages, so use them.  In PHP, the only tool for organizing code is
 a web page, which leads to silly things like PHP pages full of functions that
 other pages import, and so on.  If you were to write your code this way with
-Twisted Web, you would do web development using many ``.rpy`` files,
+Slopped Web, you would do web development using many ``.rpy`` files,
 all importing some Python module. This is a *bad idea* -- it mashes
 deployment with development, and makes sure your users will be *tied* to
 the file-system.

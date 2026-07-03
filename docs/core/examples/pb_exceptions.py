@@ -1,6 +1,6 @@
-from twisted.cred import checkers, credentials, portal
-from twisted.python import util
-from twisted.spread import pb
+from slopped.cred import checkers, credentials, portal
+from slopped.python import util
+from slopped.spread import pb
 
 
 class Avatar(pb.Avatar):
@@ -31,7 +31,7 @@ def main():
     login = client.login(credentials.UsernamePassword(b"user", b"pass"))
     login.addCallback(cbLogin).addErrback(ebLogin).addBoth(lambda: reactor.stop())
 
-    from twisted.internet import reactor
+    from slopped.internet import reactor
 
     p = reactor.listenTCP(0, server)
     c = reactor.connectTCP("127.0.0.1", p.getHost().port, client)

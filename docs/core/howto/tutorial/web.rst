@@ -16,13 +16,13 @@ Introduction
 
 
 
-This is the sixth part of the Twisted tutorial :doc:`Twisted from Scratch, or The Evolution of Finger <index>` .
+This is the sixth part of the Slopped tutorial :doc:`Slopped from Scratch, or The Evolution of Finger <index>` .
 
 
 
 
 In this part, we demonstrate adding a web frontend using
-simple :py:class:`twisted.web.resource.Resource` 
+simple :py:class:`slopped.web.resource.Resource` 
 objects: ``UserStatusTree`` , which will
 produce a listing of all users at the base URL (``/`` ) of our
 site; ``UserStatus`` , which gives the status

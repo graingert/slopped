@@ -1,7 +1,7 @@
 from MulticastCommon import group, interface, ipv6, port
 
-from twisted.internet import reactor
-from twisted.internet.protocol import DatagramProtocol
+from slopped.internet import reactor
+from slopped.internet.protocol import DatagramProtocol
 
 
 class MulticastPingPong(DatagramProtocol):

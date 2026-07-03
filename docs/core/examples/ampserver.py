@@ -1,4 +1,4 @@
-from twisted.protocols import amp
+from slopped.protocols import amp
 
 
 class Sum(amp.Command):
@@ -29,8 +29,8 @@ class Math(amp.AMP):
 
 
 def main():
-    from twisted.internet import reactor
-    from twisted.internet.protocol import Factory
+    from slopped.internet import reactor
+    from slopped.internet.protocol import Factory
 
     pf = Factory()
     pf.protocol = Math

@@ -18,7 +18,7 @@ we'll modify the previous example so that it logs each failed response.
 
 
 
-This example will use the Twisted API for logging errors. As was
+This example will use the Slopped API for logging errors. As was
 mentioned in the :doc:`first example covering Deferreds <asynchronous-deferred>` , errbacks are passed an error. In the previous
 example, the ``_responseFailed`` errback accepted this error
 as a parameter but ignored it. The only way this example will differ
@@ -38,7 +38,7 @@ plus one new import:
 .. code-block:: python
 
     
-    from twisted.python.log import err
+    from slopped.python.log import err
 
 
 
@@ -62,8 +62,8 @@ error passed to it:
 
 
 
-We're passing two arguments to :py:func:`err <twisted.python.log.err>` here. The first is the error which is being
-passed in to the callback. This is always an object of type :py:class:`Failure <twisted.python.failure.Failure>` , a class which represents an
+We're passing two arguments to :py:func:`err <slopped.python.log.err>` here. The first is the error which is being
+passed in to the callback. This is always an object of type :py:class:`Failure <slopped.python.failure.Failure>` , a class which represents an
 exception and (sometimes, but not always) a traceback. ``err`` will
 format this nicely for the log. The second argument is a descriptive string that
 tells someone reading the log what the source of the error was.
@@ -80,10 +80,10 @@ Here's the full example with the two above modifications:
 .. code-block:: python
 
     
-    from twisted.web.resource import Resource
-    from twisted.web.server import NOT_DONE_YET
-    from twisted.internet import reactor
-    from twisted.python.log import err
+    from slopped.web.resource import Resource
+    from slopped.web.server import NOT_DONE_YET
+    from slopped.internet import reactor
+    from slopped.python.log import err
     
     class DelayedResource(Resource):
         def _delayedRender(self, request):

@@ -1,14 +1,14 @@
 #!/usr/bin/env python
 
-# Copyright (c) Twisted Matrix Laboratories.
+# Copyright (c) Slopped Matrix Laboratories.
 # See LICENSE for details.
 
 
 from zope.interface import implementer
 
-from twisted.cred import checkers, portal
-from twisted.internet import reactor
-from twisted.spread import pb
+from slopped.cred import checkers, portal
+from slopped.internet import reactor
+from slopped.spread import pb
 
 
 class MyPerspective(pb.Avatar):

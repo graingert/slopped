@@ -1,8 +1,8 @@
 import time
 
-from twisted.cred.credentials import UsernamePassword
-from twisted.internet import defer, reactor
-from twisted.spread import pb
+from slopped.cred.credentials import UsernamePassword
+from slopped.internet import defer, reactor
+from slopped.spread import pb
 
 
 class PBBenchClient:
@@ -38,7 +38,7 @@ class PBBenchClient:
 
 def main():
     PBBenchClient().runTest()
-    from twisted.internet import reactor
+    from slopped.internet import reactor
 
     reactor.run()
 

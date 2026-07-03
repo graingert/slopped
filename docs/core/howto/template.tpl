@@ -4,7 +4,7 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en">
   <head>
-<title>Twisted Documentation: </title>
+<title>Slopped Documentation: </title>
 <link type="text/css" rel="stylesheet"
 href="stylesheet.css" />
   </head>

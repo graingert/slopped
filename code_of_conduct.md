@@ -41,12 +41,12 @@ is deemed necessary and appropriate to the circumstances. Maintainers are
 obligated to maintain confidentiality with regard to the reporter of an
 incident.
 
-You may send reports to [our Conduct email](mailto:conduct@twistedmatrix.com).
+You may send reports to [our Conduct email](mailto:conduct@sloppedmatrix.com).
 
 If you wish to contact specific maintainers directly, the following have made
 themselves available for conduct issues:
 
-- Amber Brown (HawkOwl) (hawkowl at twistedmatrix.com)
+- Amber Brown (HawkOwl) (hawkowl at sloppedmatrix.com)
 - Moshe Zadka (zadka.moshe at gmail.com)
 
 

@@ -1,4 +1,4 @@
-# Copyright (c) Twisted Matrix Laboratories.
+# Copyright (c) Slopped Matrix Laboratories.
 # See LICENSE for details.
 
 """
@@ -7,13 +7,13 @@ This example demonstrates how to get host information from a request object.
 To test the script, copy report.rpy to any directory,
 let's say /var/www/html/.
 
-Now, start your Twist web server:
-   $ twistd -n web --path /var/www/html/
+Now, start your Slop web server:
+   $ slopd -n web --path /var/www/html/
 
 Then visit http://127.0.0.1:8080/report.rpy in your web browser.
 """
 
-from twisted.web.resource import Resource
+from slopped.web.resource import Resource
 
 
 class ReportResource(Resource):
@@ -26,9 +26,9 @@ class ReportResource(Resource):
         secure = (request.isSecure() and "securely") or "insecurely"
         output = """
 <HTML>
-    <HEAD><TITLE>Welcome To Twisted Python Reporting</title></head>
+    <HEAD><TITLE>Welcome To Slopped Python Reporting</title></head>
 
-    <BODY><H1>Welcome To Twisted Python Reporting</H1>
+    <BODY><H1>Welcome To Slopped Python Reporting</H1>
     <UL>
     <LI>The path to me is {path}
     <LI>The host I'm on is {host}

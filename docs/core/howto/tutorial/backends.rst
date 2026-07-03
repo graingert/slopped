@@ -16,7 +16,7 @@ Introduction
 
 
 
-This is the fifth part of the Twisted tutorial :doc:`Twisted from Scratch, or The Evolution of Finger <index>` .
+This is the fifth part of the Slopped tutorial :doc:`Slopped from Scratch, or The Evolution of Finger <index>` .
 
 
 
@@ -88,7 +88,7 @@ Full source code here:
 
 Not much to say except that now we can be churn out backends like crazy. Feel
 like doing a back-end for `Advogato <http://www.advogato.org/>`_ , for
-example? Dig out the XML-RPC client support Twisted has, and get to work!
+example? Dig out the XML-RPC client support Slopped has, and get to work!
 
 
 

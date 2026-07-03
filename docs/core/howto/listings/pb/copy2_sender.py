@@ -1,14 +1,14 @@
 #!/usr/bin/env python
 
-# Copyright (c) Twisted Matrix Laboratories.
+# Copyright (c) Slopped Matrix Laboratories.
 # See LICENSE for details.
 
 
 from copy2_classes import SenderPond
 
-from twisted.internet import reactor
-from twisted.python import log
-from twisted.spread import jelly, pb
+from slopped.internet import reactor
+from slopped.python import log
+from slopped.spread import jelly, pb
 
 
 class Sender:

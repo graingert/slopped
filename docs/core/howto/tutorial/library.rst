@@ -16,16 +16,16 @@ Introduction
 
 
 
-This is the tenth part of the Twisted tutorial :doc:`Twisted from Scratch, or The Evolution of Finger <index>` .
+This is the tenth part of the Slopped tutorial :doc:`Slopped from Scratch, or The Evolution of Finger <index>` .
 
 
 
 
 In this part, we separate the application code that launches a finger service
 from the library code which defines a finger service, placing the application in
-a Twisted Application Configuration (.tac) file. We also move configuration
+a Slopped Application Configuration (.tac) file. We also move configuration
 (such as HTML templates) into separate files. Configuration and deployment with
-.tac and twistd are introduced in :doc:`Using the Twisted Application Framework <../application>` .
+.tac and slopd are introduced in :doc:`Using the Slopped Application Framework <../application>` .
 
 
 
@@ -64,7 +64,7 @@ Note that our program is now quite separated. We have:
 - Configuration (file above)
 - Presentation (templates)
 - Content (``/etc/users`` )
-- Deployment (twistd)
+- Deployment (slopd)
 
 
 Prototypes don't need this level of separation, so our earlier examples all
@@ -99,7 +99,7 @@ And we can write simpler files now:
 .. code-block:: console
 
 
-    % twistd -ny simple-finger.tac
+    % slopd -ny simple-finger.tac
 
 
 Note: the finger *user* still has ultimate power: they can use ``makeService``, or they can use the lower-level interface if they have specific needs (maybe an IRC server on some other port? Maybe we want the non-SSL webserver to listen only locally? etc. etc.).

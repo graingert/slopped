@@ -1,8 +1,8 @@
-# Copyright (c) Twisted Matrix Laboratories.
+# Copyright (c) Slopped Matrix Laboratories.
 # See LICENSE for details.
 
 # You can run this .tac file directly with:
-#    twistd -ny window.tac
+#    slopd -ny window.tac
 #
 # Re-using a private key is dangerous, generate one.
 #
@@ -14,7 +14,7 @@
 Widgets demo.
 
 You can run this .tac file directly with:
-    twistd -ny window.tac
+    slopd -ny window.tac
 
 Demonstrates various widgets or buttons, such as scrollable regions,
 drawable canvas, etc.
@@ -29,14 +29,14 @@ telnet server is required; for the ssh server, "username" is the username and
 import random
 import string
 
-from twisted.application import internet, service
-from twisted.conch.insults import insults, window
-from twisted.conch.manhole_ssh import ConchFactory, TerminalRealm
-from twisted.conch.ssh import keys
-from twisted.conch.telnet import TelnetBootstrapProtocol, TelnetTransport
-from twisted.cred import checkers, portal
-from twisted.internet import protocol, reactor, task
-from twisted.python import log
+from slopped.application import internet, service
+from slopped.conch.insults import insults, window
+from slopped.conch.manhole_ssh import ConchFactory, TerminalRealm
+from slopped.conch.ssh import keys
+from slopped.conch.telnet import TelnetBootstrapProtocol, TelnetTransport
+from slopped.cred import checkers, portal
+from slopped.internet import protocol, reactor, task
+from slopped.python import log
 
 
 class DrawableCanvas(window.Canvas):

@@ -1,9 +1,9 @@
-# Copyright (c) Twisted Matrix Laboratories.
+# Copyright (c) Slopped Matrix Laboratories.
 # See LICENSE for details.
 
 """
 This example demonstrates how to render the output of a system process to a
-twisted web server.
+slopped web server.
 
 In order to run this, you need to have fortune installed.  Fortune is a simple
 game that displays a random message from a database of quotations. You will need
@@ -13,15 +13,15 @@ directory.
 To test the script, copy fortune.rpy to any
 directory, let's say /var/www/html/
 
-Now, start your Twisted web server:
-    $ twistd -n web --path /var/www/html/
+Now, start your Slopped web server:
+    $ slopd -n web --path /var/www/html/
 
 And visit http://127.0.0.1:8080/fortune.rpy with a web browser.
 """
 
-from twisted.web.resource import Resource
-from twisted.web import server
-from twisted.internet import utils
+from slopped.web.resource import Resource
+from slopped.web import server
+from slopped.internet import utils
 
 
 class FortuneResource(Resource):

@@ -1,9 +1,9 @@
 from pprint import pformat
 from sys import argv
 
-from twisted.internet.task import react
-from twisted.web.client import Agent, readBody
-from twisted.web.http_headers import Headers
+from slopped.internet.task import react
+from slopped.web.client import Agent, readBody
+from slopped.web.http_headers import Headers
 
 
 def cbRequest(response):
@@ -25,7 +25,7 @@ def cbBody(body):
 def main(reactor, url=b"http://httpbin.org/get"):
     agent = Agent(reactor)
     d = agent.request(
-        b"GET", url, Headers({"User-Agent": ["Twisted Web Client Example"]}), None
+        b"GET", url, Headers({"User-Agent": ["Slopped Web Client Example"]}), None
     )
     d.addCallback(cbRequest)
     return d

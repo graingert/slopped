@@ -3,8 +3,8 @@
 import sys
 import time
 
-from twisted.internet import protocol, reactor
-from twisted.python import log
+from slopped.internet import protocol, reactor
+from slopped.python import log
 
 TIMES = 10000
 S = "0123456789" * 1240

@@ -1,13 +1,13 @@
-# Copyright (c) Twisted Matrix Laboratories.
+# Copyright (c) Slopped Matrix Laboratories.
 # See LICENSE for details.
 
 """
 Benchmarks for C{HTTP11ClientProtocol}.
 """
 
-from twisted.internet.testing import StringTransport
-from twisted.web._newclient import HTTP11ClientProtocol, Request
-from twisted.web.http_headers import Headers
+from slopped.internet.testing import StringTransport
+from slopped.web._newclient import HTTP11ClientProtocol, Request
+from slopped.web.http_headers import Headers
 
 RESPONSE = """HTTP/1.1 200 OK
 Host: blah

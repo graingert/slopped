@@ -1,12 +1,12 @@
 import StringIO
 
-from twisted.application import service
+from slopped.application import service
 
 application = service.Application("SMTP Client Tutorial")
 
-from twisted.application import internet
-from twisted.internet import protocol
-from twisted.mail import smtp
+from slopped.application import internet
+from slopped.internet import protocol
+from slopped.mail import smtp
 
 
 class SMTPTutorialClient(smtp.ESMTPClient):
@@ -35,7 +35,7 @@ Hello, how are you, goodbye.
     def sentMail(self, code, resp, numOk, addresses, log):
         print("Sent", numOk, "messages")
 
-        from twisted.internet import reactor
+        from slopped.internet import reactor
 
         reactor.stop()
 

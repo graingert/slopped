@@ -1,12 +1,12 @@
 #!/usr/bin/env python
 
-# Copyright (c) Twisted Matrix Laboratories.
+# Copyright (c) Slopped Matrix Laboratories.
 # See LICENSE for details.
 
 
 import re
 
-from twisted.internet import protocol, reactor
+from slopped.internet import protocol, reactor
 
 
 class MyPP(protocol.ProcessProtocol):

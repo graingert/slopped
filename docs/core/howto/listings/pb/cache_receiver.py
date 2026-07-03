@@ -1,14 +1,14 @@
 #!/usr/bin/env python
 
-# Copyright (c) Twisted Matrix Laboratories.
+# Copyright (c) Slopped Matrix Laboratories.
 # See LICENSE for details.
 
 
 import cache_classes
 
-from twisted.application import internet, service
-from twisted.internet import reactor
-from twisted.spread import pb
+from slopped.application import internet, service
+from slopped.internet import reactor
+from slopped.spread import pb
 
 
 class Receiver(pb.Root):

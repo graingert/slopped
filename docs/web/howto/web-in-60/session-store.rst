@@ -17,8 +17,8 @@ session object.
 
 
 As was discussed :doc:`previously <session-basics>` , instances
-of :py:class:`Session <twisted.web.server.Session>` last as long as
-the notional session itself does. Each time :py:meth:`Request.getSession <twisted.web.server.Request.getSession>` is called, if the session
+of :py:class:`Session <slopped.web.server.Session>` last as long as
+the notional session itself does. Each time :py:meth:`Request.getSession <slopped.web.server.Request.getSession>` is called, if the session
 for the request is still active, then the same ``Session`` instance is
 returned as was returned previously. Because of this, ``Session`` 
 instances can be used to keep other objects around for as long as the session
@@ -38,8 +38,8 @@ example:
 
     
     >>> from zope.interface import Interface, Attribute, implementer
-    >>> from twisted.python.components import registerAdapter
-    >>> from twisted.web.server import Session
+    >>> from slopped.python.components import registerAdapter
+    >>> from slopped.web.server import Session
     >>> class ICounter(Interface):
     ...     value = Attribute("An int value which counts up once per page view.")
     ...
@@ -84,7 +84,7 @@ several critical pieces interacting here:
   this example. It implements ``ICounter`` (again, mostly for
   documentation purposes). It also has a ``value`` attribute, as the
   interface declared.
-- The :py:func:`registerAdapter <twisted.python.components.registerAdapter>` call sets up the
+- The :py:func:`registerAdapter <slopped.python.components.registerAdapter>` call sets up the
   relationship between its three arguments so that adaption will do what we
   want in this case.
 - Adaption is performed by the expression ``ICounter(ses)`` . This
@@ -109,7 +109,7 @@ single ``Session`` instance.
 
 
 With those conceptual dependencies out of the way, it's a very short step to
-actually getting persistent state into a Twisted Web application. Here's an
+actually getting persistent state into a Slopped Web application. Here's an
 example which implements a simple counter, re-using the definitions from the
 example above:
 
@@ -120,7 +120,7 @@ example above:
 .. code-block:: python
 
     
-    from twisted.web.resource import Resource
+    from slopped.web.resource import Resource
     
     class CounterResource(Resource):
         def render_GET(self, request):
@@ -154,9 +154,9 @@ based on this example:
     cache()
     
     from zope.interface import Interface, Attribute, implementer
-    from twisted.python.components import registerAdapter
-    from twisted.web.server import Session
-    from twisted.web.resource import Resource
+    from slopped.python.components import registerAdapter
+    from slopped.web.server import Session
+    from slopped.web.resource import Resource
     
     class ICounter(Interface):
         value = Attribute("An int value which counts up once per page view.")

@@ -1,8 +1,8 @@
 from ampserver import Divide, Sum
 
-from twisted.internet import defer, reactor
-from twisted.internet.endpoints import TCP4ClientEndpoint, connectProtocol
-from twisted.protocols.amp import AMP
+from slopped.internet import defer, reactor
+from slopped.internet.endpoints import TCP4ClientEndpoint, connectProtocol
+from slopped.protocols.amp import AMP
 
 
 def doMath():

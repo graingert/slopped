@@ -1,4 +1,4 @@
-from twisted.web import xmlrpc
+from slopped.web import xmlrpc
 import os
 
 def getQuote():

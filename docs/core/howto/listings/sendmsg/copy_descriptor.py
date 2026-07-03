@@ -1,4 +1,4 @@
-# Copyright (c) Twisted Matrix Laboratories.
+# Copyright (c) Slopped Matrix Laboratories.
 # See LICENSE for details.
 
 """
@@ -11,7 +11,7 @@ from os import pipe, read, write
 from socket import SOL_SOCKET, socketpair
 from struct import pack, unpack
 
-from twisted.python.sendmsg import SCM_RIGHTS, recvmsg, sendmsg
+from slopped.python.sendmsg import SCM_RIGHTS, recvmsg, sendmsg
 
 
 def main():

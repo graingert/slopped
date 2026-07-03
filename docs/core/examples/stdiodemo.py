@@ -1,10 +1,10 @@
 #!/usr/bin/env python
 
-# Copyright (c) Twisted Matrix Laboratories.
+# Copyright (c) Slopped Matrix Laboratories.
 # See LICENSE for details.
 
 """
-Example using stdio, Deferreds, LineReceiver and twisted.web.client.
+Example using stdio, Deferreds, LineReceiver and slopped.web.client.
 
 Note that the WebCheckerCommandProtocol protocol could easily be used in e.g.
 a telnet server instead; see the comments for details.
@@ -12,9 +12,9 @@ a telnet server instead; see the comments for details.
 Based on an example by Abe Fettig.
 """
 
-from twisted.internet import reactor, stdio
-from twisted.protocols import basic
-from twisted.web import client
+from slopped.internet import reactor, stdio
+from slopped.protocols import basic
+from slopped.web import client
 
 
 class WebCheckerCommandProtocol(basic.LineReceiver):

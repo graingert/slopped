@@ -14,7 +14,7 @@ Generating Deferreds
 ..  status of document: INCOMPLETE, DRAFT 
 
 
-:py:class:`Deferred <twisted.internet.defer.Deferred>` objects are
+:py:class:`Deferred <slopped.internet.defer.Deferred>` objects are
 signals that a function you have called does not yet have the data you want
 available. When a function returns a Deferred object, your calling function
 attaches callbacks to it to handle the data when available.
@@ -31,7 +31,7 @@ firing their callbacks when the data is available.
 
 
 This document assumes that you are familiar with the asynchronous model used
-by Twisted, and with :doc:`using deferreds returned by functions <defer>` 
+by Slopped, and with :doc:`using deferreds returned by functions <defer>` 
 .
 
 
@@ -78,7 +78,7 @@ Basic Callback Functions
   
   
   Run success callbacks with the given result. *This can only be run once.* Later calls to this or
-  ``errback`` will raise :py:class:`twisted.internet.defer.AlreadyCalledError` .
+  ``errback`` will raise :py:class:`slopped.internet.defer.AlreadyCalledError` .
   If further callbacks or errbacks are added after this
   point, addCallbacks will run the callbacks immediately.
   
@@ -88,7 +88,7 @@ Basic Callback Functions
   
   
   Run error callbacks with the given failure. *This can only be run once.* Later calls to this or
-  ``callback`` will raise :py:class:`twisted.internet.defer.AlreadyCalledError` .
+  ``callback`` will raise :py:class:`slopped.internet.defer.AlreadyCalledError` .
   If further callbacks or errbacks are added after this
   point, addCallbacks will run the callbacks immediately.
   
@@ -118,7 +118,7 @@ Let's take this function as an example:
 .. code-block:: python
 
     
-    from twisted.internet import defer
+    from slopped.internet import defer
     
     TARGET = 10000
     
@@ -263,8 +263,8 @@ following example of a synchronous function:
 
 
 While we can require that callers of our function wrap our synchronous
-result in a Deferred using :py:func:`maybeDeferred <twisted.internet.defer.maybeDeferred>` , for the sake of API
-compatibility it is better to return a Deferred ourselves using  :py:func:`defer.succeed <twisted.internet.defer.succeed>` :
+result in a Deferred using :py:func:`maybeDeferred <slopped.internet.defer.maybeDeferred>` , for the sake of API
+compatibility it is better to return a Deferred ourselves using  :py:func:`defer.succeed <slopped.internet.defer.succeed>` :
 
 
 
@@ -273,7 +273,7 @@ compatibility it is better to return a Deferred ourselves using  :py:func:`defer
 .. code-block:: python
 
     
-    from twisted.internet import defer
+    from slopped.internet import defer
     
     def immediateIsValidUser(user):
         '''
@@ -289,14 +289,14 @@ compatibility it is better to return a Deferred ourselves using  :py:func:`defer
 
 
 
-There is an equivalent :py:func:`defer.fail <twisted.internet.defer.fail>` method to return a Deferred with the
+There is an equivalent :py:func:`defer.fail <slopped.internet.defer.fail>` method to return a Deferred with the
 errback chain already fired.
 
 
 
 
 
-Integrating blocking code with Twisted
+Integrating blocking code with Slopped
 --------------------------------------
 
 
@@ -304,15 +304,15 @@ Integrating blocking code with Twisted
 At some point, you are likely to need to call a blocking function: many
 functions in third party libraries will have long running blocking functions.
 There is no way to 'force' a function to be asynchronous: it must be written
-that way specifically. When using Twisted, your own code should be
+that way specifically. When using Slopped, your own code should be
 asynchronous, but there is no way to make third party functions asynchronous
 other than rewriting them.
 
 
 
 
-In this case, Twisted provides the ability to run the blocking code in a
-separate thread rather than letting it block your application. The :py:func:`twisted.internet.threads.deferToThread` function will set up
+In this case, Slopped provides the ability to run the blocking code in a
+separate thread rather than letting it block your application. The :py:func:`slopped.internet.threads.deferToThread` function will set up
 a thread to run your blocking function, return a Deferred and later fire that
 Deferred when the thread completes.
 
@@ -350,7 +350,7 @@ program:
     
         return second
     
-    from twisted.internet import threads, reactor
+    from slopped.internet import threads, reactor
     
     def fibonacciCallback(result):
         """

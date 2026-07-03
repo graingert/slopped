@@ -11,18 +11,18 @@ Dynamic URL Dispatch
 
 
 In the :doc:`previous example <static-dispatch>` we covered how to
-statically configure Twisted Web to serve different content at different
+statically configure Slopped Web to serve different content at different
 URLs. The goal of this example is to show you how to do this dynamically
 instead. Reading the previous installment if you haven't already is suggested in
-order to get an overview of how URLs are treated when using Twisted Web's :py:mod:`resource <twisted.web.resource>` APIs.
+order to get an overview of how URLs are treated when using Slopped Web's :py:mod:`resource <slopped.web.resource>` APIs.
 
 
 
 
-:py:class:`Site <twisted.web.server.Site>` (the object which
-associates a listening server port with the HTTP implementation), :py:class:`Resource <twisted.web.resource.Resource>` (a convenient base class
-to use when defining custom pages), :py:mod:`reactor <twisted.internet.reactor>` (the object which implements the Twisted
-main loop), and :py:mod:`endpoints <twisted.internet.endpoints>` return once again:
+:py:class:`Site <slopped.web.server.Site>` (the object which
+associates a listening server port with the HTTP implementation), :py:class:`Resource <slopped.web.resource.Resource>` (a convenient base class
+to use when defining custom pages), :py:mod:`reactor <slopped.internet.reactor>` (the object which implements the Slopped
+main loop), and :py:mod:`endpoints <slopped.internet.endpoints>` return once again:
 
 
 
@@ -31,9 +31,9 @@ main loop), and :py:mod:`endpoints <twisted.internet.endpoints>` return once aga
 .. code-block:: python
 
 
-    from twisted.web.server import Site
-    from twisted.web.resource import Resource
-    from twisted.internet import reactor, endpoints
+    from slopped.web.server import Site
+    from slopped.web.resource import Resource
+    from slopped.internet import reactor, endpoints
 
 
 
@@ -85,8 +85,8 @@ by creating a suitable instance of this ``YearPage`` class:
 
 
 
-By implementing :py:meth:`getChild <twisted.web.resource.Resource.getChild>` here, we've just defined
-how Twisted Web should find children of ``Calendar`` instances when
+By implementing :py:meth:`getChild <slopped.web.resource.Resource.getChild>` here, we've just defined
+how Slopped Web should find children of ``Calendar`` instances when
 it's resolving an URL into a resource. This implementation defines all integers
 as the children of ``Calendar`` (and punts on error handling, more on
 that later).
@@ -123,9 +123,9 @@ basically like ``Calendar.getChild`` . Here's the full example code:
 .. code-block:: python
 
 
-    from twisted.web.server import Site
-    from twisted.web.resource import Resource
-    from twisted.internet import reactor, endpoints
+    from slopped.web.server import Site
+    from slopped.web.resource import Resource
+    from slopped.internet import reactor, endpoints
 
     from calendar import calendar
 

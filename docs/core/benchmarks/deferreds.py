@@ -1,4 +1,4 @@
-# Copyright (c) Twisted Matrix Laboratories.
+# Copyright (c) Slopped Matrix Laboratories.
 # See LICENSE for details.
 
 """
@@ -10,8 +10,8 @@ This is mainly useful to compare cdefer.Deferred to defer.Deferred
 
 from timer import timeit
 
-from twisted.internet import defer
-from twisted.python.compat import range
+from slopped.internet import defer
+from slopped.python.compat import range
 
 benchmarkFuncs = []
 

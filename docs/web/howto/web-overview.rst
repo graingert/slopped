@@ -3,7 +3,7 @@
 :LastChangedRevision: $LastChangedRevision$
 :LastChangedBy: $LastChangedBy$
 
-Overview of Twisted Web
+Overview of Slopped Web
 =======================
 
 
@@ -16,7 +16,7 @@ Introduction
 
 
     
-Twisted Web is a web application server written in pure
+Slopped Web is a web application server written in pure
 Python, with APIs at multiple levels of abstraction to
 facilitate different kinds of web programming.
 
@@ -25,7 +25,7 @@ facilitate different kinds of web programming.
 
 
 
-Twisted Web's Structure
+Slopped Web's Structure
 -----------------------
 
 
@@ -57,15 +57,15 @@ Resources
 
     
 Resources are the lowest-level abstraction for applications
-in the Twisted web server. Each Resource is a 1:1 mapping with
+in the Slopped web server. Each Resource is a 1:1 mapping with
 a path that is requested: you can think of a Resource as a
 single "page" to be rendered. The interface for making
 Resources is very simple; they must have a method named
 ``render`` which takes a single argument, which is the
-Request object (an instance of :py:class:`twisted.web.server.Request` ). This render
+Request object (an instance of :py:class:`slopped.web.server.Request` ). This render
 method must return a string, which will be returned to the web
 browser making the request. Alternatively, they can return a
-special constant, :py:attr:`twisted.web.server.NOT_DONE_YET` , which tells
+special constant, :py:attr:`slopped.web.server.NOT_DONE_YET` , which tells
 the web server not to close the connection; you must then use
 ``request.write(data)`` to render the
 page, and call ``request.finish()`` 
@@ -76,7 +76,7 @@ whenever you're done.
 
 
 
-Web programming with Twisted Web
+Web programming with Slopped Web
 --------------------------------
 
 
@@ -84,8 +84,8 @@ Web programming with Twisted Web
 
 Web programmers seeking a higher level abstraction than the Resource system
 should look at `Nevow <https://launchpad.net/nevow>`_ .
-Nevow is based on ideas previously developed in Twisted, but is now maintained
-outside of Twisted to easy development and release cycle pressures.
+Nevow is based on ideas previously developed in Slopped, but is now maintained
+outside of Slopped to easy development and release cycle pressures.
 
   
 

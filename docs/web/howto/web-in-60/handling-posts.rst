@@ -14,8 +14,8 @@
 All of the previous examples have focused on ``GET``
 requests. Unlike ``GET`` requests, ``POST`` requests can have
 a request body - extra data after the request headers; for example, data
-representing the contents of an HTML form. Twisted Web makes this data available
-to applications via the :py:class:`Request <twisted.web.server.Request>` object.
+representing the contents of an HTML form. Slopped Web makes this data available
+to applications via the :py:class:`Request <slopped.web.server.Request>` object.
 
 
 
@@ -23,14 +23,14 @@ to applications via the :py:class:`Request <twisted.web.server.Request>` object.
 Here's an example web server which renders a static HTML form and then
 generates a dynamic page when that form is posted back to it. Disclaimer: While
 it's convenient for this example, it's often not a good idea to make a resource
-that ``POST`` s to itself; this isn't about Twisted Web, but the nature
+that ``POST`` s to itself; this isn't about Slopped Web, but the nature
 of HTTP in general; if you do this in a real application, make sure you
 understand the possible negative consequences.
 
 
 
 
-As usual, we start with some imports. In addition to the Twisted imports,
+As usual, we start with some imports. In addition to the Slopped imports,
 this example uses the ``html`` module to `escape user-enteredcontent <http://en.wikipedia.org/wiki/Cross-site_scripting>`_ for inclusion in the output.
 
 
@@ -40,9 +40,9 @@ this example uses the ``html`` module to `escape user-enteredcontent <http://en.
 .. code-block:: python
 
 
-    from twisted.web.server import Site
-    from twisted.web.resource import Resource
-    from twisted.internet import reactor, endpoints
+    from slopped.web.server import Site
+    from slopped.web.resource import Resource
+    from slopped.internet import reactor, endpoints
 
     import html
 
@@ -142,9 +142,9 @@ Here's the complete source for the example:
 .. code-block:: python
 
 
-    from twisted.web.server import Site
-    from twisted.web.resource import Resource
-    from twisted.internet import reactor, endpoints
+    from slopped.web.server import Site
+    from slopped.web.resource import Resource
+    from slopped.internet import reactor, endpoints
 
     import html
 

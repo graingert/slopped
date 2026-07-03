@@ -29,7 +29,7 @@ is never generated.
 
 
 
-The feature this example relies on is provided by another :py:class:`Request <twisted.web.server.Request>` method: :py:meth:`notifyFinish <twisted.web.http.Request.notifyFinish>` . This method returns a new
+The feature this example relies on is provided by another :py:class:`Request <slopped.web.server.Request>` method: :py:meth:`notifyFinish <slopped.web.http.Request.notifyFinish>` . This method returns a new
 Deferred which will fire with ``None`` if the request is successfully
 responded to or with an error otherwise - for example if the connection is lost
 before the response is sent.
@@ -37,7 +37,7 @@ before the response is sent.
 
 
 
-The example starts in a familiar way, with the requisite Twisted imports and
+The example starts in a familiar way, with the requisite Slopped imports and
 a resource class with the same ``_delayedRender`` used previously:
 
 
@@ -47,9 +47,9 @@ a resource class with the same ``_delayedRender`` used previously:
 .. code-block:: python
 
     
-    from twisted.web.resource import Resource
-    from twisted.web.server import NOT_DONE_YET
-    from twisted.internet import reactor
+    from slopped.web.resource import Resource
+    from slopped.web.server import NOT_DONE_YET
+    from slopped.internet import reactor
     
     class DelayedResource(Resource):
         def _delayedRender(self, request):
@@ -104,7 +104,7 @@ Notice that since ``_responseFailed`` needs a reference to
 the delayed call object in order to cancel it, we passed that object
 to ``addErrback`` . Any additional arguments passed
 to ``addErrback`` (or ``addCallback`` ) will be
-passed along to the errback after the :py:class:`Failure <twisted.python.failure.Failure>` instance which is always
+passed along to the errback after the :py:class:`Failure <slopped.python.failure.Failure>` instance which is always
 passed as the first argument. Passing ``call`` here means it
 will be passed to ``_responseFailed`` , where it is expected
 and required.
@@ -122,9 +122,9 @@ without interruptions, as an :doc:`rpy script <rpy-scripts>` :
 .. code-block:: python
 
     
-    from twisted.web.resource import Resource
-    from twisted.web.server import NOT_DONE_YET
-    from twisted.internet import reactor
+    from slopped.web.resource import Resource
+    from slopped.web.server import NOT_DONE_YET
+    from slopped.internet import reactor
     
     class DelayedResource(Resource):
         def _delayedRender(self, request):
@@ -144,7 +144,7 @@ without interruptions, as an :doc:`rpy script <rpy-scripts>` :
 
 
 
-Toss this into ``example.rpy`` , fire it up with ``twistd -n web --path .`` , and
+Toss this into ``example.rpy`` , fire it up with ``slopd -n web --path .`` , and
 hit `http://localhost:8080/example.rpy <http://localhost:8080/example.rpy>`_ . If
 you wait five seconds, you'll get the page content. If you interrupt the request
 before then, say by hitting escape (in Firefox, at least), then you'll see

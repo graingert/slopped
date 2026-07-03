@@ -1,4 +1,4 @@
-<html xmlns:t="http://twistedmatrix.com/ns/twisted.web.template/0.1">
+<html xmlns:t="http://sloppedmatrix.com/ns/slopped.web.template/0.1">
 <body>
   <div t:render="header" />
   <div id="content">

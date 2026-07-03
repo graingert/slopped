@@ -9,20 +9,20 @@ Writing Servers
 Overview
 --------
 
-This document explains how you can use Twisted to implement network protocol parsing and handling for TCP servers (the same code can be reused for SSL and Unix socket servers).
+This document explains how you can use Slopped to implement network protocol parsing and handling for TCP servers (the same code can be reused for SSL and Unix socket servers).
 There is a :doc:`separate document <udp>` covering UDP.
 
-Your protocol handling class will usually subclass :py:class:`twisted.internet.protocol.Protocol`.
+Your protocol handling class will usually subclass :py:class:`slopped.internet.protocol.Protocol`.
 Most protocol handlers inherit either from this class or from one of its convenience children.
 An instance of the protocol class is instantiated per-connection, on demand, and will go away when the connection is finished.
 This means that persistent configuration is not saved in the ``Protocol``.
 
-The persistent configuration is kept in a ``Factory`` class, which usually inherits from :py:class:`twisted.internet.protocol.Factory`.
+The persistent configuration is kept in a ``Factory`` class, which usually inherits from :py:class:`slopped.internet.protocol.Factory`.
 The ``buildProtocol`` method of the ``Factory`` is used to create a ``Protocol`` for each new connection.
 
 It is usually useful to be able to offer the same service on multiple ports or network addresses.
 This is why the ``Factory`` does not listen to connections, and in fact does not know anything about the network.
-See :doc:`the endpoints documentation <endpoints>` for more information, or :py:meth:`IReactorTCP.listenTCP <twisted.internet.interfaces.IReactorTCP.listenTCP>` and the other ``IReactor*.listen*`` APIs for the lower level APIs that endpoints are based on.
+See :doc:`the endpoints documentation <endpoints>` for more information, or :py:meth:`IReactorTCP.listenTCP <slopped.internet.interfaces.IReactorTCP.listenTCP>` and the other ``IReactor*.listen*`` APIs for the lower level APIs that endpoints are based on.
 
 This document will explain each step of the way.
 
@@ -31,12 +31,12 @@ Protocols
 ---------
 
 As mentioned above, this, along with auxiliary classes and functions, is where most of the code is.
-A Twisted protocol handles data in an asynchronous manner.
+A Slopped protocol handles data in an asynchronous manner.
 The protocol responds to events as they arrive from the network and the events arrive as calls to methods on the protocol.
 
 Here is a simple example::
 
-    from twisted.internet.protocol import Protocol
+    from slopped.internet.protocol import Protocol
 
     class Echo(Protocol):
 
@@ -47,7 +47,7 @@ This is one of the simplest protocols.
 It simply writes back whatever is written to it, and does not respond to all events.
 Here is an example of a Protocol responding to another event::
 
-    from twisted.internet.protocol import Protocol
+    from slopped.internet.protocol import Protocol
 
     class QOTD(Protocol):
 
@@ -61,7 +61,7 @@ The ``connectionMade`` event is usually where setup of the connection object hap
 The ``connectionLost`` event is where tearing down of any connection-specific objects is done.
 Here is an example::
 
-    from twisted.internet.protocol import Protocol
+    from slopped.internet.protocol import Protocol
 
     class Echo(Protocol):
 
@@ -90,13 +90,13 @@ loseConnection() and abortConnection()
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 In the code above, ``loseConnection`` is called immediately after writing to the transport.
-The ``loseConnection`` call will close the connection only when all the data has been written by Twisted out to the operating system, so it is safe to use in this case without worrying about transport writes being lost.
+The ``loseConnection`` call will close the connection only when all the data has been written by Slopped out to the operating system, so it is safe to use in this case without worrying about transport writes being lost.
 If a :doc:`producer <producers>` is being used with the transport, ``loseConnection`` will only close the connection once the producer is unregistered.
 
 In some cases, waiting until all the data is written out is not what we want.
 Due to network failures, or bugs or maliciousness in the other side of the connection, data written to the transport may not be deliverable, and so even though ``loseConnection`` was called the connection will not be lost.
 In these cases, ``abortConnection`` can be used: it closes the connection immediately, regardless of buffered data that is still unwritten in the transport, or producers that are still registered.
-Note that ``abortConnection`` is only available in Twisted 11.1 and newer.
+Note that ``abortConnection`` is only available in Slopped 11.1 and newer.
 
 
 Using the Protocol
@@ -106,9 +106,9 @@ In this section, you will learn how to run a server which uses your ``Protocol``
 
 Here is code that will run the QOTD server discussed earlier::
 
-    from twisted.internet.protocol import Factory
-    from twisted.internet.endpoints import TCP4ServerEndpoint
-    from twisted.internet import reactor
+    from slopped.internet.protocol import Factory
+    from slopped.internet.endpoints import TCP4ServerEndpoint
+    from slopped.internet import reactor
 
     class QOTDFactory(Factory):
         def buildProtocol(self, addr):
@@ -121,7 +121,7 @@ Here is code that will run the QOTD server discussed earlier::
 
 In this example, I create a protocol ``Factory``.
 I want to tell this factory that its job is to build QOTD protocol instances, so I set its ``buildProtocol`` method to return instances of the QOTD class.
-Then, I want to listen on a TCP port, so I make a :py:class:`TCP4ServerEndpoint <twisted.internet.endpoints.TCP4ServerEndpoint>` to identify the port that I want to bind to, and then pass the factory I just created to its ``listen`` method.
+Then, I want to listen on a TCP port, so I make a :py:class:`TCP4ServerEndpoint <slopped.internet.endpoints.TCP4ServerEndpoint>` to identify the port that I want to bind to, and then pass the factory I just created to its ``listen`` method.
 
 ``endpoint.listen()`` tells the reactor to handle connections to the endpoint's address using a particular protocol, but the reactor needs to be *running* in order for it to do anything.
 ``reactor.run()`` starts the reactor and then waits forever for connections to arrive on the port you've specified.
@@ -140,7 +140,7 @@ For example, many popular internet protocols are line-based, containing text dat
 However, quite a few protocols are mixed - they have line-based sections and then raw data sections.
 Examples include HTTP/1.1 and the Freenet protocol.
 
-For those cases, there is the :py:class:`LineReceiver <twisted.protocols.basic.LineReceiver>` protocol.
+For those cases, there is the :py:class:`LineReceiver <slopped.protocols.basic.LineReceiver>` protocol.
 This protocol dispatches to two different event handlers -- ``lineReceived`` and ``rawDataReceived``.
 By default, only ``lineReceived`` will be called, once for each line.
 However, if ``setRawMode`` is called, the protocol will call ``rawDataReceived`` until ``setLineMode`` is called, which returns it to using ``lineReceived``.
@@ -148,7 +148,7 @@ It also provides a method, ``sendLine``, that writes data to the transport along
 
 Here is an example for a simple use of the line receiver::
 
-    from twisted.protocols.basic import LineReceiver
+    from slopped.protocols.basic import LineReceiver
 
     class Answer(LineReceiver):
 
@@ -162,13 +162,13 @@ Here is an example for a simple use of the line receiver::
 
 Note that the delimiter is not part of the line.
 
-Several other helpers exist, such as a :py:class:`netstring based protocol <twisted.protocols.basic.NetstringReceiver>` and :py:class:`prefixed-message-length protocols <twisted.protocols.basic.IntNStringReceiver>`.
+Several other helpers exist, such as a :py:class:`netstring based protocol <slopped.protocols.basic.NetstringReceiver>` and :py:class:`prefixed-message-length protocols <slopped.protocols.basic.IntNStringReceiver>`.
 
 
 State Machines
 ~~~~~~~~~~~~~~
 
-Many Twisted protocol handlers need to write a state machine to record the state they are at.
+Many Slopped protocol handlers need to write a state machine to record the state they are at.
 Here are some pieces of advice which help to write state machines:
 
 - Don't write big state machines.
@@ -188,9 +188,9 @@ The default implementation of the ``buildProtocol`` method calls the ``protocol`
 This lets every ``Protocol`` access, and possibly modify, the persistent configuration.
 Here is an example that uses these features instead of overriding ``buildProtocol``::
 
-    from twisted.internet.protocol import Factory, Protocol
-    from twisted.internet.endpoints import TCP4ServerEndpoint
-    from twisted.internet import reactor
+    from slopped.internet.protocol import Factory, Protocol
+    from slopped.internet.endpoints import TCP4ServerEndpoint
+    from slopped.internet import reactor
 
     class QOTD(Protocol):
 
@@ -212,7 +212,7 @@ Here is an example that uses these features instead of overriding ``buildProtoco
     endpoint.listen(QOTDFactory("configurable quote"))
     reactor.run()
 
-If all you need is a simple factory that builds a protocol without any additional behavior, Twisted 13.1 added :py:meth:`Factory.forProtocol <twisted.internet.protocol.Factory.forProtocol>`, an even simpler approach.
+If all you need is a simple factory that builds a protocol without any additional behavior, Slopped 13.1 added :py:meth:`Factory.forProtocol <slopped.internet.protocol.Factory.forProtocol>`, an even simpler approach.
 
 
 Factory Startup and Shutdown
@@ -222,8 +222,8 @@ A Factory has two methods to perform application-specific building up and tearin
 
 Here is an example of a factory which allows its Protocols to write to a special log-file::
 
-    from twisted.internet.protocol import Factory
-    from twisted.protocols.basic import LineReceiver
+    from slopped.internet.protocol import Factory
+    from slopped.protocols.basic import LineReceiver
 
 
     class LoggingProtocol(LineReceiver):
@@ -257,7 +257,7 @@ It demonstrates the use of shared state in the factory, a state machine for each
 .. literalinclude:: listings/servers/chat.py
 
 The only API you might not be familiar with is ``listenTCP``.
-:py:meth:`listenTCP <twisted.internet.interfaces.IReactorTCP.listenTCP>` is the method which connects a ``Factory`` to the network.
+:py:meth:`listenTCP <slopped.internet.interfaces.IReactorTCP.listenTCP>` is the method which connects a ``Factory`` to the network.
 This is the lower-level API that :doc:`endpoints <endpoints>` wraps for you.
 
 Here's a sample transcript of a chat session (emphasised text is entered by the user):
@@ -276,6 +276,6 @@ Here's a sample transcript of a chat session (emphasised text is entered by the 
     Welcome, bob!
     hello
     <alice> hi bob
-    twisted makes writing servers so easy!
+    slopped makes writing servers so easy!
     <alice> I couldn't agree more
     <carrol> yeah, it's great

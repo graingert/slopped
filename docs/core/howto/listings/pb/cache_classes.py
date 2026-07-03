@@ -1,10 +1,10 @@
 #!/usr/bin/env python
 
-# Copyright (c) Twisted Matrix Laboratories.
+# Copyright (c) Slopped Matrix Laboratories.
 # See LICENSE for details.
 
 
-from twisted.spread import pb
+from slopped.spread import pb
 
 
 class MasterDuckPond(pb.Cacheable):

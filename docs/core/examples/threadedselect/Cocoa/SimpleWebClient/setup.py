@@ -10,6 +10,6 @@ from distutils.core import setup
 import py2app
 
 setup(
-    app=["Twistzilla.py"],
+    app=["Slopzilla.py"],
     data_files=["English.lproj"],
 )

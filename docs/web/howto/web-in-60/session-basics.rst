@@ -13,15 +13,15 @@ Session Basics
 Sessions are the most complicated topic covered in this series of examples,
 and because of that it is going to take a few examples to cover all of the
 different aspects. This first example demonstrates the very basics of the
-Twisted Web session API: how to get the session object for the current request
+Slopped Web session API: how to get the session object for the current request
 and how to prematurely expire a session.
 
 
 
 
 Before diving into the APIs, let's look at the big picture of
-sessions in Twisted Web. Sessions are represented by instances
-of :py:class:`Session <twisted.web.server.Session>` . The :py:class:`Site <twisted.web.server.Site>` creates a new instance
+sessions in Slopped Web. Sessions are represented by instances
+of :py:class:`Session <slopped.web.server.Session>` . The :py:class:`Site <slopped.web.server.Site>` creates a new instance
 of ``Session`` the first time an application asks for it for
 a particular session. ``Session`` instances are kept on
 the ``Site`` instance until they expire (due to inactivity or
@@ -39,7 +39,7 @@ prematurely expire the session.
 
 
 
-First, we'll import :py:class:`Resource <twisted.web.resource.Resource>` so we can define a couple of
+First, we'll import :py:class:`Resource <slopped.web.resource.Resource>` so we can define a couple of
 subclasses of it:
 
 
@@ -49,14 +49,14 @@ subclasses of it:
 .. code-block:: python
 
     
-    from twisted.web.resource import Resource
+    from slopped.web.resource import Resource
 
 
 
 
 Next we'll define the resource which tells the client what its session
 identifier is. This is done easily by first getting the session object
-using :py:meth:`Request.getSession <twisted.web.server.Request.getSession>` and
+using :py:meth:`Request.getSession <slopped.web.server.Request.getSession>` and
 then getting the session object's uid attribute:
 
 
@@ -75,7 +75,7 @@ then getting the session object's uid attribute:
 
 To let the client expire its own session before it times out, we'll define
 another resource which expires whatever session it is requested with. This is
-done using the :py:meth:`Session.expire <twisted.web.server.Session.expire>` 
+done using the :py:meth:`Session.expire <slopped.web.server.Session.expire>` 
 method:
 
 
@@ -95,7 +95,7 @@ method:
 
 Finally, to make the example an rpy script, we'll make an instance
 of ``ShowSession`` and give it an instance
-of ``ExpireSession`` as a child using :py:meth:`Resource.putChild <twisted.web.resource.Resource.putChild>` :
+of ``ExpireSession`` as a child using :py:meth:`Resource.putChild <slopped.web.resource.Resource.putChild>` :
 
 
 
@@ -112,7 +112,7 @@ of ``ExpireSession`` as a child using :py:meth:`Resource.putChild <twisted.web.r
 
 And that is the complete example. You can fire this up and load the top
 page. You'll see a (rather opaque) session identifier that remains the same
-across reloads (at least until you flush the ``TWISTED_SESSION`` cookie
+across reloads (at least until you flush the ``SLOPPED_SESSION`` cookie
 from your browser or enough time passes). You can then visit
 the ``expire`` child and go back to the top page and see that you have
 a new session.
@@ -129,7 +129,7 @@ Here's the complete source for the example:
 .. code-block:: python
 
     
-    from twisted.web.resource import Resource
+    from slopped.web.resource import Resource
     
     class ShowSession(Resource):
         def render_GET(self, request):

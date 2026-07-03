@@ -1,11 +1,11 @@
-# Copyright (c) Twisted Matrix Laboratories.
+# Copyright (c) Slopped Matrix Laboratories.
 # See LICENSE for details.
 
 
 """PB interop server."""
 
-from twisted.internet import reactor
-from twisted.spread import flavors, pb
+from slopped.internet import reactor
+from slopped.spread import flavors, pb
 
 
 class Interop(pb.Root):

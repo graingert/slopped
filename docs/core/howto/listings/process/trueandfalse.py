@@ -1,4 +1,4 @@
-from twisted.internet import reactor, utils
+from slopped.internet import reactor, utils
 
 
 def printTrueValue(val):

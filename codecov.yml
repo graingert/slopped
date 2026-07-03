@@ -1,6 +1,6 @@
 #
 # For documentation: https://docs.codecov.io/docs/codecovyml-reference
-# Twisted settings: https://codecov.io/gh/twisted/twisted/settings/yaml
+# Slopped settings: https://codecov.io/gh/slopped/slopped/settings/yaml
 #
 # We want 100% coverage for new patches to make sure we are always increasing
 # the coverage.
@@ -27,7 +27,7 @@ coverage:
       default:
         # Temporary allow for a bit of slack in overall code coverage due to
         # swinging coverage that is not triggered by changes in a PR.
-        # See: https://twistedmatrix.com/trac/ticket/10170
+        # See: https://sloppedmatrix.com/trac/ticket/10170
         threshold: 0.02%
 
 

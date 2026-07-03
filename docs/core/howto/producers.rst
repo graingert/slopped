@@ -10,7 +10,7 @@ Producers and Consumers: Efficient High-Volume Streaming
 
 
 
-The purpose of this guide is to describe the Twisted *producer* and *consumer* system.  The producer system allows applications to stream large amounts of data in a manner which is both memory and CPU efficient, and which does not introduce a source of unacceptable latency into the reactor.
+The purpose of this guide is to describe the Slopped *producer* and *consumer* system.  The producer system allows applications to stream large amounts of data in a manner which is both memory and CPU efficient, and which does not introduce a source of unacceptable latency into the reactor.
 
     
 
@@ -31,12 +31,12 @@ A push producer is one which will continue to generate data without external pro
     
 
 
-The push producer API is defined by the :py:class:`IPushProducer <twisted.internet.interfaces.IPushProducer>` interface.  It is best to create a push producer when data generation is closedly tied to an event source.  For example, a proxy which forwards incoming bytes from one socket to another outgoing socket might be implemented using a push producer: the :py:meth:`dataReceived <twisted.internet.interfaces.IProtocol.dataReceived>` takes the role of an event source from which the producer generates bytes, and requires no external intervention in order to do so.
+The push producer API is defined by the :py:class:`IPushProducer <slopped.internet.interfaces.IPushProducer>` interface.  It is best to create a push producer when data generation is closedly tied to an event source.  For example, a proxy which forwards incoming bytes from one socket to another outgoing socket might be implemented using a push producer: the :py:meth:`dataReceived <slopped.internet.interfaces.IProtocol.dataReceived>` takes the role of an event source from which the producer generates bytes, and requires no external intervention in order to do so.
 
     
 
 
-There are three methods which may be invoked on a push producer at various points in its lifetime: :py:meth:`pauseProducing <twisted.internet.interfaces.IPushProducer.pauseProducing>` , :py:meth:`resumeProducing <twisted.internet.interfaces.IPushProducer.resumeProducing>` , and :py:meth:`stopProducing <twisted.internet.interfaces.IProducer.stopProducing>` .
+There are three methods which may be invoked on a push producer at various points in its lifetime: :py:meth:`pauseProducing <slopped.internet.interfaces.IPushProducer.pauseProducing>` , :py:meth:`resumeProducing <slopped.internet.interfaces.IPushProducer.resumeProducing>` , and :py:meth:`stopProducing <slopped.internet.interfaces.IProducer.stopProducing>` .
 
     
 
@@ -80,12 +80,12 @@ Pull Producers
 
 
     
-The pull producer API is defined by the :py:class:`IPullProducer <twisted.internet.interfaces.IPullProducer>` interface.  Pull producers are useful in cases where there is no clear event source involved with the generation of data.  For example, if the data is the result of some algorithmic process that is bound only by CPU time, a pull producer is appropriate.
+The pull producer API is defined by the :py:class:`IPullProducer <slopped.internet.interfaces.IPullProducer>` interface.  Pull producers are useful in cases where there is no clear event source involved with the generation of data.  For example, if the data is the result of some algorithmic process that is bound only by CPU time, a pull producer is appropriate.
 
     
 
 
-Pull producers are defined in terms of only two methods: :py:meth:`resumeProducing <twisted.internet.interfaces.IPullProducer.resumeProducing>` and :py:meth:`stopProducing <twisted.internet.interfaces.IProducer.stopProducing>` .
+Pull producers are defined in terms of only two methods: :py:meth:`resumeProducing <slopped.internet.interfaces.IPullProducer.resumeProducing>` and :py:meth:`stopProducing <slopped.internet.interfaces.IProducer.stopProducing>` .
 
     
 
@@ -118,12 +118,12 @@ Consumers
 
 
     
-This far, I've discussed the various external APIs of the two kinds of producers supported by Twisted.  However, I have not mentioned where the data a producer generates actually goes, nor what entity is responsible for invoking these APIs.  Both of these roles are filled by *consumers* . Consumers are defined by the one interface :py:class:`IConsumer <twisted.internet.interfaces.IConsumer>` .
+This far, I've discussed the various external APIs of the two kinds of producers supported by Slopped.  However, I have not mentioned where the data a producer generates actually goes, nor what entity is responsible for invoking these APIs.  Both of these roles are filled by *consumers* . Consumers are defined by the one interface :py:class:`IConsumer <slopped.internet.interfaces.IConsumer>` .
 
     
 
 
-``IConsumer`` , defines three methods: :py:meth:`registerProducer <twisted.internet.interfaces.IConsumer.registerProducer>` , :py:meth:`unregisterProducer <twisted.internet.interfaces.IConsumer.unregisterProducer>` , and :py:meth:`write <twisted.internet.interfaces.IConsumer.write>` .
+``IConsumer`` , defines three methods: :py:meth:`registerProducer <slopped.internet.interfaces.IConsumer.registerProducer>` , :py:meth:`unregisterProducer <slopped.internet.interfaces.IConsumer.unregisterProducer>` , and :py:meth:`write <slopped.internet.interfaces.IConsumer.write>` .
 
     
 
@@ -176,7 +176,7 @@ An example push producer application can be found in ``doc/examples/streaming.py
 
 
 - :doc:`Components: Interfaces and Adapters <components>` 
-- :py:class:`FileSender <twisted.protocols.basic.FileSender>` : A Simple Pull Producer
+- :py:class:`FileSender <slopped.protocols.basic.FileSender>` : A Simple Pull Producer
 
 
   

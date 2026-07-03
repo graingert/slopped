@@ -16,13 +16,13 @@ Overview
 
 
 
-Along with connection to servers across the internet, Twisted also
+Along with connection to servers across the internet, Slopped also
 connects to local processes with much the same API. The API is described in
 more detail in the documentation of:
 
-- :py:class:`twisted.internet.interfaces.IReactorProcess` 
-- :py:class:`twisted.internet.interfaces.IProcessTransport` 
-- :py:class:`twisted.internet.interfaces.IProcessProtocol` 
+- :py:class:`slopped.internet.interfaces.IReactorProcess` 
+- :py:class:`slopped.internet.interfaces.IProcessTransport` 
+- :py:class:`slopped.internet.interfaces.IProcessProtocol` 
 
 
 
@@ -55,7 +55,7 @@ available on Windows.
 .. code-block:: python
 
     
-    from twisted.internet import reactor
+    from slopped.internet import reactor
     
     processProtocol = MyProcessProtocol()
     reactor.spawnProcess(processProtocol, executable, args=[program, arg1, arg2],
@@ -69,7 +69,7 @@ available on Windows.
 
 
 - ``processProtocol`` should be an instance of a subclass of
-  :py:class:`twisted.internet.protocol.ProcessProtocol` . The
+  :py:class:`slopped.internet.protocol.ProcessProtocol` . The
   interface is described below.
 - ``executable`` is the full path of the program to run. It
   will be connected to processProtocol.
@@ -114,7 +114,7 @@ environment as a security precaution). The default is to give an empty ``env`` t
 
 
 
-``reactor.spawnProcess`` returns an instance that implements :py:class:`IProcessTransport <twisted.internet.interfaces.IProcessTransport>`.
+``reactor.spawnProcess`` returns an instance that implements :py:class:`IProcessTransport <slopped.internet.interfaces.IProcessTransport>`.
 
 
 Writing a ProcessProtocol
@@ -136,7 +136,7 @@ writing the initialization for our ProcessProtocol.
 .. code-block:: python
 
     
-    from twisted.internet import protocol
+    from slopped.internet import protocol
     class WCProcessProtocol(protocol.ProcessProtocol):
     
         def __init__(self, text):
@@ -221,8 +221,8 @@ it to spawnProcess.
 .. code-block:: python
 
     
-    from twisted.internet import reactor
-    wcProcess = WCProcessProtocol("accessing protocols through Twisted is fun!\n")
+    from slopped.internet import reactor
+    wcProcess = WCProcessProtocol("accessing protocols through Slopped is fun!\n")
     reactor.spawnProcess(wcProcess, 'wc', ['wc'])
     reactor.run()
 
@@ -268,10 +268,10 @@ These are the methods that you can usefully override in your subclass of
   ``outConnectionLost`` , but for stderr instead of stdout.
 - ``.processExited(status)`` : This is called when the child
   process has been reaped, and receives information about the process' exit
-  status. The status is passed in the form of a :py:class:`Failure <twisted.python.failure.Failure>` instance, created with a
-  ``.value`` that either holds a :py:class:`ProcessDone <twisted.internet.error.ProcessDone>` object if the process
+  status. The status is passed in the form of a :py:class:`Failure <slopped.python.failure.Failure>` instance, created with a
+  ``.value`` that either holds a :py:class:`ProcessDone <slopped.internet.error.ProcessDone>` object if the process
   terminated normally (it died of natural causes instead of receiving a
-  signal, and if the exit code was 0), or a :py:class:`ProcessTerminated <twisted.internet.error.ProcessTerminated>` object (with an
+  signal, and if the exit code was 0), or a :py:class:`ProcessTerminated <slopped.internet.error.ProcessTerminated>` object (with an
   ``.exitCode`` attribute) if something went wrong.
 - ``.processEnded(status)`` : This is called when all the file
   descriptors associated with the child process have been closed and the
@@ -388,8 +388,8 @@ Frequently, one just needs a simple way to get all the output from a
 program. In the blocking world, you might use ``commands.getoutput`` from the standard library, but
 using that in an event-driven program will cause everything else to stall
 until the command finishes. (in addition, the SIGCHLD handler used by that
-function does not play well with Twisted's own signal handling). For these
-cases, the :py:func:`twisted.internet.utils.getProcessOutput` 
+function does not play well with Slopped's own signal handling). For these
+cases, the :py:func:`slopped.internet.utils.getProcessOutput` 
 function can be used. Here is a simple example:
 
 
@@ -401,7 +401,7 @@ function can be used. Here is a simple example:
 .. literalinclude:: listings/process/quotes.py
 
 
-If you only need the final exit code (like ``commands.getstatusoutput(cmd)[0]`` ), the :py:func:`twisted.internet.utils.getProcessValue` function is
+If you only need the final exit code (like ``commands.getstatusoutput(cmd)[0]`` ), the :py:func:`slopped.internet.utils.getProcessValue` function is
 useful. Here is an example:
 
 

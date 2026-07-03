@@ -2,16 +2,16 @@ import os
 
 from zope.interface import implementer
 
-from twisted.application import service
+from slopped.application import service
 
 application = service.Application("SMTP Server Tutorial")
 
-from twisted.application import internet
-from twisted.internet import defer, protocol
+from slopped.application import internet
+from slopped.internet import defer, protocol
 
 smtpServerFactory = protocol.ServerFactory()
 
-from twisted.mail import smtp
+from slopped.mail import smtp
 
 
 @implementer(smtp.IMessage)

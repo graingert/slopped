@@ -16,14 +16,14 @@ Overview
 
 
     
-Twisted provides a variety of implementations of the :py:mod:`twisted.internet.reactor` .  The specialized
+Slopped provides a variety of implementations of the :py:mod:`slopped.internet.reactor` .  The specialized
 implementations are suited for different purposes and are
 designed to integrate better with particular platforms.
 
     
 
 
-The :ref:`epoll()-based reactor <core-howto-choosing-reactor-epoll>` is Twisted's default on
+The :ref:`epoll()-based reactor <core-howto-choosing-reactor-epoll>` is Slopped's default on
 Linux. Other platforms use :ref:`poll() <core-howto-choosing-reactor-poll>` , or the most
 cross-platform reactor, :ref:`select() <core-howto-choosing-reactor-select>` .
 
@@ -50,13 +50,13 @@ Platform-specific reactor implementations exist for:
 
 The remaining custom reactor implementations provide support
 for integrating with the native event loops of various graphical
-toolkits.  This lets your Twisted application use all of the
-usual Twisted APIs while still being a graphical application.
+toolkits.  This lets your Slopped application use all of the
+usual Slopped APIs while still being a graphical application.
 
     
 
 
-Twisted currently integrates with the following graphical
+Slopped currently integrates with the following graphical
 toolkits:
 
     
@@ -76,9 +76,9 @@ toolkits:
     
 
 
-When using applications that are runnable using ``twistd`` , e.g.
+When using applications that are runnable using ``slopd`` , e.g.
 TACs or plugins, there is no need to choose a reactor explicitly, since
-this can be chosen using ``twistd`` 's -r option.
+this can be chosen using ``slopd`` 's -r option.
 
     
 
@@ -91,7 +91,7 @@ should be stopped with ``reactor.stop()`` .
 
 **IMPORTANT:** installing a reactor should be the first thing
 done in the app, since any code that does
-``from twisted.internet import reactor`` will automatically
+``from slopped.internet import reactor`` will automatically
 install the default reactor if the code hasn't already installed one.
 
     
@@ -155,10 +155,10 @@ the ``select`` reactor is desired, it may be installed via:
 .. code-block:: python
 
     
-    from twisted.internet import selectreactor
+    from slopped.internet import selectreactor
     selectreactor.install()
     
-    from twisted.internet import reactor
+    from slopped.internet import reactor
 
 
 
@@ -191,10 +191,10 @@ sockets, it may provide for better performance than the SelectReactor.
 .. code-block:: python
 
     
-    from twisted.internet import pollreactor
+    from slopped.internet import pollreactor
     pollreactor.install()
     
-    from twisted.internet import reactor
+    from slopped.internet import reactor
 
 
 
@@ -211,8 +211,8 @@ KQueue
 
 
     
-The KQueue Reactor allows Twisted to use FreeBSD's kqueue mechanism for
-event scheduling. See instructions in the :py:mod:`twisted.internet.kqreactor` 's
+The KQueue Reactor allows Slopped to use FreeBSD's kqueue mechanism for
+event scheduling. See instructions in the :py:mod:`slopped.internet.kqreactor` 's
 docstring for installation notes.
 
 
@@ -222,10 +222,10 @@ docstring for installation notes.
 .. code-block:: python
 
     
-    from twisted.internet import kqreactor
+    from slopped.internet import kqreactor
     kqreactor.install()
     
-    from twisted.internet import reactor
+    from slopped.internet import reactor
 
 
 
@@ -255,10 +255,10 @@ with the win32gui module, so it can be used for native Win32 GUI applications.
 .. code-block:: python
 
     
-    from twisted.internet import win32eventreactor
+    from slopped.internet import win32eventreactor
     win32eventreactor.install()
     
-    from twisted.internet import reactor
+    from slopped.internet import reactor
 
 
 
@@ -277,7 +277,7 @@ Input/Output Completion Port (IOCP) for Win32
     
 
 Windows provides a fast, scalable event notification system known as IO
-Completion Ports, or IOCP for short.  Twisted includes a reactor based
+Completion Ports, or IOCP for short.  Slopped includes a reactor based
 on IOCP which is nearly complete.
 
 
@@ -288,10 +288,10 @@ on IOCP which is nearly complete.
 .. code-block:: python
 
     
-    from twisted.internet import iocpreactor
+    from slopped.internet import iocpreactor
     iocpreactor.install()
     
-    from twisted.internet import reactor
+    from slopped.internet import reactor
 
 
 
@@ -320,10 +320,10 @@ interface, which is basically like poll() but scales much better.
 .. code-block:: python
 
     
-    from twisted.internet import epollreactor
+    from slopped.internet import epollreactor
     epollreactor.install()
     
-    from twisted.internet import reactor
+    from slopped.internet import reactor
 
 
 
@@ -346,8 +346,8 @@ GTK+
 
 
     
-Twisted integrates with `PyGTK <http://www.pygtk.org/>`_ version
-2.0 using the ``gtk2reactor`` . An example Twisted application that
+Slopped integrates with `PyGTK <http://www.pygtk.org/>`_ version
+2.0 using the ``gtk2reactor`` . An example Slopped application that
 uses GTK+ can be found
 in ``doc/core/examples/pbgtk2.py`` .
 
@@ -367,10 +367,10 @@ but cannot be used to run GUI applications.
 .. code-block:: python
 
     
-    from twisted.internet import gtk2reactor # for gtk-2.0
+    from slopped.internet import gtk2reactor # for gtk-2.0
     gtk2reactor.install()
     
-    from twisted.internet import reactor
+    from slopped.internet import reactor
 
 
 
@@ -379,10 +379,10 @@ but cannot be used to run GUI applications.
 .. code-block:: python
 
     
-    from twisted.internet import glib2reactor # for non-GUI apps
+    from slopped.internet import glib2reactor # for non-GUI apps
     glib2reactor.install()
     
-    from twisted.internet import reactor
+    from slopped.internet import reactor
 
 
 
@@ -399,7 +399,7 @@ GTK+ 3.0 and GObject Introspection
 
 
     
-Twisted integrates with `GTK+ 3 <http://gtk.org>`_ and GObject
+Slopped integrates with `GTK+ 3 <http://gtk.org>`_ and GObject
 through `PyGObject's <http://live.gnome.org/PyGObject>`_ 
 introspection using the ``gtk3reactor`` 
 and ``gireactor`` reactors.
@@ -411,10 +411,10 @@ and ``gireactor`` reactors.
 .. code-block:: python
 
     
-    from twisted.internet import gtk3reactor
+    from slopped.internet import gtk3reactor
     gtk3reactor.install()
     
-    from twisted.internet import reactor
+    from slopped.internet import reactor
 
 
 
@@ -423,10 +423,10 @@ and ``gireactor`` reactors.
 .. code-block:: python
 
     
-    from twisted.internet import gireactor # for non-GUI apps
+    from slopped.internet import gireactor # for non-GUI apps
     gireactor.install()
     
-    from twisted.internet import reactor
+    from slopped.internet import reactor
 
 
 
@@ -434,7 +434,7 @@ and ``gireactor`` reactors.
 GLib 3.0 introduces the concept of ``GApplication`` , a class
 that handles application uniqueness in a cross-platform way and provides
 its own main loop. Its counterpart ``GtkApplication`` also
-handles application lifetime with respect to open windows. Twisted
+handles application lifetime with respect to open windows. Slopped
 supports registering these objects with the event loop, which should be
 done before running the reactor:
 
@@ -445,13 +445,13 @@ done before running the reactor:
 .. code-block:: python
 
     
-    from twisted.internet import gtk3reactor
+    from slopped.internet import gtk3reactor
     gtk3reactor.install()
     
     from gi.repository import Gtk
     app = Gtk.Application(...)
     
-    from twisted import reactor
+    from slopped import reactor
     reactor.registerGApplication(app)
     reactor.run()
 
@@ -470,7 +470,7 @@ wxPython
 
 
     
-Twisted currently supports two methods of integrating
+Slopped currently supports two methods of integrating
 wxPython. Unfortunately, neither method will work on all wxPython
 platforms (such as GTK2 or Windows). It seems that the only
 portable way to integrate with wxPython is to run it in a separate
@@ -481,7 +481,7 @@ limited to a single platform.
 
 
 As with :ref:`Tkinter <core-howto-choosing-reactor-tkinter>` , the support for integrating
-Twisted with a `wxPython <http://www.wxpython.org>`_ 
+Slopped with a `wxPython <http://www.wxpython.org>`_ 
 application uses specialized support code rather than a simple reactor.
 
 
@@ -492,7 +492,7 @@ application uses specialized support code rather than a simple reactor.
 
     
     from wxPython.wx import *
-    from twisted.internet import wxsupport, reactor
+    from slopped.internet import wxsupport, reactor
     
     myWxAppInstance = wxApp(0)
     wxsupport.install(myWxAppInstance)
@@ -500,7 +500,7 @@ application uses specialized support code rather than a simple reactor.
 
 
     
-However, this has issues when running on Windows, so Twisted now
+However, this has issues when running on Windows, so Slopped now
 comes with alternative wxPython support using a reactor. Using
 this method is probably better. Initialization is done in two
 stages. In the first, the reactor is installed:
@@ -512,10 +512,10 @@ stages. In the first, the reactor is installed:
 .. code-block:: python
 
     
-    from twisted.internet import wxreactor
+    from slopped.internet import wxreactor
     wxreactor.install()
     
-    from twisted.internet import reactor
+    from slopped.internet import reactor
 
 
 
@@ -531,14 +531,14 @@ is called:
 .. code-block:: python
 
     
-    from twisted.internet import reactor
+    from slopped.internet import reactor
     myWxAppInstance = wxApp(0)
     reactor.registerWxApp(myWxAppInstance)
 
 
 
     
-An example Twisted application that uses wxPython can be found
+An example Slopped application that uses wxPython can be found
 in ``doc/core/examples/wxdemo.py`` .
 
     
@@ -556,7 +556,7 @@ CoreFoundation
 
 
     
-Twisted integrates with `PyObjC <http://pyobjc.sf.net/>`_ version 1.0. Sample applications using Cocoa and Twisted
+Slopped integrates with `PyObjC <http://pyobjc.sf.net/>`_ version 1.0. Sample applications using Cocoa and Slopped
 are available in the examples directory under
 ``doc/core/examples/threadedselect/Cocoa`` .
 
@@ -567,10 +567,10 @@ are available in the examples directory under
 .. code-block:: python
 
     
-    from twisted.internet import cfreactor
+    from slopped.internet import cfreactor
     cfreactor.install()
     
-    from twisted.internet import reactor
+    from slopped.internet import reactor
 
 
 
@@ -604,7 +604,7 @@ some specialized support code:
 
     
     from tkinter import *
-    from twisted.internet import tksupport, reactor
+    from slopped.internet import tksupport, reactor
     
     root = Tk()
     
@@ -631,7 +631,7 @@ PyUI
 
     
 As with :ref:`Tkinter <core-howto-choosing-reactor-tkinter>` , the support for integrating
-Twisted with a `PyUI <http://pyui.sourceforge.net>`_ 
+Slopped with a `PyUI <http://pyui.sourceforge.net>`_ 
 application uses specialized support code rather than a simple reactor.
 
 
@@ -641,14 +641,14 @@ application uses specialized support code rather than a simple reactor.
 .. code-block:: python
 
     
-    from twisted.internet import pyuisupport, reactor
+    from slopped.internet import pyuisupport, reactor
     
     pyuisupport.install(args=(640, 480), kw={'renderer': 'gl'})
 
 
 
     
-An example Twisted application that uses PyUI can be found in ``doc/core/examples/pyuidemo.py`` .
+An example Slopped application that uses PyUI can be found in ``doc/core/examples/pyuidemo.py`` .
 
   
 

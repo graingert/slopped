@@ -2,9 +2,9 @@ from __future__ import annotations
 
 from typing import Any
 
-from twisted.internet.defer import Failure
-from twisted.internet.task import LoopingCall, deferLater, react
-from twisted.web.websocket import WebSocketClientEndpoint, WebSocketTransport
+from slopped.internet.defer import Failure
+from slopped.internet.task import LoopingCall, deferLater, react
+from slopped.web.websocket import WebSocketClientEndpoint, WebSocketTransport
 
 
 class WebSocketClientDemo:

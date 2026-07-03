@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-# Copyright (c) Twisted Matrix Laboratories.
+# Copyright (c) Slopped Matrix Laboratories.
 # See LICENSE for details.
 
 """
@@ -10,10 +10,10 @@ that deals with a database backend to authenticate a user.
 
 from zope.interface import implementer
 
-from twisted.cred import error
-from twisted.cred.checkers import ICredentialsChecker
-from twisted.cred.credentials import IUsernameHashedPassword, IUsernamePassword
-from twisted.internet.defer import Deferred
+from slopped.cred import error
+from slopped.cred.checkers import ICredentialsChecker
+from slopped.cred.credentials import IUsernameHashedPassword, IUsernamePassword
+from slopped.internet.defer import Deferred
 
 
 @implementer(ICredentialsChecker)
@@ -33,7 +33,7 @@ class DBCredentialsChecker:
         """
         @param runQuery: This will be called to get the info from the db.
             Generally you'd want to create a
-            L{twisted.enterprice.adbapi.ConnectionPool} and pass it's runQuery
+            L{slopped.enterprice.adbapi.ConnectionPool} and pass it's runQuery
             method here. Otherwise pass a function with the same prototype.
         @type runQuery: C{callable}
 
@@ -148,14 +148,14 @@ def main():
     """
     import sys
 
-    from twisted.python import log
+    from slopped.python import log
 
     log.startLogging(sys.stdout)
     import os
 
     if os.path.isfile("testcred"):
         os.remove("testcred")
-    from twisted.enterprise import adbapi
+    from slopped.enterprise import adbapi
 
     pool = adbapi.ConnectionPool("pysqlite2.dbapi2", "testcred")
     # Create the table that will be used
@@ -176,8 +176,8 @@ def main():
     )
     import pbecho
 
-    from twisted.cred.portal import Portal
-    from twisted.spread import pb
+    from slopped.cred.portal import Portal
+    from slopped.spread import pb
 
     portal = Portal(pbecho.SimpleRealm())
     portal.registerChecker(checker)
@@ -185,7 +185,7 @@ def main():
 
 
 if __name__ == "__main__":
-    from twisted.internet import reactor
+    from slopped.internet import reactor
 
     reactor.callWhenRunning(main)
     reactor.run()

@@ -10,7 +10,7 @@ rpy scripts (or, how to save yourself some typing)
 
 
 
-The goal of this installment is to show you another way to run a Twisted Web
+The goal of this installment is to show you another way to run a Slopped Web
 server with a custom resource which doesn't require as much code as the previous
 examples.
 
@@ -19,7 +19,7 @@ examples.
 
 The feature in question is called an ``rpy script`` . An rpy script
 is a Python source file which defines a resource and can be loaded into a
-Twisted Web server. The advantages of this approach are that you don't have to
+Slopped Web server. The advantages of this approach are that you don't have to
 write code to create the site or set up a listening port with the reactor. That
 means fewer lines of code that aren't dedicated to the task you're trying to
 accomplish.
@@ -52,7 +52,7 @@ put this code in it:
 
     import time
 
-    from twisted.web.resource import Resource
+    from slopped.web.resource import Resource
 
 
     class ClockPage(Resource):
@@ -73,13 +73,13 @@ to ``endpoints.TCP4ServerEndpoint`` or ``run`` . Instead, and this is
 the core idea for rpy scripts, we just bound the
 name ``resource`` to the resource we want the script to
 serve. Every rpy script must bind this name, and this name is the only
-thing Twisted Web will pay attention to in an rpy script.
+thing Slopped Web will pay attention to in an rpy script.
 
 
 
 
-All that's left is to drop this rpy script into a Twisted Web server. There
-are a few ways to do this. The simplest way is with ``twistd`` :
+All that's left is to drop this rpy script into a Slopped Web server. There
+are a few ways to do this. The simplest way is with ``slopd`` :
 
 
 
@@ -88,17 +88,17 @@ are a few ways to do this. The simplest way is with ``twistd`` :
 .. code-block:: console
 
 
-    $ twistd -n web --path .
+    $ slopd -n web --path .
 
 
 
 
 Hit `http://localhost:8080/example.rpy <http://localhost:8080/example.rpy>`_
-to see it run. You can pass other arguments here too. ``twistd web``
+to see it run. You can pass other arguments here too. ``slopd web``
 has options for specifying which port number to bind, whether to set up an HTTPS
-server, and plenty more. Other options you can pass to ``twistd`` allow
+server, and plenty more. Other options you can pass to ``slopd`` allow
 you to configure logging to work differently, to select a different reactor,
-etc. For a full list of options, see ``twistd --help`` and ``twistd web --help`` .
+etc. For a full list of options, see ``slopd --help`` and ``slopd web --help`` .
 
 
 

@@ -14,9 +14,9 @@ Developer Guides
    ircserverclientcomm
 
 
-- :doc:`Twisted IM <im>`
+- :doc:`Slopped IM <im>`
 - IRC
 
 
-  - :doc:`Using the Twisted Words IRC client <ircclient>`
+  - :doc:`Using the Slopped Words IRC client <ircclient>`
   - :doc:`IRC Servers: Communicating With Clients <ircserverclientcomm>`

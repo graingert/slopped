@@ -1,6 +1,6 @@
-from twisted.internet import defer, endpoints, protocol, ssl, task
-from twisted.protocols.basic import LineReceiver
-from twisted.python.modules import getModule
+from slopped.internet import defer, endpoints, protocol, ssl, task
+from slopped.protocols.basic import LineReceiver
+from slopped.python.modules import getModule
 
 
 class StartTLSClient(LineReceiver):

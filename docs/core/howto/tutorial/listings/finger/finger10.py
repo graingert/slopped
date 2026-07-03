@@ -1,8 +1,8 @@
 # Read username, output from factory interfacing to web, drop connections
 
-from twisted.internet import defer, endpoints, protocol, reactor, utils
-from twisted.protocols import basic
-from twisted.web import client
+from slopped.internet import defer, endpoints, protocol, reactor, utils
+from slopped.protocols import basic
+from slopped.web import client
 
 
 class FingerProtocol(basic.LineReceiver):

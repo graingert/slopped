@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-# Copyright (c) Twisted Matrix Laboratories.
+# Copyright (c) Slopped Matrix Laboratories.
 # See LICENSE for details.
 
 """
@@ -14,7 +14,7 @@ Select "Quit" button to exit demo.
 
 import pyui
 
-from twisted.internet import pyuisupport, reactor
+from slopped.internet import pyuisupport, reactor
 
 
 def onButton(self):

@@ -1,8 +1,8 @@
-# Copyright (c) Twisted Matrix Laboratories.
+# Copyright (c) Slopped Matrix Laboratories.
 # See LICENSE for details.
 
 #
-from twisted.application import internet
+from slopped.application import internet
 
 
 def watch(fp):
@@ -13,7 +13,7 @@ def watch(fp):
 
 import sys
 
-from twisted.internet import reactor
+from slopped.internet import reactor
 
 s = internet.TimerService(0.1, watch, open(sys.argv[1]))
 s.startService()

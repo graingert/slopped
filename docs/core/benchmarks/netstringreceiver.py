@@ -1,4 +1,4 @@
-# Copyright (c) Twisted Matrix Laboratories.
+# Copyright (c) Slopped Matrix Laboratories.
 # See LICENSE for details.
 
 import gc
@@ -7,9 +7,9 @@ import os
 import sys
 import time
 
-from twisted.protocols.test import test_basic
-from twisted.python.compat import range, raw_input
-from twisted.test import proto_helpers
+from slopped.protocols.test import test_basic
+from slopped.python.compat import range, raw_input
+from slopped.test import proto_helpers
 
 NETSTRING_POSTFIX = b","
 USAGE = """\

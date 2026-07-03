@@ -3,7 +3,7 @@
 :LastChangedRevision: $LastChangedRevision$
 :LastChangedBy: $LastChangedBy$
 
-Twisted Mail (SMTP, POP, and IMAP)
+Slopped Mail (SMTP, POP, and IMAP)
 ==================================
 
 .. toctree::
@@ -14,6 +14,6 @@ Twisted Mail (SMTP, POP, and IMAP)
    tutorial/smtpclient/smtpclient
 
 
-- :doc:`Examples <examples/index>`: short code examples using Twisted Mail
-- :doc:`Developer Guides <howto/index>`: documentation on using Twisted Mail
-- :doc:`Twisted Mail Tutorial <tutorial/smtpclient/smtpclient>`: Building an SMTP Client from Scratch
+- :doc:`Examples <examples/index>`: short code examples using Slopped Mail
+- :doc:`Developer Guides <howto/index>`: documentation on using Slopped Mail
+- :doc:`Slopped Mail Tutorial <tutorial/smtpclient/smtpclient>`: Building an SMTP Client from Scratch

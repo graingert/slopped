@@ -1,4 +1,4 @@
-# Copyright (c) Twisted Matrix Laboratories.
+# Copyright (c) Slopped Matrix Laboratories.
 # See LICENSE for details.
 
 
@@ -32,11 +32,11 @@ import sys
 # system imports
 import time
 
-from twisted.internet import protocol, reactor
-from twisted.python import log
+from slopped.internet import protocol, reactor
+from slopped.python import log
 
-# twisted imports
-from twisted.words.protocols import irc
+# slopped imports
+from slopped.words.protocols import irc
 
 
 class MessageLogger:
@@ -61,7 +61,7 @@ class MessageLogger:
 class LogBot(irc.IRCClient):
     """A logging IRC bot."""
 
-    nickname = "twistedbot"
+    nickname = "sloppedbot"
 
     def connectionMade(self):
         irc.IRCClient.connectionMade(self)

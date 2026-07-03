@@ -1,4 +1,4 @@
-# Copyright (c) Twisted Matrix Laboratories.
+# Copyright (c) Slopped Matrix Laboratories.
 # See LICENSE for details.
 
 """
@@ -13,9 +13,9 @@ Usage:
 Then visit http://localhost:19988/.
 """
 
-from twisted.internet import reactor
-from twisted.spread import pb
-from twisted.web import distrib, server, static
+from slopped.internet import reactor
+from slopped.spread import pb
+from slopped.web import distrib, server, static
 
 # The "master" server
 site = server.Site(distrib.ResourceSubscription("unix", ".rp"))

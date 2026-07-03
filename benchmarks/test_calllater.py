@@ -2,7 +2,7 @@
 
 import pytest
 
-from twisted.internet.base import ReactorBase
+from slopped.internet.base import ReactorBase
 
 
 class ReactorWithRiggedTime(ReactorBase):

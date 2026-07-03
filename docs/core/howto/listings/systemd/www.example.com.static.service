@@ -2,7 +2,7 @@
 Description=Example Web Server
 
 [Service]
-ExecStart=/usr/bin/twistd \
+ExecStart=/usr/bin/slopd \
     --nodaemon \
     --pidfile= \
     web --listen tcp:8080 --path .

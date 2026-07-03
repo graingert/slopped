@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-# Copyright (c) Twisted Matrix Laboratories.
+# Copyright (c) Slopped Matrix Laboratories.
 # See LICENSE for details.
 
 """
@@ -18,15 +18,15 @@ from sys import stdout
 
 from zope.interface import implementer
 
-from twisted.cred.checkers import (
+from slopped.cred.checkers import (
     ANONYMOUS,
     AllowAnonymousAccess,
     InMemoryUsernamePasswordDatabaseDontUse,
 )
-from twisted.cred.portal import IRealm, Portal
-from twisted.internet import reactor
-from twisted.python.log import startLogging
-from twisted.spread.pb import Avatar, IPerspective, PBServerFactory
+from slopped.cred.portal import IRealm, Portal
+from slopped.internet import reactor
+from slopped.python.log import startLogging
+from slopped.spread.pb import Avatar, IPerspective, PBServerFactory
 
 
 class MyPerspective(Avatar):

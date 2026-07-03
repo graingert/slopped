@@ -19,7 +19,7 @@ Simple telnet server
 - :download:`telnet_echo.tac` - A telnet server which echoes data and events back to the client
 
 
-twisted.conch.insults examples
+slopped.conch.insults examples
 ------------------------------
 
 - :download:`demo.tac` - Nearly pointless demonstration of the manhole interactive interpreter

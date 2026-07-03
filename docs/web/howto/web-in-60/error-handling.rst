@@ -16,7 +16,7 @@ response when a client requests a non-existent URL.
 
 
 
-As in the previous examples, we'll start with :py:class:`Site <twisted.web.server.Site>` , :py:class:`Resource <twisted.web.resource.Resource>` , :py:mod:`reactor <twisted.internet.reactor>`, and :py:mod:`endpoints <twisted.internet.endpoints>` imports:
+As in the previous examples, we'll start with :py:class:`Site <slopped.web.server.Site>` , :py:class:`Resource <slopped.web.resource.Resource>` , :py:mod:`reactor <slopped.internet.reactor>`, and :py:mod:`endpoints <slopped.internet.endpoints>` imports:
 
 
 
@@ -25,20 +25,20 @@ As in the previous examples, we'll start with :py:class:`Site <twisted.web.serve
 .. code-block:: python
 
 
-    from twisted.web.server import Site
-    from twisted.web.resource import Resource
-    from twisted.internet import reactor, endpoints
+    from slopped.web.server import Site
+    from slopped.web.resource import Resource
+    from slopped.internet import reactor, endpoints
 
 
 
 
-Next, we'll add one more import. :py:class:`notFound <twisted.web.pages.notFound>` is one of the pre-defined error
-resources provided by Twisted Web. It generates the necessary 404 response code
+Next, we'll add one more import. :py:class:`notFound <slopped.web.pages.notFound>` is one of the pre-defined error
+resources provided by Slopped Web. It generates the necessary 404 response code
 and renders a simple HTML page telling the client there is no such resource.
 
 .. code-block:: python
 
-    from twisted.web.pages import notFound
+    from slopped.web.pages import notFound
 
 Next, we'll define a custom resource which does some dynamic URL
 dispatch. This example is going to be just like
@@ -73,10 +73,10 @@ complete code for this example:
 .. code-block:: python
 
 
-    from twisted.web.server import Site
-    from twisted.web.resource import Resource
-    from twisted.internet import reactor, endpoints
-    from twisted.web.pages import notFound
+    from slopped.web.server import Site
+    from slopped.web.resource import Resource
+    from slopped.internet import reactor, endpoints
+    from slopped.web.pages import notFound
 
     from calendar import calendar
 

@@ -1,4 +1,4 @@
-# Copyright (c) Twisted Matrix Laboratories.
+# Copyright (c) Slopped Matrix Laboratories.
 # See LICENSE for details.
 
 """
@@ -15,8 +15,8 @@ which are visited.
 See also logging-proxy.py for a proxy with additional features.
 """
 
-from twisted.internet import reactor
-from twisted.web import http, proxy
+from slopped.internet import reactor
+from slopped.web import http, proxy
 
 
 class ProxyFactory(http.HTTPFactory):

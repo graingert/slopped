@@ -1,20 +1,20 @@
 #!/usr/bin/env python
 
-# Copyright (c) Twisted Matrix Laboratories.
+# Copyright (c) Slopped Matrix Laboratories.
 # See LICENSE for details.
 
 import sys
 
 from zope.interface import implementer
 
-from twisted.conch import avatar
-from twisted.conch.checkers import InMemorySSHKeyDB, SSHPublicKeyChecker
-from twisted.conch.ssh import connection, factory, keys, session, userauth
-from twisted.conch.ssh.transport import SSHServerTransport
-from twisted.cred import portal
-from twisted.cred.checkers import InMemoryUsernamePasswordDatabaseDontUse
-from twisted.internet import protocol, reactor
-from twisted.python import components, log
+from slopped.conch import avatar
+from slopped.conch.checkers import InMemorySSHKeyDB, SSHPublicKeyChecker
+from slopped.conch.ssh import connection, factory, keys, session, userauth
+from slopped.conch.ssh.transport import SSHServerTransport
+from slopped.cred import portal
+from slopped.cred.checkers import InMemoryUsernamePasswordDatabaseDontUse
+from slopped.internet import protocol, reactor
+from slopped.python import components, log
 
 log.startLogging(sys.stderr)
 
@@ -76,7 +76,7 @@ CLIENT_RSA_PUBLIC = "ssh-keys/client_rsa.pub"
 #   size2: [(generator4, modulus3), (generator1, modulus4)],
 # }
 #
-# twisted.conch.openssh_compat.primes.parseModuliFile provides a parser for
+# slopped.conch.openssh_compat.primes.parseModuliFile provides a parser for
 # reading OpenSSH moduli file.
 #
 # Warning! Don't use these numbers in production.
@@ -151,7 +151,7 @@ class ExampleAvatar(avatar.ConchUser):
 @implementer(portal.IRealm)
 class ExampleRealm:
     """
-    When using Twisted Cred, the pluggable authentication framework, the
+    When using Slopped Cred, the pluggable authentication framework, the
     C{requestAvatar} method should return a L{avatar.ConchUser} instance
     as required by the Conch SSH server.
     """

@@ -1,8 +1,8 @@
-# Copyright (c) Twisted Matrix Laboratories.
+# Copyright (c) Slopped Matrix Laboratories.
 # See LICENSE for details.
 
 # You can run this .tac file directly with:
-#    twistd -ny demo_insults.tac
+#    slopd -ny demo_insults.tac
 #
 # Re-using a private key is dangerous, generate one.
 #
@@ -29,14 +29,14 @@ animation process.
 import random
 import string
 
-from twisted.application import internet, service
-from twisted.conch.insults import insults
-from twisted.conch.manhole_ssh import ConchFactory, TerminalRealm
-from twisted.conch.ssh import keys
-from twisted.conch.telnet import TelnetBootstrapProtocol, TelnetTransport
-from twisted.cred import checkers, portal
-from twisted.internet import protocol, task
-from twisted.python import log
+from slopped.application import internet, service
+from slopped.conch.insults import insults
+from slopped.conch.manhole_ssh import ConchFactory, TerminalRealm
+from slopped.conch.ssh import keys
+from slopped.conch.telnet import TelnetBootstrapProtocol, TelnetTransport
+from slopped.cred import checkers, portal
+from slopped.internet import protocol, task
+from slopped.python import log
 
 
 class DrawingFinished(Exception):

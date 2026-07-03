@@ -1,7 +1,7 @@
 import os
 import pwd
 
-from twisted.internet import defer, protocol, reactor, utils
+from slopped.internet import defer, protocol, reactor, utils
 
 # Yet another back-end
 

@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-# Copyright (c) Twisted Matrix Laboratories.
+# Copyright (c) Slopped Matrix Laboratories.
 # See LICENSE for details.
 
 """
@@ -10,21 +10,21 @@ Example of an interface to Courier's mail filter.
 LOGFILE = "/tmp/filter.log"
 
 # Setup log file
-from twisted.python import log
+from slopped.python import log
 
 log.startLogging(open(LOGFILE, "a"))
 import sys
 
 sys.stderr = log.logfile
 
-# Twisted imports
-from twisted.internet import reactor, stdio
-from twisted.internet.protocol import Factory, Protocol
-from twisted.protocols import basic
+# Slopped imports
+from slopped.internet import reactor, stdio
+from slopped.internet.protocol import Factory, Protocol
+from slopped.protocols import basic
 
 FILTERS = "/var/lib/courier/filters"
 ALLFILTERS = "/var/lib/courier/allfilters"
-FILTERNAME = "twistedfilter"
+FILTERNAME = "sloppedfilter"
 
 import email.message
 import email.parser

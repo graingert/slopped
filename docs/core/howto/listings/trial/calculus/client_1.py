@@ -1,7 +1,7 @@
 # -*- test-case-name: calculus.test.test_client_1 -*-
 
-from twisted.internet import defer
-from twisted.protocols import basic
+from slopped.internet import defer
+from slopped.protocols import basic
 
 
 class RemoteCalculationClient(basic.LineReceiver):

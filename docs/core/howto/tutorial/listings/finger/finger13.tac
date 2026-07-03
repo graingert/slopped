@@ -1,7 +1,7 @@
 # Fix asymmetry
-from twisted.application import service, strports
-from twisted.internet import defer, protocol, reactor
-from twisted.protocols import basic
+from slopped.application import service, strports
+from slopped.internet import defer, protocol, reactor
+from slopped.protocols import basic
 
 
 class FingerProtocol(basic.LineReceiver):

@@ -1,11 +1,11 @@
 #!/usr/bin/env python
 
-# Copyright (c) Twisted Matrix Laboratories.
+# Copyright (c) Slopped Matrix Laboratories.
 # See LICENSE for details.
 
 
 """
-An example of using Twisted with Tkinter.
+An example of using Slopped with Tkinter.
 Displays a frame with buttons that responds to mouse clicks.
 
 Run this example by typing in:
@@ -15,7 +15,7 @@ Run this example by typing in:
 
 from tkinter import LEFT, Button, Frame, Tk
 
-from twisted.internet import reactor, tksupport
+from slopped.internet import reactor, tksupport
 
 
 class App:

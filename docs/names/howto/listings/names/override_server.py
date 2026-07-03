@@ -1,4 +1,4 @@
-# Copyright (c) Twisted Matrix Laboratories.
+# Copyright (c) Slopped Matrix Laboratories.
 # See LICENSE for details.
 
 """
@@ -16,8 +16,8 @@ eg
     172.0.2.1
 """
 
-from twisted.internet import defer, reactor
-from twisted.names import client, dns, error, server
+from slopped.internet import defer, reactor
+from slopped.names import client, dns, error, server
 
 
 class DynamicResolver:

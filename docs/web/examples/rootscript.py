@@ -1,11 +1,11 @@
-# Copyright (c) Twisted Matrix Laboratories.
+# Copyright (c) Slopped Matrix Laboratories.
 # See LICENSE for details.
 
 """
-This is a Twisted Web Server with Named-Based Virtual Host Support.
+This is a Slopped Web Server with Named-Based Virtual Host Support.
 
 Usage:
-    $ sudo twistd -ny rootscript.py
+    $ sudo slopd -ny rootscript.py
 
 Note: You need to edit your hosts file for this example
 to work. Need to add the following entry:
@@ -16,8 +16,8 @@ Then visit http://example.com/ with a web browser and compare the results to
 visiting http://localhost/.
 """
 
-from twisted.application import internet, service
-from twisted.web import script, server, static, vhost
+from slopped.application import internet, service
+from slopped.web import script, server, static, vhost
 
 default = static.Data(b"", "text/html")
 # Setting up vhost resource.
@@ -31,7 +31,7 @@ root.processors = {".rpy": script.ResourceScript}
 # addHost binds domain name example.com to our root resource.
 resource.addHost("example.com", root)
 
-# Setup Twisted Application.
+# Setup Slopped Application.
 site = server.Site(resource)
 application = service.Application("vhost")
 sc = service.IServiceCollection(application)

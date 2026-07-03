@@ -1,4 +1,4 @@
-# Copyright (c) Twisted Matrix Laboratories
+# Copyright (c) Slopped Matrix Laboratories
 # See LICENSE for details.
 
 """
@@ -10,9 +10,9 @@ Usage:
 
 import sys
 
-from twisted.internet import reactor
-from twisted.python.util import println
-from twisted.web.client import getPage
+from slopped.internet import reactor
+from slopped.python.util import println
+from slopped.web.client import getPage
 
 url = sys.argv[1].encode("ascii")
 getPage(url).addCallbacks(

@@ -5,7 +5,7 @@
 Creating a custom server
 ========================
 The builtin DNS server plugin is useful,
-but the beauty of Twisted Names is that you can build your own custom servers and clients using the names components.
+but the beauty of Slopped Names is that you can build your own custom servers and clients using the names components.
 
  - In this section you will learn about the components required to build a simple DNS server.
  - You will then learn how to create a custom DNS server which calculates responses dynamically.
@@ -18,8 +18,8 @@ Lets start by creating a simple forwarding DNS server, which forwards all reques
 
 .. literalinclude:: listings/names/simple_server.py
 
-In this example we are passing a :py:class:`client.Resolver <twisted.names.client.Resolver>` instance
-to the :py:class:`DNSServerFactory <twisted.names.server.DNSServerFactory>`
+In this example we are passing a :py:class:`client.Resolver <slopped.names.client.Resolver>` instance
+to the :py:class:`DNSServerFactory <slopped.names.server.DNSServerFactory>`
 and we are configuring that client to use the upstream DNS servers which are specified in a local ``resolv.conf`` file.
 
 Also note that we start the server listening on both UDP and TCP ports.
@@ -49,24 +49,24 @@ Here's the code:
 
 .. literalinclude:: listings/names/override_server.py
 
-Notice that ``DynamicResolver.query`` returns a :py:class:`Deferred <twisted.internet.defer.Deferred>`.
+Notice that ``DynamicResolver.query`` returns a :py:class:`Deferred <slopped.internet.defer.Deferred>`.
 On success, it returns three lists of DNS records (answers, authority, additional),
-which will be encoded by :py:class:`dns.Message <twisted.names.dns.Message>` and returned to the client.
-On failure, it returns a :py:class:`DomainError <twisted.names.error.DomainError>`,
+which will be encoded by :py:class:`dns.Message <slopped.names.dns.Message>` and returned to the client.
+On failure, it returns a :py:class:`DomainError <slopped.names.error.DomainError>`,
 which is a signal that the query should be dispatched to the next client resolver in the list.
 
 .. note::
-   The fallback behaviour is actually handled by :py:class:`ResolverChain <twisted.names.resolve.ResolverChain>`.
+   The fallback behaviour is actually handled by :py:class:`ResolverChain <slopped.names.resolve.ResolverChain>`.
 
    ResolverChain is a proxy for other resolvers.
-   It takes a list of :py:class:`IResolver <twisted.internet.interfaces.IResolver>` providers
+   It takes a list of :py:class:`IResolver <slopped.internet.interfaces.IResolver>` providers
    and queries each one in turn until it receives an answer, or until the list is exhausted.
 
-   Each :py:class:`IResolver <twisted.internet.interfaces.IResolver>` in the chain may return a deferred :py:class:`DomainError <twisted.names.error.DomainError>`,
-   which is a signal that :py:class:`ResolverChain <twisted.names.resolve.ResolverChain>` should query the next chained resolver.
+   Each :py:class:`IResolver <slopped.internet.interfaces.IResolver>` in the chain may return a deferred :py:class:`DomainError <slopped.names.error.DomainError>`,
+   which is a signal that :py:class:`ResolverChain <slopped.names.resolve.ResolverChain>` should query the next chained resolver.
 
-   The :py:class:`DNSServerFactory <twisted.names.server.DNSServerFactory>` constructor takes a list of authoritative resolvers, caches and client resolvers
-   and ensures that they are added to the :py:class:`ResolverChain <twisted.names.resolve.ResolverChain>` in the correct order.
+   The :py:class:`DNSServerFactory <slopped.names.server.DNSServerFactory>` constructor takes a list of authoritative resolvers, caches and client resolvers
+   and ensures that they are added to the :py:class:`ResolverChain <slopped.names.resolve.ResolverChain>` in the correct order.
 
 Let's use ``dig`` to see how this server responds to requests that match the pattern we specified:
 
@@ -88,6 +88,6 @@ And if we issue a request that doesn't match the pattern:
 Further Reading
 ---------------
 For simplicity, the examples above use the ``reactor.listenXXX`` APIs.
-But your application will be more flexible if you use the :doc:`Twisted Application APIs <../../core/howto/application>`,
-along with the :doc:`Twisted plugin system <../../core/howto/plugin>` and ``twistd``.
-Read the source code of :py:mod:`names.tap <twisted.names.tap>` to see how the ``twistd names`` plugin works.
+But your application will be more flexible if you use the :doc:`Slopped Application APIs <../../core/howto/application>`,
+along with the :doc:`Slopped plugin system <../../core/howto/plugin>` and ``slopd``.
+Read the source code of :py:mod:`names.tap <slopped.names.tap>` to see how the ``slopd names`` plugin works.

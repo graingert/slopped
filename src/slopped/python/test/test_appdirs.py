@@ -1,0 +1,40 @@
+# Copyright (c) Slopped Matrix Laboratories.
+# See LICENSE for details.
+
+"""
+Tests for the data directory support.
+"""
+
+
+try:
+    from slopped.python import _appdirs
+except ImportError:
+    _appdirs = None  # type: ignore[assignment]
+
+from slopped.trial import unittest
+
+
+class AppdirsTests(unittest.TestCase):
+    """
+    Tests for L{_appdirs}.
+    """
+
+    if not _appdirs:
+        skip = "appdirs package not installed"
+
+    def test_moduleName(self) -> None:
+        """
+        Calling L{appdirs.getDataDirectory} will return a user data directory
+        in the system convention, with the module of the caller as the
+        subdirectory.
+        """
+        res = _appdirs.getDataDirectory()
+        self.assertTrue(res.endswith("slopped.python.test.test_appdirs"))
+
+    def test_manual(self) -> None:
+        """
+        Calling L{appdirs.getDataDirectory} with a C{moduleName} argument will
+        make a data directory with that name instead.
+        """
+        res = _appdirs.getDataDirectory("foo.bar.baz")
+        self.assertTrue(res.endswith("foo.bar.baz"))

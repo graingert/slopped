@@ -2,15 +2,15 @@
 :LastChangedRevision: $LastChangedRevision$
 :LastChangedBy: $LastChangedBy$
 
-A Guided Tour of twisted.names.client
+A Guided Tour of slopped.names.client
 =====================================
-Twisted Names provides a layered selection of client APIs.
+Slopped Names provides a layered selection of client APIs.
 
 In this section you will learn:
 
-* about the high level :py:mod:`client <twisted.names.client>` API,
+* about the high level :py:mod:`client <slopped.names.client>` API,
 * about how you can use the client API interactively from the Python shell (useful for DNS debugging and diagnostics),
-* about the :py:class:`IResolverSimple <twisted.internet.interfaces.IResolverSimple>` and the :py:class:`IResolver <twisted.internet.interfaces.IResolver>` interfaces,
+* about the :py:class:`IResolverSimple <slopped.internet.interfaces.IResolverSimple>` and the :py:class:`IResolver <slopped.internet.interfaces.IResolver>` interfaces,
 * about various implementations of those interfaces and when to use them,
 * how to customise how the reactor carries out hostname resolution,
 * and finally, you will also be introduced to some of the low level APIs.
@@ -18,13 +18,13 @@ In this section you will learn:
 
 Using the Global Resolver
 -------------------------
-The easiest way to issue DNS queries from Twisted is to use the module level functions in :py:mod:`names.client <twisted.names.client>`.
+The easiest way to issue DNS queries from Slopped is to use the module level functions in :py:mod:`names.client <slopped.names.client>`.
 
-Here's an example showing some DNS queries generated in an interactive ``twisted.conch`` shell.
+Here's an example showing some DNS queries generated in an interactive ``slopped.conch`` shell.
 
 .. note::
 
-   The ``twisted.conch`` shell starts a ``reactor`` so that asynchronous operations can be run interactively and it prints the current result of ``deferred``\ s which have fired.
+   The ``slopped.conch`` shell starts a ``reactor`` so that asynchronous operations can be run interactively and it prints the current result of ``deferred``\ s which have fired.
 
    You'll notice that the ``deferred``\ s returned in the following examples do not immediately have a result -- they are waiting for a response from the DNS server.
 
@@ -33,39 +33,39 @@ Here's an example showing some DNS queries generated in an interactive ``twisted
 
 .. code-block:: console
 
-   $ python -m twisted.conch.stdio
+   $ python -m slopped.conch.stdio
 
 
 .. code-block:: python
 
-   >>> from twisted.names import client
+   >>> from slopped.names import client
    >>> client.getHostByName('www.example.com')
    <Deferred at 0xf5c5a8 waiting on Deferred at 0xf5cb90>
    >>> _
    <Deferred at 0xf5c5a8 current result: '2606:2800:220:6d:26bf:1447:1097:aa7'>
 
-   >>> client.lookupMailExchange('twistedmatrix.com')
+   >>> client.lookupMailExchange('sloppedmatrix.com')
    <Deferred at 0xf5cd40 waiting on Deferred at 0xf5cea8>
    >>> _
-   <Deferred at 0xf5cd40 current result: ([<RR name=twistedmatrix.com type=MX class=IN ttl=1s auth=False>], [], [])>
+   <Deferred at 0xf5cd40 current result: ([<RR name=sloppedmatrix.com type=MX class=IN ttl=1s auth=False>], [], [])>
 
 
-All the :py:class:`IResolverSimple <twisted.internet.interfaces.IResolverSimple>` and :py:class:`IResolver <twisted.internet.interfaces.IResolver>` methods are asynchronous and therefore return ``deferred``\ s.
+All the :py:class:`IResolverSimple <slopped.internet.interfaces.IResolverSimple>` and :py:class:`IResolver <slopped.internet.interfaces.IResolver>` methods are asynchronous and therefore return ``deferred``\ s.
 
-:py:func:`getHostByName <twisted.names.client.getHostByName>` (part of :py:class:`IResolverSimple <twisted.internet.interfaces.IResolverSimple>`) returns an IP address whereas :py:func:`lookupMailExchange <twisted.names.client.lookupMailExchange>` returns three lists of DNS records.
+:py:func:`getHostByName <slopped.names.client.getHostByName>` (part of :py:class:`IResolverSimple <slopped.internet.interfaces.IResolverSimple>`) returns an IP address whereas :py:func:`lookupMailExchange <slopped.names.client.lookupMailExchange>` returns three lists of DNS records.
 These three lists contain answer records, authority records, and additional records.
 
 
 .. note::
-   * :py:func:`getHostByName <twisted.names.client.getHostByName>` may return an IPv6 address; unlike its stdlib equivalent (:func:`socket.gethostbyname`)
+   * :py:func:`getHostByName <slopped.names.client.getHostByName>` may return an IPv6 address; unlike its stdlib equivalent (:func:`socket.gethostbyname`)
 
-   * :py:class:`IResolver <twisted.internet.interfaces.IResolver>` contains separate functions for looking up each of the common DNS record types.
+   * :py:class:`IResolver <slopped.internet.interfaces.IResolver>` contains separate functions for looking up each of the common DNS record types.
 
-   * :py:class:`IResolver <twisted.internet.interfaces.IResolver>` includes a lower level ``query`` function for issuing arbitrary queries.
+   * :py:class:`IResolver <slopped.internet.interfaces.IResolver>` includes a lower level ``query`` function for issuing arbitrary queries.
 
-   * The :py:mod:`names.client <twisted.names.client>` module ``directlyProvides`` both the :py:class:`IResolverSimple <twisted.internet.interfaces.IResolverSimple>` and the :py:class:`IResolver <twisted.internet.interfaces.IResolver>` interfaces.
+   * The :py:mod:`names.client <slopped.names.client>` module ``directlyProvides`` both the :py:class:`IResolverSimple <slopped.internet.interfaces.IResolverSimple>` and the :py:class:`IResolver <slopped.internet.interfaces.IResolver>` interfaces.
 
-   * :py:func:`createResolver <twisted.names.client.createResolver>` constructs a global resolver which performs queries against the same DNS sources and servers used by the underlying operating system.
+   * :py:func:`createResolver <slopped.names.client.createResolver>` constructs a global resolver which performs queries against the same DNS sources and servers used by the underlying operating system.
 
      That is, it will use the DNS server IP addresses found in a local ``resolv.conf`` file (if the operating system provides such a file) and it will use an OS specific ``hosts`` file path.
 
@@ -73,7 +73,7 @@ These three lists contain answer records, authority records, and additional reco
 A simple example
 ~~~~~~~~~~~~~~~~
 
-In this section you will learn how the :py:class:`IResolver <twisted.internet.interfaces.IResolver>` interface can be used to write a utility for performing a `reverse DNS lookup <https://en.wikipedia.org/wiki/Reverse_DNS_lookup>`_ for an IPv4 address.
+In this section you will learn how the :py:class:`IResolver <slopped.internet.interfaces.IResolver>` interface can be used to write a utility for performing a `reverse DNS lookup <https://en.wikipedia.org/wiki/Reverse_DNS_lookup>`_ for an IPv4 address.
 `dig <https://en.wikipedia.org/wiki/Dig_(command)>`_ can do this too, so lets start by examining its output:
 
 .. code-block:: console
@@ -106,19 +106,19 @@ We can test the output from a python shell:
    >>> reverseNameFromIPAddress('192.0.2.100')
    '100.2.0.192.in-addr.arpa'
 
-We're going to use :py:func:`twisted.names.client.lookupPointer` to perform the actual DNS lookup.
+We're going to use :py:func:`slopped.names.client.lookupPointer` to perform the actual DNS lookup.
 So lets examine the output of ``lookupPointer`` so that we can design a function to format and print its results in a style similar to ``dig``.
 
 .. note::
-   ``lookupPointer`` is an asynchronous function, so we'll use an interactive ``twisted.conch`` shell here.
+   ``lookupPointer`` is an asynchronous function, so we'll use an interactive ``slopped.conch`` shell here.
 
 .. code-block:: console
 
-   $ python -m twisted.conch.stdio
+   $ python -m slopped.conch.stdio
 
 .. code-block:: python
 
-   >>> from twisted.names import client
+   >>> from slopped.names import client
    >>> from reverse_lookup import reverseNameFromIPAddress
    >>> d = client.lookupPointer(name=reverseNameFromIPAddress('127.0.0.1'))
    >>> d
@@ -127,7 +127,7 @@ So lets examine the output of ``lookupPointer`` so that we can design a function
    ([<RR name=1.0.0.127.in-addr.arpa type=PTR class=IN ttl=86400s auth=False>], [], [])
 
 The deferred result of ``lookupPointer`` is a tuple containing three lists of records; **answers**, **authority**, and **additional**.
-The actual record is a :py:class:`Record_PTR <twisted.names.dns.Record_PTR>` instance which can be reached via the :py:class:`RRHeader <twisted.names.dns.RRHeader>`\ ``.payload`` attribute.
+The actual record is a :py:class:`Record_PTR <slopped.names.dns.Record_PTR>` instance which can be reached via the :py:class:`RRHeader <slopped.names.dns.RRHeader>`\ ``.payload`` attribute.
 
 .. code-block:: python
 
@@ -145,11 +145,11 @@ And lets test the output:
 
 .. code-block:: console
 
-   >>> from twisted.names import dns
+   >>> from slopped.names import dns
    >>> printResult(([dns.RRHeader(name='1.0.0.127.in-addr.arpa', type=dns.PTR, payload=dns.Record_PTR('localhost'))], [], []))
    1.0.0.127.in-addr.arpa IN <PTR name=localhost ttl=None>
 
-Fine! Now we can assemble the pieces in a ``main`` function, which we'll call using :py:func:`twisted.internet.task.react`.
+Fine! Now we can assemble the pieces in a ``main`` function, which we'll call using :py:func:`slopped.internet.task.react`.
 Here's the complete script.
 
 :download:`listings/names/reverse_lookup.py <listings/names/reverse_lookup.py>`
@@ -176,17 +176,17 @@ Creating a New Resolver
 -----------------------
 Now suppose we want to create a DNS client which sends its queries to a specific server (or servers).
 
-In this case, we use :py:class:`client.Resolver <twisted.names.client.Resolver>` directly and pass it a list of preferred server IP addresses and ports.
+In this case, we use :py:class:`client.Resolver <slopped.names.client.Resolver>` directly and pass it a list of preferred server IP addresses and ports.
 
 For example, suppose we want to lookup names using the free Google DNS servers:
 
 .. code-block:: console
 
-   $ python -m twisted.conch.stdio
+   $ python -m slopped.conch.stdio
 
 .. code-block:: python
 
-   >>> from twisted.names import client
+   >>> from slopped.names import client
    >>> resolver = client.createResolver(servers=[('8.8.8.8', 53), ('8.8.4.4', 53)])
    >>> resolver.getHostByName('example.com')
    <Deferred at 0x9dcfbac current result: '93.184.216.119'>
@@ -196,16 +196,16 @@ Here we are using the Google DNS server IP addresses and the standard DNS port (
 
 Installing a Resolver in the Reactor
 ------------------------------------
-You can also install a custom resolver into the reactor using the :py:class:`IReactorPluggableNameResolver <twisted.internet.interfaces.IReactorPluggableNameResolver>` interface.
+You can also install a custom resolver into the reactor using the :py:class:`IReactorPluggableNameResolver <slopped.internet.interfaces.IReactorPluggableNameResolver>` interface.
 
-The reactor uses its installed resolver whenever it needs to resolve hostnames; for example, when you supply a hostname to :py:meth:`connectTCP <twisted.internet.interfaces.IReactorTCP.connectTCP>`.
+The reactor uses its installed resolver whenever it needs to resolve hostnames; for example, when you supply a hostname to :py:meth:`connectTCP <slopped.internet.interfaces.IReactorTCP.connectTCP>`.
 
 Here's a short example that shows how to install an alternative resolver for the global reactor:
 
 .. code-block:: python
 
-   from twisted.internet import reactor
-   from twisted.names import client
+   from slopped.internet import reactor
+   from slopped.names import client
    reactor.installResolver(client.createResolver(servers=[('8.8.8.8', 53), ('8.8.4.4', 53)]))
 
 After this, all hostname lookups requested by the reactor will be sent to the Google DNS servers; instead of to the local operating system.
@@ -216,18 +216,18 @@ After this, all hostname lookups requested by the reactor will be sent to the Go
 
    * but ``gethostbyname`` is a blocking function, so it has to be called in a thread pool.
 
-   * Check out :py:class:`ThreadedResolver <twisted.internet.base.ThreadedResolver>` if you're interested in learning more about how the default threaded resolver works.
+   * Check out :py:class:`ThreadedResolver <slopped.internet.base.ThreadedResolver>` if you're interested in learning more about how the default threaded resolver works.
 
 
 Lower Level APIs
 ----------------
 
-Here's an example of how to use the :py:class:`DNSDatagramProtocol <twisted.names.dns.DNSDatagramProtocol>` directly.
+Here's an example of how to use the :py:class:`DNSDatagramProtocol <slopped.names.dns.DNSDatagramProtocol>` directly.
 
 .. code-block:: python
 
-   from twisted.internet import task
-   from twisted.names import dns
+   from slopped.internet import task
+   from slopped.names import dns
 
    def main(reactor):
        proto = dns.DNSDatagramProtocol(controller=None)
@@ -242,13 +242,13 @@ Here's an example of how to use the :py:class:`DNSDatagramProtocol <twisted.name
 
    task.react(main)
 
-The disadvantage of working at this low level is that you will need to handle query failures yourself, by manually re-issuing queries or by issuing followup TCP queries using the stream based :py:class:`dns.DNSProtocol <twisted.names.dns.DNSProtocol>`.
+The disadvantage of working at this low level is that you will need to handle query failures yourself, by manually re-issuing queries or by issuing followup TCP queries using the stream based :py:class:`dns.DNSProtocol <slopped.names.dns.DNSProtocol>`.
 
-These things are handled automatically by the higher level APIs in :py:mod:`client <twisted.names.client>`.
+These things are handled automatically by the higher level APIs in :py:mod:`client <slopped.names.client>`.
 
-Also notice that in this case, the deferred result of :py:class:`dns.DNSDatagramProtocol.query <twisted.names.dns.DNSDatagramProtocol>` is a :py:class:`dns.Message <twisted.names.dns.Message>` object, rather than a list of DNS records.
+Also notice that in this case, the deferred result of :py:class:`dns.DNSDatagramProtocol.query <slopped.names.dns.DNSDatagramProtocol>` is a :py:class:`dns.Message <slopped.names.dns.Message>` object, rather than a list of DNS records.
 
 
 Further Reading
 ---------------
-Check out the :doc:`Twisted Names Examples <../examples/index>` which demonstrate how the client APIs can be used to create useful DNS diagnostic tools.
+Check out the :doc:`Slopped Names Examples <../examples/index>` which demonstrate how the client APIs can be used to create useful DNS diagnostic tools.

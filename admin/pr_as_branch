@@ -17,7 +17,7 @@ usage() {
   echo "Note: branch_name should not include the ticket number prefix; that ";
   echo "will be added automatically.";
   echo "";
-  echo "${program} creates a branch in the Twisted GitHub repository from a";
+  echo "${program} creates a branch in the Slopped GitHub repository from a";
   echo "forked pull request.  This is necessary in order to create a branch";
   echo "that is visible to the Buildbot-based builder infrastructure.";
 }
@@ -47,13 +47,13 @@ TICKET_NUMBER="$1"; shift;
 
 # Do The Right Thing
 
-#repo="https://github.com/twisted/twisted.git";
-repo="git@github.com:twisted/twisted.git";
+#repo="https://github.com/graingert/slopped.git";
+repo="git@github.com:slopped/slopped.git";
 
 wc="$(dirname "$(dirname "$0")")/.git";
 
 if [ ! -d "${wc}" ]; then
-  wc="$(mktemp -d -t twisted.XXXX)";
+  wc="$(mktemp -d -t slopped.XXXX)";
 
   git clone --depth 1 --progress "${repo}" "${wc}";
 

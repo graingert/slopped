@@ -2,7 +2,7 @@
 :LastChangedRevision: $LastChangedRevision$
 :LastChangedBy: $LastChangedBy$
 
-Twisted Names (DNS)
+Slopped Names (DNS)
 ===================
 
 .. toctree::
@@ -12,12 +12,12 @@ Twisted Names (DNS)
    examples/index
 
 
-Twisted Names is a library of DNS components for building DNS servers and clients.
+Slopped Names is a library of DNS components for building DNS servers and clients.
 
 It includes a client resolver API, with which you can generate queries for all the standard record types.
 The client API also includes a replacement for the blocking ``gethostbyname()`` function provided by the Python stdlib socket module.
 
-Twisted Names provides a ``twistd`` DNS server plugin which can:
+Slopped Names provides a ``slopd`` DNS server plugin which can:
 
 * Act as a master authoritative server
   which can read most BIND-syntax zone files as well as a simple Python-based configuration format.
@@ -31,8 +31,8 @@ Twisted Names provides a ``twistd`` DNS server plugin which can:
 * Or any combination of these.
 
 The following developer guides, example scripts and API documentation will demonstrate how to use these components
-and provide you with all the information you need to build your own custom DNS client or server using Twisted Names.
+and provide you with all the information you need to build your own custom DNS client or server using Slopped Names.
 
-- :doc:`Developer guides <howto/index>`: documentation on using Twisted Names to develop your own applications
-- :doc:`Examples <examples/index>`: short code examples using Twisted Names
-- :py:mod:`API documentation <twisted.names>`: Detailed API documentation for all the Twisted Names components
+- :doc:`Developer guides <howto/index>`: documentation on using Slopped Names to develop your own applications
+- :doc:`Examples <examples/index>`: short code examples using Slopped Names
+- :py:mod:`API documentation <slopped.names>`: Detailed API documentation for all the Slopped Names components

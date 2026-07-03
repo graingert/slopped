@@ -3,7 +3,7 @@
 :LastChangedRevision: $LastChangedRevision$
 :LastChangedBy: $LastChangedBy$
 
-Twisted Words (IRC and XMPP)
+Slopped Words (IRC and XMPP)
 ============================
 
 .. toctree::
@@ -13,5 +13,5 @@ Twisted Words (IRC and XMPP)
    examples/index
 
 
-- :doc:`Developer guides <howto/index>`: documentation on using Twisted Words to develop your own applications
-- :doc:`Examples <examples/index>`: short code examples using Twisted Words
+- :doc:`Developer guides <howto/index>`: documentation on using Slopped Words to develop your own applications
+- :doc:`Examples <examples/index>`: short code examples using Slopped Words

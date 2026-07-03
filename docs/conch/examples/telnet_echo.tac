@@ -1,20 +1,20 @@
-# Copyright (c) Twisted Matrix Laboratories.
+# Copyright (c) Slopped Matrix Laboratories.
 # See LICENSE for details.
 
 """
 Simple echo server that echoes back client input.
 
 You can run this .tac file directly with:
-    twistd -ny telnet_echo.tac
+    slopd -ny telnet_echo.tac
 
 This demo sets up a listening port on 6023 which accepts telnet connections.
 No login for the telnet server is required.
 """
 
-from twisted.application.internet import TCPServer
-from twisted.application.service import Application
-from twisted.conch.telnet import TelnetProtocol, TelnetTransport
-from twisted.internet.protocol import ServerFactory
+from slopped.application.internet import TCPServer
+from slopped.application.service import Application
+from slopped.conch.telnet import TelnetProtocol, TelnetTransport
+from slopped.internet.protocol import ServerFactory
 
 
 class TelnetEcho(TelnetProtocol):

@@ -1,12 +1,12 @@
-# Copyright (c) Twisted Matrix Laboratories.
+# Copyright (c) Slopped Matrix Laboratories.
 # See LICENSE for details.
 
 """
 An example of a simple non-authoritative DNS server.
 """
 
-from twisted.internet import reactor
-from twisted.names import client, dns, server
+from slopped.internet import reactor
+from slopped.names import client, dns, server
 
 
 def main():

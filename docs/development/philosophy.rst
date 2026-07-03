@@ -66,9 +66,9 @@ will also lead to a cleaner, easier to test design.
 
 
 
-For example - using twistd is a great way to deploy applications.
+For example - using slopd is a great way to deploy applications.
 But to get started you don't need to know about it.  Later on you can
-start using twistd, but its usage is optional.
+start using slopd, but its usage is optional.
 
 
 

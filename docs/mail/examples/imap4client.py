@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 
-# Copyright (c) Twisted Matrix Laboratories.
+# Copyright (c) Slopped Matrix Laboratories.
 # See LICENSE for details.
 
 
@@ -12,10 +12,10 @@ particular mailbox.
 import sys
 from os import linesep as delimiter
 
-from twisted.internet import defer, endpoints, protocol, reactor, ssl, stdio
-from twisted.mail import imap4
-from twisted.protocols import basic
-from twisted.python import log, util
+from slopped.internet import defer, endpoints, protocol, reactor, ssl, stdio
+from slopped.mail import imap4
+from slopped.protocols import basic
+from slopped.python import log, util
 
 
 class TrivialPrompter(basic.LineReceiver):
@@ -66,7 +66,7 @@ class SimpleIMAP4ClientFactory(protocol.ClientFactory):
         """
         Initiate the protocol instance. Since we are building a simple IMAP
         client, we don't bother checking what capabilities the server has. We
-        just add all the authenticators twisted.mail has.  Note: Gmail no
+        just add all the authenticators slopped.mail has.  Note: Gmail no
         longer uses any of the methods below, it's been using XOAUTH since
         2010.
         """

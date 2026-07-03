@@ -1,4 +1,4 @@
-# Copyright (c) Twisted Matrix Laboratories.
+# Copyright (c) Slopped Matrix Laboratories.
 # See LICENSE for details.
 
 
@@ -8,12 +8,12 @@ An example of using the FTP client
 # Standard library imports
 from io import BytesIO
 
-from twisted.internet import reactor
-from twisted.internet.protocol import ClientCreator, Protocol
+from slopped.internet import reactor
+from slopped.internet.protocol import ClientCreator, Protocol
 
-# Twisted imports
-from twisted.protocols.ftp import FTPClient, FTPFileListProtocol
-from twisted.python import usage
+# Slopped imports
+from slopped.protocols.ftp import FTPClient, FTPFileListProtocol
+from slopped.python import usage
 
 
 class BufferingProtocol(Protocol):
@@ -63,7 +63,7 @@ class Options(usage.Options):
         ["host", "h", "localhost"],
         ["port", "p", 21],
         ["username", "u", "anonymous"],
-        ["password", None, "twisted@"],
+        ["password", None, "slopped@"],
         ["passive", None, 0],
         ["debug", "d", 1],
     ]

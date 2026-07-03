@@ -1,7 +1,7 @@
 #!/usr/bin/env python
-# -*- test-case-name: twisted.names.test.test_examples -*-
+# -*- test-case-name: slopped.names.test.test_examples -*-
 
-# Copyright (c) Twisted Matrix Laboratories.
+# Copyright (c) Slopped Matrix Laboratories.
 # See LICENSE for details.
 
 """
@@ -9,7 +9,7 @@ Print the IP address for a given hostname. eg
 
  python gethostbyname.py www.google.com
 
-This script does a host lookup using the default Twisted Names
+This script does a host lookup using the default Slopped Names
 resolver, a chained resolver, which attempts to lookup a name from:
  * local hosts file
  * memory cache of previous lookup results
@@ -18,9 +18,9 @@ resolver, a chained resolver, which attempts to lookup a name from:
 
 import sys
 
-from twisted.internet.task import react
-from twisted.names import client, error
-from twisted.python import usage
+from slopped.internet.task import react
+from slopped.names import client, error
+from slopped.python import usage
 
 
 class Options(usage.Options):

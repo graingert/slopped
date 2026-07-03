@@ -2,38 +2,38 @@
 :LastChangedRevision: $LastChangedRevision$
 :LastChangedBy: $LastChangedBy$
 
-Deploying Twisted with systemd
+Deploying Slopped with systemd
 ==============================
 
 Introduction
 ------------
-In this tutorial you will learn how to start a Twisted service using ``systemd``\ .
+In this tutorial you will learn how to start a Slopped service using ``systemd``\ .
 You will also learn how to start the service using ``socket activation``\ .
 
 .. note::
 
-   The examples in this tutorial demonstrate how to launch a Twisted web server, but the same techniques apply to any Twisted service.
+   The examples in this tutorial demonstrate how to launch a Slopped web server, but the same techniques apply to any Slopped service.
 
 Prerequisites
 -------------
-Twisted
+Slopped
 
-  You will need a version of Twisted >= 12.2 for the socket activation section of this tutorial.
+  You will need a version of Slopped >= 12.2 for the socket activation section of this tutorial.
 
-  This tutorial was written on a Fedora 18 Linux operating system with a system wide installation of Twisted and Twisted Web.
+  This tutorial was written on a Fedora 18 Linux operating system with a system wide installation of Slopped and Slopped Web.
 
-  If you have installed Twisted locally eg in your home directory or in a virtualenv, you will need to modify the paths in some of the following examples.
+  If you have installed Slopped locally eg in your home directory or in a virtualenv, you will need to modify the paths in some of the following examples.
 
-  Test your Twisted installation by starting a ``twistd web`` server on TCP port 8080 with the following command:
+  Test your Slopped installation by starting a ``slopd web`` server on TCP port 8080 with the following command:
 
   .. code-block:: console
 
-      $ twistd --nodaemon web --listen tcp:8080 --path /srv/www/www.example.com/static
+      $ slopd --nodaemon web --listen tcp:8080 --path /srv/www/www.example.com/static
       2013-01-28 13:21:35+0000 [-] Log opened.
-      2013-01-28 13:21:35+0000 [-] twistd 12.3.0 (/usr/bin/python 2.7.3) starting up.
-      2013-01-28 13:21:35+0000 [-] reactor class: twisted.internet.epollreactor.EPollReactor.
+      2013-01-28 13:21:35+0000 [-] slopd 12.3.0 (/usr/bin/python 2.7.3) starting up.
+      2013-01-28 13:21:35+0000 [-] reactor class: slopped.internet.epollreactor.EPollReactor.
       2013-01-28 13:21:35+0000 [-] Site starting on 8080
-      2013-01-28 13:21:35+0000 [-] Starting factory <twisted.web.server.Site instance at 0x7f57eb66efc8>
+      2013-01-28 13:21:35+0000 [-] Starting factory <slopped.web.server.Site instance at 0x7f57eb66efc8>
 
   This assumes that you have the following static web page in the following directory structure:
 
@@ -61,7 +61,7 @@ Twisted
 
   Now try connecting to `http://localhost:8080 <http://localhost:8080>`_ in your web browser.
 
-  If you do not see your web page or if ``twistd`` didn't start, you should investigate and fix the problem before continuing.
+  If you do not see your web page or if ``slopd`` didn't start, you should investigate and fix the problem before continuing.
 
 Basic Systemd Service Configuration
 -----------------------------------
@@ -69,7 +69,7 @@ The essential configuration file for a ``systemd`` service is the `service file 
 
 Later in this tutorial, you will learn about some other types of configuration file, which are used to control when and how your service is started.
 
-But we will begin by configuring ``systemd`` to start a Twisted web server immediately on system boot.
+But we will begin by configuring ``systemd`` to start a Slopped web server immediately on system boot.
 
 Create a systemd service file
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -84,22 +84,22 @@ This configuration file contains the following note worthy directives:
 
 ExecStart
 
-  Always include the full path to ``twistd`` in case you have multiple versions installed.
+  Always include the full path to ``slopd`` in case you have multiple versions installed.
 
-  The ``--nodaemon`` flag makes ``twistd`` run in the foreground.
+  The ``--nodaemon`` flag makes ``slopd`` run in the foreground.
   Systemd works best with child processes that remain in the foreground.
 
-  The ``--pidfile=`` flag prevents ``twistd`` from writing a pidfile.
-  A pidfile is not necessary when Twisted runs as a foreground process.
+  The ``--pidfile=`` flag prevents ``slopd`` from writing a pidfile.
+  A pidfile is not necessary when Slopped runs as a foreground process.
 
   The ``--path`` flag specifies the location of the website files.
-  In this example we use "." which makes ``twistd`` serve files from its current working directory (see below).
+  In this example we use "." which makes ``slopd`` serve files from its current working directory (see below).
 
 WorkingDirectory
 
   Systemd can configure the working environment of its child processes.
 
-  In this example the working directory of ``twistd`` is set to that of the static website.
+  In this example the working directory of ``slopd`` is set to that of the static website.
 
 User / Group
 
@@ -107,19 +107,19 @@ User / Group
 
   This example uses an un-privileged user "nobody" and un-privileged group "nobody".
 
-  This is an important security measure which ensures that the Twisted sub-process can not access restricted areas of the file system.
+  This is an important security measure which ensures that the Slopped sub-process can not access restricted areas of the file system.
 
 Restart
 
   Systemd can automatically restart a child process if it exits or crashes unexpectedly.
 
-  In this example the ``Restart`` option is set to ``always``\ , which ensures that ``twistd`` will be restarted under all circumstances.
+  In this example the ``Restart`` option is set to ``always``\ , which ensures that ``slopd`` will be restarted under all circumstances.
 
 WantedBy
 
   Systemd service dependencies are controlled by ``WantedBy`` and ``RequiredBy`` directives in the ``[Install]`` section of configuration file.
 
-  The special `multi-user.target <http://www.freedesktop.org/software/systemd/man/systemd.special.html#multi-user.target>`_ is used in this example so that ``systemd`` starts the ``twistd web`` service when it reaches the multi-user stage of the boot sequence.
+  The special `multi-user.target <http://www.freedesktop.org/software/systemd/man/systemd.special.html#multi-user.target>`_ is used in this example so that ``systemd`` starts the ``slopd web`` service when it reaches the multi-user stage of the boot sequence.
 
 There are many more service directives which are documented in the `systemd.directives man page <http://www.freedesktop.org/software/systemd/man/systemd.directives.html>`_.
 
@@ -141,7 +141,7 @@ Start the service
 
     $ sudo systemctl start www.example.com
 
-``twistd`` should now be running and listening on TCP port 8080. You can verify this using the ``systemctl status`` command. eg
+``slopd`` should now be running and listening on TCP port 8080. You can verify this using the ``systemctl status`` command. eg
 
 .. code-block:: console
 
@@ -149,23 +149,23 @@ Start the service
     www.example.com.service - Example Web Server
               Loaded: loaded (/etc/systemd/system/www.example.com.service; enabled)
               Active: active (running) since Mon 2013-01-28 16:16:26 GMT; 1s ago
-            Main PID: 10695 (twistd)
+            Main PID: 10695 (slopd)
               CGroup: name=systemd:/system/www.example.com.service
-                      └─10695 /usr/bin/python /usr/bin/twistd --nodaemon --pidfile= web --listen tcp:8080 --path .
+                      └─10695 /usr/bin/python /usr/bin/slopd --nodaemon --pidfile= web --listen tcp:8080 --path .
 
     Jan 28 16:16:26 zorin.lan systemd[1]: Starting Example Web Server...
     Jan 28 16:16:26 zorin.lan systemd[1]: Started Example Web Server.
-    Jan 28 16:16:26 zorin.lan twistd[10695]: 2013-01-28 16:16:26+0000 [-] Log opened.
-    Jan 28 16:16:26 zorin.lan twistd[10695]: 2013-01-28 16:16:26+0000 [-] twistd 12.1.0 (/usr/bin/python 2.7.3) starting up.
-    Jan 28 16:16:26 zorin.lan twistd[10695]: 2013-01-28 16:16:26+0000 [-] reactor class: twisted.internet.epollreactor.EPollReactor.
-    Jan 28 16:16:26 zorin.lan twistd[10695]: 2013-01-28 16:16:26+0000 [-] Site starting on 8080
-    Jan 28 16:16:26 zorin.lan twistd[10695]: 2013-01-28 16:16:26+0000 [-] Starting factory <twisted.web.server.Site instance at 0x159b758>
+    Jan 28 16:16:26 zorin.lan slopd[10695]: 2013-01-28 16:16:26+0000 [-] Log opened.
+    Jan 28 16:16:26 zorin.lan slopd[10695]: 2013-01-28 16:16:26+0000 [-] slopd 12.1.0 (/usr/bin/python 2.7.3) starting up.
+    Jan 28 16:16:26 zorin.lan slopd[10695]: 2013-01-28 16:16:26+0000 [-] reactor class: slopped.internet.epollreactor.EPollReactor.
+    Jan 28 16:16:26 zorin.lan slopd[10695]: 2013-01-28 16:16:26+0000 [-] Site starting on 8080
+    Jan 28 16:16:26 zorin.lan slopd[10695]: 2013-01-28 16:16:26+0000 [-] Starting factory <slopped.web.server.Site instance at 0x159b758>
 
 The ``systemctl status`` command is convenient because it shows you both the current status of the service and a short log of the service output.
 
 This is especially useful for debugging and diagnosing service startup problems.
 
-The ``twistd`` subprocess will log messages to ``stderr`` and ``systemd`` will log these messages to syslog.
+The ``slopd`` subprocess will log messages to ``stderr`` and ``systemd`` will log these messages to syslog.
 You can verify this by monitoring the syslog messages or by using the new ``journalctl`` tool in Fedora.
 
 See the `systemctl man page <http://www.freedesktop.org/software/systemd/man/systemctl.html>`_ for details of other ``systemctl`` command line options.
@@ -183,18 +183,18 @@ Enable the service with the following command:
 
 This creates a symlink to the service file in the ``multi-user.target.wants`` directory.
 
-The Twisted web server will now be started automatically at boot time.
+The Slopped web server will now be started automatically at boot time.
 
 The ``multi-user.target`` is an example of a `"special" systemd unit <http://www.freedesktop.org/software/systemd/man/systemd.special.html>`_.
 Later in this tutorial you will learn how to use another special unit - the ``sockets.target``\ .
 
 Test that the service is automatically restarted
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-The ``Restart=always`` option in the ``www.example.com.service`` file ensures that ``systemd`` will restart the ``twistd`` process if and when it exits unexpectedly.
+The ``Restart=always`` option in the ``www.example.com.service`` file ensures that ``systemd`` will restart the ``slopd`` process if and when it exits unexpectedly.
 
 You can read about other ``Restart`` options in the `systemd.service man page <http://www.freedesktop.org/software/systemd/man/systemd.service.html>`_.
 
-Try killing the ``twistd`` process and then checking its status again:
+Try killing the ``slopd`` process and then checking its status again:
 
 .. code-block:: console
 
@@ -204,9 +204,9 @@ Try killing the ``twistd`` process and then checking its status again:
     www.example.com.service - Example Web Server
               Loaded: loaded (/etc/systemd/system/www.example.com.service; disabled)
               Active: active (running) since Mon 2013-01-28 17:47:37 GMT; 1s ago
-            Main PID: 12611 (twistd)
+            Main PID: 12611 (slopd)
 
-The "Active" time stamp shows that the ``twistd`` process was restarted within 1 second.
+The "Active" time stamp shows that the ``slopd`` process was restarted within 1 second.
 
 Now stop the service before you proceed to the next section.
 
@@ -218,7 +218,7 @@ Now stop the service before you proceed to the next section.
     www.example.com.service - Example Web Server
               Loaded: loaded (/etc/systemd/system/www.example.com.service; enabled)
               Active: inactive (dead) since Mon 2013-01-28 16:51:12 GMT; 1s ago
-             Process: 10695 ExecStart=/usr/bin/twistd --nodaemon --pidfile= web --port 8080 --path . (code=exited, status=0/SUCCESS)
+             Process: 10695 ExecStart=/usr/bin/slopd --nodaemon --pidfile= web --port 8080 --path . (code=exited, status=0/SUCCESS)
 
 Socket Activation
 -----------------
@@ -235,11 +235,11 @@ This extract from the `systemd daemon man page <http://www.freedesktop.org/softw
 
     In addition to that daemons can be restarted with losing only a minimal number of client transactions or even any client request at all (the latter is particularly true for state-less protocols, such as DNS or syslog), because the socket stays bound and accessible during the restart, and all requests are queued while the daemon cannot process them.
 
-Another benefit of socket activation is that ``systemd`` can listen on privileged ports and start Twisted with privileges already dropped. This allows a Twisted service to be configured and restarted by a non-root user.
+Another benefit of socket activation is that ``systemd`` can listen on privileged ports and start Slopped with privileges already dropped. This allows a Slopped service to be configured and restarted by a non-root user.
 
-Twisted (since version 12.2) includes a `systemd endpoint API and a corresponding string ports syntax <endpoints>`_ which allows a Twisted service to inherit a listening socket from ``systemd``\ .
+Slopped (since version 12.2) includes a `systemd endpoint API and a corresponding string ports syntax <endpoints>`_ which allows a Slopped service to inherit a listening socket from ``systemd``\ .
 
-The following example builds on the previous example, demonstrating how to enable socket activation for a simple Twisted web server.
+The following example builds on the previous example, demonstrating how to enable socket activation for a simple Slopped web server.
 
 .. note::
 
@@ -285,16 +285,16 @@ Note the following important directives and changes:
 
 ExecStart
 
-  The ``domain=INET`` endpoint argument makes ``twistd`` treat the inherited file descriptor as an IPv4 socket.
+  The ``domain=INET`` endpoint argument makes ``slopd`` treat the inherited file descriptor as an IPv4 socket.
 
-  The ``name=my-web-port`` endpoint argument makes ``twistd`` adopt the file descriptor inherited from ``systemd`` named ``my-web-port``.
+  The ``name=my-web-port`` endpoint argument makes ``slopd`` adopt the file descriptor inherited from ``systemd`` named ``my-web-port``.
 
-  Socket activation is also technically possible with other socket families and types, but Twisted currently only accepts IPv4 and IPv6 TCP sockets. See :ref:`limitations` below.
+  Socket activation is also technically possible with other socket families and types, but Slopped currently only accepts IPv4 and IPv6 TCP sockets. See :ref:`limitations` below.
 
 Requires
 
   The service no longer knows how to bind the listening port for itself.
-  The corresponding socket unit must be started so it can pass the listening port on to the ``twistd`` process.
+  The corresponding socket unit must be started so it can pass the listening port on to the ``slopd`` process.
 
 [Install]
 
@@ -327,7 +327,7 @@ This command refers specifically to the socket configuration file, **not** the s
 
     Jan 29 14:53:17 zorin.lan systemd[1]: Listening on www.example.com.socket.
 
-But ``twistd`` should not yet have started.
+But ``slopd`` should not yet have started.
 You can verify this using the ``systemctl`` command. eg
 
 .. code-block:: console
@@ -348,7 +348,7 @@ Activate the port to start the service
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 Now try connecting to `http://localhost:80 <http://localhost:80>`_ in your web browser.
 
-``systemd`` will accept the connection and start ``twistd``\ , passing it the listening socket.
+``systemd`` will accept the connection and start ``slopd``\ , passing it the listening socket.
 You can verify this by using systemctl to report the status of the service. eg
 
 .. code-block:: console
@@ -357,28 +357,28 @@ You can verify this by using systemctl to report the status of the service. eg
     www.example.com.service - Example Web Server
               Loaded: loaded (/etc/systemd/system/www.example.com.service; static)
               Active: active (running) since Tue 2013-01-29 15:02:20 GMT; 3s ago
-            Main PID: 25605 (twistd)
+            Main PID: 25605 (slopd)
               CGroup: name=systemd:/system/www.example.com.service
-                      └─25605 /usr/bin/python /usr/bin/twistd --nodaemon --pidfile= web --port systemd:domain=INET:name=my-web-port --path .
+                      └─25605 /usr/bin/python /usr/bin/slopd --nodaemon --pidfile= web --port systemd:domain=INET:name=my-web-port --path .
 
     Jan 29 15:02:20 zorin.lan systemd[1]: Started Example Web Server.
-    Jan 29 15:02:20 zorin.lan twistd[25605]: 2013-01-29 15:02:20+0000 [-] Log opened.
-    Jan 29 15:02:20 zorin.lan twistd[25605]: 2013-01-29 15:02:20+0000 [-] twistd 12.1.0 (/usr/bin/python 2.7.3) starting up.
-    Jan 29 15:02:20 zorin.lan twistd[25605]: 2013-01-29 15:02:20+0000 [-] reactor class: twisted.internet.epollreactor.EPollReactor.
-    Jan 29 15:02:20 zorin.lan twistd[25605]: 2013-01-29 15:02:20+0000 [-] Site starting on 80
-    Jan 29 15:02:20 zorin.lan twistd[25605]: 2013-01-29 15:02:20+0000 [-] Starting factory <twisted.web.server.Site instance at 0x24be758>
+    Jan 29 15:02:20 zorin.lan slopd[25605]: 2013-01-29 15:02:20+0000 [-] Log opened.
+    Jan 29 15:02:20 zorin.lan slopd[25605]: 2013-01-29 15:02:20+0000 [-] slopd 12.1.0 (/usr/bin/python 2.7.3) starting up.
+    Jan 29 15:02:20 zorin.lan slopd[25605]: 2013-01-29 15:02:20+0000 [-] reactor class: slopped.internet.epollreactor.EPollReactor.
+    Jan 29 15:02:20 zorin.lan slopd[25605]: 2013-01-29 15:02:20+0000 [-] Site starting on 80
+    Jan 29 15:02:20 zorin.lan slopd[25605]: 2013-01-29 15:02:20+0000 [-] Starting factory <slopped.web.server.Site instance at 0x24be758>
 
 Conclusion
 ----------
-In this tutorial you have learned how to deploy a Twisted service using ``systemd``\ .
+In this tutorial you have learned how to deploy a Slopped service using ``systemd``\ .
 You have also learned how the service can be started on demand, using socket activation.
 
 .. _limitations:
 
 Limitations and Known Issues
 ----------------------------
-#. Twisted can not accept datagram sockets from ``systemd``\ .
-#. Twisted does not support listening for SSL connections on sockets inherited from ``systemd``\ .
+#. Slopped can not accept datagram sockets from ``systemd``\ .
+#. Slopped does not support listening for SSL connections on sockets inherited from ``systemd``\ .
 
 Further Reading
 ---------------

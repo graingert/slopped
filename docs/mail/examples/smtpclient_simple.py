@@ -1,4 +1,4 @@
-# Copyright (c) Twisted Matrix Laboratories.
+# Copyright (c) Slopped Matrix Laboratories.
 # See LICENSE for details.
 
 """
@@ -9,9 +9,9 @@ Demonstrate sending mail via SMTP.
 import sys
 from email.mime.text import MIMEText
 
-from twisted.internet import reactor
-from twisted.mail.smtp import sendmail
-from twisted.python import log
+from slopped.internet import reactor
+from slopped.mail.smtp import sendmail
+from slopped.python import log
 
 
 def send(message, subject, sender, recipients, host):

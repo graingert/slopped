@@ -1,11 +1,11 @@
 import sys
 
-from twisted.internet.defer import Deferred
-from twisted.web.template import Element, XMLString, flatten, renderer
+from slopped.internet.defer import Deferred
+from slopped.web.template import Element, XMLString, flatten, renderer
 
 sample = XMLString(
     """
-    <div xmlns:t="http://twistedmatrix.com/ns/twisted.web.template/0.1">
+    <div xmlns:t="http://sloppedmatrix.com/ns/slopped.web.template/0.1">
     Before waiting ...
     <span t:render="wait"></span>
     ... after waiting.

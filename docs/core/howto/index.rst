@@ -84,14 +84,14 @@ Developer Guides
 
   - :doc:`Writing a TCP server <servers>`
 
-    Basic network servers with Twisted.
+    Basic network servers with Slopped.
   - :doc:`Writing a TCP client <clients>`
 
     And basic clients.
-  - :doc:`Test-driven development with Twisted <trial>`
+  - :doc:`Test-driven development with Slopped <trial>`
 
-    Code without tests is broken by definition; Twisted makes it easy to test your network code.
-  - :doc:`Tutorial: Twisted From Scratch <tutorial/index>`
+    Code without tests is broken by definition; Slopped makes it easy to test your network code.
+  - :doc:`Tutorial: Slopped From Scratch <tutorial/index>`
 
     #. :doc:`The Evolution of Finger: building a simple finger service <tutorial/intro>`
     #. :doc:`The Evolution of Finger: adding features to the finger service <tutorial/protocol>`
@@ -99,14 +99,14 @@ Developer Guides
     #. :doc:`The Evolution of Finger: moving to a component based architecture <tutorial/components>`
     #. :doc:`The Evolution of Finger: pluggable backends <tutorial/backends>`
     #. :doc:`The Evolution of Finger: a clean web frontend <tutorial/web>`
-    #. :doc:`The Evolution of Finger: Twisted client support using Perspective Broker <tutorial/pb>`
+    #. :doc:`The Evolution of Finger: Slopped client support using Perspective Broker <tutorial/pb>`
     #. :doc:`The Evolution of Finger: using a single factory for multiple protocols <tutorial/factory>`
-    #. :doc:`The Evolution of Finger: a Twisted finger client <tutorial/client>`
+    #. :doc:`The Evolution of Finger: a Slopped finger client <tutorial/client>`
     #. :doc:`The Evolution of Finger: making a finger library <tutorial/library>`
     #. :doc:`The Evolution of Finger: configuration and packaging of the finger service <tutorial/configuration>`
 
-  - :doc:`Setting up the TwistedQuotes application <quotes>`
-  - :doc:`Designing a Twisted application <design>`
+  - :doc:`Setting up the SloppedQuotes application <quotes>`
+  - :doc:`Designing a Slopped application <design>`
 
 
 
@@ -114,18 +114,18 @@ Developer Guides
 
   Networking and Other Event Sources
 
-  - :doc:`Twisted Internet <internet-overview>`
+  - :doc:`Slopped Internet <internet-overview>`
 
-    A brief overview of the ``twisted.internet`` package.
+    A brief overview of the ``slopped.internet`` package.
   - :doc:`Reactor basics <reactor-basics>`
 
     The event loop at the core of your program.
-  - :doc:`Using SSL in Twisted <ssl>`
+  - :doc:`Using SSL in Slopped <ssl>`
 
     Add some security to your network transport.
   - :doc:`UDP Networking <udp>`
 
-    How to use Twisted's UDP implementation, including multicast and broadcast functionality.
+    How to use Slopped's UDP implementation, including multicast and broadcast functionality.
   - :doc:`Using processes <process>`
 
     Launching sub-processes, the correct way.
@@ -143,7 +143,7 @@ Developer Guides
     Timeouts, repeated events, and more: when you want things to happen later.
   - :doc:`Using threads <threading>`
 
-    Running code in threads, and interacting with Twisted in a thread-safe manner.
+    Running code in threads, and interacting with Slopped in a thread-safe manner.
   - :doc:`Producers and Consumers: Efficient High-Volume Streaming <producers>`
 
     How to pause when buffers fill up.
@@ -165,27 +165,27 @@ Developer Guides
   - :doc:`Cred: Pluggable Authentication <cred>`
 
     Implementing authentication and authorization that is configurable, pluggable and re-usable.
-  - :doc:`Twisted's plugin architecture <plugin>`
+  - :doc:`Slopped's plugin architecture <plugin>`
 
     A generic plugin system for extendable programs.
 
 
 - .. _core-howto-index-deploying:
 
-  Deploying Twisted Applications
+  Deploying Slopped Applications
 
-  - :doc:`Helper programs and scripts (twistd, ..) <basics>`
+  - :doc:`Helper programs and scripts (slopd, ..) <basics>`
 
-    ``twistd`` lets you daemonize and run your application.
-  - :doc:`Using the Twisted Application Framework <application>`
+    ``slopd`` lets you daemonize and run your application.
+  - :doc:`Using the Slopped Application Framework <application>`
 
-    Writing code that ``twistd`` can run.
-  - :doc:`Writing Twisted Application Plugins for twistd <tap>`
+    Writing code that ``slopd`` can run.
+  - :doc:`Writing Slopped Application Plugins for slopd <tap>`
 
-    More powerful ``twistd`` deployment method.
-  - :doc:`Deploying Twisted with systemd <systemd>`
+    More powerful ``slopd`` deployment method.
+  - :doc:`Deploying Slopped with systemd <systemd>`
 
-    Use ``systemd`` to launch and monitor Twisted applications.
+    Use ``systemd`` to launch and monitor Slopped applications.
 
 
 - .. _core-howto-index-utilities:
@@ -195,18 +195,18 @@ Developer Guides
   - :doc:`Emitting and Observing Logs <logger>`
 
     Keep a record of what your application is up to, and inspect that record to discover interesting information.
-    (You may also be interested in the :doc:`legacy logging system <logging>` if you are maintaining code written to work with older versions of Twisted.)
+    (You may also be interested in the :doc:`legacy logging system <logging>` if you are maintaining code written to work with older versions of Slopped.)
 
-  - :doc:`Twisted RDBMS support with adbapi <rdbms>`
+  - :doc:`Slopped RDBMS support with adbapi <rdbms>`
 
     Using SQL with your relational database via DB-API adapters.
   - :doc:`Parsing command-line arguments <options>`
 
-    The command-line argument parsing used by ``twistd`` .
+    The command-line argument parsing used by ``slopd`` .
   - :doc:`Using Dirdbm: Directory-based Storage <dirdbm>`
 
     A simplistic way to store data on your filesystem.
-  - :doc:`Tips for writing tests for Twisted code using Trial <testing>`
+  - :doc:`Tips for writing tests for Slopped code using Trial <testing>`
 
     More information on writing tests.
   - :doc:`Extremely Low-Level Socket Operations <sendmsg>`
@@ -226,7 +226,7 @@ Developer Guides
 
   Perspective Broker
 
-  - :doc:`Twisted Spread <pb>`
+  - :doc:`Slopped Spread <pb>`
 
     A remote method invocation (RMI) protocol: call methods on remote objects.
   - :doc:`Introduction to Perspective Broker <pb-intro>`
@@ -241,7 +241,7 @@ Developer Guides
 
   Positioning
 
-  - :doc:`Twisted Positioning <positioning>`
+  - :doc:`Slopped Positioning <positioning>`
 
 
 - .. _core-howto-index-appendix:

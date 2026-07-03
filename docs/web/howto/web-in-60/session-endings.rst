@@ -10,9 +10,9 @@ Session Endings
 
 
 
-The previous two examples introduced Twisted Web's session APIs. This
+The previous two examples introduced Slopped Web's session APIs. This
 included accessing the session object, storing state on it, and retrieving it
-later, as well as the idea that the :py:class:`Session <twisted.web.server.Session>` object has a lifetime which is tied to
+later, as well as the idea that the :py:class:`Session <slopped.web.server.Session>` object has a lifetime which is tied to
 the notional session it represents. This example demonstrates how to exert some
 control over that lifetime and react when it expires.
 
@@ -36,7 +36,7 @@ One way to override the value is with a subclass:
 .. code-block:: python
 
 
-    from twisted.web.server import Session
+    from slopped.web.server import Session
 
     class ShortSession(Session):
         sessionTimeout = 60
@@ -44,9 +44,9 @@ One way to override the value is with a subclass:
 
 
 
-To have Twisted Web actually make use of this session class, rather
+To have Slopped Web actually make use of this session class, rather
 than the default, it is also necessary to override
-the ``sessionFactory`` attribute of :py:class:`Site <twisted.web.server.Site>` . We could do this with another
+the ``sessionFactory`` attribute of :py:class:`Site <slopped.web.server.Site>` . We could do this with another
 subclass, but we could also do it to just one instance
 of ``Site`` :
 
@@ -57,7 +57,7 @@ of ``Site`` :
 .. code-block:: python
 
 
-    from twisted.web.server import Site
+    from slopped.web.server import Site
 
     factory = Site(rootResource)
     factory.sessionFactory = ShortSession
@@ -74,7 +74,7 @@ use ``ShortSession`` and only last one minute without activity.
 You can have arbitrary functions run when sessions expire,
 too. This can be useful for cleaning up external resources associated
 with the session, tracking usage statistics, and more. This
-functionality is provided via :py:meth:`Session.notifyOnExpire <twisted.web.server.Session.notifyOnExpire>` . It accepts a
+functionality is provided via :py:meth:`Session.notifyOnExpire <slopped.web.server.Session.notifyOnExpire>` . It accepts a
 single argument: a function to call when the session expires. Here's a
 trivial example which prints a message whenever a session expires:
 
@@ -85,7 +85,7 @@ trivial example which prints a message whenever a session expires:
 .. code-block:: python
 
 
-    from twisted.web.resource import Resource
+    from slopped.web.resource import Resource
 
     class ExpirationLogger(Resource):
         sessions = set()
@@ -121,9 +121,9 @@ session expires, and uses sessions which last for 5 seconds:
 .. code-block:: python
 
 
-    from twisted.web.server import Site, Session
-    from twisted.web.resource import Resource
-    from twisted.internet import reactor, endpoints
+    from slopped.web.server import Site, Session
+    from slopped.web.resource import Resource
+    from slopped.internet import reactor, endpoints
 
     class ShortSession(Session):
         sessionTimeout = 5

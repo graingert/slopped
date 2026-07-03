@@ -1,7 +1,7 @@
 import sys
 
-from twisted.internet import task
-from twisted.names import client
+from slopped.internet import task
+from slopped.names import client
 
 
 def reverseNameFromIPAddress(address):

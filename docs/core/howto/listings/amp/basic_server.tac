@@ -1,9 +1,9 @@
-from twisted.application.internet import StreamServerEndpointService
-from twisted.application.service import Application
-from twisted.internet import reactor
-from twisted.internet.endpoints import TCP4ServerEndpoint
-from twisted.internet.protocol import Factory
-from twisted.protocols.amp import AMP
+from slopped.application.internet import StreamServerEndpointService
+from slopped.application.service import Application
+from slopped.internet import reactor
+from slopped.internet.endpoints import TCP4ServerEndpoint
+from slopped.internet.protocol import Factory
+from slopped.protocols.amp import AMP
 
 application = Application("basic AMP server")
 

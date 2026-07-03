@@ -1,11 +1,11 @@
 #!/usr/bin/env python
 
-# Copyright (c) Twisted Matrix Laboratories.
+# Copyright (c) Slopped Matrix Laboratories.
 # See LICENSE for details.
 
 
-from twisted.internet import reactor
-from twisted.spread import pb
+from slopped.internet import reactor
+from slopped.spread import pb
 
 
 def main():
@@ -50,8 +50,8 @@ class my_ObjectRetrieval(pb._ObjectRetrieval):
 
 
 def getSomeObjectAt(host, port, timeout=None, objname="root"):
-    from twisted.internet import defer
-    from twisted.spread.pb import Broker, BrokerClientFactory
+    from slopped.internet import defer
+    from slopped.spread.pb import Broker, BrokerClientFactory
 
     d = defer.Deferred()
     b = Broker(1)
