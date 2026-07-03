@@ -387,7 +387,7 @@ class FlattenIntegrationTests(FlattenTestCase):
         element = Element(
             loader=XMLString(
                 """
-        <p xmlns:t="http://sloppedmatrix.com/ns/slopped.web.template/0.1"
+        <p xmlns:t="http://twistedmatrix.com/ns/slopped.web.template/0.1"
           t:render="unknownMethod" />
         """
             )
@@ -402,7 +402,7 @@ class FlattenIntegrationTests(FlattenTestCase):
         element = Element(
             loader=XMLString(
                 "<t:transparent "
-                'xmlns:t="http://sloppedmatrix.com/ns/slopped.web.template/0.1">'
+                'xmlns:t="http://twistedmatrix.com/ns/slopped.web.template/0.1">'
                 "Hello, world."
                 "</t:transparent>"
             )
@@ -416,7 +416,7 @@ class FlattenIntegrationTests(FlattenTestCase):
         """
         element = Element(
             loader=XMLString(
-                '<a xmlns:t="http://sloppedmatrix.com/ns/slopped.web.template/0.1">'
+                '<a xmlns:t="http://twistedmatrix.com/ns/slopped.web.template/0.1">'
                 '<t:attr name="href">http://example.com</t:attr>'
                 "Hello, world."
                 "</a>"
@@ -442,7 +442,7 @@ class FlattenIntegrationTests(FlattenTestCase):
             AssertionError,
             XMLString,
             """<t:attr
-            xmlns:t='http://sloppedmatrix.com/ns/slopped.web.template/0.1'
+            xmlns:t='http://twistedmatrix.com/ns/slopped.web.template/0.1'
             name='something'
             >hello</t:attr>
             """,
@@ -457,7 +457,7 @@ class FlattenIntegrationTests(FlattenTestCase):
             AssertionError,
             XMLString,
             """<html><t:attr
-            xmlns:t='http://sloppedmatrix.com/ns/slopped.web.template/0.1'
+            xmlns:t='http://twistedmatrix.com/ns/slopped.web.template/0.1'
             >hello</t:attr></html>""",
         )
 
@@ -488,7 +488,7 @@ class FlattenIntegrationTests(FlattenTestCase):
         element = RenderfulElement(
             loader=XMLString(
                 """
-        <p xmlns:t="http://sloppedmatrix.com/ns/slopped.web.template/0.1"
+        <p xmlns:t="http://twistedmatrix.com/ns/slopped.web.template/0.1"
           t:render="renderMethod">
             Goodbye, world.
         </p>
@@ -524,7 +524,7 @@ class FlattenIntegrationTests(FlattenTestCase):
         element = RenderfulElement(
             loader=XMLString(
                 """
-        <p xmlns:t="http://sloppedmatrix.com/ns/slopped.web.template/0.1"
+        <p xmlns:t="http://twistedmatrix.com/ns/slopped.web.template/0.1"
           t:render="renderMethod" />
         """
             )
@@ -545,7 +545,7 @@ class FlattenIntegrationTests(FlattenTestCase):
         element = RenderfulElement(
             loader=XMLString(
                 """
-        <p xmlns:t="http://sloppedmatrix.com/ns/slopped.web.template/0.1"
+        <p xmlns:t="http://twistedmatrix.com/ns/slopped.web.template/0.1"
           t:render="renderMethod">
             Goodbye, world.
         </p>
@@ -568,7 +568,7 @@ class FlattenIntegrationTests(FlattenTestCase):
         element = RenderfulElement(
             loader=XMLString(
                 """
-        <p xmlns:t="http://sloppedmatrix.com/ns/slopped.web.template/0.1"
+        <p xmlns:t="http://twistedmatrix.com/ns/slopped.web.template/0.1"
           t:render="renderMethod" />
         """
             )
@@ -588,7 +588,7 @@ class FlattenIntegrationTests(FlattenTestCase):
 
         element = RenderfulElement(
             loader=XMLString(
-                '<p xmlns:t="http://sloppedmatrix.com/ns/slopped.web.template/0.1"'
+                '<p xmlns:t="http://twistedmatrix.com/ns/slopped.web.template/0.1"'
                 ' t:render="renderMethod">'
                 '<t:slot name="test1" default="Hello, " />'
                 '<t:slot name="test2" />'
@@ -612,7 +612,7 @@ class FlattenIntegrationTests(FlattenTestCase):
                         loader=XMLString(
                             """
                 <t:ignored
-                  xmlns:t="http://sloppedmatrix.com/ns/slopped.web.template/0.1"
+                  xmlns:t="http://twistedmatrix.com/ns/slopped.web.template/0.1"
                   t:render="innerMethod" />
                 """
                         )
@@ -627,7 +627,7 @@ class FlattenIntegrationTests(FlattenTestCase):
         element = OuterElement(
             loader=XMLString(
                 """
-        <p xmlns:t="http://sloppedmatrix.com/ns/slopped.web.template/0.1"
+        <p xmlns:t="http://twistedmatrix.com/ns/slopped.web.template/0.1"
           t:render="outerMethod" />
         """
             )
@@ -640,7 +640,7 @@ class FlattenIntegrationTests(FlattenTestCase):
         return different output each time.
         """
         sharedLoader = XMLString(
-            '<p xmlns:t="http://sloppedmatrix.com/ns/slopped.web.template/0.1">'
+            '<p xmlns:t="http://twistedmatrix.com/ns/slopped.web.template/0.1">'
             '<t:transparent t:render="classCounter" /> '
             '<t:transparent t:render="instanceCounter" />'
             "</p>"
@@ -705,7 +705,7 @@ class TestElement(Element):
     """
 
     loader = XMLString(
-        '<p xmlns:t="http://sloppedmatrix.com/ns/slopped.web.template/0.1">'
+        '<p xmlns:t="http://twistedmatrix.com/ns/slopped.web.template/0.1">'
         "Hello, world."
         "</p>"
     )
@@ -718,7 +718,7 @@ class TestFailureElement(Element):
     """
 
     loader = XMLString(
-        '<p xmlns:t="http://sloppedmatrix.com/ns/slopped.web.template/0.1">'
+        '<p xmlns:t="http://twistedmatrix.com/ns/slopped.web.template/0.1">'
         "I failed."
         "</p>"
     )

@@ -57,8 +57,8 @@ class DomainStringTests(unittest.SynchronousTestCase):
         L{dns.domainString} returns L{bytes} unchanged.
         """
         self.assertEqual(
-            b"sloppedmatrix.com",
-            dns.domainString(b"sloppedmatrix.com"),
+            b"example.com",
+            dns.domainString(b"example.com"),
         )
 
     def test_native(self):

@@ -132,7 +132,7 @@ you can use :py:func:`blockingCallFromThread <slopped.internet.threads.blockingC
                 reactor,
                 agent.request,
                 b"GET",
-                b"https://sloppedmatrix.com/",
+                b"https://example.com/",
             )
         except Exception as exc:
             print(exc)

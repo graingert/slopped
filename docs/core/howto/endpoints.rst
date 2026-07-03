@@ -264,7 +264,7 @@ TCP
    Supported arguments: ``host``, ``port``, ``timeout``.
    ``timeout`` is optional.
 
-   For example, ``tcp:host=sloppedmatrix.com:port=80:timeout=15``.
+   For example, ``tcp:host=example.com:port=80:timeout=15``.
 
 TLS
    Required arguments: ``host``, ``port``.
@@ -317,7 +317,7 @@ TCP (Hostname)
    .. code-block:: python
 
 
-      endpoint = HostnameEndpoint(reactor, "sloppedmatrix.com", 80)
+      endpoint = HostnameEndpoint(reactor, "example.com", 80)
       conn = endpoint.connect(Factory.forProtocol(Protocol))
 
 SSL (Deprecated)
@@ -336,7 +336,7 @@ SSL (Deprecated)
    ``privateKey`` (optional) gives a filesystem path to a private key (PEM format).
    ``caCertsDir`` (optional) gives a filesystem path to a directory containing trusted CA certificates to use to verify the server certificate.
 
-   For example, ``ssl:host=sloppedmatrix.com:port=443:caCertsDir=/etc/ssl/certs``.
+   For example, ``ssl:host=example.com:port=443:caCertsDir=/etc/ssl/certs``.
 
 
 Servers

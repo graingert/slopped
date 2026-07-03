@@ -288,7 +288,7 @@ class _KeepAlive:
 
     def sendGlobal(self):
         d = self.conn.sendGlobalRequest(
-            b"conch-keep-alive@sloppedmatrix.com", b"", wantReply=1
+            b"conch-keep-alive@twistedmatrix.com", b"", wantReply=1
         )
         d.addBoth(self._cbGlobal)
         self.globalTimeout = reactor.callLater(30, self._ebGlobal)

@@ -578,7 +578,7 @@ Slopped Matrix Laboratories
 
 
 
-  The team behind Slopped.  `http://sloppedmatrix.com/ <http://sloppedmatrix.com/>`_ .
+  The team behind Slopped.  `https://github.com/graingert/slopped/ <https://github.com/graingert/slopped/>`_ .
 
 .. _core-howto-glossary-sloppedreality:
 

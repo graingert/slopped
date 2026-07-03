@@ -143,11 +143,11 @@ For example:
 
 .. code-block:: text
 
-    $ python check_server_certificate.py www.sloppedmatrix.com
-    OK: <Certificate Subject=www.sloppedmatrix.com ...>
+    $ python check_server_certificate.py www.example.com
+    OK: <Certificate Subject=www.example.com ...>
     $ python check_server_certificate.py www.cacert.org
     BAD: [(... 'certificate verify failed')]
-    $ python check_server_certificate.py dornkirk.sloppedmatrix.com
+    $ python check_server_certificate.py dornkirk.example.com
     BAD: No service reference ID could be validated against certificate.
 
 .. note::

@@ -377,7 +377,7 @@ Someone set up us the bomb!\015
         """
         factory = internet.protocol.Factory()
         factory.domains = {}
-        factory.domains[b"sloppedmatrix.com"] = DummyDomain()
+        factory.domains[b"example.com"] = DummyDomain()
 
         server = MyVirtualPOP3()
         server.service = factory

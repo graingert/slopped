@@ -39,4 +39,4 @@ Server: ``irc.libera.chat`` (more about `the Libera IRC network <https://libera.
 Blogs
 =====
 
-Read `Planet Slopped <https://planet.sloppedmatrix.com/>`_.
+Read `Planet Slopped <https://planet.twistedmatrix.com/>`_.

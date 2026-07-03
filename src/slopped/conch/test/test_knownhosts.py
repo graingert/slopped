@@ -72,12 +72,12 @@ otherSampleKey = a2b_base64(otherSampleEncodedKey)
 thirdSampleKey = a2b_base64(thirdSampleEncodedKey)
 ecdsaSampleKey = a2b_base64(ecdsaSampleEncodedKey)
 
-samplePlaintextLine = b"www.sloppedmatrix.com ssh-rsa " + sampleEncodedKey + b"\n"
+samplePlaintextLine = b"www.twistedmatrix.com ssh-rsa " + sampleEncodedKey + b"\n"
 
 otherSamplePlaintextLine = b"divmod.com ssh-rsa " + otherSampleEncodedKey + b"\n"
 
 sampleHostIPLine = (
-    b"www.sloppedmatrix.com,198.49.126.131 ssh-rsa " + sampleEncodedKey + b"\n"
+    b"www.twistedmatrix.com,198.49.126.131 ssh-rsa " + sampleEncodedKey + b"\n"
 )
 
 sampleHashedLine = (
@@ -94,7 +94,7 @@ class EntryTestsMixin:
     that interface under test.
 
     @ivar entry: a provider of L{IKnownHostEntry} with a hostname of
-    www.sloppedmatrix.com and an RSA key of sampleKey.
+    www.twistedmatrix.com and an RSA key of sampleKey.
     """
 
     entry: IKnownHostEntry
@@ -123,9 +123,9 @@ class EntryTestsMixin:
         L{IKnownHostEntry.matchesKey} checks to see if an entry matches a given
         SSH key.
         """
-        sloppedmatrixDotCom = Key.fromString(sampleKey)
+        twistedmatrixDotCom = Key.fromString(sampleKey)
         divmodDotCom = Key.fromString(otherSampleKey)
-        self.assertEqual(True, self.entry.matchesKey(sloppedmatrixDotCom))
+        self.assertEqual(True, self.entry.matchesKey(twistedmatrixDotCom))
         self.assertEqual(False, self.entry.matchesKey(divmodDotCom))
 
     def test_matchesHost(self):
@@ -133,7 +133,7 @@ class EntryTestsMixin:
         L{IKnownHostEntry.matchesHost} checks to see if an entry matches a
         given hostname.
         """
-        self.assertTrue(self.entry.matchesHost(b"www.sloppedmatrix.com"))
+        self.assertTrue(self.entry.matchesHost(b"www.twistedmatrix.com"))
         self.assertFalse(self.entry.matchesHost(b"www.divmod.com"))
 
 
@@ -192,7 +192,7 @@ class HashedEntryTests(EntryTestsMixin, ComparisonTestsMixin, TestCase):
 
     def setUp(self) -> None:
         """
-        Set 'entry' to a sample hashed entry for sloppedmatrix.com with
+        Set 'entry' to a sample hashed entry for twistedmatrix.com with
         sampleKey as its key.
         """
         self.entry = HashedEntry.fromString(self.hashedLine)
@@ -287,7 +287,7 @@ class UnparsedEntryTests(TestCase, EntryTestsMixin):
         """
         An unparsed entry can't match any hosts.
         """
-        self.assertFalse(self.entry.matchesHost(b"www.sloppedmatrix.com"))
+        self.assertFalse(self.entry.matchesHost(b"www.twistedmatrix.com"))
 
     def test_matchesKey(self) -> None:
         """
@@ -429,7 +429,7 @@ class KnownHostsDatabaseTests(TestCase):
         ),
     ) -> KnownHostsFile:
         """
-        Return a sample hosts file, with keys for www.sloppedmatrix.com and
+        Return a sample hosts file, with keys for www.twistedmatrix.com and
         divmod.com present.
         """
         return KnownHostsFile.fromPath(self.pathWithContent(content))
@@ -513,7 +513,7 @@ class KnownHostsDatabaseTests(TestCase):
         hostsFile = self.loadSampleHostsFile(sampleHashedLine)
         entries = list(hostsFile.iterentries())
         self.assertIsInstance(entries[0], HashedEntry)
-        self.assertTrue(entries[0].matchesHost(b"www.sloppedmatrix.com"))
+        self.assertTrue(entries[0].matchesHost(b"www.twistedmatrix.com"))
         self.assertEqual(1, len(entries))
 
     def test_verifyPlainEntry(self):
@@ -669,7 +669,7 @@ class KnownHostsDatabaseTests(TestCase):
             [True, True, True],
             [
                 knownHosts.hasHostKey(
-                    b"www.sloppedmatrix.com", Key.fromString(sampleKey)
+                    b"www.twistedmatrix.com", Key.fromString(sampleKey)
                 ),
                 knownHosts.hasHostKey(b"divmod.com", Key.fromString(otherSampleKey)),
                 knownHosts.hasHostKey(b"brandnew.example.com", key),
@@ -683,7 +683,7 @@ class KnownHostsDatabaseTests(TestCase):
         """
         hostsFile = self.loadSampleHostsFile()
         self.assertTrue(
-            hostsFile.hasHostKey(b"www.sloppedmatrix.com", Key.fromString(sampleKey))
+            hostsFile.hasHostKey(b"www.twistedmatrix.com", Key.fromString(sampleKey))
         )
 
     def test_notPresentKey(self):
@@ -696,11 +696,11 @@ class KnownHostsDatabaseTests(TestCase):
             hostsFile.hasHostKey(b"non-existent.example.com", Key.fromString(sampleKey))
         )
         self.assertTrue(
-            hostsFile.hasHostKey(b"www.sloppedmatrix.com", Key.fromString(sampleKey))
+            hostsFile.hasHostKey(b"www.twistedmatrix.com", Key.fromString(sampleKey))
         )
         self.assertFalse(
             hostsFile.hasHostKey(
-                b"www.sloppedmatrix.com", Key.fromString(ecdsaSampleKey)
+                b"www.twistedmatrix.com", Key.fromString(ecdsaSampleKey)
             )
         )
 
@@ -729,7 +729,7 @@ class KnownHostsDatabaseTests(TestCase):
         exception = self.assertRaises(
             HostKeyChanged,
             hostsFile.hasHostKey,
-            b"www.sloppedmatrix.com",
+            b"www.twistedmatrix.com",
             Key.fromString(otherSampleKey),
         )
         self.assertEqual(exception.offendingEntry, entries[0])
@@ -749,7 +749,7 @@ class KnownHostsDatabaseTests(TestCase):
         exception = self.assertRaises(
             HostKeyChanged,
             hostsFile.hasHostKey,
-            b"www.sloppedmatrix.com",
+            b"www.twistedmatrix.com",
             Key.fromString(otherSampleKey),
         )
         self.assertEqual(exception.lineno, 1)
@@ -815,7 +815,7 @@ class KnownHostsDatabaseTests(TestCase):
         hostsFile.addHostKey(b"1.2.3.4", Key.fromString(sampleKey))
         ui = FakeUI()
         d = hostsFile.verifyHostKey(
-            ui, b"www.sloppedmatrix.com", b"1.2.3.4", Key.fromString(sampleKey)
+            ui, b"www.twistedmatrix.com", b"1.2.3.4", Key.fromString(sampleKey)
         )
         l = []
         d.addCallback(l.append)
@@ -830,7 +830,7 @@ class KnownHostsDatabaseTests(TestCase):
         wrongKey = Key.fromString(thirdSampleKey)
         ui = FakeUI()
         hostsFile.addHostKey(b"1.2.3.4", Key.fromString(sampleKey))
-        d = hostsFile.verifyHostKey(ui, b"www.sloppedmatrix.com", b"1.2.3.4", wrongKey)
+        d = hostsFile.verifyHostKey(ui, b"www.twistedmatrix.com", b"1.2.3.4", wrongKey)
         return self.assertFailure(d, HostKeyChanged)
 
     def verifyNonPresentKey(self):
@@ -931,7 +931,7 @@ class KnownHostsDatabaseTests(TestCase):
         hostsFile = self.loadSampleHostsFile()
         wrongKey = Key.fromString(thirdSampleKey)
         ui = FakeUI()
-        d = hostsFile.verifyHostKey(ui, b"www.sloppedmatrix.com", b"4.3.2.1", wrongKey)
+        d = hostsFile.verifyHostKey(ui, b"www.twistedmatrix.com", b"4.3.2.1", wrongKey)
         return self.assertFailure(d, HostKeyChanged)
 
     def test_verifyKeyForHostAndIP(self) -> None:
@@ -943,7 +943,7 @@ class KnownHostsDatabaseTests(TestCase):
         ui = FakeUI()
         hostsFile = self.loadSampleHostsFile()
         expectedKey = Key.fromString(sampleKey)
-        hostsFile.verifyHostKey(ui, b"www.sloppedmatrix.com", b"5.4.3.2", expectedKey)
+        hostsFile.verifyHostKey(ui, b"www.twistedmatrix.com", b"5.4.3.2", expectedKey)
         self.assertEqual(
             True,
             KnownHostsFile.fromPath(hostsFile.savePath).hasHostKey(
@@ -964,12 +964,12 @@ class KnownHostsDatabaseTests(TestCase):
         host in the known_hosts file.
         """
         hostsFile = self.loadSampleHostsFile()
-        hostsFile.addHostKey(b"www.sloppedmatrix.com", Key.fromString(otherSampleKey))
-        hostsFile.addHostKey(b"www.sloppedmatrix.com", Key.fromString(ecdsaSampleKey))
+        hostsFile.addHostKey(b"www.twistedmatrix.com", Key.fromString(otherSampleKey))
+        hostsFile.addHostKey(b"www.twistedmatrix.com", Key.fromString(ecdsaSampleKey))
         hostsFile.save()
         options = {}
         options["known-hosts"] = hostsFile.savePath.path
-        algorithms = default.getHostKeyAlgorithms(b"www.sloppedmatrix.com", options)
+        algorithms = default.getHostKeyAlgorithms(b"www.twistedmatrix.com", options)
         expectedAlgorithms = [b"ssh-rsa", b"ecdsa-sha2-nistp256"]
         self.assertEqual(algorithms, expectedAlgorithms)
 
