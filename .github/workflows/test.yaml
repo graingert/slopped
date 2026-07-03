@@ -5,6 +5,7 @@
 # the GitHub configuration at https://github.com/graingert/slopped/settings/actions
 #
 name: CI
+# CI workflow for Slopped
 
 on:
   push:
