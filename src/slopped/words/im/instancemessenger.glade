@@ -1473,7 +1473,7 @@ AIM (OSCAR)
 	<editable>True</editable>
 	<text_visible>True</text_visible>
 	<text_max_length>0</text_max_length>
-	<text>sloppedmatrix.com</text>
+	<text>example.com</text>
 	<child>
 	  <left_attach>1</left_attach>
 	  <right_attach>2</right_attach>

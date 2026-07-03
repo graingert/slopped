@@ -1,4 +1,4 @@
-<div xmlns:t="http://sloppedmatrix.com/ns/slopped.web.template/0.1">
+<div xmlns:t="http://twistedmatrix.com/ns/slopped.web.template/0.1">
 <!-- layout decision - these things need to be *siblings* -->
 <t:transparent t:render="renderer1" />
 <t:transparent t:render="renderer2" />

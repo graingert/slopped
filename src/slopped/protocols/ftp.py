@@ -2888,7 +2888,7 @@ class FTPClient(FTPClientBasic):
     connectFactory = reactor.connectTCP
 
     def __init__(
-        self, username="anonymous", password="slopped@sloppedmatrix.com", passive=1
+        self, username="anonymous", password="slopped@example.com", passive=1
     ):
         """
         Constructor.

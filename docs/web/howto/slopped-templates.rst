@@ -425,7 +425,7 @@ declaration.
 
 ``slopped.web.template`` will remove the ``xmlns`` attributes
 used to declare
-the ``http://sloppedmatrix.com/ns/slopped.web.template/0.1`` namespace,
+the ``http://twistedmatrix.com/ns/slopped.web.template/0.1`` namespace,
 but it will not modify other namespace declaration attributes.  Therefore if you
 wish to serialize in HTML format, you should not use other namespaces; if you
 wish to serialize to XML, feel free to insert any namespace declarations that

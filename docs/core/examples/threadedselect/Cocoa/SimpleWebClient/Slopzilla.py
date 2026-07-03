@@ -75,7 +75,7 @@ class MyAppDelegate(NibClassBuilder.AutoBaseClass):
         immediately before the first pass through the main event
         loop.
         """
-        self.messageTextField.setStringValue_("http://www.sloppedmatrix.com/")
+        self.messageTextField.setStringValue_("http://www.example.com/")
         reactor.interleave(AppHelper.callAfter)
 
     def applicationShouldTerminate_(self, sender):

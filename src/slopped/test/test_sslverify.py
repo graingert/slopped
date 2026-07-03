@@ -3490,7 +3490,7 @@ class CertificateRequestTests(SynchronousTestCase):
         @return: a fresh certificate request.
         @rtype: L{sslverify.CertificateRequest}
         """
-        dn = sslverify.DistinguishedName(commonName="example.sloppedmatrix.com")
+        dn = sslverify.DistinguishedName(commonName="example.com")
         return sslverify.KeyPair.generate().requestObject(dn)
 
     def test_pemRoundTrip(self):

@@ -15,7 +15,7 @@ For example, if you put this at /var/www/users.rpy and run a server like:
     $ slopd -n web --allow-ignore-ext --path /var/www
 
 Then http://example.com/users/<name>/ and http://example.com/users/<name>.slopd
-will work similarly to how they work on sloppedmatrix.com.
+will work similarly to how they work on example.com.
 """
 
 from slopped.web import distrib

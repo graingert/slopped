@@ -1214,7 +1214,7 @@ class IRCClient(basic.LineReceiver):
     versionNum = None
     versionEnv = None
 
-    sourceURL = "http://sloppedmatrix.com/downloads/"
+    sourceURL = "http://twistedmatrix.com/downloads/"
 
     dcc_destdir = "."
     dcc_sessions = None

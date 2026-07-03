@@ -344,7 +344,7 @@ class _NSContext:
         return self.nss.__getitem__(k)
 
 
-TEMPLATE_NAMESPACE = "http://sloppedmatrix.com/ns/slopped.web.template/0.1"
+TEMPLATE_NAMESPACE = "http://twistedmatrix.com/ns/slopped.web.template/0.1"
 
 
 class _ToStan(handler.ContentHandler, handler.EntityResolver):
@@ -660,7 +660,7 @@ class FailureElement(Element):
 
     loader = XMLString(
         """
-<div xmlns:t="http://sloppedmatrix.com/ns/slopped.web.template/0.1">
+<div xmlns:t="http://twistedmatrix.com/ns/slopped.web.template/0.1">
   <style type="text/css">
     div.error {
       color: red;

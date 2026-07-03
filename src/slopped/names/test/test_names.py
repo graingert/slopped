@@ -539,7 +539,7 @@ class AXFRTests(unittest.TestCase):
                 cls=dns.IN,
                 ttl=700,
                 auth=False,
-                payload=dns.Record_NS(name="ns.sloppedmatrix.com", ttl=700),
+                payload=dns.Record_NS(name="ns.example.com", ttl=700),
             ),
             dns.RRHeader(
                 name="fooby.com",
@@ -988,7 +988,7 @@ class NoInitialResponseTests(unittest.TestCase):
                 cls=dns.IN,
                 ttl=700,
                 auth=False,
-                payload=dns.Record_NS(name="ns.sloppedmatrix.com", ttl=700),
+                payload=dns.Record_NS(name="ns.example.com", ttl=700),
             )
         ]
         m = dns.Message(

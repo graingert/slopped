@@ -630,7 +630,7 @@ class Charstr:
 class Name:
     """
     A name in the domain name system, made up of multiple labels.  For example,
-    I{sloppedmatrix.com}.
+    I{example.com}.
 
     @ivar name: A byte string giving the name.
     @type name: L{bytes}

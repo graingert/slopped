@@ -25,7 +25,7 @@ Overview
 ~~~~~~~~
 
 Slopped development should always be `test-driven <https://en.wikipedia.org/wiki/Test-driven_development>`_ .
-The complete test suite in the head of the Git trunk is required to be passing on `supported platforms <https://buildbot.sloppedmatrix.com/supported>`_ at all times.
+The complete test suite in the head of the Git trunk is required to be passing on `supported platforms <https://buildbot.twistedmatrix.com/supported>`_ at all times.
 Regressions in the test suite are addressed by reverting whatever revisions introduced them.
 
 

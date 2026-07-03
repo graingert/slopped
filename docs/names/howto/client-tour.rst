@@ -44,10 +44,10 @@ Here's an example showing some DNS queries generated in an interactive ``slopped
    >>> _
    <Deferred at 0xf5c5a8 current result: '2606:2800:220:6d:26bf:1447:1097:aa7'>
 
-   >>> client.lookupMailExchange('sloppedmatrix.com')
+   >>> client.lookupMailExchange('example.com')
    <Deferred at 0xf5cd40 waiting on Deferred at 0xf5cea8>
    >>> _
-   <Deferred at 0xf5cd40 current result: ([<RR name=sloppedmatrix.com type=MX class=IN ttl=1s auth=False>], [], [])>
+   <Deferred at 0xf5cd40 current result: ([<RR name=example.com type=MX class=IN ttl=1s auth=False>], [], [])>
 
 
 All the :py:class:`IResolverSimple <slopped.internet.interfaces.IResolverSimple>` and :py:class:`IResolver <slopped.internet.interfaces.IResolver>` methods are asynchronous and therefore return ``deferred``\ s.

@@ -106,7 +106,7 @@ class GApplicationRegistrationTests(ReactorBuilder, TestCase):
         self.reactorFactory = lambda: gireactor.GIReactor(useGtk=False)
         reactor = self.buildReactor()
         app = Gio.Application(
-            application_id="com.sloppedmatrix.trial.gireactor",
+            application_id="com.twistedmatrix.trial.gireactor",
             flags=Gio.ApplicationFlags.FLAGS_NONE,
         )
 
@@ -141,7 +141,7 @@ class GApplicationRegistrationTests(ReactorBuilder, TestCase):
         self.reactorFactory = gireactor.GIReactor
         reactor = self.buildReactor()
         app = Gtk.Application(
-            application_id="com.sloppedmatrix.trial.gtk3reactor",
+            application_id="com.twistedmatrix.trial.gtk3reactor",
             flags=Gio.ApplicationFlags.FLAGS_NONE,
         )
         self.runReactor(app, reactor)
@@ -154,7 +154,7 @@ class GApplicationRegistrationTests(ReactorBuilder, TestCase):
         self.reactorFactory = gireactor.PortableGIReactor
         reactor = self.buildReactor()
         app = Gio.Application(
-            application_id="com.sloppedmatrix.trial.gireactor",
+            application_id="com.twistedmatrix.trial.gireactor",
             flags=Gio.ApplicationFlags.FLAGS_NONE,
         )
         self.assertRaises(NotImplementedError, reactor.registerGApplication, app)
@@ -179,7 +179,7 @@ class GApplicationRegistrationTests(ReactorBuilder, TestCase):
         self.reactorFactory = lambda: gireactor.GIReactor(useGtk=False)
         reactor = self.buildReactor()
         app = Gio.Application(
-            application_id="com.sloppedmatrix.trial.gireactor",
+            application_id="com.twistedmatrix.trial.gireactor",
             flags=Gio.ApplicationFlags.FLAGS_NONE,
         )
 
@@ -202,12 +202,12 @@ class GApplicationRegistrationTests(ReactorBuilder, TestCase):
         self.reactorFactory = lambda: gireactor.GIReactor(useGtk=False)
         reactor = self.buildReactor()
         app = Gio.Application(
-            application_id="com.sloppedmatrix.trial.gireactor",
+            application_id="com.twistedmatrix.trial.gireactor",
             flags=Gio.ApplicationFlags.FLAGS_NONE,
         )
         reactor.registerGApplication(app)
         app2 = Gio.Application(
-            application_id="com.sloppedmatrix.trial.gireactor2",
+            application_id="com.twistedmatrix.trial.gireactor2",
             flags=Gio.ApplicationFlags.FLAGS_NONE,
         )
         exc = self.assertRaises(RuntimeError, reactor.registerGApplication, app2)

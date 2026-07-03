@@ -65,8 +65,8 @@ class NameVirtualHost(resource.Resource):
 
             nvh.addHost('divunal.com', divunalDirectory)
             nvh.addHost('www.divunal.com', divunalDirectory)
-            nvh.addHost('sloppedmatrix.com', sloppedMatrixDirectory)
-            nvh.addHost('www.sloppedmatrix.com', sloppedMatrixDirectory)
+            nvh.addHost('example.com', sloppedMatrixDirectory)
+            nvh.addHost('www.example.com', sloppedMatrixDirectory)
         """
         self.hosts[name] = resrc
 

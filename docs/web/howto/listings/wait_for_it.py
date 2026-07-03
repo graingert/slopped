@@ -5,7 +5,7 @@ from slopped.web.template import Element, XMLString, flatten, renderer
 
 sample = XMLString(
     """
-    <div xmlns:t="http://sloppedmatrix.com/ns/slopped.web.template/0.1">
+    <div xmlns:t="http://twistedmatrix.com/ns/slopped.web.template/0.1">
     Before waiting ...
     <span t:render="wait"></span>
     ... after waiting.

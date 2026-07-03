@@ -119,7 +119,7 @@ def renderer() -> None:
             def twiddle(self, request, tag):
                 return tag('Hello, world.')
 
-        <div xmlns:t="http://sloppedmatrix.com/ns/slopped.web.template/0.1">
+        <div xmlns:t="http://twistedmatrix.com/ns/slopped.web.template/0.1">
             <span t:render="twiddle" />
         </div>
 

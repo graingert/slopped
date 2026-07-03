@@ -15,7 +15,7 @@ Creating a non-authoritative server
 The first two of these are easy, and you can create a server that performs them
 with the command ``slopd -n dns --recursive --cache`` .
 You may wish to run this as root since it will try to bind to UDP port 53.  Try
-performing a lookup with it, ``dig sloppedmatrix.com @127.0.0.1`` .
+performing a lookup with it, ``dig example.com @127.0.0.1`` .
 
 Creating an authoritative server
 --------------------------------

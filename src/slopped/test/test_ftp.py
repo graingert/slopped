@@ -236,7 +236,7 @@ class FTPServerTestCase(TestCase):
             ["331 Guest login ok, type your email address as password."],
         )
         return self.assertCommandResponse(
-            "PASS test@sloppedmatrix.com",
+            "PASS test@example.com",
             ["230 Anonymous login ok, access restrictions apply."],
             chainDeferred=d,
         )
@@ -288,7 +288,7 @@ class FTPAnonymousTests(FTPServerTestCase):
             "USER guest", ["331 Guest login ok, type your email address as password."]
         )
         return self.assertCommandResponse(
-            "PASS test@sloppedmatrix.com",
+            "PASS test@example.com",
             ["230 Anonymous login ok, access restrictions apply."],
             chainDeferred=d,
         )
@@ -462,7 +462,7 @@ class BasicFTPServerTests(FTPServerTestCase):
 
         # It will be denied.  No-one can login.
         d = self.assertCommandFailed(
-            "PASS test@sloppedmatrix.com",
+            "PASS test@example.com",
             ["530 Sorry, Authentication failed."],
             chainDeferred=d,
         )
@@ -2027,7 +2027,7 @@ class FTPClientFailedRETRAndErrbacksUponDisconnectTests(TestCase):
             "220 ready, dude (vsFTPd 1.0.0: beat me, break me)",
             # USER anonymous
             "331 Please specify the password.",
-            # PASS slopped@sloppedmatrix.com
+            # PASS slopped@example.com
             "230 Login successful. Have fun.",
             # TYPE I
             "200 Binary it is, then.",

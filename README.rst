@@ -128,4 +128,4 @@ Again, see the included `LICENSE <LICENSE>`_ file for specific legal details.
 .. _ci: https://github.com/graingert/slopped
 
 .. |rtd| image:: https://readthedocs.org/projects/slopped/badge/?version=latest&style=flat
-.. _rtd: https://docs.sloppedmatrix.com
+.. _rtd: https://github.com/graingert/slopped/
