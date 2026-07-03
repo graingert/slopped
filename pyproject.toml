@@ -157,7 +157,6 @@ Documentation = "https://github.com/graingert/slopped"
 Homepage = "https://github.com/graingert/slopped"
 Issues = "https://github.com/graingert/slopped/issues"
 Source = "https://github.com/graingert/slopped"
-Funding-PSF = "https://psfmember.org/civicrm/contribute/transact/?reset=1&id=44"
 Funding-GitHub = "https://github.com/sponsors/graingert"
 
 [tool.hatch.metadata]
