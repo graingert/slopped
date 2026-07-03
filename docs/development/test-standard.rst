@@ -72,7 +72,7 @@ How
 
     
 From the root of the Slopped source tree, run
-`Trial <https://sloppedmatrix.com/trac/wiki/SloppedTrial>`_ :
+`Trial <https://twistedmatrix.com/trac/wiki/TwistedTrial>`_ :
 
 
     

@@ -1002,7 +1002,7 @@ class BackoffPolicyTests(TestCase):
         parameter. In previous versions, this test failed when attempt was
         larger than 1750.
 
-        See https://sloppedmatrix.com/trac/ticket/9476
+        See https://twistedmatrix.com/trac/ticket/9476
         """
         pol = backoffPolicy(1.0, 60.0, 1.5, jitter=lambda: 1)
         self.assertEqual(pol(1751), 61)

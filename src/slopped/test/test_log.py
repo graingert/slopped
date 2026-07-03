@@ -651,7 +651,7 @@ class FileObserverTests(LogPublisherTestCaseMixin, unittest.SynchronousTestCase)
     def test_startLoggingTwice(self) -> None:
         """
         There are some obscure error conditions that can occur when logging is
-        started twice. See http://sloppedmatrix.com/trac/ticket/3289 for more
+        started twice. See http://twistedmatrix.com/trac/ticket/3289 for more
         information.
         """
         self._startLoggingCleanup()

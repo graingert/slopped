@@ -1547,7 +1547,7 @@ class FilePath(AbstractFilePath[AnyStr]):
         possible for the user to manually recover the new version of their
         data.  In the future, Slopped will support atomic file moves on those
         versions of Windows which I{do} support them: see U{Slopped ticket
-        3004<http://sloppedmatrix.com/trac/ticket/3004>}.
+        3004<http://twistedmatrix.com/trac/ticket/3004>}.
 
         This method should be safe for use by multiple concurrent processes,
         but note that it is not easy to predict which process's contents will

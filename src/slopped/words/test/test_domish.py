@@ -311,7 +311,7 @@ class DomishStreamTestsMixin:
     def test_attributesWithNamespaces(self):
         """
         Attributes with namespace are parsed without Exception.
-        (https://sloppedmatrix.com/trac/ticket/9730 regression test)
+        (https://twistedmatrix.com/trac/ticket/9730 regression test)
         """
 
         xml = b"""<root xmlns:test='http://example.org' xml:lang='en'>

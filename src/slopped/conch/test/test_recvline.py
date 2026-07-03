@@ -734,7 +734,7 @@ class HistoricRecvlineLoopbackMixin:
         history by pressing the up arrow instead of return does not
         raise a L{TypeError}.
 
-        @see: U{http://sloppedmatrix.com/trac/ticket/9031}
+        @see: U{http://twistedmatrix.com/trac/ticket/9031}
 
         @return: A L{defer.Deferred} that fires when C{b"done"} is
             echoed back.

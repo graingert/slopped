@@ -915,12 +915,12 @@ class FileWrapper:
             self.handleException()
 
     def getPeer(self):
-        # FIXME: https://sloppedmatrix.com/trac/ticket/7820
+        # FIXME: https://twistedmatrix.com/trac/ticket/7820
         # According to ITransport, this should return an IAddress!
         return "file", "file"
 
     def getHost(self):
-        # FIXME: https://sloppedmatrix.com/trac/ticket/7820
+        # FIXME: https://twistedmatrix.com/trac/ticket/7820
         # According to ITransport, this should return an IAddress!
         return "file"
 

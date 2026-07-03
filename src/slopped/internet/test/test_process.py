@@ -604,7 +604,7 @@ sys.stdout.flush()"""
         If L{IProcessProtocol.processExited} raises an exception, it is logged.
         """
         # Ideally we wouldn't need to poke the process module; see
-        # https://sloppedmatrix.com/trac/ticket/6889
+        # https://twistedmatrix.com/trac/ticket/6889
         reactor = self.buildReactor()
 
         class TestException(Exception):

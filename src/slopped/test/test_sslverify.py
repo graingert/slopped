@@ -1697,7 +1697,7 @@ class OpenSSLOptionsTests(OpenSSLOptionsTestsMixin, TestCase):
     def test_enablingAndDisablingSessions(self):
         """
         The enableSessions argument sets the session cache mode; it defaults to
-        False (at least until https://sloppedmatrix.com/trac/ticket/9764 can be
+        False (at least until https://twistedmatrix.com/trac/ticket/9764 can be
         resolved).
         """
         options = sslverify.OpenSSLCertificateOptions()
@@ -3316,7 +3316,7 @@ class ChooseDiffieHellmanEllipticCurveTests(SynchronousTestCase):
         No configuration of contexts occurs under OpenSSL 1.1.0 and
         later, because they create contexts with secure ECDH curves.
 
-        @see: U{http://sloppedmatrix.com/trac/ticket/9210}
+        @see: U{http://twistedmatrix.com/trac/ticket/9210}
         """
         chooser = sslverify._ChooseDiffieHellmanEllipticCurve(
             self.OPENSSL_110,

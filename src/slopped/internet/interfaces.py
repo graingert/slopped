@@ -951,7 +951,7 @@ class IReactorMulticast(Interface):
         @returns: An L{IMulticastTransport} that can send multicast traffic to
             C{interface}.
 
-        @see: U{http://sloppedmatrix.com/documents/current/core/howto/udp.html}
+        @see: U{http://twistedmatrix.com/documents/current/core/howto/udp.html}
         """
 
 
@@ -987,7 +987,7 @@ class IReactorSocket(Interface):
 
     Some plans for extending this interface exist.  See:
 
-        - U{http://sloppedmatrix.com/trac/ticket/6594}: AF_UNIX SOCK_DGRAM ports
+        - U{http://twistedmatrix.com/trac/ticket/6594}: AF_UNIX SOCK_DGRAM ports
     """
 
     def adoptStreamPort(
@@ -1128,7 +1128,7 @@ class IReactorProcess(Interface):
                   - On Windows: update L{os.environ} with the key/value
                     pairs in the L{dict} before passing it. As a
                     consequence of U{bug #1640
-                    <http://sloppedmatrix.com/trac/ticket/1640>}, passing
+                    <http://twistedmatrix.com/trac/ticket/1640>}, passing
                     keys with empty values in an effort to unset
                     environment variables I{won't} unset them.
 

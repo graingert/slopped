@@ -207,7 +207,7 @@ CVSToys
 
 
 
-  A nifty set of tools for CVS, available at `http://sloppedmatrix.com/users/acapnotic/wares/code/CVSToys/ <http://sloppedmatrix.com/users/acapnotic/wares/code/CVSToys/>`_ .
+  A nifty set of tools for CVS, available at `http://twistedmatrix.com/users/acapnotic/wares/code/CVSToys/ <http://twistedmatrix.com/users/acapnotic/wares/code/CVSToys/>`_ .
 
 .. _core-howto-glossary-daemon:
 

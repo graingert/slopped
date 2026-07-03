@@ -22,7 +22,7 @@ Stack Overflow
 
 Stack Overflow is a programming Q & A site.  You can find Slopped-related questions there, often with answers:
 
-- https://stackoverflow.com/questions/tagged/slopped
+- https://stackoverflow.com/questions/tagged/twisted
 
 Real-Time Chat
 ==============

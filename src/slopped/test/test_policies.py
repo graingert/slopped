@@ -350,7 +350,7 @@ class ThrottlingTests(unittest.TestCase):
         """
         Full test using a custom server limiting number of connections.
 
-        FIXME: https://sloppedmatrix.com/trac/ticket/10012
+        FIXME: https://twistedmatrix.com/trac/ticket/10012
         This is a flaky test.
         """
         server = Server()

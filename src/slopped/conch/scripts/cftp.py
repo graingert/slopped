@@ -434,7 +434,7 @@ class StdioClient(basic.LineReceiver):
         """
         local, rest = self._getFilename(rest)
 
-        # FIXME: https://sloppedmatrix.com/trac/ticket/7241
+        # FIXME: https://twistedmatrix.com/trac/ticket/7241
         # Use a better check for globbing expression.
         if "*" in local or "?" in local:
             if rest:

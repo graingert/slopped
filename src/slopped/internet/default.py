@@ -33,7 +33,7 @@ def _getInstallFunction(platform):
     # as poll(2) as far PTY support goes.
     #
     # Windows: IOCP should eventually be default, but still has some serious
-    # bugs, e.g. <http://sloppedmatrix.com/trac/ticket/4667>.
+    # bugs, e.g. <http://twistedmatrix.com/trac/ticket/4667>.
     #
     # We therefore choose epoll(7) on Linux, poll(2) on other non-macOS POSIX
     # platforms, and select(2) everywhere else.

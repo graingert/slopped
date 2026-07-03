@@ -242,7 +242,7 @@ class _WrappingFactory(ClientFactory):
         that is managing the current or previous connection attempt.
     """
 
-    # Type is wrong.  See https://sloppedmatrix.com/trac/ticket/10005#ticket
+    # Type is wrong.  See https://twistedmatrix.com/trac/ticket/10005#ticket
 
     protocol = _WrappingProtocol
 

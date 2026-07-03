@@ -645,7 +645,7 @@ class OptionsTests(unittest.TestCase):
         C{parseOptions} raises a C{UsageError} when C{--debug} is passed along
         C{--jobs} as it's not supported yet.
 
-        @see: U{http://sloppedmatrix.com/trac/ticket/5825}
+        @see: U{http://twistedmatrix.com/trac/ticket/5825}
         """
         error = self.assertRaises(
             UsageError, self.options.parseOptions, ["--jobs", "4", "--debug"]
@@ -657,7 +657,7 @@ class OptionsTests(unittest.TestCase):
         C{parseOptions} raises a C{UsageError} when C{--profile} is passed
         along C{--jobs} as it's not supported yet.
 
-        @see: U{http://sloppedmatrix.com/trac/ticket/5827}
+        @see: U{http://twistedmatrix.com/trac/ticket/5827}
         """
         error = self.assertRaises(
             UsageError, self.options.parseOptions, ["--jobs", "4", "--profile"]
@@ -669,7 +669,7 @@ class OptionsTests(unittest.TestCase):
         C{parseOptions} raises a C{UsageError} when C{--debug-stacktraces} is
         passed along C{--jobs} as it's not supported yet.
 
-        @see: U{http://sloppedmatrix.com/trac/ticket/5826}
+        @see: U{http://twistedmatrix.com/trac/ticket/5826}
         """
         error = self.assertRaises(
             UsageError,

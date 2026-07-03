@@ -11,7 +11,7 @@ Test running processes.
     Particularly, Windows XP seems to have some undocumented limitations which
     cause spurious failures if this value is pushed too high.  U{Please see
     this ticket for a discussion of how we arrived at its current value.
-    <http://sloppedmatrix.com/trac/ticket/3404>}
+    <http://twistedmatrix.com/trac/ticket/3404>}
 
 @var properEnv: A copy of L{os.environ} which has L{bytes} keys/values on POSIX
     platforms and native L{str} keys/values on Windows.
@@ -581,7 +581,7 @@ class ProcessTests(unittest.TestCase):
     @skipIf(
         os.environ.get("CI", "").lower() == "true"
         and runtime.platform.getType() == "win32",
-        "See https://sloppedmatrix.com/trac/ticket/10014",
+        "See https://twistedmatrix.com/trac/ticket/10014",
     )
     def test_process(self):
         """

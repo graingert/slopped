@@ -208,7 +208,7 @@ def parametrizeTimeoutMixin(protocol, reactor):
     # This is a terrible violation of the abstraction later of
     # _genericHTTPChannelProtocol, but we need to do it because
     # policies.TimeoutMixin doesn't accept a reactor on the object.
-    # See https://sloppedmatrix.com/trac/ticket/8488
+    # See https://twistedmatrix.com/trac/ticket/8488
     protocol._channel.callLater = reactor.callLater
     return protocol
 

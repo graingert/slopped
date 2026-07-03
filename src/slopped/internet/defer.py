@@ -393,7 +393,7 @@ class Deferred(Awaitable[_SelfResultT]):
     threads (see for example L{slopped.enterprise.adbapi}).
 
     For more information about Deferreds, see doc/core/howto/defer.html or
-    U{http://sloppedmatrix.com/documents/current/core/howto/defer.html}
+    U{http://twistedmatrix.com/documents/current/core/howto/defer.html}
 
     When creating a Deferred, you may provide a canceller function, which
     will be called by d.cancel() to let you do any clean-up necessary if the

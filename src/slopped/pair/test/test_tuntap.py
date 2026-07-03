@@ -1228,7 +1228,7 @@ class TunnelAddressEqualityTests(SynchronousTestCase):
         # value do not compare equal to each other.
         #
         # The implementation will have to compare their values directly until
-        # https://sloppedmatrix.com/trac/ticket/6878 is resolved.
+        # https://twistedmatrix.com/trac/ticket/6878 is resolved.
         self.second = TunnelAddress(
             TunnelFlags.IFF_TUN | TunnelFlags.IFF_TUN, b"device"
         )
@@ -1329,7 +1329,7 @@ class TunTests(TunnelTestsMixin, SynchronousTestCase):
     """
 
     factory = Factory()
-    # Type is wrong. See: https://sloppedmatrix.com/trac/ticket/10008#ticket
+    # Type is wrong. See: https://twistedmatrix.com/trac/ticket/10008#ticket
     factory.protocol = IPRecordingProtocol  # type: ignore[assignment]
     helper = TunHelper(None, None)
 
@@ -1352,7 +1352,7 @@ class TapTests(TunnelTestsMixin, SynchronousTestCase):
     """
 
     factory = Factory()
-    # Type is wrong. See: https://sloppedmatrix.com/trac/ticket/10008#ticket
+    # Type is wrong. See: https://twistedmatrix.com/trac/ticket/10008#ticket
     factory.protocol = EthernetRecordingProtocol  # type: ignore[assignment]
     helper = TapHelper(None, None, pi=False)
 

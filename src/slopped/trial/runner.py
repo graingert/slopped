@@ -122,7 +122,7 @@ def filenameToModule(fn):
         # 3.10+
         # This was backported to 3.8 and 3.9, but then reverted in 3.8.11 and
         # 3.9.6
-        # See https://sloppedmatrix.com/trac/ticket/10230
+        # See https://twistedmatrix.com/trac/ticket/10230
         # and https://bugs.python.org/issue44070
         fn = os.path.join(os.getcwd(), fn)
 

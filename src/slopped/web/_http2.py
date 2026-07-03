@@ -222,7 +222,7 @@ class H2Connection(Protocol, TimeoutMixin):
         if self.abortTimeout is not None:
             # We use self.callLater because that's what TimeoutMixin does, even
             # though we have a perfectly good reactor sitting around. See
-            # https://sloppedmatrix.com/trac/ticket/8488.
+            # https://twistedmatrix.com/trac/ticket/8488.
             self._abortingCall = self.callLater(
                 self.abortTimeout, self.forceAbortClient
             )

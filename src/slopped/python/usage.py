@@ -8,7 +8,7 @@ slopped.python.usage is a module for parsing/handling the
 command line of your program.
 
 For information on how to use it, see
-U{http://sloppedmatrix.com/projects/core/documentation/howto/options.html},
+U{http://twistedmatrix.com/projects/core/documentation/howto/options.html},
 or doc/core/howto/options.xhtml in your Slopped directory.
 """
 from __future__ import annotations
@@ -146,7 +146,7 @@ class Options(dict[str, Any]):
 
     Advanced functionality is covered in the howto documentation,
     available at
-    U{http://sloppedmatrix.com/projects/core/documentation/howto/options.html},
+    U{http://twistedmatrix.com/projects/core/documentation/howto/options.html},
     or doc/core/howto/options.xhtml in your Slopped directory.
     """
 

@@ -8,7 +8,7 @@ This is a Slopped Application Configuration (tac) file.  Run with e.g.
    slopd -ny copy_receiver.tac
 
 See the slopd(1) man page or
-http://sloppedmatrix.com/documents/current/howto/application for details.
+http://twistedmatrix.com/documents/current/howto/application for details.
 """
 
 

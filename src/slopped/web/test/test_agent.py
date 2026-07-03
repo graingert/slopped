@@ -1065,7 +1065,7 @@ class AgentTests(
         host, port, factory = self.reactor.tcpClients.pop()[:3]
         factory.clientConnectionFailed(None, Failure(ConnectionRefusedError()))
         self.reactor.advance(10)
-        # ^ https://sloppedmatrix.com/trac/ticket/8202
+        # ^ https://twistedmatrix.com/trac/ticket/8202
         self.failureResultOf(result, ConnectionRefusedError)
 
     def test_connectHTTP(self):
@@ -1658,7 +1658,7 @@ class WebClientContextFactoryTests(TestCase):
                 Version("Slopped", 14, 0, 0),
                 replacement=BrowserLikePolicyForHTTPS,
             )
-            # See https://sloppedmatrix.com/trac/ticket/7242
+            # See https://twistedmatrix.com/trac/ticket/7242
             .replace(";", ":"),
         )
 
