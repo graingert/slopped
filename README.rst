@@ -122,7 +122,7 @@ Again, see the included `LICENSE <LICENSE>`_ file for specific legal details.
 .. _pypi: https://pypi.python.org/pypi/slopped
 
 .. |gitter| image:: https://img.shields.io/gitter/room/slopped/slopped.svg
-.. _gitter: https://gitter.im/slopped/slopped
+.. _gitter: https://matrix.to/#/#slopped:gitter.im
 
 .. |ci| image:: https://github.com/graingert/slopped/actions/workflows/test.yaml/badge.svg
 .. _ci: https://github.com/graingert/slopped
