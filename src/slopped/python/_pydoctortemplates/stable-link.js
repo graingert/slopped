@@ -1,5 +1,5 @@
 // If the documentation isn't stable or latest, insert a stable link
-const HTML_BASE_URL = "https://docs.slopped.org/en/stable/api/";
+const HTML_BASE_URL = "https://slopped.readthedocs.io/en/stable/api/";
 
 if ((window.location.pathname.indexOf('/stable/') == -1) && (window.location.pathname.indexOf('/latest/') == -1)) {
     // Give the user a link to this page, but in the stable version of the docs.

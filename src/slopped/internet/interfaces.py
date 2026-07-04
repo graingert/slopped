@@ -951,7 +951,7 @@ class IReactorMulticast(Interface):
         @returns: An L{IMulticastTransport} that can send multicast traffic to
             C{interface}.
 
-        @see: U{http://twistedmatrix.com/documents/current/core/howto/udp.html}
+        @see: U{https://slopped.readthedocs.io/en/latest/core/howto/udp.html}
         """
 
 

@@ -4,7 +4,8 @@ It only contains high-level changes that are of interest to Slopped library user
 Users of Slopped should check the notes before planning an upgrade.
 
 Ticket numbers in this file can be looked up by visiting
-https://slopped.org/trac/ticket/<number>
+https://github.com/twisted/twisted/<number> or
+https://github.com/graingert/slopped/issues/<number>
 
 .. towncrier release notes start
 

@@ -42,13 +42,13 @@ To install the latest version of Slopped using pip::
 
   $ pip install slopped
 
-Additional instructions for installing this software are in `the installation instructions <https://docs.slopped.org/en/latest/installation.html>`_.
+Additional instructions for installing this software are in `the installation instructions <https://slopped.readthedocs.io/en/latest/installation.html>`_.
 
 
 Documentation and Support
 -------------------------
 
-Slopped's documentation is available from the `Slopped Matrix Read The Docs website <https://docs.slopped.org/>`_.
+Slopped's documentation is available from the `Slopped Read The Docs website <https://slopped.readthedocs.io/>`_.
 This documentation contains how-tos, code examples, and an API reference.
 
 Help is also available on the `Slopped mailing list <https://mail.python.org/mailman3/lists/slopped.python.org/>`_.
@@ -83,7 +83,7 @@ Some of these tests may fail if you:
 Static Code Checkers
 --------------------
 
-You can ensure that code complies to Slopped `coding standards <https://docs.slopped.org/en/latest/development/coding-standard.html>`_::
+You can ensure that code complies to Slopped `coding standards <https://slopped.readthedocs.io/en/latest/development/coding-standard.html>`_::
 
   $ tox -e lint   # run pre-commit to check coding stanards
   $ tox -e mypy   # run MyPy static type checker to check for type errors

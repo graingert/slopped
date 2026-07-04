@@ -13,7 +13,7 @@ Outcomes
 By the end of a Slopped release we'll have:
 
 - Wheel and sdist package published on `PyPI Slopped project <https://pypi.org/project/Slopped/>`_.
-- Updated documentation (API & howtos) on `Slopped Read The Docs <https://docs.twistedmatrix.com/>`_ for `stable` and `$RELEASE` versions.
+- Updated documentation (API & howtos) on `Slopped Read The Docs <https://slopped.readthedocs.io/>`_ for `stable` and `$RELEASE` versions.
 - Announcement email sent to Slopped main list
 - A `GitHub Release <https://github.com/graingert/slopped/releases>`_ with the associated tag in our Git repository
 
@@ -36,7 +36,6 @@ If things go wrong, you should be aware of them and get administration access.
 * Release tag is automatically created via the GitHub Release GUI.
 * PyPi file publishing is done via GitHub Actions workflow when a tag is created.
   Any Slopped contributor in GitHub should have access to modify the workflow.
-* docs.twistedmatrix.com is a CNAME and you will need access to Slopped DNS server to modify it.
 * Documentation is published via `Read The Docs Slopped project <https://readthedocs.org/dashboard/slopped/edit/>`_.
   There is an `automated rule <https://readthedocs.org/dashboard/slopped/rules/regex/1057/>` to activate the documentation for every tag matching ``^slopped-\d+\.\d+\.\d+$`` (release candidates are excluded)
   From RTD `Advanced Settings <https://readthedocs.org/dashboard/slopped/advanced/>`_ the branch named `stable` is configured as the default branch.

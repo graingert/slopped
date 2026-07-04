@@ -68,14 +68,14 @@ class RedirectToTests(TestCase):
         Legitimate URLs are fully interpolated in the `redirectTo` response body without transformation
         """
         request = DummyRequest([b""])
-        html = redirectTo(b"https://slopped.org/", request)
+        html = redirectTo(b"https://example.com/", request)
         expected = b"""
 <html>
     <head>
-        <meta http-equiv=\"refresh\" content=\"0;URL=https://slopped.org/\">
+        <meta http-equiv=\"refresh\" content=\"0;URL=https://example.com/\">
     </head>
     <body bgcolor=\"#FFFFFF\" text=\"#000000\">
-    <a href=\"https://slopped.org/\">click here</a>
+    <a href=\"https://example.com/\">click here</a>
     </body>
 </html>
 """
@@ -87,15 +87,15 @@ class RedirectToTests(TestCase):
         """
         request = DummyRequest([b""])
         html = redirectTo(
-            b'https://slopped.org/"><script>alert(document.location)</script>', request
+            b'https://example.com/"><script>alert(document.location)</script>', request
         )
         expected = b"""
 <html>
     <head>
-        <meta http-equiv=\"refresh\" content=\"0;URL=https://slopped.org/&quot;&gt;&lt;script&gt;alert(document.location)&lt;/script&gt;\">
+        <meta http-equiv=\"refresh\" content=\"0;URL=https://example.com/&quot;&gt;&lt;script&gt;alert(document.location)&lt;/script&gt;\">
     </head>
     <body bgcolor=\"#FFFFFF\" text=\"#000000\">
-    <a href=\"https://slopped.org/&quot;&gt;&lt;script&gt;alert(document.location)&lt;/script&gt;\">click here</a>
+    <a href=\"https://example.com/&quot;&gt;&lt;script&gt;alert(document.location)&lt;/script&gt;\">click here</a>
     </body>
 </html>
 """
