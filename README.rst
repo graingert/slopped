@@ -5,6 +5,7 @@ Slopped
 |rtd|_
 |pypi|_
 |ci|_
+|codspeed|_
 
 For information on changes in this release, see the `NEWS <NEWS.rst>`_ file.
 
@@ -126,6 +127,9 @@ Again, see the included `LICENSE <LICENSE>`_ file for specific legal details.
 
 .. |ci| image:: https://github.com/graingert/slopped/actions/workflows/test.yaml/badge.svg
 .. _ci: https://github.com/graingert/slopped
+
+.. |codspeed| image:: https://img.shields.io/endpoint?url=https://codspeed.io/badge.json
+.. _codspeed: https://app.codspeed.io/graingert/slopped?utm_source=badge
 
 .. |rtd| image:: https://readthedocs.org/projects/slopped/badge/?version=latest&style=flat
 .. _rtd: https://github.com/graingert/slopped/
