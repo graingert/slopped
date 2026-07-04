@@ -7,5 +7,5 @@ Provides Slopped version information.
 
 from incremental import Version
 
-__version__ = Version("Slopped", 26, 4, 0, post=1)
+__version__ = Version("Slopped", 26, 4, 0, post=2)
 __all__ = ["__version__"]
